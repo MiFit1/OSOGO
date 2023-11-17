@@ -1,0 +1,42 @@
+@startuml
+state "Окно входа в программу" as loginWindow
+state "Домашнее окно" as homeWindow
+state "Окно рассчёта\n заработной платы" as salaryWindow
+state "Окно просмотра статиcтики" as statisticWindow
+state "Окно профиля пользователя" as profileWindow
+state "Окно настройки тарифной ставки" as rateWindow
+
+loginWindow : Пользователь может:
+loginWindow : -ввести ФИО
+loginWindow : -войти
+
+homeWindow : Пользователь может:
+homeWindow : -Открыть окно рассчёта\n заработной платы
+homeWindow : -Открыть окно просмотра статистики
+homeWindow : -Открыть профиль пользователя
+homeWindow : -Закрыть программу
+
+salaryWindow : Пользователь может:
+salaryWindow : -Открыть настройки\n тарифной ставки
+salaryWindow : -Выбрать пользователей и рассчитать\n заработную плату
+
+statisticWindow : Пользователь может:
+statisticWindow : -Просматривать ститистику\n по всем договорам
+
+profileWindow : Пользователь может:
+profileWindow : -Просмотреть свои ФИО
+profileWindow : -Выйти из сессии
+
+rateWindow : Пользователь может:
+rateWindow : -Установить тарифные ставки
+
+[*] --> loginWindow
+loginWindow -left-> homeWindow : Нажата кнопка вход
+homeWindow -left-> salaryWindow : Нажата кнопка\n рассчитать плату
+homeWindow -up-> statisticWindow : Нажата кнопка\n просмотреть статистику
+homeWindow -down-> profileWindow : Нажата кнопка\n профиля
+salaryWindow -> rateWindow : Нажата кнопка\n тарифная ставка
+homeWindow -left->[*] : Окно закрыто
+profileWindow -> loginWindow : Нажата кнопка выход
+
+@enduml

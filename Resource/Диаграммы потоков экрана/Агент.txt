@@ -1,0 +1,37 @@
+@startuml
+state "Окно входа в программу" as loginWindow
+state "Домашнее окно" as homeWindow
+state "Окно заключения договора" as contractWindow
+state "Окно просмотра статиcтики" as statisticWindow
+state "Окно профиля пользователя" as profileWindow
+
+loginWindow : Пользователь может:
+loginWindow : -ввести ФИО
+loginWindow : -войти
+
+homeWindow : Пользователь может:
+homeWindow : -Открыть окно заключения договора
+homeWindow : -Открыть окно просмотра статистики
+homeWindow : -Открыть профиль пользователя
+homeWindow : -Закрыть программу
+
+contractWindow : Пользователь может:
+contractWindow : -Заполнить необходимые данные
+contractWindow : -Заключить договор
+
+statisticWindow : Пользователь может:
+statisticWindow : -Просматривать ститистику\n по заработной плате
+
+profileWindow : Пользователь может:
+profileWindow : -Просмотреть свои ФИО
+profileWindow : -Выйти из сессии
+
+[*] --> loginWindow
+loginWindow -left-> homeWindow : Нажата кнопка вход
+homeWindow -left-> contractWindow : Нажата кнопка\n заключить договор
+homeWindow -up-> statisticWindow : Нажата кнопка\n просмотреть статистику
+homeWindow -down-> profileWindow : Нажата кнопка\n профиля
+homeWindow -right->[*] : Окно закрыто
+profileWindow -> loginWindow : Нажата кнопка выход
+
+@enduml
