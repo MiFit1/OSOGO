@@ -42,6 +42,8 @@ homeWindow -down-> verifyWindow : Нажата кнопка\n рассчитат
 homeWindow -up-> statisticWindow : Нажата кнопка\n просмотреть статистику
 homeWindow -down-> profileWindow : Нажата кнопка\n профиля
 verifyWindow -left-> rateWindow : Нажата кнопка\n тарифная ставка
-verifyWindow -up-> contractWindow
+verifyWindow -up-> contractWindow : Нажат\n договор
 homeWindow -right->[*] : Окно закрыто
 profileWindow -> loginWindow : Нажата кнопка выход
+
+@enduml
