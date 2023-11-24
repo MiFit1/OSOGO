@@ -4,6 +4,13 @@ state "Домашнее окно" as homeWindow
 state "Окно заключения договора" as contractWindow
 state "Окно просмотра статиcтики" as statisticWindow
 state "Окно профиля пользователя" as profileWindow
+state "Окно перезаключения договоров" as renewContractWindow
+
+renewContractWindow : Пользователь может:
+renewContractWindow : -Прочитать комментарий бухгалтера
+renewContractWindow : -Изменить условия договора
+renewContractWindow : -Отправить договор на подтверждение
+
 
 loginWindow : Пользователь может:
 loginWindow : -ввести ФИО
@@ -17,7 +24,7 @@ homeWindow : -Закрыть программу
 
 contractWindow : Пользователь может:
 contractWindow : -Заполнить необходимые данные
-contractWindow : -Заключить договор
+contractWindow : -Отправить договор на подтверждение
 
 statisticWindow : Пользователь может:
 statisticWindow : -Просматривать ститистику\n по заработной плате
@@ -29,6 +36,7 @@ profileWindow : -Выйти из сессии
 [*] --> loginWindow
 loginWindow -left-> homeWindow : Нажата кнопка вход
 homeWindow -left-> contractWindow : Нажата кнопка\n заключить договор
+homeWindow -up-> renewContractWindow : Нажата кнопка\n перезаключить договор
 homeWindow -up-> statisticWindow : Нажата кнопка\n просмотреть статистику
 homeWindow -down-> profileWindow : Нажата кнопка\n профиля
 homeWindow -right->[*] : Окно закрыто
