@@ -6,9 +6,9 @@ left to right direction
 
 actor "Агент" as fc
 
-usecase "Войти/выйти в/из систему(ы)" as UC1
+usecase "Войти в систему" as UC1
 usecase "Заключить договор" as UC2
-usecase "Просмотреть заработную плату" as UC3
+usecase "Просмотреть\n заработную плату" as UC3
 
 fc --> UC1
 fc --> UC2
@@ -25,8 +25,8 @@ left to right direction
 
 actor "Бухгалтер" as fc
 
-usecase "Войти/выйти в/из систему(ы)" as UC1
-usecase "Рассчитать заработную плату" as UC2
+usecase "Войти в систему" as UC1
+usecase "Подтверждать договоры" as UC2
 usecase "Просматривать договоры" as UC3
 
 fc --> UC1
@@ -43,8 +43,8 @@ left to right direction
 
 actor "Администратор" as fc
 
-usecase "Войти/выйти в/из систему(ы)" as UC1
-usecase "Добавить\n бухгалтера или пользователя" as UC2
+usecase "Войти в систему" as UC1
+usecase "Добавить бухгалтера\n или пользователя" as UC2
 usecase "Удалить бухгалтера\n или пользователя" as UC3
 
 fc --> UC1
