@@ -5,12 +5,15 @@ state "Окно заключения договора" as contractWindow
 state "Окно просмотра статиcтики" as statisticWindow
 state "Окно профиля пользователя" as profileWindow
 state "Окно перезаключения договоров" as renewContractWindow
+state "Окно договора" as renewContract
+
+renewContract : Пользователь может:
+renewContract : -Прочитать комментарий бухгалтера
+renewContract : -Изменить условия договора
+renewContract : -Отправить договор на подтверждение
 
 renewContractWindow : Пользователь может:
-renewContractWindow : -Прочитать комментарий бухгалтера
-renewContractWindow : -Изменить условия договора
-renewContractWindow : -Отправить договор на подтверждение
-
+renewContractWindow : -Выбрать нужный договор
 
 loginWindow : Пользователь может:
 loginWindow : -ввести ФИО
@@ -37,9 +40,9 @@ profileWindow : -Выйти из сессии
 loginWindow -left-> homeWindow : Нажата кнопка вход
 homeWindow -left-> contractWindow : Нажата кнопка\n заключить договор
 homeWindow -up-> renewContractWindow : Нажата кнопка\n перезаключить договор
+renewContractWindow -right-> renewContract : Нажат договор
 homeWindow -up-> statisticWindow : Нажата кнопка\n просмотреть статистику
 homeWindow -down-> profileWindow : Нажата кнопка\n профиля
 homeWindow -right->[*] : Окно закрыто
 profileWindow -> loginWindow : Нажата кнопка выход
-
 @enduml
