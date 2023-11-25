@@ -10,8 +10,10 @@ usecase "Войти в систему" as UC1
 usecase "Заключить договор" as UC2
 usecase "Просмотреть\n заработную плату" as UC3
 usecase "Перезаключить договор" as UC4
+usecase "Выйти из системы" as UC5
 
 fc --> UC1
+fc --> UC5
 fc --> UC2
 fc --> UC3
 fc --> UC4
@@ -30,14 +32,15 @@ usecase "Войти в систему" as UC1
 usecase "Подтвердить договор" as UC2
 usecase "Просмотреть\n заключённые договоры" as UC3
 usecase "Установить\n тарифную ставку" as UC4
+usecase "Выйти из системы" as UC5
 
 fc --> UC1
+fc --> UC5
 fc --> UC2
 fc --> UC3
 fc --> UC4
 
 @enduml
-
 
 //Администратор (Основные возможности)----------------------------------------
 
@@ -48,11 +51,14 @@ left to right direction
 actor "Администратор" as fc
 
 usecase "Войти в систему" as UC1
-usecase "Добавить бухгалтера\n или пользователя" as UC2
-usecase "Удалить бухгалтера\n или пользователя" as UC3
+usecase "Добавить пользователя" as UC2
+usecase "Удалить пользователя" as UC3
+usecase "Выйти из системы" as UC4
 
 fc --> UC1
+fc --> UC4
 fc --> UC2
 fc --> UC3
+
 
 @enduml
