@@ -14,21 +14,24 @@ SOURCES += \
     contractconfirmationwindow.cpp \
     loginwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    profilewindow.cpp
 
 HEADERS += \
     accountantwindow.h \
     adminwindow.h \
     contractconfirmationwindow.h \
     loginwindow.h \
-    mainwindow.h
+    mainwindow.h \
+    profilewindow.h
 
 FORMS += \
     accountantwindow.ui \
     adminwindow.ui \
     contractconfirmationwindow.ui \
     loginwindow.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    profilewindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

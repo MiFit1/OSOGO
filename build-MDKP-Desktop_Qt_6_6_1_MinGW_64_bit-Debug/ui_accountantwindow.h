@@ -12,10 +12,12 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -32,6 +34,7 @@ public:
     QWidget *ParentWidgetConfirmContract;
     QWidget *tab_2;
     QHBoxLayout *horizontalLayout_2;
+    QTableView *tableView;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -60,6 +63,11 @@ public:
         tab_2->setObjectName("tab_2");
         horizontalLayout_2 = new QHBoxLayout(tab_2);
         horizontalLayout_2->setObjectName("horizontalLayout_2");
+        tableView = new QTableView(tab_2);
+        tableView->setObjectName("tableView");
+
+        horizontalLayout_2->addWidget(tableView);
+
         tabWidget->addTab(tab_2, QString());
 
         horizontalLayout->addWidget(tabWidget);

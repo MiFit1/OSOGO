@@ -31,6 +31,7 @@ private:
     void ConfiguringInterface();
     void ShowViewContracts();
     void ShowConfirmationWindow();
+    void DeleteParentWidgetChildren();
 };
 
 #endif // ACCOUNTANTWINDOW_H

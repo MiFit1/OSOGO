@@ -36,6 +36,9 @@ public:
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
     QTabWidget *tabWidget;
+    QWidget *tab_8;
+    QHBoxLayout *horizontalLayout_2;
+    QTableView *TableView;
     QWidget *tab_7;
     QHBoxLayout *horizontalLayout_3;
     QGridLayout *gridLayout_2;
@@ -55,9 +58,6 @@ public:
     QSpacerItem *horizontalSpacer_3;
     QPushButton *pushButton;
     QSpacerItem *horizontalSpacer_5;
-    QWidget *tab_8;
-    QHBoxLayout *horizontalLayout_2;
-    QTableView *TableView;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -75,6 +75,18 @@ public:
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName("tabWidget");
         tabWidget->setIconSize(QSize(40, 40));
+        tab_8 = new QWidget();
+        tab_8->setObjectName("tab_8");
+        horizontalLayout_2 = new QHBoxLayout(tab_8);
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        TableView = new QTableView(tab_8);
+        TableView->setObjectName("TableView");
+        TableView->verticalHeader()->setMinimumSectionSize(14);
+        TableView->verticalHeader()->setHighlightSections(true);
+
+        horizontalLayout_2->addWidget(TableView);
+
+        tabWidget->addTab(tab_8, QString());
         tab_7 = new QWidget();
         tab_7->setObjectName("tab_7");
         horizontalLayout_3 = new QHBoxLayout(tab_7);
@@ -194,18 +206,6 @@ public:
         horizontalLayout_3->addLayout(gridLayout_2);
 
         tabWidget->addTab(tab_7, QString());
-        tab_8 = new QWidget();
-        tab_8->setObjectName("tab_8");
-        horizontalLayout_2 = new QHBoxLayout(tab_8);
-        horizontalLayout_2->setObjectName("horizontalLayout_2");
-        TableView = new QTableView(tab_8);
-        TableView->setObjectName("TableView");
-        TableView->verticalHeader()->setMinimumSectionSize(14);
-        TableView->verticalHeader()->setHighlightSections(true);
-
-        horizontalLayout_2->addWidget(TableView);
-
-        tabWidget->addTab(tab_8, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -232,6 +232,7 @@ public:
     void retranslateUi(QMainWindow *AdminWindow)
     {
         AdminWindow->setWindowTitle(QCoreApplication::translate("AdminWindow", "MainWindow", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_8), QCoreApplication::translate("AdminWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \320\277\320\276\320\273\321\214\320\267\320\276\320\262\320\260\321\202\320\265\320\273\321\217", nullptr));
         Branch->setPlaceholderText(QCoreApplication::translate("AdminWindow", "\320\244\320\270\320\273\320\270\320\260\320\273", nullptr));
         Address->setPlaceholderText(QCoreApplication::translate("AdminWindow", "\320\220\320\264\321\200\320\265\321\201", nullptr));
         LastName->setPlaceholderText(QCoreApplication::translate("AdminWindow", "\320\244\320\260\320\274\320\270\320\273\320\270\321\217", nullptr));
@@ -242,7 +243,6 @@ public:
         Phone->setPlaceholderText(QCoreApplication::translate("AdminWindow", "\320\242\320\265\320\273\320\265\321\204\320\276\320\275", nullptr));
         pushButton->setText(QCoreApplication::translate("AdminWindow", "\320\227\320\260\321\200\320\265\320\263\320\270\321\201\321\202\321\200\320\270\321\200\320\276\320\262\320\260\321\202\321\214", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_7), QCoreApplication::translate("AdminWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\277\320\276\320\273\321\214\320\267\320\276\320\262\320\260\321\202\320\265\320\273\321\217", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_8), QCoreApplication::translate("AdminWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \320\277\320\276\320\273\321\214\320\267\320\276\320\262\320\260\321\202\320\265\320\273\321\217", nullptr));
     } // retranslateUi
 
 };
