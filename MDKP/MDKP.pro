@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     accountantwindow.cpp \
     adminwindow.cpp \
+    contractconfirmationwindow.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp
@@ -18,12 +19,14 @@ SOURCES += \
 HEADERS += \
     accountantwindow.h \
     adminwindow.h \
+    contractconfirmationwindow.h \
     loginwindow.h \
     mainwindow.h
 
 FORMS += \
     accountantwindow.ui \
     adminwindow.ui \
+    contractconfirmationwindow.ui \
     loginwindow.ui \
     mainwindow.ui
 

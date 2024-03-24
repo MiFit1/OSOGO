@@ -10,12 +10,7 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui(new Ui::AdminWindow)
 {
     ui->setupUi(this);
-    QPushButton* btn = new QPushButton;
-    btn->setIcon(QIcon(":/images/resources/settings.png"));
-    btn->setIconSize(QSize(40, 40));
-    btn->setMinimumHeight(50);
-    ui->tabWidget->setCornerWidget(btn, Qt::TopLeftCorner);
-    ui->tabWidget->setStyleSheet("QTabBar::tab { height: 50px;}");
+    configuringInterface();
 }
 
 AdminWindow::~AdminWindow()
@@ -23,13 +18,16 @@ AdminWindow::~AdminWindow()
     delete ui;
 }
 
-void AdminWindow::on_tabWidget_currentChanged(int index)
-{
-}
+void AdminWindow::configuringInterface(){
+    //Кнопка профиля
+    QPushButton* btn = new QPushButton;
+    btn->setIcon(QIcon(":/images/resources/settings.png"));
+    btn->setIconSize(QSize(40, 40));
+    btn->setMinimumHeight(50);
+    ui->tabWidget->setCornerWidget(btn, Qt::TopLeftCorner);
+    ui->tabWidget->setStyleSheet("QTabBar::tab { height: 50px;}");
 
-
-void AdminWindow::on_tabWidget_tabCloseRequested(int index)
-{
-    qDebug()<<"CloseRecusted "<<index;
+    //Размеры полей ввода
+    //ui->LastName->setMinimumHeight(40);
 }
 

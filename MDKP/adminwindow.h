@@ -16,13 +16,10 @@ public:
     ~AdminWindow();
 
 private slots:
-    void on_tabWidget_currentChanged(int index);
-
-    void on_tabWidget_tabCloseRequested(int index);
 
 private:
     Ui::AdminWindow *ui;
-    int currentidx{1};
+    void configuringInterface();
 };
 
 #endif // ADMINWINDOW_H
