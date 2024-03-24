@@ -1,0 +1,25 @@
+@startuml
+skinparam Shadowing true
+actor "Пользователь" as person
+boundary "Окно входа" as loginWindow
+boundary "Главное меню\n   пользователя" as mainMenu
+boundary "Окно ошибки" as errorWindow #Red
+
+control "Проверка учётной\n     записи" as checkDatabase
+entity "Файловая система" as fs
+
+person -> loginWindow : Вводит данные
+person -> loginWindow : Нажата кнопка войти
+loginWindow -> checkDatabase : Выполнить
+checkDatabase -> fs : Запрос в базу данных
+fs --> checkDatabase : Результат
+checkDatabase --> loginWindow : Результат
+loginWindow -> loginWindow : Обработать
+alt Данные о пользвателе найдены
+    loginWindow -> mainMenu : Создать
+    mainMenu --> person
+else Данные о пользователе не найдены
+    loginWindow -> errorWindow : Создать
+    errorWindow --> person
+end
+@enduml

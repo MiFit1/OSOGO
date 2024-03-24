@@ -1,0 +1,20 @@
+@startuml
+skinparam Shadowing true
+actor "Администратор" as admin
+boundary "  Главное меню\nадминистратора" as mainMenuAd
+boundary "Окно удаления\n пользователей" as removeUserWindow 
+
+control "Открытие окна удаления\n          пользователей" as removeUserWindowControl
+control "Обновление базы\n         данных" as writeToDatabase
+entity "Файловая система" as fs
+
+
+admin -u-> mainMenuAd
+mainMenuAd -r-> removeUserWindowControl
+removeUserWindowControl --> removeUserWindow
+removeUserWindow --> writeToDatabase
+
+writeToDatabase --> fs
+admin -- removeUserWindow
+
+@enduml

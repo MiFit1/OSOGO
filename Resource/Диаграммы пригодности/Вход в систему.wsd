@@ -1,0 +1,32 @@
+@startuml
+skinparam Shadowing true
+actor "Пользователь" as person
+boundary "Окно входа" as loginWindow
+boundary "Главное меню\n   бухгалтера" as mainMenuB
+boundary "Главное меню\n       агента" as mainMenuAg
+boundary "  Главное меню\nадминистратора" as mainMenuAd
+boundary "Окно ошибки" as errorWindow #Red
+
+control "Проверка учётной\n         записи" as checkDatabase
+control "Открытие главного\nменю пользователя" as openMainMenu
+control "Открытие окна ошибки" as openErrorWindow
+entity "Файловая система" as fs
+
+
+person -r-> loginWindow
+
+loginWindow -u-> checkDatabase : Введены данные\nНажата кнопка \nвойти
+checkDatabase <-u-> fs
+
+checkDatabase -u-> openMainMenu 
+openMainMenu -d-> mainMenuB
+openMainMenu -d-> mainMenuAg
+openMainMenu -d-> mainMenuAd
+checkDatabase --> openErrorWindow
+openErrorWindow -l-> errorWindow
+
+mainMenuB -- person
+mainMenuAg -- person
+mainMenuAd -- person
+person -- errorWindow
+@enduml

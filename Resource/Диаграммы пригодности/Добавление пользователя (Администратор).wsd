@@ -1,0 +1,28 @@
+@startuml 
+skinparam Shadowing true
+actor "Администратор" as admin
+boundary "  Главное меню\nадминистратора" as mainMenuAd
+boundary "Окно добавления\n  пользователей" as addUserWindow
+boundary "Окно ошибки" as errorWindow #Red
+
+
+control "Открытие окна добавления\n          пользователей" as addUserWindowControl
+control "Запись в базу\n      данных" as writeToDatabase
+control "Проверка корректности\n             данных" as checkCorrectData
+control "Открытие окна\n       ошибки" as openErrorWindow
+entity "Файловая система" as fs
+
+
+admin -u-> mainMenuAd
+mainMenuAd -l-> addUserWindowControl : Нажата кнопка\n добавления пользователей
+addUserWindowControl -r-> addUserWindow
+
+addUserWindow -d-> checkCorrectData : Ввёл данные
+checkCorrectData --> openErrorWindow
+openErrorWindow --> errorWindow
+checkCorrectData <-d-> writeToDatabase
+writeToDatabase --> fs
+
+admin -- errorWindow
+admin -- addUserWindow
+@enduml

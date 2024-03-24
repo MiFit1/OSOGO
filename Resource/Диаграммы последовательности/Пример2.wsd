@@ -1,0 +1,28 @@
+@startuml add_user
+
+' -----------------------------------------------
+
+actor "Администратор" as admin
+
+boundary "  Главное Окно\nАдминистратора" as admin_window
+boundary "Окно Добавления\n   Пользователя" as add_user_window
+boundary "Окно Ошибки" as err_window #red
+
+entity "Файловое\nХранилище" as file_storage
+
+admin -> admin_window : Нажимает кнопку\n''Плюс''
+admin_window -> add_user_window : Отобразить
+
+admin -> add_user_window : Заполняет форму
+admin -> add_user_window : Нажимает кнопку ''Добавить''
+
+add_user_window -> file_storage : Поиск пользователя\nпо логину
+add_user_window -> add_user_window : Проверить форму
+
+alt успех
+    add_user_window -> file_storage : Добавить пользователя
+else Некорректные данные
+    add_user_window -> err_window : Отобразить
+end
+
+@enduml

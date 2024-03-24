@@ -1,0 +1,31 @@
+@startuml
+skinparam Shadowing true
+actor "Бухгалтер" as accountant
+boundary "Главное меню\n   бухгалтера" as mainMenuAc
+boundary "Окно выбора\n    договора" as contractWindow
+boundary "Окно подтверждения\n           договора" as accessContractWindow
+boundary "Окно ошибки" as errorWindow #Red
+
+control "Открытие окна\n ошибки" as errorWindowControl
+control " Открытие окна\nвыбора договора" as contractWindowControl
+control "         Открытие окна\nподтверждения договора" as accessContractWindowControl
+control "Проверка корректности\n             данных" as checkCorrectData
+control "Обновление базы\n         данных" as updateDatabase
+entity "Файловая система" as fs
+
+accountant -u-> mainMenuAc
+mainMenuAc -l-> contractWindowControl
+contractWindowControl -l-> contractWindow
+contractWindow -l-> accessContractWindowControl
+accessContractWindowControl -l-> accessContractWindow
+accessContractWindow --> checkCorrectData
+updateDatabase <--> fs
+checkCorrectData --> errorWindowControl
+checkCorrectData --> updateDatabase
+errorWindowControl --> errorWindow
+
+accountant -- contractWindow
+accountant -- accessContractWindow
+accountant -- errorWindow
+
+@enduml

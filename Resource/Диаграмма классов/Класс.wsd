@@ -1,0 +1,140 @@
+@startuml
+class User{
+   -int id
+   -bool isWork
+   -QString lastName
+   -QString firstName
+   -QString patronymic
+   -QString address
+   -QString phone
+   -QString branch
+}
+
+class Contract{
+   -int id
+   -Date date
+   -double insuranceSum
+   -int typeInsurance
+   -double tariffRate
+   -QString branch
+   -QString lastName
+   -QString firstName
+   -QString patronymic
+   -QStringList comments
+}
+
+class ProfileWindow{
+   User user
+}
+
+class  LoginWindow{
+   -UI::ui*
+}
+
+class TariffRateWindow{
+   -UI::ui*
+}
+
+class ContractConfirmationWindow{
+   -UI::ui*
+   QTableView view
+}
+
+class ContractConclusionWindow{
+   -UI::ui*
+}
+
+class ContractRenegotiateWindow{
+   -UI::ui*
+}
+
+class StatisticsWindow{
+   -UI::ui*
+   QTableView view
+}
+
+class AddUserWindow{
+   -UI::ui*
+}
+
+class DeleteUserWindow{
+   -UI::ui*
+}
+
+class AbstractWindowForRole{
+   +void show()
+}
+
+class WindowNavigator{
+   -AbstractWindowForRole WindowForRole
+   -LoginWindow login
+}
+
+class Database {
+   +bool UserVerify()
+   +bool AddUser()
+   +bool AddContract()
+   +bool DeleteUser()
+   +bool ConfirmationContract()
+   +bool RenegotiateContract()
+}
+
+class AdminWindow{
+   -UI::ui
+   AdminModel model
+   Database database
+}
+
+class AgentWindow{
+   -UI::ui
+   AgentModel model
+   Database database
+}
+
+class AccountantWindow{
+   -UI::ui
+   AccountantModel model
+   Database database
+}
+
+class AdminModel{
+   QVector<User> users
+}
+
+class AccountantModel{
+   Vector<Contract> contracts
+}
+
+class AgentModel{
+   Vector<Contract> contracts
+}
+
+AbstractWindowForRole <|-- AdminWindow
+AbstractWindowForRole <|-- AgentWindow
+AbstractWindowForRole <|-- AccountantWindow
+AdminWindow --> AdminModel
+AccountantWindow --> AccountantModel
+AgentWindow --> AgentModel
+AgentWindow o-- Database
+AdminWindow o-- Database
+AccountantWindow o-- Database
+WindowNavigator --> AbstractWindowForRole
+WindowNavigator --> LoginWindow
+AdminWindow --> AddUserWindow
+AdminWindow --> DeleteUserWindow
+AgentWindow --> ContractConclusionWindow
+AgentWindow --> ContractRenegotiateWindow
+AgentWindow --> StatisticsWindow
+AccountantWindow --> StatisticsWindow
+AccountantWindow --> ContractConfirmationWindow
+AccountantWindow --> TariffRateWindow
+AdminWindow --> ProfileWindow
+AgentWindow --> ProfileWindow
+AccountantWindow --> ProfileWindow
+AgentModel --> Contract
+AccountantModel --> Contract
+AdminModel --> User
+ProfileWindow --> User
+
+
+@enduml

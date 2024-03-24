@@ -1,0 +1,40 @@
+' -----------------------------------------------
+
+actor "Пользователь" as user
+boundary "Окно Для Входа" as entry_window
+
+boundary "Окно Ошибки" as err_window #red
+boundary "Главное Окно\nДля Роли" as main_window
+
+entity "Файловое\nХранилище" as file_storage
+
+' -----------------------------------------------
+
+user -> entry_window : Вводит логин и пароль
+user -> entry_window : Нажимает кнопку "Войти"
+
+entry_window -> entry_window : Первоначальная\nобработка формы
+alt Успех
+    entry_window -> file_storage : Поиск пользователя\nпо логину и паролю
+    file_storage --> entry_window
+    entry_window -> entry_window : Обработка ответа
+
+    alt успех
+        entry_window -> main_window : Создать
+        ...
+        main_window --> user
+        ...
+    else пользователь не найден
+        entry_window -> err_window : Создать
+        ...
+        err_window --> user
+        ...
+    end
+else Некорректный логин или пароль
+    entry_window -> err_window : Создать
+    ...
+    err_window --> user
+    ...
+end 
+
+...
