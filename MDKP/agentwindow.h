@@ -9,12 +9,13 @@
 #include <QVBoxLayout>
 #include <QTableView>
 #include <QLayoutItem>
+#include "abstractuserwindow.h"
 
 namespace Ui {
 class AgentWindow;
 }
 
-class AgentWindow : public QMainWindow
+class AgentWindow : public AbstractUserWindow
 {
     Q_OBJECT
 

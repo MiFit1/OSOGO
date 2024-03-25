@@ -7,12 +7,13 @@
 #include <QVBoxLayout>
 #include <QTableView>
 #include <QLayoutItem>
+#include "abstractuserwindow.h"
 
 namespace Ui {
 class AccountantWindow;
 }
 
-class AccountantWindow : public QMainWindow
+class AccountantWindow : public AbstractUserWindow
 {
     Q_OBJECT
 

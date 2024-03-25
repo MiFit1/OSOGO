@@ -2,7 +2,7 @@
 #include "ui_agentwindow.h"
 
 AgentWindow::AgentWindow(QWidget *parent)
-    : QMainWindow(parent)
+    : AbstractUserWindow(parent)
     , ui(new Ui::AgentWindow)
 {
     ui->setupUi(this);

@@ -31,9 +31,9 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QVBoxLayout *verticalLayout;
     QSpacerItem *verticalSpacer;
-    QLineEdit *lineEdit;
-    QLineEdit *lineEdit_2;
-    QPushButton *pushButton;
+    QLineEdit *LoginLine;
+    QLineEdit *PasswordLine;
+    QPushButton *LoginButton;
     QSpacerItem *verticalSpacer_2;
     QSpacerItem *horizontalSpacer;
     QMenuBar *menubar;
@@ -60,23 +60,23 @@ public:
 
         verticalLayout->addItem(verticalSpacer);
 
-        lineEdit = new QLineEdit(centralwidget);
-        lineEdit->setObjectName("lineEdit");
-        lineEdit->setMinimumSize(QSize(0, 30));
+        LoginLine = new QLineEdit(centralwidget);
+        LoginLine->setObjectName("LoginLine");
+        LoginLine->setMinimumSize(QSize(0, 30));
 
-        verticalLayout->addWidget(lineEdit);
+        verticalLayout->addWidget(LoginLine);
 
-        lineEdit_2 = new QLineEdit(centralwidget);
-        lineEdit_2->setObjectName("lineEdit_2");
-        lineEdit_2->setMinimumSize(QSize(0, 30));
+        PasswordLine = new QLineEdit(centralwidget);
+        PasswordLine->setObjectName("PasswordLine");
+        PasswordLine->setMinimumSize(QSize(0, 30));
 
-        verticalLayout->addWidget(lineEdit_2);
+        verticalLayout->addWidget(PasswordLine);
 
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName("pushButton");
-        pushButton->setMinimumSize(QSize(0, 40));
+        LoginButton = new QPushButton(centralwidget);
+        LoginButton->setObjectName("LoginButton");
+        LoginButton->setMinimumSize(QSize(0, 40));
 
-        verticalLayout->addWidget(pushButton);
+        verticalLayout->addWidget(LoginButton);
 
         verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -92,7 +92,7 @@ public:
         LoginWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(LoginWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 612, 26));
+        menubar->setGeometry(QRect(0, 0, 612, 17));
         LoginWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(LoginWindow);
         statusbar->setObjectName("statusbar");
@@ -106,7 +106,7 @@ public:
     void retranslateUi(QMainWindow *LoginWindow)
     {
         LoginWindow->setWindowTitle(QCoreApplication::translate("LoginWindow", "MainWindow", nullptr));
-        pushButton->setText(QCoreApplication::translate("LoginWindow", "\320\222\320\276\320\271\321\202\320\270", nullptr));
+        LoginButton->setText(QCoreApplication::translate("LoginWindow", "\320\222\320\276\320\271\321\202\320\270", nullptr));
     } // retranslateUi
 
 };

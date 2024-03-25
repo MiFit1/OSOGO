@@ -9,25 +9,34 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    abstractuserwindow.cpp \
     accountantwindow.cpp \
     adminwindow.cpp \
     agentwindow.cpp \
     contractconfirmationwindow.cpp \
+    database.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     profilewindow.cpp \
-    renegotiatecontractwindow.cpp
+    renegotiatecontractwindow.cpp \
+    user.cpp \
+    windownavigator.cpp
 
 HEADERS += \
+    Global.h \
+    abstractuserwindow.h \
     accountantwindow.h \
     adminwindow.h \
     agentwindow.h \
     contractconfirmationwindow.h \
+    database.h \
     loginwindow.h \
     mainwindow.h \
     profilewindow.h \
-    renegotiatecontractwindow.h
+    renegotiatecontractwindow.h \
+    user.h \
+    windownavigator.h
 
 FORMS += \
     accountantwindow.ui \

@@ -2,6 +2,7 @@
 #define LOGINWINDOW_H
 
 #include <QMainWindow>
+#include "user.h"
 
 namespace Ui {
 class LoginWindow;
@@ -17,6 +18,12 @@ public:
 
 private:
     Ui::LoginWindow *ui;
+
+signals:
+    void signalLoginSuccessful(const User& user);
+private slots:
+
+    void on_LoginButton_clicked();
 };
 
 #endif // LOGINWINDOW_H

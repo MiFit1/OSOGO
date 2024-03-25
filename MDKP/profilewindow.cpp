@@ -6,6 +6,7 @@ ProfileWindow::ProfileWindow(QWidget *parent)
     , ui(new Ui::ProfileWindow)
 {
     ui->setupUi(this);
+    connect(ui->LogoutButton, SIGNAL(clicked()),SIGNAL(signalLogoutButtonClicked()));
 }
 
 ProfileWindow::~ProfileWindow()

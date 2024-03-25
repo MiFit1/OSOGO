@@ -27,7 +27,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QGridLayout *gridLayout;
     QSpacerItem *horizontalSpacer_2;
-    QPushButton *pushButton_3;
+    QPushButton *CancelButton;
     QLineEdit *lineEdit_2;
     QLineEdit *lineEdit_3;
     QSpacerItem *verticalSpacer;
@@ -36,7 +36,7 @@ public:
     QSpacerItem *horizontalSpacer;
     QSpacerItem *horizontalSpacer_3;
     QLineEdit *lineEdit;
-    QPushButton *pushButton;
+    QPushButton *LogoutButton;
     QSpacerItem *verticalSpacer_3;
 
     void setupUi(QWidget *ProfileWindow)
@@ -52,11 +52,11 @@ public:
 
         gridLayout->addItem(horizontalSpacer_2, 6, 4, 1, 1);
 
-        pushButton_3 = new QPushButton(ProfileWindow);
-        pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setMinimumSize(QSize(0, 30));
+        CancelButton = new QPushButton(ProfileWindow);
+        CancelButton->setObjectName("CancelButton");
+        CancelButton->setMinimumSize(QSize(0, 30));
 
-        gridLayout->addWidget(pushButton_3, 6, 3, 1, 1);
+        gridLayout->addWidget(CancelButton, 6, 3, 1, 1);
 
         lineEdit_2 = new QLineEdit(ProfileWindow);
         lineEdit_2->setObjectName("lineEdit_2");
@@ -97,11 +97,11 @@ public:
 
         gridLayout->addWidget(lineEdit, 2, 1, 1, 2);
 
-        pushButton = new QPushButton(ProfileWindow);
-        pushButton->setObjectName("pushButton");
-        pushButton->setMinimumSize(QSize(0, 30));
+        LogoutButton = new QPushButton(ProfileWindow);
+        LogoutButton->setObjectName("LogoutButton");
+        LogoutButton->setMinimumSize(QSize(0, 30));
 
-        gridLayout->addWidget(pushButton, 6, 1, 1, 1);
+        gridLayout->addWidget(LogoutButton, 6, 1, 1, 1);
 
         verticalSpacer_3 = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
 
@@ -119,9 +119,9 @@ public:
     void retranslateUi(QWidget *ProfileWindow)
     {
         ProfileWindow->setWindowTitle(QCoreApplication::translate("ProfileWindow", "Form", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("ProfileWindow", "\320\236\321\202\320\274\320\265\320\275\320\260", nullptr));
+        CancelButton->setText(QCoreApplication::translate("ProfileWindow", "\320\236\321\202\320\274\320\265\320\275\320\260", nullptr));
         label->setText(QCoreApplication::translate("ProfileWindow", "\320\237\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
-        pushButton->setText(QCoreApplication::translate("ProfileWindow", "\320\222\321\213\320\271\321\202\320\270", nullptr));
+        LogoutButton->setText(QCoreApplication::translate("ProfileWindow", "\320\222\321\213\320\271\321\202\320\270", nullptr));
     } // retranslateUi
 
 };

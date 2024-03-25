@@ -6,7 +6,7 @@
 #include <QSize>
 
 AdminWindow::AdminWindow(QWidget *parent) :
-    QMainWindow(parent),
+    AbstractUserWindow(parent),
     ui(new Ui::AdminWindow)
 {
     ui->setupUi(this);
@@ -20,14 +20,24 @@ AdminWindow::~AdminWindow()
 
 void AdminWindow::configuringInterface(){
     //Кнопка профиля
-    QPushButton* btn = new QPushButton;
-    btn->setIcon(QIcon(":/images/resources/settings.png"));
-    btn->setIconSize(QSize(40, 40));
-    btn->setMinimumHeight(50);
-    ui->tabWidget->setCornerWidget(btn, Qt::TopLeftCorner);
+    profileButton = new QPushButton(this);
+    profileButton->setIcon(QIcon(":/images/resources/settings.png"));
+    profileButton->setIconSize(QSize(40, 40));
+    profileButton->setMinimumHeight(50);
+    ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
     ui->tabWidget->setStyleSheet("QTabBar::tab { height: 50px;}");
 
+    profileWindow = new ProfileWindow();
+    connect(profileButton,SIGNAL(clicked()),this,SLOT(slotProfileButtonClicked()));
+    connect(profileWindow,SIGNAL(signalLogoutButtonClicked()),SLOT(slotLogoutButtonClicked()));
     //Размеры полей ввода
     //ui->LastName->setMinimumHeight(40);
 }
 
+void AdminWindow::slotProfileButtonClicked(){
+    profileWindow->show();
+}
+
+void AdminWindow::slotLogoutButtonClicked(){
+    emit signalLogout();
+}

@@ -53,7 +53,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="LoginLine">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -63,7 +63,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_2">
+       <widget class="QLineEdit" name="PasswordLine">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -73,7 +73,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="LoginButton">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -124,7 +124,7 @@
      <x>0</x>
      <y>0</y>
      <width>612</width>
-     <height>26</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>
