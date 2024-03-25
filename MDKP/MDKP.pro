@@ -11,27 +11,33 @@ CONFIG += c++17
 SOURCES += \
     accountantwindow.cpp \
     adminwindow.cpp \
+    agentwindow.cpp \
     contractconfirmationwindow.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
-    profilewindow.cpp
+    profilewindow.cpp \
+    renegotiatecontractwindow.cpp
 
 HEADERS += \
     accountantwindow.h \
     adminwindow.h \
+    agentwindow.h \
     contractconfirmationwindow.h \
     loginwindow.h \
     mainwindow.h \
-    profilewindow.h
+    profilewindow.h \
+    renegotiatecontractwindow.h
 
 FORMS += \
     accountantwindow.ui \
     adminwindow.ui \
+    agentwindow.ui \
     contractconfirmationwindow.ui \
     loginwindow.ui \
     mainwindow.ui \
-    profilewindow.ui
+    profilewindow.ui \
+    renegotiatecontractwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

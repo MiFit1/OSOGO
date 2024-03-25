@@ -204,10 +204,17 @@ public:
     void retranslateUi(QWidget *ContractConfirmationWindow)
     {
         ContractConfirmationWindow->setWindowTitle(QCoreApplication::translate("ContractConfirmationWindow", "Form", nullptr));
+        lineEdit_3->setPlaceholderText(QCoreApplication::translate("ContractConfirmationWindow", "\320\236\321\202\321\207\320\265\321\201\321\202\320\262\320\276", nullptr));
+        lineEdit_2->setPlaceholderText(QCoreApplication::translate("ContractConfirmationWindow", "\320\230\320\274\321\217", nullptr));
+        textEdit->setPlaceholderText(QCoreApplication::translate("ContractConfirmationWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\272\320\276\320\274\320\274\320\265\320\275\321\202\320\260\321\200\320\270\320\271", nullptr));
         pushButton_2->setText(QCoreApplication::translate("ContractConfirmationWindow", "\320\236\321\202\320\272\320\273\320\276\320\275\320\270\321\202\321\214", nullptr));
         pushButton_3->setText(QCoreApplication::translate("ContractConfirmationWindow", "\320\237\320\276\320\264\321\202\320\262\320\265\321\200\320\264\320\270\321\202\321\214", nullptr));
+        lineEdit_6->setPlaceholderText(QCoreApplication::translate("ContractConfirmationWindow", "\320\241\321\203\320\274\320\274\320\260", nullptr));
+        lineEdit_4->setPlaceholderText(QCoreApplication::translate("ContractConfirmationWindow", "\320\242\320\265\320\273\320\265\321\204\320\276\320\275", nullptr));
         label->setText(QCoreApplication::translate("ContractConfirmationWindow", "\320\230\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\321\217 \320\276 \320\272\320\273\320\270\320\265\320\275\321\202\320\265:", nullptr));
+        lineEdit->setPlaceholderText(QCoreApplication::translate("ContractConfirmationWindow", "\320\244\320\260\320\274\320\270\320\273\320\270\321\217", nullptr));
         label_2->setText(QCoreApplication::translate("ContractConfirmationWindow", "\320\230\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\321\217 \320\276 \320\264\320\276\320\263\320\276\320\262\320\276\321\200\320\265:", nullptr));
+        lineEdit_5->setPlaceholderText(QCoreApplication::translate("ContractConfirmationWindow", "\320\242\320\270\320\277 \320\264\320\276\320\263\320\276\320\262\320\276\321\200\320\260", nullptr));
         pushButton->setText(QCoreApplication::translate("ContractConfirmationWindow", "\320\235\320\260\320\267\320\260\320\264", nullptr));
         label_3->setText(QCoreApplication::translate("ContractConfirmationWindow", "\320\222\320\260\321\210 \320\272\320\276\320\274\320\274\320\265\320\275\321\202\320\260\321\200\320\270\320\271:", nullptr));
     } // retranslateUi
