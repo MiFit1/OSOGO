@@ -135,7 +135,8 @@ SidePanel::SidePanel(QWidget *parent)
 
     });
 
-    _handler = new HandlerWidgetT(parent);
+    //_handler = new HandlerWidgetT(parent);
+    _handler = new HandlerWidgetT(this);
     _handler->setObjectName("SidePanel_handler");
 
 

@@ -23,6 +23,7 @@ class SidePanel : public QScrollArea
 public:
 
     using HandlerWidgetT = QPushButton;
+    HandlerWidgetT* _handler = nullptr;
 
 private:
 
@@ -38,8 +39,6 @@ private:
     QEasingCurve curve_on_close = {QEasingCurve::Type::InBounce };
 
     QTimer* _timer = nullptr;
-
-    HandlerWidgetT* _handler = nullptr;
 
     qreal _anim_progress = 0.0;
 
