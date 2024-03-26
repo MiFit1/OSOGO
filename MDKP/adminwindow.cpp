@@ -15,6 +15,7 @@ AdminWindow::AdminWindow(QWidget *parent) :
 
 AdminWindow::~AdminWindow()
 {
+    delete profileWindow;
     delete ui;
 }
 
@@ -27,17 +28,23 @@ void AdminWindow::configuringInterface(){
     ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
     ui->tabWidget->setStyleSheet("QTabBar::tab { height: 50px;}");
 
-    profileWindow = new ProfileWindow();
-    connect(profileButton,SIGNAL(clicked()),this,SLOT(slotProfileButtonClicked()));
-    connect(profileWindow,SIGNAL(signalLogoutButtonClicked()),SLOT(slotLogoutButtonClicked()));
-    //Размеры полей ввода
-    //ui->LastName->setMinimumHeight(40);
-}
+    //Настройка боковой панели профиля
+    profilePanel = new PanelLeftSide(this);
+    profilePanel->setOpenEasingCurve(QEasingCurve::Type::OutExpo);
+    profilePanel->setCloseEasingCurve(QEasingCurve::Type::InExpo);
+    profilePanel->init(profileButton);
 
-void AdminWindow::slotProfileButtonClicked(){
-    profileWindow->show();
+    profileWindow = new ProfileWindow();
+    profilePanel->setPanelSize(profileWindow->size().width()+5);
+    profilePanel->setWidgetResizable(true);
+    profilePanel->setWidget(profileWindow);
+
+
+    connect(profileWindow,SIGNAL(signalLogoutButtonClicked()),SLOT(slotLogoutButtonClicked()));
+    connect(profileWindow,SIGNAL(singalCancelButtonClicked()),profileButton, SIGNAL(clicked()));
 }
 
 void AdminWindow::slotLogoutButtonClicked(){
     emit signalLogout();
 }
+

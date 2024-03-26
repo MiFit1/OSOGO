@@ -9,3 +9,5 @@ int main(int argc, char *argv[])
     WindowNavigator navigator(db);
     return a.exec();
 }
+
+

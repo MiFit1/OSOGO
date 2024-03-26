@@ -3,8 +3,10 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <QVBoxLayout>
 #include "abstractuserwindow.h"
 #include "profilewindow.h"
+#include "QSidePanel/PanelLeftSide.hpp"
 
 namespace Ui {
 class AdminWindow;
@@ -21,10 +23,10 @@ private:
     Ui::AdminWindow *ui;
     QPushButton* profileButton;
     ProfileWindow* profileWindow;
+    PanelLeftSide* profilePanel;
 
     void configuringInterface();
 private slots:
-    void slotProfileButtonClicked();
     void slotLogoutButtonClicked();
 };
 

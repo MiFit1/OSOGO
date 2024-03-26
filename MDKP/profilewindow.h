@@ -19,6 +19,7 @@ private:
     Ui::ProfileWindow *ui;
 signals:
     void signalLogoutButtonClicked();
+    void singalCancelButtonClicked();
 };
 
 #endif // PROFILEWINDOW_H
