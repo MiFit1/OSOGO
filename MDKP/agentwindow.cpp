@@ -19,11 +19,11 @@ void AgentWindow::ConfiguringInterface(){
     ui->tabWidget->addTab(parentWidgetRenegotiationContract,"Перезаключить договор");
 
     //Кнопка профиля
-    QPushButton* btn = new QPushButton;
-    btn->setIcon(QIcon(":/images/resources/settings.png"));
-    btn->setIconSize(QSize(40, 40));
-    btn->setMinimumHeight(50);
-    ui->tabWidget->setCornerWidget(btn, Qt::TopLeftCorner);
+    profileButton = new QPushButton;
+    profileButton->setIcon(QIcon(":/images/resources/settings.png"));
+    profileButton->setIconSize(QSize(40, 40));
+    profileButton->setMinimumHeight(50);
+    ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
     ui->tabWidget->setStyleSheet("QTabBar::tab { height: 50px;}");
 
     //layout
@@ -32,6 +32,21 @@ void AgentWindow::ConfiguringInterface(){
     renegotiationContractWidget = new RenegotiateContractWindow();
 
     ShowViewRenegotiateContract();
+
+    //Настройка боковой панели профиля
+    profilePanel = new PanelLeftSide(this);
+    profilePanel->setOpenEasingCurve(QEasingCurve::Type::OutExpo);
+    profilePanel->setCloseEasingCurve(QEasingCurve::Type::InExpo);
+    profilePanel->init(profileButton);
+
+    profileWindow = new ProfileWindow();
+    profilePanel->setPanelSize(profileWindow->size().width()+5);
+    profilePanel->setWidgetResizable(true);
+    profilePanel->setWidget(profileWindow);
+
+
+    connect(profileWindow,SIGNAL(signalLogoutButtonClicked()),SLOT(slotLogoutButtonClicked()));
+    connect(profileWindow,SIGNAL(singalCancelButtonClicked()),profileButton, SIGNAL(clicked()));
 }
 
 void AgentWindow::ShowViewRenegotiateContract(){
@@ -56,3 +71,8 @@ void AgentWindow::DeleteParentRenegotiationWidgetChildren(){
         layoutParentWidgetRenegotiationContract->update();
     }
 }
+
+void AgentWindow::slotLogoutButtonClicked(){
+    emit signalLogout();
+}
+

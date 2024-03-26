@@ -10,6 +10,8 @@
 #include <QTableView>
 #include <QLayoutItem>
 #include "abstractuserwindow.h"
+#include "profilewindow.h"
+#include "QSidePanel/PanelLeftSide.hpp"
 
 namespace Ui {
 class AgentWindow;
@@ -31,9 +33,16 @@ private:
     QTableView* viewRenegotiateContract;
     RenegotiateContractWindow* renegotiationContractWidget;
 
+    QPushButton* profileButton;
+    ProfileWindow* profileWindow;
+    PanelLeftSide* profilePanel;
+
     void ShowViewRenegotiateContract();
     void ShowRenegotiateContractWidget();
     void DeleteParentRenegotiationWidgetChildren();
+
+private slots:
+    void slotLogoutButtonClicked();
 };
 
 #endif // AGENTWINDOW_H

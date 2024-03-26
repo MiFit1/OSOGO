@@ -8,6 +8,8 @@
 #include <QTableView>
 #include <QLayoutItem>
 #include "abstractuserwindow.h"
+#include "profilewindow.h"
+#include "QSidePanel/PanelLeftSide.hpp"
 
 namespace Ui {
 class AccountantWindow;
@@ -22,6 +24,7 @@ public:
     ~AccountantWindow();
 
 private slots:
+    void slotLogoutButtonClicked();
 
 
 private:
@@ -29,6 +32,10 @@ private:
     QTableView* viewContracts;
     ContractConfirmationWindow* confirmationWindow;
     QVBoxLayout* layoutParentWidgetConfirmContract;
+
+    QPushButton* profileButton;
+    ProfileWindow* profileWindow;
+    PanelLeftSide* profilePanel;
     void ConfiguringInterface();
     void ShowViewContracts();
     void ShowConfirmationWindow();
