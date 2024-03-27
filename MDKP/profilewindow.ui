@@ -43,22 +43,31 @@
       </widget>
      </item>
      <item row="3" column="1" colspan="2">
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="FirstNameLine">
        <property name="minimumSize">
         <size>
          <width>0</width>
          <height>30</height>
         </size>
        </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Имя</string>
+       </property>
       </widget>
      </item>
      <item row="4" column="1" colspan="2">
-      <widget class="QLineEdit" name="lineEdit_3">
+      <widget class="QLineEdit" name="PatronymicLine">
        <property name="minimumSize">
         <size>
          <width>0</width>
          <height>30</height>
         </size>
+       </property>
+       <property name="placeholderText">
+        <string>Отчество</string>
        </property>
       </widget>
      </item>
@@ -128,12 +137,15 @@
       </spacer>
      </item>
      <item row="2" column="1" colspan="2">
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="LastNameLine">
        <property name="minimumSize">
         <size>
          <width>180</width>
          <height>30</height>
         </size>
+       </property>
+       <property name="placeholderText">
+        <string>Фамилия</string>
        </property>
       </widget>
      </item>

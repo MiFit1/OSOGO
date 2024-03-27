@@ -14,3 +14,11 @@ ProfileWindow::~ProfileWindow()
 {
     delete ui;
 }
+
+void ProfileWindow::fillProfile(const User& user){
+    if(!user.isEmpty()){
+        ui->LastNameLine->setText(user.GetLastName());
+        ui->FirstNameLine->setText(user.GetFirstName());
+        ui->PatronymicLine->setText(user.GetPatronymic());
+    }
+}

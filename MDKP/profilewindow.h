@@ -2,6 +2,7 @@
 #define PROFILEWINDOW_H
 
 #include <QWidget>
+#include "user.h"
 
 namespace Ui {
 class ProfileWindow;
@@ -14,7 +15,7 @@ class ProfileWindow : public QWidget
 public:
     explicit ProfileWindow(QWidget *parent = nullptr);
     ~ProfileWindow();
-
+    void fillProfile(const User& user);
 private:
     Ui::ProfileWindow *ui;
 signals:

@@ -9,6 +9,7 @@ WindowNavigator::WindowNavigator(QObject *parent, Database* db)
 
 void WindowNavigator::slotLoginSuccessful(const User& user){
     HideAndRemoveLoginWindow();
+    qDebug()<<&user;
     switch (user.getRole()) {
     case Admin:{
         AdminWindow* window = new AdminWindow;
@@ -32,6 +33,7 @@ void WindowNavigator::slotLoginSuccessful(const User& user){
     }
 
     windowForRole->show();
+    windowForRole->setUser(user);
     connect(windowForRole.get(),SIGNAL(signalLogout()),this,SLOT(slotLogout()));
 }
 

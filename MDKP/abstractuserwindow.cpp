@@ -3,6 +3,8 @@
 AbstractUserWindow::AbstractUserWindow(QWidget *parent)
     : QMainWindow{parent}
 {
+    user = User();
+
     qDebug() << "call abstract constructor";
     profileButton = new QPushButton;
     profileButton->setIcon(QIcon(":/images/resources/settings.png"));
@@ -27,3 +29,9 @@ AbstractUserWindow::~AbstractUserWindow(){
     qDebug() << "call abstract destructor";
     delete profileButton;
 }
+
+void AbstractUserWindow::setUser(const User& us){
+    user = us;
+    profileWindow->fillProfile(us);
+}
+

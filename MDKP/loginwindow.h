@@ -21,8 +21,8 @@ private:
 
 signals:
     void signalLoginSuccessful(const User& user);
-private slots:
 
+private slots:
     void on_LoginButton_clicked();
 };
 
