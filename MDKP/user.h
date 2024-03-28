@@ -18,6 +18,8 @@ private:
     QString address;
     QString phone;
     QString branch;
+    QString login;
+    QString password;
     bool empty;
 
 public:
@@ -25,6 +27,9 @@ public:
     QString GetLastName() const;
     QString GetFirstName() const;
     QString GetPatronymic() const;
+    QString GetPhone() const;
+    int GetPost() const;
+    QString GetBranch() const;
     bool isEmpty() const;
 };
 //Q_DECLARE_METATYPE(User)

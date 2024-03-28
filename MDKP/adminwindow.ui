@@ -20,7 +20,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="iconSize">
          <size>
@@ -34,14 +34,7 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QTableView" name="TableView">
-            <attribute name="verticalHeaderMinimumSectionSize">
-             <number>14</number>
-            </attribute>
-            <attribute name="verticalHeaderHighlightSections">
-             <bool>true</bool>
-            </attribute>
-           </widget>
+           <widget class="QWidget" name="ParentWidget" native="true"/>
           </item>
          </layout>
         </widget>
@@ -52,25 +45,6 @@
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="3" column="3">
-             <widget class="QLineEdit" name="Address">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>200</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="placeholderText">
-               <string>Адрес</string>
-              </property>
-             </widget>
-            </item>
             <item row="3" column="1">
              <widget class="QLineEdit" name="FirstName">
               <property name="sizePolicy">
@@ -90,10 +64,39 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="3">
-             <widget class="QComboBox" name="Post">
+            <item row="5" column="3">
+             <widget class="QLineEdit" name="LoginLine">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="placeholderText">
+               <string>Логин</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Minimum</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="LastName">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -105,7 +108,7 @@
                </size>
               </property>
               <property name="placeholderText">
-               <string>Выберите должность</string>
+               <string>Фамилия</string>
               </property>
              </widget>
             </item>
@@ -120,54 +123,6 @@
               <property name="sizeHint" stdset="0">
                <size>
                 <width>80</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="6" column="2">
-             <spacer name="verticalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::MinimumExpanding</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="5" column="1">
-             <widget class="QLineEdit" name="Phone">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="placeholderText">
-               <string>Телефон</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
                 <height>20</height>
                </size>
               </property>
@@ -189,6 +144,44 @@
               </property>
              </spacer>
             </item>
+            <item row="3" column="3">
+             <widget class="QLineEdit" name="Address">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="placeholderText">
+               <string>Адрес</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QLineEdit" name="Branch">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="placeholderText">
+               <string>Филиал</string>
+              </property>
+             </widget>
+            </item>
             <item row="3" column="5">
              <spacer name="horizontalSpacer_3">
               <property name="orientation">
@@ -202,6 +195,57 @@
               </property>
              </spacer>
             </item>
+            <item row="8" column="5">
+             <widget class="QPushButton" name="pushButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>120</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Зарегистрировать</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="3">
+             <widget class="QComboBox" name="Post">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="placeholderText">
+               <string>Выберите должность</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="2">
              <spacer name="verticalSpacer">
               <property name="orientation">
@@ -209,6 +253,41 @@
               </property>
               <property name="sizeType">
                <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Введите информацию о пользователе:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="2">
+             <spacer name="verticalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::MinimumExpanding</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -237,10 +316,10 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="QLabel" name="label">
+            <item row="5" column="1">
+             <widget class="QLineEdit" name="Phone">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -248,84 +327,24 @@
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Введите информацию о пользователе:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="5">
-             <widget class="QPushButton" name="pushButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>120</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Зарегистрировать</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Minimum</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="4" column="3">
-             <widget class="QLineEdit" name="Branch">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>200</width>
                 <height>30</height>
                </size>
               </property>
               <property name="placeholderText">
-               <string>Филиал</string>
+               <string>Телефон</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="LastName">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
+            <item row="6" column="3">
+             <widget class="QLineEdit" name="PasswordLine">
               <property name="minimumSize">
                <size>
-                <width>200</width>
+                <width>0</width>
                 <height>30</height>
                </size>
               </property>
               <property name="placeholderText">
-               <string>Фамилия</string>
+               <string>Пароль</string>
               </property>
              </widget>
             </item>

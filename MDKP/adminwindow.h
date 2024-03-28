@@ -5,6 +5,12 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include "abstractuserwindow.h"
+#include "usertablemodel.h"
+#include <QVBoxLayout>
+#include <QTableView>
+#include "changeuserdatawidget.h"
+#include <QLayoutItem>
+
 
 namespace Ui {
 class AdminWindow;
@@ -20,6 +26,15 @@ public:
 private:
     Ui::AdminWindow *ui;
     void configuringInterface();
+    UserTableModel* u_model;
+
+    QTableView* viewUsers;
+    ChangeUserDataWidget* changeUserDataWidget;
+    QVBoxLayout* layoutParentWidgetChangeUserData;
+
+    void ShowViewUsers();
+    void ShowChangeUserDataWidget();
+    void DeleteParentWidgetChildren();
 };
 
 #endif // ADMINWINDOW_H

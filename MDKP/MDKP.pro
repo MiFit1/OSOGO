@@ -17,6 +17,7 @@ SOURCES += \
     accountantwindow.cpp \
     adminwindow.cpp \
     agentwindow.cpp \
+    changeuserdatawidget.cpp \
     contractconfirmationwindow.cpp \
     database.cpp \
     loginwindow.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
     profilewindow.cpp \
     renegotiatecontractwindow.cpp \
     user.cpp \
+    usertablemodel.cpp \
     windownavigator.cpp
 
 HEADERS += \
@@ -33,6 +35,7 @@ HEADERS += \
     accountantwindow.h \
     adminwindow.h \
     agentwindow.h \
+    changeuserdatawidget.h \
     contractconfirmationwindow.h \
     database.h \
     loginwindow.h \
@@ -40,12 +43,14 @@ HEADERS += \
     profilewindow.h \
     renegotiatecontractwindow.h \
     user.h \
+    usertablemodel.h \
     windownavigator.h
 
 FORMS += \
     accountantwindow.ui \
     adminwindow.ui \
     agentwindow.ui \
+    changeuserdatawidget.ui \
     contractconfirmationwindow.ui \
     loginwindow.ui \
     mainwindow.ui \

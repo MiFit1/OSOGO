@@ -49,3 +49,14 @@ QString User::GetFirstName() const{
 QString User::GetPatronymic() const{
     return patronymic;
 }
+QString User::GetPhone() const{
+    return phone;
+}
+
+int User::GetPost() const{
+    return post;
+}
+
+QString User::GetBranch() const{
+    return branch;
+}

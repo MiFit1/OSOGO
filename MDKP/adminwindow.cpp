@@ -25,5 +25,36 @@ void AdminWindow::configuringInterface(){
     ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
     ui->tabWidget->setStyleSheet("QTabBar::tab { height: 50px;}");
     profilePanel->raise();
+
+    layoutParentWidgetChangeUserData = new QVBoxLayout(ui->ParentWidget);
+    viewUsers = new QTableView();
+    changeUserDataWidget = new ChangeUserDataWidget();
+    ShowViewUsers();
+
+    u_model = new UserTableModel(this);
+    viewUsers->setModel(u_model);
+}
+
+void AdminWindow::ShowViewUsers(){
+    DeleteParentWidgetChildren();
+    viewUsers->setParent(ui->ParentWidget);
+    layoutParentWidgetChangeUserData->addWidget(viewUsers);
+}
+
+void AdminWindow::ShowChangeUserDataWidget(){
+    DeleteParentWidgetChildren();
+    changeUserDataWidget->setParent(ui->ParentWidget);
+    layoutParentWidgetChangeUserData->addWidget(changeUserDataWidget);
+}
+
+void AdminWindow::DeleteParentWidgetChildren(){
+    QLayoutItem* item = layoutParentWidgetChangeUserData->itemAt(0);
+    if(item != NULL){
+        layoutParentWidgetChangeUserData->removeItem(item);
+        layoutParentWidgetChangeUserData->removeWidget(item->widget());
+        item->widget()->setParent(NULL);
+        delete item;
+        layoutParentWidgetChangeUserData->update();
+    }
 }
 
