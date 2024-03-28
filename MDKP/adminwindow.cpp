@@ -13,6 +13,7 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui->setupUi(this);
     configuringInterface();
     connect(viewUsers,SIGNAL(doubleClicked(QModelIndex)),SLOT(slotDoubleClikedOnUser(QModelIndex)));
+    connect(changeUserDataWidget, SIGNAL(signalBackButtonCliked()),SLOT(slotBackButtonChangeUserWidgetCliked()));
 }
 
 AdminWindow::~AdminWindow()
@@ -40,9 +41,9 @@ void AdminWindow::configuringInterface(){
     viewUsers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     //
-    User user1(1,1,1,"Eliseev","Vasiliy","Andreevich","Киренского 17","87777777777","Московский филиал");
-    User user2(2,2,2,"Петечкин","Пётр","Петрович","Свобондный 82а","87777777777","Томский филиал");
-    User user3(3,3,3,"фон Эверек","Ольгерд","Ольгердович","Красноярск, Ленина 15","87777777777","Красноярский филиал");
+    User user1(1,1,1,"Eliseev","Vasiliy","Andreevich","Киренского 17","87777777777","Московский филиал","vasa228","VodkaBalalayka");
+    User user2(2,2,2,"Петечкин","Пётр","Петрович","Свобондный 82а","87777777777","Томский филиал","HlebnyDizelky","qwerty");
+    User user3(3,3,3,"фон Эверек","Ольгерд","Ольгердович","Красноярск, Ленина 15","87777777777","Красноярский филиал","Olega777","1234");
     u_model->addUser(user1);
     u_model->addUser(user2);
     u_model->addUser(user3);
@@ -73,6 +74,12 @@ void AdminWindow::DeleteParentWidgetChildren(){
 
 void AdminWindow::slotDoubleClikedOnUser(const QModelIndex index){
     //qDebug()<<index.row();
-    //ShowChangeUserDataWidget();
+    ShowChangeUserDataWidget();
+    User user = u_model->getUser(index);
+    changeUserDataWidget->setUserToChangeWidget(user);
+}
+
+void AdminWindow::slotBackButtonChangeUserWidgetCliked(){
+    ShowViewUsers();
 }
 

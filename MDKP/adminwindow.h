@@ -1,14 +1,14 @@
 #ifndef ADMINWINDOW_H
 #define ADMINWINDOW_H
+#include "abstractuserwindow.h"
+#include "usertablemodel.h"
+#include "changeuserdatawidget.h"
 
 #include <QMainWindow>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include "abstractuserwindow.h"
-#include "usertablemodel.h"
 #include <QVBoxLayout>
 #include <QTableView>
-#include "changeuserdatawidget.h"
 #include <QLayoutItem>
 #include <QHeaderView>
 
@@ -36,6 +36,8 @@ private:
     void ShowViewUsers();
     void ShowChangeUserDataWidget();
     void DeleteParentWidgetChildren();
+public slots:
+    void slotBackButtonChangeUserWidgetCliked();
 private slots:
     void slotDoubleClikedOnUser(const QModelIndex index);
 };

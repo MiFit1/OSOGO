@@ -1,8 +1,7 @@
 #include "user.h"
 
 User::User(int id, int post, bool isWork, QString lastName, QString firstName, QString patronymic, QString address, QString phone, QString branch) {
-    //int id = -1, int post =-1, bool isWork = false, QString lastName = "", QString firstName = "", QString patronymic = "", QString address = "", QString phone = "", QString branch = ""
- //   empty = false;
+    empty = false;
     this->id = id;
     this->post = post;
     this->isWork = isWork;
@@ -14,6 +13,21 @@ User::User(int id, int post, bool isWork, QString lastName, QString firstName, Q
     this->branch = branch;
 }
 
+User::User(int id, int post, bool isWork, QString lastName, QString firstName, QString patronymic, QString address, QString phone, QString branch, QString Login, QString Password) {
+    empty = false;
+    this->id = id;
+    this->post = post;
+    this->isWork = isWork;
+    this->lastName = lastName;
+    this->firstName = firstName;
+    this->patronymic = patronymic;
+    this->address = address;
+    this->phone = phone;
+    this->branch = branch;
+    this->login = Login;
+    this->password = Password;
+}
+//(int id, int post, bool isWork, QString lastName, QString firstName, QString patronymic, QString address, QString phone, QString branch, QString Login, QString Password)
 User::User(){
     empty = true;
 }
@@ -59,4 +73,36 @@ int User::GetPost() const{
 
 QString User::GetBranch() const{
     return branch;
+}
+
+QString User::GetAddress() const{
+    return address;
+}
+
+QString User::GetLogin() const{
+    return login;
+}
+
+QString User::GetPassword() const{
+    return password;
+}
+
+static QString convertPost(int post){
+    switch (post) {
+    case Admin:
+        return QString("Администратор");
+        break;
+    case Accountant:
+        return QString("Бухгалтер");
+        break;
+    case Agent:
+        return QString("Агент");
+        break;
+    case Unknown:
+        return QString("Unknown");
+        break;
+    default:
+        break;
+    }
+    return QString("Unknown");
 }
