@@ -79,3 +79,17 @@ void UserTableModel::addUser(const User &user)
     m_users << user;
     endInsertRows();
 }
+
+User UserTableModel::getUser(int index){
+    if(index < 0 || index > (m_users.size()-1)){
+        return User();
+    }
+    return m_users.at(index);
+}
+
+User UserTableModel::getUser(const QModelIndex& index){
+    if(index.row() < 0 || index.row() > (m_users.size() -1)){
+        return User();
+    }
+    return m_users.at(index.row());
+}

@@ -10,6 +10,7 @@
 #include <QTableView>
 #include "changeuserdatawidget.h"
 #include <QLayoutItem>
+#include <QHeaderView>
 
 
 namespace Ui {
@@ -35,6 +36,8 @@ private:
     void ShowViewUsers();
     void ShowChangeUserDataWidget();
     void DeleteParentWidgetChildren();
+private slots:
+    void slotDoubleClikedOnUser(const QModelIndex index);
 };
 
 #endif // ADMINWINDOW_H
