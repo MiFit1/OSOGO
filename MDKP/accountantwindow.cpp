@@ -7,7 +7,19 @@ AccountantWindow::AccountantWindow(QWidget *parent) :
     ui(new Ui::AccountantWindow)
 {
     ui->setupUi(this);
+
     ConfiguringInterface();
+
+    //тесты ======================================================
+    model = new QSqlQueryModel(this);
+    model->setQuery("SELECT ID as [ID пользователя],"
+                    "       LastName as [Фамилия],"
+                    "       FirstName as [Имя],"
+                    "       Patronymic as [Отчество]"
+                    "FROM test_table;");
+    viewContracts->setModel(model);
+    viewContracts->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    viewContracts->setColumnHidden(0,true);
 }
 
 AccountantWindow::~AccountantWindow()

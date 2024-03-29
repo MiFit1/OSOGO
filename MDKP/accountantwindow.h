@@ -8,6 +8,7 @@
 #include <QTableView>
 #include <QLayoutItem>
 #include "abstractuserwindow.h"
+#include <QSqlQueryModel>>
 
 
 namespace Ui {
@@ -26,6 +27,8 @@ private:
     QTableView* viewContracts;
     ContractConfirmationWindow* confirmationWindow;
     QVBoxLayout* layoutParentWidgetConfirmContract;
+    QSqlQueryModel* model;
+
     void ConfiguringInterface();
     void ShowViewContracts();
     void ShowConfirmationWindow();
