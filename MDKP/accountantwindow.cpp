@@ -15,7 +15,8 @@ AccountantWindow::AccountantWindow(QWidget *parent) :
     model->setQuery("SELECT ID as [ID пользователя],"
                     "       LastName as [Фамилия],"
                     "       FirstName as [Имя],"
-                    "       Patronymic as [Отчество]"
+                    "       Patronymic as [Отчество],"
+                    "       Datee as [Дата]"
                     "FROM test_table;");
     viewContracts->setModel(model);
     viewContracts->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);

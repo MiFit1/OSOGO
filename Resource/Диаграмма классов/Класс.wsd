@@ -8,6 +8,8 @@ class User{
    -QString address
    -QString phone
    -QString branch
+   -QString login
+   -QString password
 }
 
 class Contract{
@@ -25,44 +27,61 @@ class Contract{
 
 class ProfileWindow{
    User user
+   void Logout()
 }
 
 class  LoginWindow{
-   -UI::ui*
+   QString login
+   QString password
+   Database db
+   void checkUser()
 }
 
 class TariffRateWindow{
-   -UI::ui*
+   double rateOne
+   double rateTwo
+   double rateThree
+   void setRateOne()
+   void setRateTwo()
+   void setRateThree()
 }
 
 class ContractConfirmationWindow{
-   -UI::ui*
+   
    QTableView view
+   void ConfirmContract()
+   void NotConfirmContract()
 }
 
 class ContractConclusionWindow{
-   -UI::ui*
+   Contract contractData
+   void ConcludeContract()
 }
 
 class ContractRenegotiateWindow{
-   -UI::ui*
+   Contract contractData
+   void RenegotiateWindow()
 }
 
 class StatisticsWindow{
-   -UI::ui*
+   
    QTableView view
 }
 
 class AddUserWindow{
-   -UI::ui*
+   User userData
+   void AddUser()
 }
 
-class DeleteUserWindow{
-   -UI::ui*
+class ChangeUserWindow{
+   User userData
+   void ChangeUser()
+   void DeleteUser()
 }
 
 class AbstractWindowForRole{
-   +void show()
+   ProfileWindow profile
+   void SetUser()
 }
 
 class WindowNavigator{
@@ -80,33 +99,49 @@ class Database {
 }
 
 class AdminWindow{
-   -UI::ui
    AdminModel model
    Database database
+   ChangeUserWindow changeWindow
+   AddUserWindow addWindow
+   ProfileWindow profileWindow
+   void showChangeWindow()
+   void showProfileWindow()
 }
 
 class AgentWindow{
-   -UI::ui
    AgentModel model
    Database database
+   ContractConclusionWindow conclusionWindow
+   ProfileWindow profileWindow
+   ContractRenegotiateWindow renegotiateWindow
+   StatisticsWindow statisticsWindow
 }
 
 class AccountantWindow{
-   -UI::ui
    AccountantModel model
    Database database
+   ProfileWindow profileWindow
+   StatisticsWindow statisticsWindow
+   TariffRateWindow tariffRate
+   ContractConfirmationWindow confirmWindow
 }
 
 class AdminModel{
    QVector<User> users
+   void AddUser()
+   User GetUser(int index)
 }
 
 class AccountantModel{
    Vector<Contract> contracts
+   void AddContract()
+   Contract GetUser(int index)
 }
 
 class AgentModel{
    Vector<Contract> contracts
+   void AddContract()
+   Contract GetContract(int index)
 }
 
 AbstractWindowForRole <|-- AdminWindow
@@ -121,20 +156,26 @@ AccountantWindow o-- Database
 WindowNavigator --> AbstractWindowForRole
 WindowNavigator --> LoginWindow
 AdminWindow --> AddUserWindow
-AdminWindow --> DeleteUserWindow
+AdminWindow --> ChangeUserWindow
 AgentWindow --> ContractConclusionWindow
 AgentWindow --> ContractRenegotiateWindow
 AgentWindow --> StatisticsWindow
 AccountantWindow --> StatisticsWindow
 AccountantWindow --> ContractConfirmationWindow
 AccountantWindow --> TariffRateWindow
-AdminWindow --> ProfileWindow
-AgentWindow --> ProfileWindow
-AccountantWindow --> ProfileWindow
+AbstractWindowForRole --> ProfileWindow
 AgentModel --> Contract
 AccountantModel --> Contract
 AdminModel --> User
 ProfileWindow --> User
 
+AddUserWindow --> User
+ChangeUserWindow --> User
+
+ContractConclusionWindow --> Contract
+ContractRenegotiateWindow --> Contract
+ContractConfirmationWindow --> Contract
+
+LoginWindow o-- Database
 
 @enduml

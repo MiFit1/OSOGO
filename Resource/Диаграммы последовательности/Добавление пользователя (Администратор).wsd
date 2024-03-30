@@ -1,4 +1,4 @@
-@startuml
+@startuml dia_add_user_for_admin
 skinparam Shadowing true
 actor "Администратор" as admin
 boundary "  Главное меню\nадминистратора" as mainMenuAd
