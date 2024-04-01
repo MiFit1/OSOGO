@@ -2,25 +2,15 @@
 #include "ui_accountantwindow.h"
 
 
-AccountantWindow::AccountantWindow(QWidget *parent) :
+AccountantWindow::AccountantWindow(Database* database, QWidget *parent) :
     AbstractUserWindow(parent),
     ui(new Ui::AccountantWindow)
 {
     ui->setupUi(this);
-
+    db = database;
     ConfiguringInterface();
-
-    //тесты ======================================================
-    model = new QSqlQueryModel(this);
-    model->setQuery("SELECT ID as [ID пользователя],"
-                    "       LastName as [Фамилия],"
-                    "       FirstName as [Имя],"
-                    "       Patronymic as [Отчество],"
-                    "       Datee as [Дата]"
-                    "FROM test_table;");
-    viewContracts->setModel(model);
-    viewContracts->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    viewContracts->setColumnHidden(0,true);
+    connect(viewContracts, SIGNAL(doubleClicked(QModelIndex)), SLOT(slotDoubleClikedOnContract(QModelIndex)));
+    connect(confirmationWindow, SIGNAL(signalBackButtonClicked()),SLOT(slotConfirmWidgetBackButtonClicked()));
 }
 
 AccountantWindow::~AccountantWindow()
@@ -39,6 +29,22 @@ void AccountantWindow::ConfiguringInterface(){
     viewContracts = new QTableView();
     confirmationWindow = new ContractConfirmationWindow();
     ShowViewContracts();
+
+    //Модель договоров (для подтверждения)
+    sqlModel = new QSqlQueryModel(this);
+    sqlModel->setQuery("SELECT  Contract.ID,"
+                       "        TypeInsurance as [Тип договора],"
+                       "        Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
+                       "        Employee.LastName || ' ' || Employee.FirstName || ' ' || COALESCE(Employee.Patronymic,'') as [ФИО агента],"
+                       "        Contract.Summa as [Сумма договора],"
+                       "        Contract.Datee as [Дата заключения]"
+                       "FROM Contract"
+                       "    JOIN Client ON Contract.ID_Client = Client.ID"
+                       "    JOIN Employee ON Contract.ID_Employee = Employee.ID;");
+    viewContracts->setModel(sqlModel);
+    viewContracts->setSelectionBehavior(QAbstractItemView::SelectRows);
+    viewContracts->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    viewContracts->setColumnHidden(0,true);
 }
 
 //установка родительского виджета для виджета представления контрактов и добаление его в layout
@@ -64,4 +70,17 @@ void AccountantWindow::DeleteParentWidgetChildren(){
         delete item;
         layoutParentWidgetConfirmContract->update();
     }
+}
+
+void AccountantWindow::slotDoubleClikedOnContract(const QModelIndex index){
+    int indexRowClicked = index.row();
+    int idContract = sqlModel->index(indexRowClicked, 0).data().toInt();
+    Contract contract = db->GetContractById(idContract);
+    Client client = db->GetClientById(contract.GetIdClient());
+    confirmationWindow->SetContractAndClient(contract, client);
+    ShowConfirmationWindow();
+}
+
+void AccountantWindow::slotConfirmWidgetBackButtonClicked(){
+    ShowViewContracts();
 }

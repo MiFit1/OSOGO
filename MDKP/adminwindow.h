@@ -3,6 +3,7 @@
 #include "abstractuserwindow.h"
 #include "usertablemodel.h"
 #include "changeuserdatawidget.h"
+#include "database.h"
 
 #include <QMainWindow>
 #include <QPushButton>
@@ -22,7 +23,7 @@ class AdminWindow : public AbstractUserWindow
 Q_OBJECT
 
 public:
-    explicit AdminWindow(QWidget *parent = nullptr);
+    explicit AdminWindow(Database* database,QWidget *parent = nullptr);
     ~AdminWindow();
 private:
     Ui::AdminWindow *ui;

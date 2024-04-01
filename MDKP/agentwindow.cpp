@@ -1,7 +1,7 @@
 #include "agentwindow.h"
 #include "ui_agentwindow.h"
 
-AgentWindow::AgentWindow(QWidget *parent)
+AgentWindow::AgentWindow(Database* database, QWidget *parent)
     : AbstractUserWindow(parent)
     , ui(new Ui::AgentWindow)
 {

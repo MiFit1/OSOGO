@@ -2,6 +2,8 @@
 #define CONTRACTCONFIRMATIONWINDOW_H
 
 #include <QWidget>
+#include "client.h"
+#include "contract.h"
 
 namespace Ui {
 class ContractConfirmationWindow;
@@ -14,9 +16,14 @@ class ContractConfirmationWindow : public QWidget
 public:
     explicit ContractConfirmationWindow(QWidget *parent = nullptr);
     ~ContractConfirmationWindow();
+    void SetContractAndClient(Contract Contract, Client Client);
 
 private:
     Ui::ContractConfirmationWindow *ui;
+    Contract contract;
+    Client client;
+signals:
+    void signalBackButtonClicked();
 };
 
 #endif // CONTRACTCONFIRMATIONWINDOW_H

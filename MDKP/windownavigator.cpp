@@ -12,19 +12,19 @@ void WindowNavigator::slotLoginSuccessful(const User& user){
     qDebug()<<&user;
     switch (user.getRole()) {
     case Admin:{
-        AdminWindow* window = new AdminWindow;
+        AdminWindow* window = new AdminWindow(db);
         windowForRole.reset(window);
     }
         break;
 
     case Accountant:{
-        AccountantWindow* window = new AccountantWindow;
+        AccountantWindow* window = new AccountantWindow(db);
         windowForRole.reset(window);
     }
     break;
 
     case Agent:{
-        AgentWindow* window = new AgentWindow;
+        AgentWindow* window = new AgentWindow(db);
         windowForRole.reset(window);
     }
     break;

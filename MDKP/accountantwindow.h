@@ -8,7 +8,8 @@
 #include <QTableView>
 #include <QLayoutItem>
 #include "abstractuserwindow.h"
-#include <QSqlQueryModel>>
+#include <QSqlQueryModel>
+#include "database.h"
 
 
 namespace Ui {
@@ -20,19 +21,23 @@ class AccountantWindow : public AbstractUserWindow
     Q_OBJECT
 
 public:
-    explicit AccountantWindow(QWidget *parent = nullptr);
+    explicit AccountantWindow(Database* database, QWidget *parent = nullptr);
     ~AccountantWindow();
 private:
     Ui::AccountantWindow *ui;
     QTableView* viewContracts;
     ContractConfirmationWindow* confirmationWindow;
     QVBoxLayout* layoutParentWidgetConfirmContract;
-    QSqlQueryModel* model;
+    QSqlQueryModel* sqlModel;
+    Database* db;
 
     void ConfiguringInterface();
     void ShowViewContracts();
     void ShowConfirmationWindow();
     void DeleteParentWidgetChildren();
+private slots:
+    void slotDoubleClikedOnContract(const QModelIndex index);
+    void slotConfirmWidgetBackButtonClicked();
 };
 
 #endif // ACCOUNTANTWINDOW_H

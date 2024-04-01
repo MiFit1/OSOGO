@@ -18,6 +18,8 @@ SOURCES += \
     adminwindow.cpp \
     agentwindow.cpp \
     changeuserdatawidget.cpp \
+    client.cpp \
+    contract.cpp \
     contractconfirmationwindow.cpp \
     database.cpp \
     loginwindow.cpp \
@@ -36,6 +38,8 @@ HEADERS += \
     adminwindow.h \
     agentwindow.h \
     changeuserdatawidget.h \
+    client.h \
+    contract.h \
     contractconfirmationwindow.h \
     database.h \
     loginwindow.h \

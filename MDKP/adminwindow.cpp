@@ -5,7 +5,7 @@
 #include <QPushButton>
 #include <QSize>
 
-AdminWindow::AdminWindow(QWidget *parent) :
+AdminWindow::AdminWindow(Database* database, QWidget *parent) :
     AbstractUserWindow(parent),
     ui(new Ui::AdminWindow)
 {

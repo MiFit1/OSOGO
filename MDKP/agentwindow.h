@@ -10,6 +10,7 @@
 #include <QTableView>
 #include <QLayoutItem>
 #include "abstractuserwindow.h"
+#include "database.h"
 
 namespace Ui {
 class AgentWindow;
@@ -20,7 +21,7 @@ class AgentWindow : public AbstractUserWindow
     Q_OBJECT
 
 public:
-    explicit AgentWindow(QWidget *parent = nullptr);
+    explicit AgentWindow(Database* database, QWidget *parent = nullptr);
     ~AgentWindow();
 
 private:
