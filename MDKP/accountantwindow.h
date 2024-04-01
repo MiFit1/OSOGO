@@ -1,14 +1,15 @@
 #ifndef ACCOUNTANTWINDOW_H
 #define ACCOUNTANTWINDOW_H
-
+#include "contractconfirmationwindow.h"
+#include "abstractuserwindow.h"
+#include "accountantmodelstatistics.h"
 #include <QMainWindow>
 #include <QPushButton>
-#include "contractconfirmationwindow.h"
 #include <QVBoxLayout>
 #include <QTableView>
 #include <QLayoutItem>
-#include "abstractuserwindow.h"
 #include <QSqlQueryModel>
+#include <QHeaderView>
 #include "database.h"
 
 
@@ -26,9 +27,12 @@ public:
 private:
     Ui::AccountantWindow *ui;
     QTableView* viewContracts;
+    QTableView* viewStatistics;
     ContractConfirmationWindow* confirmationWindow;
     QVBoxLayout* layoutParentWidgetConfirmContract;
-    QSqlQueryModel* sqlModel;
+    QVBoxLayout* layoutParentWidgetStatistics;
+    QSqlQueryModel* sqlModelContract;
+    AccountantModelStatistics* sqlModelStatistics;
     Database* db;
 
     void ConfiguringInterface();

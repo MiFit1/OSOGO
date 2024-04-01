@@ -17,6 +17,8 @@ public:
 
 private:
     Ui::RenegotiateContractWindow *ui;
+signals:
+    void signalBackButtonClicked();
 };
 
 #endif // RENEGOTIATECONTRACTWINDOW_H

@@ -18,7 +18,7 @@ void  Database::CreateTables(){
                         "Datee DATE NOT NULL,"
                         "Summa DECIMAL(10,2) NOT NULL,"
                         "TypeInsurance NVARCHAR(100) NOT NULL,"
-                        "TariffRate FLOAT NOT NULL,"
+                        "TariffRate FLOAT NULL,"
                         "ID_Client INTEGER NOT NULL,"
                         "ID_Employee INTEGER NOT NULL,"
                         "Status INTEGER NOT NULL,"
@@ -91,7 +91,7 @@ void  Database::InsertTestData(){
     QString str_query = "INSERT INTO Contract (Datee, Summa, TypeInsurance, TariffRate, ID_Client, ID_Employee, Status) VALUES "
                         "(DATETIME(), 690700,'Договор страхования жизни', 0.56, 1,2,1),"
                         "(DATETIME(), 346798,'Договор страхования жизни', 0.678, 2,2,1),"
-                        "(DATETIME(), 488000,'Договор страхования машины', 0.8, 3,2,1);";
+                        "(DATETIME(), 488000,'Договор страхования машины', 0.8, 3,2,3);";
     bool queryResult = query.exec(str_query);
     if(!queryResult){
         qDebug() << "Не удаётся вставить данные";

@@ -23,6 +23,7 @@ public:
     PanelLeftSide* profilePanel;
 
     void setUser(const User& user);
+    User getUser();
 private:
     User user;
 

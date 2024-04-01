@@ -35,3 +35,7 @@ void AbstractUserWindow::setUser(const User& us){
     profileWindow->fillProfile(us);
 }
 
+User AbstractUserWindow::getUser(){
+    return user;
+}
+

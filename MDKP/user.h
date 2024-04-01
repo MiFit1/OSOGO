@@ -26,6 +26,7 @@ private:
 
 public:
     //void operator = (const User &user);
+    int GetId() const;
     QString GetLastName() const;
     QString GetFirstName() const;
     QString GetPatronymic() const;

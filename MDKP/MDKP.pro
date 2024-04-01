@@ -14,6 +14,7 @@ include($${PWD}/QSidePanel/q_side_panel.pri)
 
 SOURCES += \
     abstractuserwindow.cpp \
+    accountantmodelstatistics.cpp \
     accountantwindow.cpp \
     adminwindow.cpp \
     agentwindow.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
 HEADERS += \
     Global.h \
     abstractuserwindow.h \
+    accountantmodelstatistics.h \
     accountantwindow.h \
     adminwindow.h \
     agentwindow.h \

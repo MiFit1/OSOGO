@@ -30,7 +30,7 @@
         </property>
         <widget class="QWidget" name="tab_8">
          <attribute name="title">
-          <string>Удалить пользователя</string>
+          <string>Управление пользователями</string>
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>

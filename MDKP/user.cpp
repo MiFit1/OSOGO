@@ -47,6 +47,9 @@ int User::getRole() const{
 //     this->phone = user.phone;
 //     this->branch = user.branch;
 // }
+int User::GetId() const{
+    return id;
+}
 
 bool User::isEmpty() const{
     return empty;

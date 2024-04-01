@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include <QTableView>
 #include <QLayoutItem>
+#include <QtSql>
 #include "abstractuserwindow.h"
 #include "database.h"
 
@@ -31,10 +32,16 @@ private:
     QVBoxLayout* layoutParentWidgetRenegotiationContract;
     QTableView* viewRenegotiateContract;
     RenegotiateContractWindow* renegotiationContractWidget;
+    QSqlQueryModel* sqlModelRenegotiate;
+    Database* db;
 
     void ShowViewRenegotiateContract();
     void ShowRenegotiateContractWidget();
     void DeleteParentRenegotiationWidgetChildren();
+
+private slots:
+    void slotDoubleClikedOnRenegitiationContract(const QModelIndex index);
+    void slotRenegotiateWidgetBackButtonClicked();
 
 };
 

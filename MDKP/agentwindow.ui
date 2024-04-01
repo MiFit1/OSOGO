@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -257,6 +257,16 @@
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
          <widget class="QTableView" name="tableView"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="RenegotiateContract">
+       <attribute name="title">
+        <string>Перезаключить договор</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QWidget" name="ParentWidgetRenContract" native="true"/>
         </item>
        </layout>
       </widget>
