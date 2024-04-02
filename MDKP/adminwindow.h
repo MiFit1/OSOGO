@@ -37,6 +37,7 @@ private:
     void ShowViewUsers();
     void ShowChangeUserDataWidget();
     void DeleteParentWidgetChildren();
+    void AddShadowToChildren(QObject* obj);
 public slots:
     void slotBackButtonChangeUserWidgetCliked();
 private slots:

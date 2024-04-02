@@ -13,12 +13,32 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+    background-color: #f2f2f2; /* Светло-серый цвет фона */
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="styleSheet">
+       <string notr="true">QTabBar::tab { 
+	font: 500 8pt &quot;Montserrat Medium&quot;;
+    background:	#e9e9e9;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+	height: 34 px;
+	padding: 8px;
+}
+
+QTabBar::tab:selected {
+    background-color: white;
+}
+</string>
+      </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -26,7 +46,11 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QWidget" name="ParentWidgetConfirmContract" native="true"/>
+         <widget class="QWidget" name="ParentWidgetConfirmContract" native="true">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

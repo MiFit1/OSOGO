@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>315</width>
-    <height>295</height>
+    <width>346</width>
+    <height>301</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,9 +33,25 @@
       <widget class="QPushButton" name="CancelButton">
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>30</height>
+         <width>120</width>
+         <height>40</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	font: 500 14pt &quot;Montserrat Medium&quot;;
+    background-color: #ff0000; 
+    color: white; 
+    border: none;
+    font-size: 14px;
+    border-radius: 5px; 
+}
+QPushButton:hover {
+    background-color: #d20000;
+}
+QPushButton:pressed {
+    background-color: #8B0000; 
+}</string>
        </property>
        <property name="text">
         <string>Отмена</string>
@@ -46,12 +62,29 @@
       <widget class="QLineEdit" name="FirstNameLine">
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>30</height>
+         <width>200</width>
+         <height>40</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
        <property name="placeholderText">
         <string>Имя</string>
@@ -62,9 +95,26 @@
       <widget class="QLineEdit" name="PatronymicLine">
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>30</height>
+         <width>200</width>
+         <height>40</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
        <property name="placeholderText">
         <string>Отчество</string>
@@ -89,6 +139,12 @@
      </item>
      <item row="1" column="1" colspan="2">
       <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	font: 500 11pt &quot;Montserrat Medium&quot;;
+}
+</string>
+       </property>
        <property name="text">
         <string>Профиль</string>
        </property>
@@ -140,9 +196,26 @@
       <widget class="QLineEdit" name="LastNameLine">
        <property name="minimumSize">
         <size>
-         <width>180</width>
-         <height>30</height>
+         <width>200</width>
+         <height>40</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
        <property name="placeholderText">
         <string>Фамилия</string>
@@ -153,9 +226,25 @@
       <widget class="QPushButton" name="LogoutButton">
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>30</height>
+         <width>120</width>
+         <height>40</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+font: 500 14pt &quot;Montserrat Medium&quot;;
+    background-color: #4CAF50; 
+    color: white; 
+    border: none;
+    font-size: 14px;
+    border-radius: 5px; 
+}
+QPushButton:hover {
+    background-color: #45a049;
+}
+QPushButton:pressed {
+    background-color: #357a38; 
+}</string>
        </property>
        <property name="text">
         <string>Выйти</string>

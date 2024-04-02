@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/images">
         <file>resources/settings.png</file>
+        <file>resources/CheckMark.png</file>
     </qresource>
 </RCC>

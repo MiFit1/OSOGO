@@ -2,6 +2,7 @@
 #define PROFILEWINDOW_H
 
 #include <QWidget>
+#include <QGraphicsDropShadowEffect>
 #include "user.h"
 
 namespace Ui {

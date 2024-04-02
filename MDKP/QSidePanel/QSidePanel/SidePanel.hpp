@@ -1,6 +1,5 @@
 #ifndef Q_SIDE_PANEL__SIDE_PANEL_HPP
 #define Q_SIDE_PANEL__SIDE_PANEL_HPP
-
 #include <QScrollArea>
 
 #include <QTimer>

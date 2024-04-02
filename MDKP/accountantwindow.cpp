@@ -20,7 +20,6 @@ AccountantWindow::~AccountantWindow()
 void AccountantWindow::ConfiguringInterface(){
     //Кнопка профиля
     ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
-    ui->tabWidget->setStyleSheet("QTabBar::tab { height: 50px;}");
     profilePanel->raise();
 
     //layout вкладки подтверждения договоров

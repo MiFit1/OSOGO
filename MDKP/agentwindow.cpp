@@ -22,7 +22,6 @@ void AgentWindow::ConfiguringInterface(){
 
     //Кнопка профиля
     ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
-    ui->tabWidget->setStyleSheet("QTabBar::tab { height: 50px;}");
     profilePanel->raise();
 
     //layout
@@ -41,6 +40,19 @@ void AgentWindow::ConfiguringInterface(){
     viewRenegotiateContract->setSelectionBehavior(QAbstractItemView::SelectRows);
     viewRenegotiateContract->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     viewRenegotiateContract->setColumnHidden(0,true);
+
+    //Эффект тени на дочерние объекты
+    for (auto child : ui->ConcludeTab->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly)) {
+        if (child->metaObject()->className() == QStringLiteral("QLabel")) {
+            // Пропускаем QLabel
+            continue;
+        }
+        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
+        shadowEffect->setBlurRadius(20);
+        shadowEffect->setColor(QColor(140,140,140,255));
+        shadowEffect->setOffset(3,3);
+        child->setGraphicsEffect(shadowEffect);
+    }
 
     ShowViewRenegotiateContract();
 }

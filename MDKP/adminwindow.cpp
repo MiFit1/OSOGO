@@ -12,6 +12,8 @@ AdminWindow::AdminWindow(Database* database, QWidget *parent) :
     qDebug() << "call constructor";
     ui->setupUi(this);
     configuringInterface();
+    AddShadowToChildren(changeUserDataWidget);
+    AddShadowToChildren(ui->AddUserTab);
     connect(viewUsers,SIGNAL(doubleClicked(QModelIndex)),SLOT(slotDoubleClikedOnUser(QModelIndex)));
     connect(changeUserDataWidget, SIGNAL(signalBackButtonCliked()),SLOT(slotBackButtonChangeUserWidgetCliked()));
 }
@@ -25,7 +27,6 @@ AdminWindow::~AdminWindow()
 void AdminWindow::configuringInterface(){
     //Кнопка профиля
     ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
-    ui->tabWidget->setStyleSheet("QTabBar::tab { height: 50px;}");
     profilePanel->raise();
 
     layoutParentWidgetChangeUserData = new QVBoxLayout(ui->ParentWidget);
@@ -81,5 +82,20 @@ void AdminWindow::slotDoubleClikedOnUser(const QModelIndex index){
 
 void AdminWindow::slotBackButtonChangeUserWidgetCliked(){
     ShowViewUsers();
+}
+
+void AdminWindow::AddShadowToChildren(QObject* obj){
+    //Эффект тени на дочерние объекты
+    for (auto child : obj->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly)) {
+        if (child->metaObject()->className() == QStringLiteral("QLabel")) {
+            // Пропускаем QLabel
+            continue;
+        }
+        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
+        shadowEffect->setBlurRadius(20);
+        shadowEffect->setColor(QColor(140,140,140,255));
+        shadowEffect->setOffset(3,3);
+        child->setGraphicsEffect(shadowEffect);
+    }
 }
 

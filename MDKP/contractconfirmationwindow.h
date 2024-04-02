@@ -2,6 +2,7 @@
 #define CONTRACTCONFIRMATIONWINDOW_H
 
 #include <QWidget>
+#include <QGraphicsDropShadowEffect>
 #include "client.h"
 #include "contract.h"
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>840</width>
-    <height>429</height>
+    <height>455</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,6 +19,22 @@
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QTabWidget" name="tabWidget">
+        <property name="styleSheet">
+         <string notr="true">QTabBar::tab { 
+	font: 500 8pt &quot;Montserrat Medium&quot;;
+    background:	#e9e9e9;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+	height: 34 px;
+	padding: 8px;
+}
+
+QTabBar::tab:selected {
+    background-color: white;
+}
+
+</string>
+        </property>
         <property name="currentIndex">
          <number>0</number>
         </property>
@@ -28,25 +44,142 @@
           <height>40</height>
          </size>
         </property>
-        <widget class="QWidget" name="tab_8">
-         <attribute name="title">
-          <string>Управление пользователями</string>
-         </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QWidget" name="ParentWidget" native="true"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="tab_7">
+        <widget class="QWidget" name="AddUserTab">
          <attribute name="title">
           <string>Добавить пользователя</string>
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="3" column="1">
-             <widget class="QLineEdit" name="FirstName">
+            <item row="3" column="4">
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Minimum</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="5" column="3">
+             <widget class="QLineEdit" name="LoginLine">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+              </property>
+              <property name="placeholderText">
+               <string>Логин</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QComboBox" name="Post">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QComboBox {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QComboBox:editable {
+    background: #5fbaeb;
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+    background: #cdcdcd;
+}
+
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px;
+	border-left-width: 1px;
+}
+
+QComboBox::down-arrow {
+   image: url(:/images/resources/CheckMark.png);
+	width: 12px;
+	height: 12px;
+}
+QComboBox QAbstractItemView::item {
+height: 40px;
+}
+</string>
+              </property>
+              <property name="placeholderText">
+               <string>Выберите должность</string>
+              </property>
+              <item>
+               <property name="text">
+                <string>Администратор</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Агент</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Бухгалтер</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::MinimumExpanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>50</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="4" column="3">
+             <widget class="QLineEdit" name="Branch">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                 <horstretch>0</horstretch>
@@ -55,27 +188,44 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>0</width>
-                <height>30</height>
+                <width>200</width>
+                <height>40</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+              </property>
               <property name="placeholderText">
-               <string>Имя</string>
+               <string>Филиал</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="3">
-             <widget class="QLineEdit" name="LoginLine">
-              <property name="minimumSize">
+            <item row="7" column="2">
+             <spacer name="verticalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::MinimumExpanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
                <size>
-                <width>0</width>
-                <height>30</height>
+                <width>20</width>
+                <height>40</height>
                </size>
               </property>
-              <property name="placeholderText">
-               <string>Логин</string>
-              </property>
-             </widget>
+             </spacer>
             </item>
             <item row="3" column="2">
              <spacer name="horizontalSpacer_2">
@@ -104,11 +254,85 @@
               <property name="minimumSize">
                <size>
                 <width>200</width>
-                <height>30</height>
+                <height>40</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
               </property>
               <property name="placeholderText">
                <string>Фамилия</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="3">
+             <widget class="QLineEdit" name="PasswordLine">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+              </property>
+              <property name="placeholderText">
+               <string>Пароль</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QLineEdit" name="Phone">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+              </property>
+              <property name="placeholderText">
+               <string>Телефон</string>
               </property>
              </widget>
             </item>
@@ -128,22 +352,6 @@
               </property>
              </spacer>
             </item>
-            <item row="3" column="4">
-             <spacer name="horizontalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Minimum</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
             <item row="3" column="3">
              <widget class="QLineEdit" name="Address">
               <property name="sizePolicy">
@@ -155,16 +363,55 @@
               <property name="minimumSize">
                <size>
                 <width>200</width>
-                <height>30</height>
+                <height>40</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
               </property>
               <property name="placeholderText">
                <string>Адрес</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="3">
-             <widget class="QLineEdit" name="Branch">
+            <item row="1" column="1">
+             <widget class="QLabel" name="label">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	font: 500 11pt &quot;Montserrat Medium&quot;;
+}
+</string>
+              </property>
+              <property name="text">
+               <string>Введите информацию о пользователе:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="MiddleName">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                 <horstretch>0</horstretch>
@@ -173,44 +420,59 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>200</width>
-                <height>30</height>
+                <width>0</width>
+                <height>40</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+              </property>
               <property name="placeholderText">
-               <string>Филиал</string>
+               <string>Отчество</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="5">
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="8" column="5">
-             <widget class="QPushButton" name="pushButton">
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="FirstName">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
                <size>
-                <width>120</width>
-                <height>30</height>
+                <width>0</width>
+                <height>40</height>
                </size>
               </property>
-              <property name="text">
-               <string>Зарегистрировать</string>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+              </property>
+              <property name="placeholderText">
+               <string>Имя</string>
               </property>
              </widget>
             </item>
@@ -227,128 +489,102 @@
               </property>
              </spacer>
             </item>
-            <item row="2" column="3">
-             <widget class="QComboBox" name="Post">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>200</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="placeholderText">
-               <string>Выберите должность</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <spacer name="verticalSpacer">
+            <item row="3" column="5">
+             <spacer name="horizontalSpacer_3">
               <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Expanding</enum>
+               <enum>Qt::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>20</width>
-                <height>40</height>
+                <width>40</width>
+                <height>20</height>
                </size>
               </property>
              </spacer>
             </item>
-            <item row="1" column="1">
-             <widget class="QLabel" name="label">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+            <item row="7" column="5">
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <property name="topMargin">
+               <number>0</number>
               </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Введите информацию о пользователе:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="2">
-             <spacer name="verticalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::MinimumExpanding</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="4" column="1">
-             <widget class="QLineEdit" name="MiddleName">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="placeholderText">
-               <string>Отчество</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QLineEdit" name="Phone">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="placeholderText">
-               <string>Телефон</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="3">
-             <widget class="QLineEdit" name="PasswordLine">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="placeholderText">
-               <string>Пароль</string>
-              </property>
-             </widget>
+              <item>
+               <spacer name="verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_4">
+                <item>
+                 <spacer name="horizontalSpacer_6">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>150</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+font: 500 14pt &quot;Montserrat Medium&quot;;
+    background-color: #4CAF50; 
+    color: white; 
+    border: none;
+    font-size: 14px;
+    border-radius: 5px; 
+}
+QPushButton:hover {
+    background-color: #45a049;
+}
+QPushButton:pressed {
+    background-color: #357a38; 
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>Зарегистрировать</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
             </item>
            </layout>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_8">
+         <attribute name="title">
+          <string>Управление пользователями</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QWidget" name="ParentWidget" native="true"/>
           </item>
          </layout>
         </widget>

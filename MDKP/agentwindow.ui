@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>748</width>
-    <height>361</height>
+    <width>876</width>
+    <height>404</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,25 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>2</number>
+      <property name="styleSheet">
+       <string notr="true">QTabBar::tab { 
+	font: 500 8pt &quot;Montserrat Medium&quot;;
+    background:	#e9e9e9;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+	height: 34 px;
+	padding: 8px;
+}
+
+QTabBar::tab:selected {
+    background-color: white;
+}
+</string>
       </property>
-      <widget class="QWidget" name="tab">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="ConcludeTab">
        <attribute name="title">
         <string>Заключить договор</string>
        </attribute>
@@ -31,17 +46,131 @@
            <widget class="QComboBox" name="comboBox">
             <property name="minimumSize">
              <size>
-              <width>200</width>
-              <height>30</height>
+              <width>300</width>
+              <height>40</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QComboBox:editable {
+    background: #5fbaeb;
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+    background: #cdcdcd;
+}
+
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px;
+	border-left-width: 1px;
+}
+
+QComboBox::down-arrow {
+   image: url(:/images/resources/CheckMark.png);
+	width: 12px;
+	height: 12px;
+}
+QComboBox QAbstractItemView::item {
+height: 40px;
+}
+</string>
             </property>
             <property name="placeholderText">
              <string>Выберите тип договора</string>
             </property>
+            <item>
+             <property name="text">
+              <string>Добровольное медицинское страхование</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Страхование домашнего имущества</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Страхование автотранспорта</string>
+             </property>
+            </item>
            </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+            </property>
+            <property name="placeholderText">
+             <string>Фамилия</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <spacer name="horizontalSpacer_9">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="2">
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::MinimumExpanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item row="1" column="3">
            <widget class="QLabel" name="label_2">
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+	font: 500 11pt &quot;Montserrat Medium&quot;;
+}
+</string>
+            </property>
             <property name="text">
              <string>Информация о договоре:</string>
             </property>
@@ -63,22 +192,6 @@
             </property>
            </spacer>
           </item>
-          <item row="3" column="0">
-           <spacer name="horizontalSpacer_10">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>80</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
           <item row="6" column="2">
            <spacer name="verticalSpacer_4">
             <property name="orientation">
@@ -95,39 +208,30 @@
             </property>
            </spacer>
           </item>
-          <item row="2" column="0">
-           <spacer name="horizontalSpacer_9">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
           <item row="3" column="3">
            <widget class="QLineEdit" name="lineEdit_6">
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>30</height>
+              <height>40</height>
              </size>
             </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEdit">
-            <property name="minimumSize">
-             <size>
-              <width>200</width>
-              <height>30</height>
-             </size>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+            </property>
+            <property name="placeholderText">
+             <string>Сумма</string>
             </property>
            </widget>
           </item>
@@ -147,46 +251,86 @@
             </property>
            </spacer>
           </item>
-          <item row="5" column="1">
-           <widget class="QLineEdit" name="lineEdit_4">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="1">
            <widget class="QLabel" name="label">
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+	font: 500 11pt &quot;Montserrat Medium&quot;;
+}
+</string>
+            </property>
             <property name="text">
              <string>Информация о клиенте:</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
-           <spacer name="verticalSpacer_3">
+          <item row="3" column="0">
+           <spacer name="horizontalSpacer_10">
             <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <enum>Qt::Horizontal</enum>
             </property>
             <property name="sizeType">
-             <enum>QSizePolicy::MinimumExpanding</enum>
+             <enum>QSizePolicy::Fixed</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>20</width>
+              <width>80</width>
               <height>20</height>
              </size>
             </property>
            </spacer>
           </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEdit_3">
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="lineEdit_4">
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>30</height>
+              <height>40</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+            </property>
+            <property name="placeholderText">
+             <string>Телефон</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEdit_2">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+            </property>
+            <property name="placeholderText">
+             <string>Имя</string>
             </property>
            </widget>
           </item>
@@ -212,9 +356,25 @@
              <widget class="QPushButton" name="pushButton_2">
               <property name="minimumSize">
                <size>
-                <width>120</width>
-                <height>30</height>
+                <width>160</width>
+                <height>40</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+font: 500 14pt &quot;Montserrat Medium&quot;;
+    background-color: #4CAF50; 
+    color: white; 
+    border: none;
+    font-size: 14px;
+    border-radius: 5px; 
+}
+QPushButton:hover {
+    background-color: #45a049;
+}
+QPushButton:pressed {
+    background-color: #357a38; 
+}</string>
               </property>
               <property name="text">
                <string>Заключить договор</string>
@@ -223,13 +383,30 @@
             </item>
            </layout>
           </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEdit_2">
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="lineEdit_3">
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>30</height>
+              <height>40</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+            </property>
+            <property name="placeholderText">
+             <string>Отчество</string>
             </property>
            </widget>
           </item>
@@ -250,16 +427,6 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Просмотреть статистику</string>
-       </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <item>
-         <widget class="QTableView" name="tableView"/>
-        </item>
-       </layout>
-      </widget>
       <widget class="QWidget" name="RenegotiateContract">
        <attribute name="title">
         <string>Перезаключить договор</string>
@@ -267,6 +434,16 @@
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QWidget" name="ParentWidgetRenContract" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Просмотреть статистику</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QTableView" name="tableView"/>
         </item>
        </layout>
       </widget>
@@ -279,7 +456,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>748</width>
+     <width>876</width>
      <height>17</height>
     </rect>
    </property>

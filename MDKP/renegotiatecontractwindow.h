@@ -2,6 +2,8 @@
 #define RENEGOTIATECONTRACTWINDOW_H
 
 #include <QWidget>
+#include <QGraphicsDropShadowEffect>
+#include <QListView>
 
 namespace Ui {
 class RenegotiateContractWindow;
