@@ -12,6 +12,7 @@
 #include <QtSql>
 #include "abstractuserwindow.h"
 #include "database.h"
+#include "agentstatisticmodel.h"
 
 namespace Ui {
 class AgentWindow;
@@ -22,7 +23,7 @@ class AgentWindow : public AbstractUserWindow
     Q_OBJECT
 
 public:
-    explicit AgentWindow(Database* database, QWidget *parent = nullptr);
+    explicit AgentWindow(const User& us,Database* database, QWidget *parent = nullptr);
     ~AgentWindow();
 
 private:
@@ -31,8 +32,10 @@ private:
     QWidget* parentWidgetRenegotiationContract;
     QVBoxLayout* layoutParentWidgetRenegotiationContract;
     QTableView* viewRenegotiateContract;
+    QTableView* viewStatistic;
     RenegotiateContractWindow* renegotiationContractWidget;
     QSqlQueryModel* sqlModelRenegotiate;
+    AgentStatisticModel* sqlStatisticModel;
     Database* db;
 
     void ShowViewRenegotiateContract();

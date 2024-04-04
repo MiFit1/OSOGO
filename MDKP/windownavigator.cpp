@@ -9,22 +9,22 @@ WindowNavigator::WindowNavigator(QObject *parent, Database* db)
 
 void WindowNavigator::slotLoginSuccessful(const User& user){
     HideAndRemoveLoginWindow();
-    qDebug()<<&user;
+    qDebug()<<user.GetId()<<" WindwowNavigator";
     switch (user.getRole()) {
     case Admin:{
-        AdminWindow* window = new AdminWindow(db);
+        AdminWindow* window = new AdminWindow(user,db);
         windowForRole.reset(window);
     }
         break;
 
     case Accountant:{
-        AccountantWindow* window = new AccountantWindow(db);
+        AccountantWindow* window = new AccountantWindow(user,db);
         windowForRole.reset(window);
     }
     break;
 
     case Agent:{
-        AgentWindow* window = new AgentWindow(db);
+        AgentWindow* window = new AgentWindow(user,db);
         windowForRole.reset(window);
     }
     break;
@@ -33,7 +33,6 @@ void WindowNavigator::slotLoginSuccessful(const User& user){
     }
 
     windowForRole->show();
-    windowForRole->setUser(user);
     connect(windowForRole.get(),SIGNAL(signalLogout()),this,SLOT(slotLogout()));
 }
 

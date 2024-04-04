@@ -11,7 +11,7 @@ class AbstractUserWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit AbstractUserWindow(QWidget *parent = nullptr);
+    explicit AbstractUserWindow(const User& user, QWidget *parent = nullptr);
     ~AbstractUserWindow();
 
 signals:
@@ -21,12 +21,10 @@ public:
     QPushButton* profileButton;
     ProfileWindow* profileWindow;
     PanelLeftSide* profilePanel;
-
-    void setUser(const User& user);
     User getUser();
-private:
-    User user;
 
+protected:
+    User user;
 };
 
 #endif // ABSTRACTUSERWINDOW_H

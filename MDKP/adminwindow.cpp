@@ -5,8 +5,8 @@
 #include <QPushButton>
 #include <QSize>
 
-AdminWindow::AdminWindow(Database* database, QWidget *parent) :
-    AbstractUserWindow(parent),
+AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
+    AbstractUserWindow(us,parent),
     ui(new Ui::AdminWindow)
 {
     qDebug() << "call constructor";

@@ -33,7 +33,7 @@ QTabBar::tab:selected {
 </string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="ConcludeTab">
        <attribute name="title">
@@ -437,13 +437,43 @@ QLineEdit:focus {
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="StatisticTab">
        <attribute name="title">
         <string>Просмотреть статистику</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
-         <widget class="QTableView" name="tableView"/>
+         <widget class="QTableView" name="statisticView">
+          <property name="styleSheet">
+           <string notr="true">QTableView {
+    color: black; /*цвет текста внутри таблицы*/
+    gridline-color: black /*цвет сетки*/;
+    /*font: 10px;*/
+}
+QHeaderView::section {
+    background-color: rgb(71, 153, 176); /*цвет названия солбцов и номеров строки*/
+    color: white; /*цвет текста хэдеров*/
+   /*height: 35px;
+    font: 14px;*/
+}
+/*QTableView::item:focus{
+    border: 2px solid rgb(242, 128, 133);
+    background-color: rgb(255, 254, 229);
+}*/
+QScrollBar:vertical {
+    background: rgb(188, 224, 235); /*цвет заднего фона за вертикальным ползунком прокрутки*/
+}
+ QScrollBar::handle:vertical {
+    background: rgb(71, 153, 176); /*цвет вертикального ползунка прокрутки*/
+ }
+QScrollBar:horizontal {
+    background: rgb(188, 224, 235); /*цвет заднего фона за горизонтальным ползунком прокрутки*/
+}
+ QScrollBar::handle:horizontal {
+    background: rgb(71, 153, 176); /*цвет горизонтального ползунка прокрутки*/
+ }</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

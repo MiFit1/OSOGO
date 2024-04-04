@@ -22,7 +22,7 @@ class AccountantWindow : public AbstractUserWindow
     Q_OBJECT
 
 public:
-    explicit AccountantWindow(Database* database, QWidget *parent = nullptr);
+    explicit AccountantWindow(const User& us, Database* database, QWidget *parent = nullptr);
     ~AccountantWindow();
 private:
     Ui::AccountantWindow *ui;

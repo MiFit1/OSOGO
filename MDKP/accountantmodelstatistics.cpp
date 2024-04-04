@@ -2,7 +2,7 @@
 
 
 AccountantModelStatistics::AccountantModelStatistics(QObject *parent)
-    : QSqlQueryModel{parent}
+    : QSqlQueryModel(parent)
 {
     setQuery("SELECT    Contract.ID,"
              "          TypeInsurance as [Тип договора],"

@@ -23,7 +23,7 @@ class AdminWindow : public AbstractUserWindow
 Q_OBJECT
 
 public:
-    explicit AdminWindow(Database* database,QWidget *parent = nullptr);
+    explicit AdminWindow(const User& us,Database* database,QWidget *parent = nullptr);
     ~AdminWindow();
 private:
     Ui::AdminWindow *ui;

@@ -1,9 +1,9 @@
 #include "abstractuserwindow.h"
 
-AbstractUserWindow::AbstractUserWindow(QWidget *parent)
+AbstractUserWindow::AbstractUserWindow(const User& us, QWidget *parent)
     : QMainWindow{parent}
 {
-    user = User();
+    user = us;
 
     qDebug() << "call abstract constructor";
     profileButton = new QPushButton;
@@ -20,6 +20,7 @@ AbstractUserWindow::AbstractUserWindow(QWidget *parent)
     profilePanel->setPanelSize(profileWindow->size().width()+5);
     profilePanel->setWidgetResizable(true);
     profilePanel->setWidget(profileWindow);
+    profileWindow->fillProfile(us);
 
     connect(profileWindow, SIGNAL(signalLogoutButtonClicked()),SIGNAL(signalLogout()));
     connect(profileWindow,SIGNAL(singalCancelButtonClicked()),profileButton, SIGNAL(clicked()));
@@ -30,10 +31,11 @@ AbstractUserWindow::~AbstractUserWindow(){
     delete profileButton;
 }
 
-void AbstractUserWindow::setUser(const User& us){
-    user = us;
-    profileWindow->fillProfile(us);
-}
+// void AbstractUserWindow::setUser(const User& us){
+//     qDebug()<<us.GetId()<<" setUser metod";
+//     user = us;
+//     profileWindow->fillProfile(us);
+// }
 
 User AbstractUserWindow::getUser(){
     return user;

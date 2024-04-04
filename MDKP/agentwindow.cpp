@@ -1,8 +1,9 @@
 #include "agentwindow.h"
 #include "ui_agentwindow.h"
 
-AgentWindow::AgentWindow(Database* database, QWidget *parent)
-    : AbstractUserWindow(parent)
+
+AgentWindow::AgentWindow(const User& us,Database* database, QWidget *parent)
+    : AbstractUserWindow(us,parent)
     , ui(new Ui::AgentWindow)
 {
     ui->setupUi(this);
@@ -27,6 +28,7 @@ void AgentWindow::ConfiguringInterface(){
     //layout
     layoutParentWidgetRenegotiationContract = new QVBoxLayout(parentWidgetRenegotiationContract);
     viewRenegotiateContract = new QTableView();
+    viewStatistic = ui->statisticView;
     renegotiationContractWidget = new RenegotiateContractWindow();
 
     sqlModelRenegotiate = new QSqlQueryModel(this);
@@ -41,6 +43,15 @@ void AgentWindow::ConfiguringInterface(){
     viewRenegotiateContract->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     viewRenegotiateContract->setColumnHidden(0,true);
 
+    sqlStatisticModel = new AgentStatisticModel(user,this);
+    viewStatistic->setModel(sqlStatisticModel);
+    viewStatistic->setSelectionBehavior(QAbstractItemView::SelectRows);
+    viewStatistic->setSelectionMode(QAbstractItemView::SingleSelection);
+    viewStatistic->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    viewStatistic->setColumnHidden(0,true);
+    viewStatistic->horizontalHeader()->setHighlightSections(false);
+
+
     //Эффект тени на дочерние объекты
     for (auto child : ui->ConcludeTab->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly)) {
         if (child->metaObject()->className() == QStringLiteral("QLabel")) {
@@ -53,7 +64,6 @@ void AgentWindow::ConfiguringInterface(){
         shadowEffect->setOffset(3,3);
         child->setGraphicsEffect(shadowEffect);
     }
-
     ShowViewRenegotiateContract();
 }
 

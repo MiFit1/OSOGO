@@ -17,6 +17,7 @@ SOURCES += \
     accountantmodelstatistics.cpp \
     accountantwindow.cpp \
     adminwindow.cpp \
+    agentstatisticmodel.cpp \
     agentwindow.cpp \
     changeuserdatawidget.cpp \
     client.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     accountantmodelstatistics.h \
     accountantwindow.h \
     adminwindow.h \
+    agentstatisticmodel.h \
     agentwindow.h \
     changeuserdatawidget.h \
     client.h \

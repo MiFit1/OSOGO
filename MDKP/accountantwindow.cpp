@@ -1,8 +1,8 @@
 #include "accountantwindow.h"
 #include "ui_accountantwindow.h"
 
-AccountantWindow::AccountantWindow(Database* database, QWidget *parent) :
-    AbstractUserWindow(parent),
+AccountantWindow::AccountantWindow(const User& us, Database* database, QWidget *parent) :
+    AbstractUserWindow(us,parent),
     ui(new Ui::AccountantWindow)
 {
     ui->setupUi(this);
