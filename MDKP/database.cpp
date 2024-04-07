@@ -184,3 +184,30 @@ Client Database::GetClientById(int id){
 
     return Client(ID,LastName,FirstName,Patronymic,Phone);
 }
+
+User Database::GetUserById(int id){
+    QSqlQuery query;
+    QString str_query = QString("SELECT *"
+                                "FROM Employee "
+                                "WHERE ID = %1;").arg(id);
+
+    bool queryResult = query.exec(str_query);
+
+    if(!queryResult){
+        qDebug() << query.lastError();
+        return User();
+    }
+
+    query.next();
+    if(query.value(0).isNull()){
+        return User();
+    }
+
+//    QString ID = query.value("ID").toString();
+//    QString LastName = query.value("LastName").toString();
+//    QString FirstName = query.value("FirstName").toString();
+//    QString Patronymic = query.value("Patronymic").toString();
+//    QString Phone = query.value("Phone").toString();
+
+//    return Client(ID,LastName,FirstName,Patronymic,Phone);
+}

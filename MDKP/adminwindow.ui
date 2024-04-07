@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
-    <height>455</height>
+    <width>938</width>
+    <height>526</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,7 +36,7 @@ QTabBar::tab:selected {
 </string>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="iconSize">
          <size>
@@ -599,8 +599,8 @@ QPushButton:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>840</width>
-     <height>17</height>
+     <width>938</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>

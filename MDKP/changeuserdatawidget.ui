@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>980</width>
-    <height>342</height>
+    <width>1065</width>
+    <height>383</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -585,7 +585,8 @@ QPushButton:hover {
 }
 QPushButton:pressed {
     background-color: #357a38; 
-}</string>
+}
+</string>
          </property>
          <property name="text">
           <string>Подтвердить</string>

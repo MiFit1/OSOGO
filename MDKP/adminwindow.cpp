@@ -12,8 +12,8 @@ AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
     qDebug() << "call constructor";
     ui->setupUi(this);
     configuringInterface();
-    AddShadowToChildren(changeUserDataWidget);
-    AddShadowToChildren(ui->AddUserTab);
+   // AddShadowToChildren(changeUserDataWidget);
+    //AddShadowToChildren(ui->AddUserTab);
     connect(viewUsers,SIGNAL(doubleClicked(QModelIndex)),SLOT(slotDoubleClikedOnUser(QModelIndex)));
     connect(changeUserDataWidget, SIGNAL(signalBackButtonCliked()),SLOT(slotBackButtonChangeUserWidgetCliked()));
 }
@@ -34,12 +34,20 @@ void AdminWindow::configuringInterface(){
     changeUserDataWidget = new ChangeUserDataWidget();
     ShowViewUsers();
 
-
+   //ФИО телефон должность филиал
     u_model = new UserTableModel(this);
-    viewUsers->setModel(u_model);
+    usersModel = new QSqlQueryModel(this);
+    usersModel->setQuery("SELECT Employee.ID, "
+                         "      LastName ||' '|| FirstName ||' '||Patronymic as [ФИО],"
+                         "      Phone as [Телефон], "
+                         "      Role as [Должность], "
+                         "      Branch as [Филиал]"
+                         " FROM Employee");
+    viewUsers->setModel(usersModel);
     viewUsers->setSelectionBehavior(QAbstractItemView::SelectRows);
     viewUsers->horizontalHeader()->setStretchLastSection(true);
     viewUsers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    viewUsers->setColumnHidden(0,true);
 
     //
     User user1(1,1,1,"Eliseev","Vasiliy","Andreevich","Киренского 17","87777777777","Московский филиал","vasa228","VodkaBalalayka");

@@ -5,6 +5,7 @@
 #include <QtSql>
 #include "contract.h"
 #include "client.h"
+#include "user.h"
 
 class Database : public QObject
 {
@@ -16,6 +17,7 @@ public:
     void InsertTestData();
     Contract GetContractById(int id);
     Client GetClientById(int id);
+    User GetUserById(int id);
 private:
     QSqlDatabase* sqlDatabase;
 

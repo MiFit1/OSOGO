@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>876</width>
-    <height>404</height>
+    <width>917</width>
+    <height>465</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -448,30 +448,57 @@ QLineEdit:focus {
            <string notr="true">QTableView {
     color: black; /*цвет текста внутри таблицы*/
     gridline-color: black /*цвет сетки*/;
-    /*font: 10px;*/
 }
 QHeaderView::section {
     background-color: rgb(71, 153, 176); /*цвет названия солбцов и номеров строки*/
     color: white; /*цвет текста хэдеров*/
-   /*height: 35px;
-    font: 14px;*/
 }
-/*QTableView::item:focus{
-    border: 2px solid rgb(242, 128, 133);
-    background-color: rgb(255, 254, 229);
-}*/
-QScrollBar:vertical {
-    background: rgb(188, 224, 235); /*цвет заднего фона за вертикальным ползунком прокрутки*/
+
+QScrollBar:horizontal 
+{
+    background-color: #bce0eb;
+	border: 1px solid  #2b5c6a;
 }
- QScrollBar::handle:vertical {
-    background: rgb(71, 153, 176); /*цвет вертикального ползунка прокрутки*/
- }
-QScrollBar:horizontal {
-    background: rgb(188, 224, 235); /*цвет заднего фона за горизонтальным ползунком прокрутки*/
+
+
+QScrollBar::handle:horizontal 
+{
+    border: 1px solid #4391a7;
+    background-color: #4799b0;
 }
- QScrollBar::handle:horizontal {
-    background: rgb(71, 153, 176); /*цвет горизонтального ползунка прокрутки*/
- }</string>
+
+
+QScrollBar::add-line:horizontal, 
+QScrollBar::sub-line:horizontal,
+QScrollBar::add-page:horizontal, 
+QScrollBar::sub-page:horizontal 
+{
+    width: 0px;
+    background-color: transparent;
+}
+
+
+QScrollBar:vertical 
+{
+    background-color: #bce0eb;
+	border: 1px solid  #2b5c6a;
+}
+
+QScrollBar::handle:vertical 
+{
+    border: 1px solid #4391a7;
+    background-color: #4799b0;
+}
+
+
+QScrollBar::add-line:vertical, 
+QScrollBar::sub-line:vertical,
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical 
+{
+    height: 0px;
+    background-color: transparent;
+}</string>
           </property>
          </widget>
         </item>
@@ -486,8 +513,8 @@ QScrollBar:horizontal {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>876</width>
-     <height>17</height>
+     <width>917</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>

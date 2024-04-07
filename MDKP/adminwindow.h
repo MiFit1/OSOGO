@@ -12,6 +12,7 @@
 #include <QTableView>
 #include <QLayoutItem>
 #include <QHeaderView>
+#include <QtSql>
 
 
 namespace Ui {
@@ -30,6 +31,7 @@ private:
     void configuringInterface();
     UserTableModel* u_model;
 
+    QSqlQueryModel* usersModel;
     QTableView* viewUsers;
     ChangeUserDataWidget* changeUserDataWidget;
     QVBoxLayout* layoutParentWidgetChangeUserData;
