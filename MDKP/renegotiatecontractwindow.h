@@ -4,6 +4,9 @@
 #include <QWidget>
 #include <QGraphicsDropShadowEffect>
 #include <QListView>
+#include "contract.h"
+#include "client.h"
+#include "Global.h"
 
 namespace Ui {
 class RenegotiateContractWindow;
@@ -16,6 +19,7 @@ class RenegotiateContractWindow : public QWidget
 public:
     explicit RenegotiateContractWindow(QWidget *parent = nullptr);
     ~RenegotiateContractWindow();
+    void SetContractAndClient(Contract Contract, Client Client);
 
 private:
     Ui::RenegotiateContractWindow *ui;

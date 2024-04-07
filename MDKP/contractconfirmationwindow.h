@@ -5,6 +5,7 @@
 #include <QGraphicsDropShadowEffect>
 #include "client.h"
 #include "contract.h"
+#include "Global.h"
 
 namespace Ui {
 class ContractConfirmationWindow;

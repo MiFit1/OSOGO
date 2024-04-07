@@ -1,9 +1,5 @@
 #include "ui_adminwindow.h"
 #include "adminwindow.h"
-#include <QDebug>
-#include <QMessageBox>
-#include <QPushButton>
-#include <QSize>
 
 AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
     AbstractUserWindow(us,parent),
@@ -11,9 +7,10 @@ AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
 {
     qDebug() << "call constructor";
     ui->setupUi(this);
+    db = database;
     configuringInterface();
-   // AddShadowToChildren(changeUserDataWidget);
-    //AddShadowToChildren(ui->AddUserTab);
+    AddShadowToChildren(changeUserDataWidget);
+    AddShadowToChildren(ui->AddUserTab);
     connect(viewUsers,SIGNAL(doubleClicked(QModelIndex)),SLOT(slotDoubleClikedOnUser(QModelIndex)));
     connect(changeUserDataWidget, SIGNAL(signalBackButtonCliked()),SLOT(slotBackButtonChangeUserWidgetCliked()));
 }
@@ -29,13 +26,14 @@ void AdminWindow::configuringInterface(){
     ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
     profilePanel->raise();
 
-    layoutParentWidgetChangeUserData = new QVBoxLayout(ui->ParentWidget);
-    viewUsers = new QTableView();
-    changeUserDataWidget = new ChangeUserDataWidget();
+    stackedWidgetUserManagement = ui->stackedWidgetUserManagement;
+    viewUsers = new QTableView(stackedWidgetUserManagement);
+    changeUserDataWidget = new ChangeUserDataWidget(stackedWidgetUserManagement);
+    stackedWidgetUserManagement->addWidget(viewUsers);
+    stackedWidgetUserManagement->addWidget(changeUserDataWidget);
     ShowViewUsers();
 
    //ФИО телефон должность филиал
-    u_model = new UserTableModel(this);
     usersModel = new QSqlQueryModel(this);
     usersModel->setQuery("SELECT Employee.ID, "
                          "      LastName ||' '|| FirstName ||' '||Patronymic as [ФИО],"
@@ -47,63 +45,28 @@ void AdminWindow::configuringInterface(){
     viewUsers->setSelectionBehavior(QAbstractItemView::SelectRows);
     viewUsers->horizontalHeader()->setStretchLastSection(true);
     viewUsers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    viewUsers->setSelectionMode(QAbstractItemView::SingleSelection);
+    viewUsers->horizontalHeader()->setHighlightSections(false);
     viewUsers->setColumnHidden(0,true);
-
-    //
-    User user1(1,1,1,"Eliseev","Vasiliy","Andreevich","Киренского 17","87777777777","Московский филиал","vasa228","VodkaBalalayka");
-    User user2(2,2,2,"Петечкин","Пётр","Петрович","Свобондный 82а","87777777777","Томский филиал","HlebnyDizelky","qwerty");
-    User user3(3,3,3,"фон Эверек","Ольгерд","Ольгердович","Красноярск, Ленина 15","87777777777","Красноярский филиал","Olega777","1234");
-    u_model->addUser(user1);
-    u_model->addUser(user2);
-    u_model->addUser(user3);
 }
 
 void AdminWindow::ShowViewUsers(){
-    DeleteParentWidgetChildren();
-    viewUsers->setParent(ui->ParentWidget);
-    layoutParentWidgetChangeUserData->addWidget(viewUsers);
+    stackedWidgetUserManagement->setCurrentWidget(viewUsers);
 }
 
 void AdminWindow::ShowChangeUserDataWidget(){
-    DeleteParentWidgetChildren();
-    changeUserDataWidget->setParent(ui->ParentWidget);
-    layoutParentWidgetChangeUserData->addWidget(changeUserDataWidget);
-}
-
-void AdminWindow::DeleteParentWidgetChildren(){
-    QLayoutItem* item = layoutParentWidgetChangeUserData->itemAt(0);
-    if(item != NULL){
-        layoutParentWidgetChangeUserData->removeItem(item);
-        layoutParentWidgetChangeUserData->removeWidget(item->widget());
-        item->widget()->setParent(NULL);
-        delete item;
-        layoutParentWidgetChangeUserData->update();
-    }
+    stackedWidgetUserManagement->setCurrentWidget(changeUserDataWidget);
 }
 
 void AdminWindow::slotDoubleClikedOnUser(const QModelIndex index){
     //qDebug()<<index.row();
     ShowChangeUserDataWidget();
-    User user = u_model->getUser(index);
+    QModelIndex indexID = usersModel->index(index.row(),0);
+    int IdUser = usersModel->data(indexID).toInt();
+    User user = db->GetUserById(IdUser);
     changeUserDataWidget->setUserToChangeWidget(user);
 }
 
 void AdminWindow::slotBackButtonChangeUserWidgetCliked(){
     ShowViewUsers();
 }
-
-void AdminWindow::AddShadowToChildren(QObject* obj){
-    //Эффект тени на дочерние объекты
-    for (auto child : obj->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly)) {
-        if (child->metaObject()->className() == QStringLiteral("QLabel")) {
-            // Пропускаем QLabel
-            continue;
-        }
-        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
-        shadowEffect->setBlurRadius(20);
-        shadowEffect->setColor(QColor(140,140,140,255));
-        shadowEffect->setOffset(3,3);
-        child->setGraphicsEffect(shadowEffect);
-    }
-}
-

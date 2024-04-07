@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "user.h"
+#include "Global.h"
 
 namespace Ui {
 class LoginWindow;

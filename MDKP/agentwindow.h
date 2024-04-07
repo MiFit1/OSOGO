@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include <QTableView>
 #include <QLayoutItem>
+#include <QStackedWidget>
 #include <QtSql>
 #include "abstractuserwindow.h"
 #include "database.h"
@@ -29,18 +30,17 @@ public:
 private:
     Ui::AgentWindow *ui;
     void ConfiguringInterface();
-    QWidget* parentWidgetRenegotiationContract;
-    QVBoxLayout* layoutParentWidgetRenegotiationContract;
     QTableView* viewRenegotiateContract;
     QTableView* viewStatistic;
     RenegotiateContractWindow* renegotiationContractWidget;
     QSqlQueryModel* sqlModelRenegotiate;
     AgentStatisticModel* sqlStatisticModel;
     Database* db;
+    QStackedWidget* stackedWidgetRenegotiateContract;
 
     void ShowViewRenegotiateContract();
     void ShowRenegotiateContractWidget();
-    void DeleteParentRenegotiationWidgetChildren();
+//    void DeleteParentRenegotiationWidgetChildren();
 
 private slots:
     void slotDoubleClikedOnRenegitiationContract(const QModelIndex index);

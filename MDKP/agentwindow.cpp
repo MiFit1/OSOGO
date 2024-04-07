@@ -19,17 +19,18 @@ AgentWindow::~AgentWindow()
 }
 
 void AgentWindow::ConfiguringInterface(){
-    parentWidgetRenegotiationContract = ui->ParentWidgetRenContract;
 
     //Кнопка профиля
     ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
     profilePanel->raise();
 
     //layout
-    layoutParentWidgetRenegotiationContract = new QVBoxLayout(parentWidgetRenegotiationContract);
-    viewRenegotiateContract = new QTableView();
+    stackedWidgetRenegotiateContract = ui->stackedWidgetRenegotiateContract;
+    viewRenegotiateContract = new QTableView(stackedWidgetRenegotiateContract);
     viewStatistic = ui->statisticView;
-    renegotiationContractWidget = new RenegotiateContractWindow();
+    renegotiationContractWidget = new RenegotiateContractWindow(stackedWidgetRenegotiateContract);
+    stackedWidgetRenegotiateContract->addWidget(viewRenegotiateContract);
+    stackedWidgetRenegotiateContract->addWidget(renegotiationContractWidget);
 
     sqlModelRenegotiate = new QSqlQueryModel(this);
     sqlModelRenegotiate->setQuery("SELECT   Contract.ID,"
@@ -41,6 +42,8 @@ void AgentWindow::ConfiguringInterface(){
     viewRenegotiateContract->setModel(sqlModelRenegotiate);
     viewRenegotiateContract->setSelectionBehavior(QAbstractItemView::SelectRows);
     viewRenegotiateContract->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    viewRenegotiateContract->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    viewRenegotiateContract->horizontalHeader()->setHighlightSections(false);
     viewRenegotiateContract->setColumnHidden(0,true);
 
     sqlStatisticModel = new AgentStatisticModel(user,this);
@@ -51,51 +54,24 @@ void AgentWindow::ConfiguringInterface(){
     viewStatistic->setColumnHidden(0,true);
     viewStatistic->horizontalHeader()->setHighlightSections(false);
 
-
-    //Эффект тени на дочерние объекты
-    for (auto child : ui->ConcludeTab->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly)) {
-        if (child->metaObject()->className() == QStringLiteral("QLabel")) {
-            // Пропускаем QLabel
-            continue;
-        }
-        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
-        shadowEffect->setBlurRadius(20);
-        shadowEffect->setColor(QColor(140,140,140,255));
-        shadowEffect->setOffset(3,3);
-        child->setGraphicsEffect(shadowEffect);
-    }
+    AddShadowToChildren(ui->ConcludeTab);
     ShowViewRenegotiateContract();
 }
 
 void AgentWindow::ShowViewRenegotiateContract(){
-    DeleteParentRenegotiationWidgetChildren();
-    viewRenegotiateContract->setParent(parentWidgetRenegotiationContract);
-    layoutParentWidgetRenegotiationContract->addWidget(viewRenegotiateContract);
+    stackedWidgetRenegotiateContract->setCurrentWidget(viewRenegotiateContract);
 }
 
 void AgentWindow::ShowRenegotiateContractWidget(){
-    DeleteParentRenegotiationWidgetChildren();
-    renegotiationContractWidget->setParent(parentWidgetRenegotiationContract);
-    layoutParentWidgetRenegotiationContract->addWidget(renegotiationContractWidget);
-}
-
-void AgentWindow::DeleteParentRenegotiationWidgetChildren(){
-    QLayoutItem* item = layoutParentWidgetRenegotiationContract->itemAt(0);
-    if(item != NULL){
-        layoutParentWidgetRenegotiationContract->removeItem(item);
-        layoutParentWidgetRenegotiationContract->removeWidget(item->widget());
-        item->widget()->setParent(NULL);
-        delete item;
-        layoutParentWidgetRenegotiationContract->update();
-    }
+    stackedWidgetRenegotiateContract->setCurrentWidget(renegotiationContractWidget);
 }
 
 void AgentWindow::slotDoubleClikedOnRenegitiationContract(const QModelIndex index){
     int indexRowClicked = index.row();
     int idContract = sqlModelRenegotiate->index(indexRowClicked, 0).data().toInt();
-    //Contract contract = db->GetContractById(idContract);
-    //Client client = db->GetClientById(contract.GetIdClient());
-    //confirmationWindow->SetContractAndClient(contract, client);
+    Contract contract = db->GetContractById(idContract);
+    Client client = db->GetClientById(contract.GetIdClient());
+    renegotiationContractWidget->SetContractAndClient(contract, client);
     ShowRenegotiateContractWidget();
 }
 

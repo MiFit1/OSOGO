@@ -6,6 +6,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
     ui(new Ui::LoginWindow)
 {
     ui->setupUi(this);
+    AddShadowToChildren(this);
 }
 
 LoginWindow::~LoginWindow()

@@ -27,4 +27,6 @@ void ChangeUserDataWidget::setUserToChangeWidget(User user){
     ui->Branch->setText(user.GetBranch());
     ui->LoginLine->setText(user.GetLogin());
     ui->PasswordLine->setText(user.GetPassword());
+    QString postStr = user.convertPost(user.GetPost());
+    ui->Post->setCurrentText(postStr);
 }

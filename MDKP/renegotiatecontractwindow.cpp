@@ -8,21 +8,21 @@ RenegotiateContractWindow::RenegotiateContractWindow(QWidget *parent)
     ui->setupUi(this);
 
     //Тени на дочерние объекты
-    for (auto child : this->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly)) {
-        if (child->metaObject()->className() == QStringLiteral("QLabel")) {
-            // Пропускаем QLabel
-            continue;
-        }
-        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
-        shadowEffect->setBlurRadius(20);
-        shadowEffect->setColor(QColor(140,140,140,255));
-        shadowEffect->setOffset(3,3);
-        child->setGraphicsEffect(shadowEffect);
-    }
+    AddShadowToChildren(this);
     connect(ui->BackButton, SIGNAL(clicked()),SIGNAL(signalBackButtonClicked()));
 }
 
 RenegotiateContractWindow::~RenegotiateContractWindow()
 {
     delete ui;
+}
+
+void RenegotiateContractWindow::SetContractAndClient(Contract Contract, Client Client){
+    ui->LastName->setText(Client.GetLastName());
+    ui->FirstName->setText(Client.GetFirstName());
+    ui->Patronymic->setText(Client.GetPatronymic());
+    ui->Phone->setText(Client.GetPhone());
+    ui->Summa->setText(QString::number(Contract.GetSumma()));
+    qDebug()<<Contract.GetTypeInsurance();
+    ui->TypeContract->setCurrentText(Contract.GetTypeInsurance());
 }

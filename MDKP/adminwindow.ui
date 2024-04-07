@@ -36,7 +36,7 @@ QTabBar::tab:selected {
 </string>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="iconSize">
          <size>
@@ -584,7 +584,10 @@ QPushButton:pressed {
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QWidget" name="ParentWidget" native="true"/>
+           <widget class="QStackedWidget" name="stackedWidgetUserManagement">
+            <widget class="QWidget" name="page"/>
+            <widget class="QWidget" name="page_2"/>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -600,7 +603,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>938</width>
-     <height>26</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>

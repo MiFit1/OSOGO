@@ -23,12 +23,14 @@ void AccountantWindow::ConfiguringInterface(){
     profilePanel->raise();
 
     //layout вкладки подтверждения договоров
-    layoutParentWidgetConfirmContract = new QVBoxLayout(ui->ParentWidgetConfirmContract);
-    viewContracts = new QTableView();
-    confirmationWindow = new ContractConfirmationWindow();
+    stackedWidgetConfirmContract = ui->stackedWidgetConfirmContract;
+    viewContracts = new QTableView(stackedWidgetConfirmContract);
+    confirmationWindow = new ContractConfirmationWindow(stackedWidgetConfirmContract);
+    stackedWidgetConfirmContract->addWidget(viewContracts);
+    stackedWidgetConfirmContract->addWidget(confirmationWindow );
     ShowViewContracts();
 
-    //layout вкладки статистики
+    ///layout вкладки статистики ЗАМЕНИТЬ НА STACKED WIDGET
     layoutParentWidgetStatistics = new QVBoxLayout(ui->ParentWidgetStatistics);
     viewStatistics = new QTableView(ui->ParentWidgetStatistics);
     layoutParentWidgetStatistics->addWidget(viewStatistics);
@@ -48,38 +50,25 @@ void AccountantWindow::ConfiguringInterface(){
     viewContracts->setModel(sqlModelContract);
     viewContracts->setSelectionBehavior(QAbstractItemView::SelectRows);
     viewContracts->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    viewContracts->setSelectionMode(QAbstractItemView::SingleSelection);
+    viewContracts->horizontalHeader()->setHighlightSections(false);
     viewContracts->setColumnHidden(0,true);
 
     sqlModelStatistics = new AccountantModelStatistics(this);
     viewStatistics->setModel(sqlModelStatistics);
     viewStatistics->setSelectionBehavior(QAbstractItemView::SelectRows);
     viewStatistics->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    viewStatistics->setSelectionMode(QAbstractItemView::SingleSelection);
+    viewStatistics->horizontalHeader()->setHighlightSections(false);
     viewStatistics->setColumnHidden(0,true);
 }
 
-//установка родительского виджета для виджета представления контрактов и добаление его в layout
 void AccountantWindow::ShowViewContracts(){
-    DeleteParentWidgetChildren();
-    viewContracts->setParent(ui->ParentWidgetConfirmContract);
-    layoutParentWidgetConfirmContract->addWidget(viewContracts);
+    stackedWidgetConfirmContract->setCurrentWidget(viewContracts);
 }
 
 void AccountantWindow::ShowConfirmationWindow(){
-    DeleteParentWidgetChildren();
-    confirmationWindow->setParent(ui->ParentWidgetConfirmContract);
-    layoutParentWidgetConfirmContract->addWidget(confirmationWindow);
-}
-
-//очистка layout у родительского виджета и удаления виджета из layout
-void AccountantWindow::DeleteParentWidgetChildren(){
-    QLayoutItem* item = layoutParentWidgetConfirmContract->itemAt(0);
-    if(item != NULL){
-        layoutParentWidgetConfirmContract->removeItem(item);
-        layoutParentWidgetConfirmContract->removeWidget(item->widget());
-        item->widget()->setParent(NULL);
-        delete item;
-        layoutParentWidgetConfirmContract->update();
-    }
+    stackedWidgetConfirmContract->setCurrentWidget(confirmationWindow);
 }
 
 void AccountantWindow::slotDoubleClikedOnContract(const QModelIndex index){

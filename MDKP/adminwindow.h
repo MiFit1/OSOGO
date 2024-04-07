@@ -1,7 +1,6 @@
 #ifndef ADMINWINDOW_H
 #define ADMINWINDOW_H
 #include "abstractuserwindow.h"
-#include "usertablemodel.h"
 #include "changeuserdatawidget.h"
 #include "database.h"
 
@@ -13,6 +12,11 @@
 #include <QLayoutItem>
 #include <QHeaderView>
 #include <QtSql>
+#include <QStackedWidget>
+#include <QDebug>
+#include <QMessageBox>
+#include <QPushButton>
+#include <QSize>
 
 
 namespace Ui {
@@ -29,17 +33,15 @@ public:
 private:
     Ui::AdminWindow *ui;
     void configuringInterface();
-    UserTableModel* u_model;
 
     QSqlQueryModel* usersModel;
     QTableView* viewUsers;
     ChangeUserDataWidget* changeUserDataWidget;
-    QVBoxLayout* layoutParentWidgetChangeUserData;
+    QStackedWidget* stackedWidgetUserManagement;
+    Database* db;
 
     void ShowViewUsers();
     void ShowChangeUserDataWidget();
-    void DeleteParentWidgetChildren();
-    void AddShadowToChildren(QObject* obj);
 public slots:
     void slotBackButtonChangeUserWidgetCliked();
 private slots:

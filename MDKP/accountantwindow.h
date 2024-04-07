@@ -10,6 +10,7 @@
 #include <QLayoutItem>
 #include <QSqlQueryModel>
 #include <QHeaderView>
+#include <QStackedWidget>
 #include "database.h"
 
 
@@ -29,8 +30,8 @@ private:
     QTableView* viewContracts;
     QTableView* viewStatistics;
     ContractConfirmationWindow* confirmationWindow;
-    QVBoxLayout* layoutParentWidgetConfirmContract;
     QVBoxLayout* layoutParentWidgetStatistics;
+    QStackedWidget* stackedWidgetConfirmContract;
     QSqlQueryModel* sqlModelContract;
     AccountantModelStatistics* sqlModelStatistics;
     Database* db;
@@ -38,7 +39,6 @@ private:
     void ConfiguringInterface();
     void ShowViewContracts();
     void ShowConfirmationWindow();
-    void DeleteParentWidgetChildren();
 private slots:
     void slotDoubleClikedOnContract(const QModelIndex index);
     void slotConfirmWidgetBackButtonClicked();

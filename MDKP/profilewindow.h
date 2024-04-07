@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QGraphicsDropShadowEffect>
 #include "user.h"
+#include "Global.h"
 
 namespace Ui {
 class ProfileWindow;

@@ -89,9 +89,9 @@ void  Database::CreateTables(){
 void  Database::InsertTestData(){
     QSqlQuery query;
     QString str_query = "INSERT INTO Contract (Datee, Summa, TypeInsurance, TariffRate, ID_Client, ID_Employee, Status) VALUES "
-                        "(DATETIME(), 690700,'Договор страхования жизни', 0.56, 1,2,1),"
-                        "(DATETIME(), 346798,'Договор страхования жизни', 0.678, 2,2,1),"
-                        "(DATETIME(), 488000,'Договор страхования машины', 0.8, 3,2,3);";
+                        "(DATETIME(), 690700,'Добровольное медицинское страхование', 0.56, 1,2,1),"
+                        "(DATETIME(), 346798,'Cтрахование домашнего имущества', 0.678, 2,2,1),"
+                        "(DATETIME(), 488000,'Cтрахование автотранспорта', 0.8, 3,2,3);";
     bool queryResult = query.exec(str_query);
     if(!queryResult){
         qDebug() << "Не удаётся вставить данные";
@@ -198,16 +198,8 @@ User Database::GetUserById(int id){
         return User();
     }
 
-    query.next();
-    if(query.value(0).isNull()){
-        return User();
-    }
+    User user;
+    user << query;
 
-//    QString ID = query.value("ID").toString();
-//    QString LastName = query.value("LastName").toString();
-//    QString FirstName = query.value("FirstName").toString();
-//    QString Patronymic = query.value("Patronymic").toString();
-//    QString Phone = query.value("Phone").toString();
-
-//    return Client(ID,LastName,FirstName,Patronymic,Phone);
+    return user;
 }

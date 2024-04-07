@@ -33,7 +33,7 @@
       </spacer>
      </item>
      <item row="5" column="1">
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="LastName">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -79,7 +79,7 @@ QLineEdit:focus {
       </widget>
      </item>
      <item row="7" column="1">
-      <widget class="QLineEdit" name="lineEdit_3">
+      <widget class="QLineEdit" name="Patronymic">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -157,7 +157,7 @@ QLineEdit:focus {
       </spacer>
      </item>
      <item row="8" column="1">
-      <widget class="QLineEdit" name="lineEdit_4">
+      <widget class="QLineEdit" name="Phone">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -255,7 +255,7 @@ QPushButton:pressed {
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="FirstName">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -382,7 +382,7 @@ QPushButton:pressed {
       </widget>
      </item>
      <item row="2" column="1" colspan="4">
-      <widget class="QTextEdit" name="textEdit">
+      <widget class="QTextEdit" name="AccountantComments">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -443,7 +443,7 @@ QTextEdit:focus {
       </spacer>
      </item>
      <item row="6" column="3">
-      <widget class="QLineEdit" name="lineEdit_6">
+      <widget class="QLineEdit" name="Summa">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -527,12 +527,12 @@ height: 40px;
        </item>
        <item>
         <property name="text">
-         <string>Страхование домашнего имущества</string>
+         <string>Cтрахование домашнего имущества</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Страхование автотранспорта</string>
+         <string>Cтрахование автотранспорта</string>
         </property>
        </item>
       </widget>

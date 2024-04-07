@@ -1,6 +1,6 @@
 #include "user.h"
 
-User::User(int id, int post, bool isWork, QString lastName, QString firstName, QString patronymic, QString address, QString phone, QString branch) {
+User::User(int id, int post, int isWork, QString lastName, QString firstName, QString patronymic, QString address, QString phone, QString branch) {
     empty = false;
     this->id = id;
     this->post = post;
@@ -13,7 +13,21 @@ User::User(int id, int post, bool isWork, QString lastName, QString firstName, Q
     this->branch = branch;
 }
 
-User::User(int id, int post, bool isWork, QString lastName, QString firstName, QString patronymic, QString address, QString phone, QString branch, QString Login, QString Password) {
+User::User(QString ID,QString IsWorked, QString LastName, QString FirstName, QString Patronymic, QString Address, QString Phone, QString Branch, QString Login, QString Password, QString Role){
+    empty = false;
+    id = ID.toInt();
+    isWork = IsWorked.toInt();
+    lastName = LastName;
+    firstName = FirstName;
+    patronymic = Patronymic;
+    address = Address;
+    phone = Phone;
+    branch = Branch;
+    login = Login;
+    post = User::convertPostToInt(Role);
+}
+
+User::User(int id, int post, int isWork, QString lastName, QString firstName, QString patronymic, QString address, QString phone, QString branch, QString Login, QString Password) {
     empty = false;
     this->id = id;
     this->post = post;
@@ -27,7 +41,28 @@ User::User(int id, int post, bool isWork, QString lastName, QString firstName, Q
     this->login = Login;
     this->password = Password;
 }
-//(int id, int post, bool isWork, QString lastName, QString firstName, QString patronymic, QString address, QString phone, QString branch, QString Login, QString Password)
+
+void User::operator << (QSqlQuery& query){
+    query.next();
+    if(query.value(0).isNull()){
+        empty = true;
+        return;
+    }
+
+    id = query.value("ID").toString().toInt();
+    isWork = query.value("IsWorked").toString().toInt();
+    lastName = query.value("LastName").toString();
+    firstName = query.value("FirstName").toString();
+    patronymic = query.value("Patronymic").toString();
+    address = query.value("Address").toString();
+    phone = query.value("Phone").toString();
+    branch = query.value("Branch").toString();
+    login = query.value("Login").toString();
+    password = query.value("Password").toString();
+    int role = User::convertPostToInt(query.value("Role").toString());
+    post = role;
+}
+
 User::User(){
     empty = true;
 }
@@ -90,7 +125,7 @@ QString User::GetPassword() const{
     return password;
 }
 
-static QString convertPost(int post){
+QString User::convertPost(int post){
     switch (post) {
     case Admin:
         return QString("Администратор");
@@ -108,4 +143,18 @@ static QString convertPost(int post){
         break;
     }
     return QString("Unknown");
+}
+
+int User::convertPostToInt(QString post){
+    if(post == "Агент"){
+        return Agent;
+    }
+    if(post == "Бухгалтер"){
+        return Accountant;
+    }
+    if(post == "Администратор"){
+        return Admin;
+    }
+
+    return Unknown;
 }

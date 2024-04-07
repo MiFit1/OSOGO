@@ -13,6 +13,7 @@ TEMPLATE = app
 include($${PWD}/QSidePanel/q_side_panel.pri)
 
 SOURCES += \
+    Global.cpp \
     abstractuserwindow.cpp \
     accountantmodelstatistics.cpp \
     accountantwindow.cpp \
@@ -30,7 +31,6 @@ SOURCES += \
     profilewindow.cpp \
     renegotiatecontractwindow.cpp \
     user.cpp \
-    usertablemodel.cpp \
     windownavigator.cpp
 
 HEADERS += \
@@ -51,7 +51,6 @@ HEADERS += \
     profilewindow.h \
     renegotiatecontractwindow.h \
     user.h \
-    usertablemodel.h \
     windownavigator.h
 
 FORMS += \
