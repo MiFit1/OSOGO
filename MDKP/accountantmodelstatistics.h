@@ -8,6 +8,7 @@ class AccountantModelStatistics : public QSqlQueryModel
     Q_OBJECT
 public:
     explicit AccountantModelStatistics(QObject *parent = nullptr);
+    void UpdateView();
 
 signals:
 };

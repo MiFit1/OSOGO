@@ -39,9 +39,12 @@ private:
     void ConfiguringInterface();
     void ShowViewContracts();
     void ShowConfirmationWindow();
+    void UpdateViewContracts();
 private slots:
     void slotDoubleClikedOnContract(const QModelIndex index);
     void slotConfirmWidgetBackButtonClicked();
+    void slotContractUpdateAndReject();
+    void slotContractUpdateAndConfirm();
 };
 
 #endif // ACCOUNTANTWINDOW_H

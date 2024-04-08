@@ -4,6 +4,10 @@
 AccountantModelStatistics::AccountantModelStatistics(QObject *parent)
     : QSqlQueryModel(parent)
 {
+    UpdateView();
+}
+
+void AccountantModelStatistics::UpdateView(){
     setQuery("SELECT    Contract.ID,"
              "          TypeInsurance as [Тип договора],"
              "          Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"

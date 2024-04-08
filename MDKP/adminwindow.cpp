@@ -114,5 +114,5 @@ void AdminWindow::ClearDataRegistrationUserWidget(){
     ui->Branch->clear();
     ui->LoginLine->clear();
     ui->PasswordLine->clear();
-    ui->Post->clear();
+    ui->Post->setCurrentIndex(-1);
 }
