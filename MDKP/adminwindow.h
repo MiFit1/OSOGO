@@ -44,6 +44,7 @@ private:
     void ShowViewUsers();
     void ShowChangeUserDataWidget();
     void RefreshDataView();
+    void ClearDataRegistrationUserWidget();
 public slots:
     void slotBackButtonChangeUserWidgetCliked();
 private slots:

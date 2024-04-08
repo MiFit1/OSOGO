@@ -90,6 +90,8 @@ void AdminWindow::slotRegistrationButtonClicked(){
         QMessageBox::critical(this,"Ошибка",err.what());
         return;
     }
+
+    ClearDataRegistrationUserWidget();
     RefreshDataView();
 }
 
@@ -101,4 +103,16 @@ void AdminWindow::slotRefreshUserInDatabase(User& user){
     db->RefreshUserById(user);
     RefreshDataView();
     ShowViewUsers();
+}
+
+void AdminWindow::ClearDataRegistrationUserWidget(){
+    ui->LastName->clear();
+    ui->FirstName->clear();
+    ui->Patronymic->clear();
+    ui->Phone->clear();
+    ui->Address->clear();
+    ui->Branch->clear();
+    ui->LoginLine->clear();
+    ui->PasswordLine->clear();
+    ui->Post->clear();
 }

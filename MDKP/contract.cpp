@@ -55,3 +55,17 @@ bool Contract::isValid(){
     return valid;
 }
 
+void Contract::SetSumma(double Summa){
+    summa = Summa;
+}
+void Contract::SetStatus(int Status){
+    status = Status;
+}
+void Contract::SetTypeInsurance(QString TypeContract){
+    typeInsurance = TypeContract;
+}
+void Contract::SetIdEmployee(int IdEmployee){
+    idEmployee = IdEmployee;
+}
+
+

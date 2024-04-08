@@ -13,6 +13,10 @@ public:
     QString GetPatronymic();
     QString GetPhone();
     bool isValid();
+    void SetLastName(QString LastName);
+    void SetFirstName(QString FirstName);
+    void SetPatronymic(QString Patronymic);
+    void SetPhone(QString Phone);
 private:
     int id;
     QString lastName;

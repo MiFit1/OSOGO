@@ -36,3 +36,16 @@ QString Client::GetPhone(){
 bool Client::isValid(){
     return valid;
 }
+
+void Client::SetLastName(QString LastName){
+    lastName = LastName;
+}
+void Client::SetFirstName(QString FirstName){
+    firstName = FirstName;
+}
+void Client::SetPatronymic(QString Patronymic){
+    patronymic = Patronymic;
+}
+void Client::SetPhone(QString Phone){
+    phone = Phone;
+}

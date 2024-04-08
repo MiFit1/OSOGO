@@ -18,6 +18,10 @@ public:
     int GetIdEmployee();
     int GetStatus();
     bool isValid();
+    void SetSumma(double Summa);
+    void SetStatus(int Status);
+    void SetTypeInsurance(QString TypeContract);
+    void SetIdEmployee(int IdEmployee);
 private:
     int id;
     QDateTime date;

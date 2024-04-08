@@ -16,7 +16,7 @@ void  Database::CreateTables(){
     QString str_query = "CREATE TABLE if not exists Contract ("
                         "ID INTEGER PRIMARY KEY NOT NULL,"
                         "Datee DATE NOT NULL,"
-                        "Summa DECIMAL(10,2) NOT NULL,"
+                        "Summa FLOAT NOT NULL,"
                         "TypeInsurance NVARCHAR(100) NOT NULL,"
                         "TariffRate FLOAT NULL,"
                         "ID_Client INTEGER NOT NULL,"
@@ -90,7 +90,7 @@ void  Database::InsertTestData(){
     QSqlQuery query;
     QString str_query = "INSERT INTO Contract (Datee, Summa, TypeInsurance, TariffRate, ID_Client, ID_Employee, Status) VALUES "
                         "(DATETIME(), 690700,'Добровольное медицинское страхование', 0.56, 1,2,1),"
-                        "(DATETIME(), 346798,'Cтрахование домашнего имущества', 0.678, 2,2,1),"
+                        "(DATETIME(), 346798,'Cтрахование домашнего имущества', 0.678, 2,2,2),"
                         "(DATETIME(), 488000,'Cтрахование автотранспорта', 0.8, 3,2,3);";
     bool queryResult = query.exec(str_query);
     if(!queryResult){
@@ -141,8 +141,8 @@ Contract Database::GetContractById(int id){
         return Contract();
     }
 
-    query.next();
-    if(query.value(0).isNull()){
+
+    if(query.next() && query.value(0).isNull()){
         return Contract();
     }
 
@@ -171,8 +171,7 @@ Client Database::GetClientById(int id){
         return Client();
     }
 
-    query.next();
-    if(query.value(0).isNull()){
+    if(query.next() && query.value(0).isNull()){
         return Client();
     }
 
@@ -234,8 +233,7 @@ void Database::RegisterUser(QString LastName, QString FirstName, QString Patrony
         throw std::runtime_error("Не удалось выполнить запрос.");
     }
 
-    query.next();
-    if(!query.value(0).isNull()){
+    if(query.next() && !query.value(0).isNull()){
         throw std::runtime_error("Данный логин уже используется.");
     }
     query.clear();
@@ -278,6 +276,152 @@ void Database::RefreshUserById(User user){
     bool queryResult = query.exec();
     if(!queryResult){
         qDebug() << query.lastError();
-        throw std::runtime_error("Не удалось вставить данные.");
+        throw std::runtime_error("Не удалось обновить данные.");
+    }
+}
+
+int Database::RegisterClient(Client client){
+    QSqlQuery query;
+    query.prepare("SELECT * "
+                  "FROM Client "
+                  "WHERE Phone = :phone;");
+    query.bindValue(":phone",client.GetPhone());
+    bool queryResult = query.exec();
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось проверить данные клиента в БД.");
+    }
+
+    //Если номер занят
+    if(query.next() && !query.value(0).isNull()){
+        //Номер занят, но ФИО не совпадает
+        if((query.value("LastName").toString() != client.GetLastName()) ||
+            (query.value("FirstName").toString() != client.GetFirstName()) ||
+            (query.value("Patronymic").toString() != client.GetPatronymic())){
+            throw std::runtime_error("Данный номер занят другим клиентом.");
+        }
+        //Номер занят, но ФИО совпадают
+        return query.value("ID").toInt();
+    }
+
+    //Номер не занят
+    query.prepare("INSERT INTO Client (LastName, FirstName, Patronymic, Phone) VALUES"
+                  "(:lastName, :firstName, :patronymic, :phone)");
+    query.bindValue(":lastName", client.GetLastName());
+    query.bindValue(":firstName", client.GetFirstName());
+    query.bindValue(":patronymic", client.GetPatronymic());
+    query.bindValue(":phone", client.GetPhone());
+    queryResult = query.exec();
+
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось вставить данные о клиенте в БД.");
+    }
+
+    //Поиск только что вставленного клиента
+    query.prepare("SELECT * "
+                  "FROM Client "
+                  "WHERE LastName = :lastName AND "
+                  "     FirstName = :firstName AND "
+                  "     Patronymic = :patronymic AND "
+                  "     Phone = :phone;");
+    query.bindValue(":lastName", client.GetLastName());
+    query.bindValue(":firstName", client.GetFirstName());
+    query.bindValue(":patronymic", client.GetPatronymic());
+    query.bindValue(":phone", client.GetPhone());
+    queryResult = query.exec();
+
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось осуществить поиск вставленного пользователя.");
+    }
+
+    if(query.next() && query.value(0).isNull()){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Вставленный пользователь не найден.");
+    }
+
+    return query.value("ID").toInt();
+}
+
+void Database::AddContract(Contract contract){
+    QSqlQuery query;
+    query.prepare("INSERT INTO Contract (Datee, Summa, TypeInsurance, ID_Client, ID_Employee, Status) VALUES "
+                  "(DATETIME(), :summa, :typeContract, :idClient, :idEmployee, :status);");
+    query.bindValue(":summa", contract.GetSumma());
+    query.bindValue(":typeContract", contract.GetTypeInsurance());
+    query.bindValue(":idClient", contract.GetIdClient());
+    query.bindValue(":idEmployee", contract.GetIdEmployee());
+    query.bindValue(":status", contract.GetStatus());
+
+    bool queryResult = query.exec();
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось вставить данные в БД.");
+    }
+}
+
+void Database::RefreshClientById(Client client){
+    QSqlQuery query;
+    query.prepare("UPDATE  Client "
+                  "SET    LastName = :lastName, "
+                  "       FirstName = :firstName, "
+                  "       Patronymic = :patronymic, "
+                  "       Phone = :phone "
+                  "WHERE ID = :id;");
+    query.bindValue(":lastName", client.GetLastName());
+    query.bindValue(":firstName", client.GetFirstName());
+    query.bindValue(":patronymic", client.GetPatronymic());
+    query.bindValue(":phone", client.GetPhone());
+    query.bindValue(":id", client.GetId());
+
+    bool queryResult = query.exec();
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось обновить данные.");
+    }
+}
+void Database::RefreshContractById(Contract contract){
+    QSqlQuery query;
+    query.prepare("UPDATE  Contract "
+                  "SET    Datee = DATETIME(), "
+                  "       Summa = :summa, "
+                  "       TariffRate = :rate, "
+                  "       TypeInsurance = :typeContract, "
+                  "       ID_Client = :idClient,"
+                  "       ID_Employee = :idEmployee, "
+                  "       Status = :status "
+                  "WHERE ID = :id;");
+    query.bindValue(":summa", contract.GetSumma());
+    query.bindValue(":rate", contract.GetTariffRate());
+    query.bindValue(":typeContract", contract.GetTypeInsurance());
+    query.bindValue(":idClient", contract.GetIdClient());
+    query.bindValue(":idEmployee", contract.GetIdEmployee());
+    query.bindValue(":status", contract.GetStatus());
+    query.bindValue(":id", contract.GetId());
+    bool queryResult = query.exec();
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось обновить данные.");
+    }
+}
+
+void Database::CheckClientNumberForId(Client client){
+    QSqlQuery query;
+    query.prepare("SELECT * "
+                  "FROM Client "
+                  "WHERE ID <> :id AND Phone = :phone;");
+    query.bindValue(":id",client.GetId());
+    query.bindValue(":phone",client.GetPhone());
+
+    bool queryResult = query.exec();
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось осуществить поиск.");
+    }
+
+    if(query.next() && !query.value(0).isNull()){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Клиент с таким номером телефона уже есть.");
     }
 }

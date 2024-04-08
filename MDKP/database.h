@@ -22,6 +22,11 @@ public:
     User CheckLogin(const QString login, const QString password);
     void RegisterUser(QString LastName, QString FirstName, QString Patronymic, QString Phone, QString Role, QString Address, QString Branch, QString Login, QString Password);
     void RefreshUserById(User user);
+    void AddContract(Contract contract);
+    int RegisterClient(Client client);
+    void RefreshClientById(Client client);
+    void RefreshContractById(Contract contract);
+    void CheckClientNumberForId(Client client);//Есть ли другие клиенты с таким же телефоном, но другим id
 private:
     QSqlDatabase* sqlDatabase;
 

@@ -1,7 +1,6 @@
 #ifndef AGENTWINDOW_H
 #define AGENTWINDOW_H
 
-#include "renegotiatecontractwindow.h"
 #include <QMainWindow>
 #include <QPushButton>
 #include <QTabWidget>
@@ -14,6 +13,7 @@
 #include "abstractuserwindow.h"
 #include "database.h"
 #include "agentstatisticmodel.h"
+#include "renegotiatecontractwindow.h"
 
 namespace Ui {
 class AgentWindow;
@@ -40,11 +40,14 @@ private:
 
     void ShowViewRenegotiateContract();
     void ShowRenegotiateContractWidget();
-//    void DeleteParentRenegotiationWidgetChildren();
+    void ClearContractDataUi();
+    void viewRenegotiateContractRefresh();
 
 private slots:
     void slotDoubleClikedOnRenegitiationContract(const QModelIndex index);
     void slotRenegotiateWidgetBackButtonClicked();
+    void slotConcludeContractButtonClicked();
+    void slotRenegotiateContractDataChanged();
 
 };
 
