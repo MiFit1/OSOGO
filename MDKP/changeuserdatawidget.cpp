@@ -10,6 +10,7 @@ ChangeUserDataWidget::ChangeUserDataWidget(QWidget *parent)
 
     //ui->Post->
     connect(ui->BackButton,SIGNAL(clicked()),SIGNAL(signalBackButtonCliked()));
+    connect(ui->ConfirmButton,SIGNAL(clicked()),SLOT(slotConfirmButtonClicked()));
 }
 
 ChangeUserDataWidget::~ChangeUserDataWidget()
@@ -27,6 +28,25 @@ void ChangeUserDataWidget::setUserToChangeWidget(User user){
     ui->Branch->setText(user.GetBranch());
     ui->LoginLine->setText(user.GetLogin());
     ui->PasswordLine->setText(user.GetPassword());
-    QString postStr = user.convertPost(user.GetPost());
+    QString postStr = User::convertPost(user.GetPost());
     ui->Post->setCurrentText(postStr);
+    QString statusStr = User::convertStatusToString(user.GetStatus());
+    ui->Status->setCurrentText(statusStr);
+}
+
+void ChangeUserDataWidget::slotConfirmButtonClicked(){
+    User changeUser = user;
+    changeUser.SetLastName(ui->LastName->text());
+    changeUser.SetFirstName(ui->FirstName->text());
+    changeUser.SetPatronymic(ui->Patronymic->text());
+    changeUser.SetPhone(ui->Phone->text());
+    changeUser.SetAddress(ui->Address->text());
+    int post = User::convertPostToInt(ui->Post->currentText());
+    changeUser.SetPost(post);
+    int status = User::convertStatusToInt(ui->Status->currentText());
+    changeUser.SetStatus(status);
+    changeUser.SetBranch(ui->Branch->text());
+    changeUser.SetLogin(ui->LoginLine->text());
+    changeUser.SetPassword(ui->PasswordLine->text());
+    emit signalRefreshUser(changeUser);
 }

@@ -6,6 +6,7 @@
 #include "contract.h"
 #include "client.h"
 #include "user.h"
+#include <stdexcept>
 
 class Database : public QObject
 {
@@ -18,6 +19,9 @@ public:
     Contract GetContractById(int id);
     Client GetClientById(int id);
     User GetUserById(int id);
+    User CheckLogin(const QString login, const QString password);
+    void RegisterUser(QString LastName, QString FirstName, QString Patronymic, QString Phone, QString Role, QString Address, QString Branch, QString Login, QString Password);
+    void RefreshUserById(User user);
 private:
     QSqlDatabase* sqlDatabase;
 

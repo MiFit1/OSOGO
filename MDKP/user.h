@@ -29,6 +29,16 @@ private:
 public:
     //void operator = (const User &user);
     void operator << (QSqlQuery &query);
+    void SetLastName(QString lastName);
+    void SetFirstName(QString firstName);
+    void SetPatronymic(QString patronymic);
+    void SetPhone(QString phone);
+    void SetAddress(QString address);
+    void SetPost(int post);
+    void SetStatus(int status);
+    void SetBranch(QString branch);
+    void SetPassword(QString password);
+    void SetLogin(QString login);
     int GetId() const;
     QString GetLastName() const;
     QString GetFirstName() const;
@@ -36,12 +46,15 @@ public:
     QString GetPhone() const;
     QString GetAddress() const;
     int GetPost() const;
+    int GetStatus() const;
     QString GetBranch() const;
     QString GetPassword() const;
     QString GetLogin() const;
     bool isEmpty() const;
     static QString convertPost(int post);
     static int convertPostToInt(QString post);
+    static QString convertStatusToString(int status);
+    static int convertStatusToInt(QString status);
 };
 //Q_DECLARE_METATYPE(User)
 

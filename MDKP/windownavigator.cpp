@@ -37,7 +37,7 @@ void WindowNavigator::slotLoginSuccessful(const User& user){
 }
 
 void WindowNavigator::CreateAndShowLoginWindow(){
-    loginWindow.reset(new LoginWindow);
+    loginWindow.reset(new LoginWindow(db));
     connect(loginWindow.get(), SIGNAL(signalLoginSuccessful(User)),this,SLOT(slotLoginSuccessful(User)));
     loginWindow->show();
 }

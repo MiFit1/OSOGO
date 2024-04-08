@@ -49,6 +49,7 @@ void User::operator << (QSqlQuery& query){
         return;
     }
 
+    empty = false;
     id = query.value("ID").toString().toInt();
     isWork = query.value("IsWorked").toString().toInt();
     lastName = query.value("LastName").toString();
@@ -63,6 +64,37 @@ void User::operator << (QSqlQuery& query){
     post = role;
 }
 
+void User::SetLastName(QString lastName){
+    this->lastName = lastName;
+}
+void User::SetFirstName(QString firstName){
+    this->firstName = firstName;
+}
+void User::SetPatronymic(QString patronymic){
+    this->patronymic = patronymic;
+}
+void User::SetPhone(QString phone){
+    this->phone = phone;
+}
+void User::SetAddress(QString address){
+    this->address = address;
+}
+void User::SetPost(int post){
+    this->post = post;
+}
+void User::SetStatus(int status){
+    this->isWork = status;
+}
+void User::SetBranch(QString branch){
+    this->branch = branch;
+}
+void User::SetPassword(QString password){
+    this->password = password;
+}
+void User::SetLogin(QString login){
+    this->login = login;
+}
+
 User::User(){
     empty = true;
 }
@@ -71,17 +103,10 @@ int User::getRole() const{
     return post;
 }
 
-// void User::operator =(const User &user){
-//     this->id = user.id;
-//     this->post = user.post;
-//     this->isWork = user.isWork;
-//     this->lastName = user.lastName;
-//     this->firstName = user.firstName;
-//     this->patronymic = user.patronymic;
-//     this->address = user.address;
-//     this->phone = user.phone;
-//     this->branch = user.branch;
-// }
+int User::GetStatus() const{
+    return isWork;
+}
+
 int User::GetId() const{
     return id;
 }
@@ -157,4 +182,31 @@ int User::convertPostToInt(QString post){
     }
 
     return Unknown;
+}
+
+int User::convertStatusToInt(QString status){
+    if(status == "Работает"){
+        return Works;
+    }
+    if(status == "Уволен"){
+        return Fired;
+    }
+    return UnknownStatus;
+}
+
+QString User::convertStatusToString(int status){
+    switch (status) {
+    case Fired:
+        return QString("Уволен");
+        break;
+    case Works:
+        return QString("Работает");
+        break;
+    case UnknownStatus:
+        return QString("Unknown");
+        break;
+    default:
+        break;
+    }
+    return QString("Unknown");
 }

@@ -11,5 +11,11 @@ enum {
     Agent = 3
 };
 
+enum {
+    UnknownStatus = -1,
+    Fired = 0,
+    Works = 1
+};
+
 void AddShadowToChildren(QObject* obj);
 #endif // GLOBAL_H

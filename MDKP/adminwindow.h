@@ -17,6 +17,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSize>
+#include <stdexcept>
 
 
 namespace Ui {
@@ -42,10 +43,13 @@ private:
 
     void ShowViewUsers();
     void ShowChangeUserDataWidget();
+    void RefreshDataView();
 public slots:
     void slotBackButtonChangeUserWidgetCliked();
 private slots:
     void slotDoubleClikedOnUser(const QModelIndex index);
+    void slotRegistrationButtonClicked();
+    void slotRefreshUserInDatabase(User& user);
 };
 
 #endif // ADMINWINDOW_H

@@ -32,9 +32,9 @@ void  Database::CreateTables(){
 
     str_query = "CREATE TABLE if not exists Client ("
                         "ID INTEGER PRIMARY KEY NOT NULL,"
-                        "LastName NVARCHAR(20) NOT NULL,"
-                        "FirstName NVARCHAR(20) NOT NULL,"
-                        "Patronymic NVARCHAR(20) NULL,"
+                        "LastName NVARCHAR(40) NOT NULL,"
+                        "FirstName NVARCHAR(40) NOT NULL,"
+                        "Patronymic NVARCHAR(40) NULL,"
                         "Phone NVARCHAR(20) NOT NULL);";
     queryResult = query.exec(str_query);
     if(!queryResult){
@@ -45,9 +45,9 @@ void  Database::CreateTables(){
     str_query = "CREATE TABLE if not exists Employee ("
                 "ID INTEGER PRIMARY KEY NOT NULL,"
                 "IsWorked INTEGER NOT NULL,"
-                "LastName NVARCHAR(20) NOT NULL,"
-                "FirstName NVARCHAR(20) NOT NULL,"
-                "Patronymic NVARCHAR(20) NULL,"
+                "LastName NVARCHAR(40) NOT NULL,"
+                "FirstName NVARCHAR(40) NOT NULL,"
+                "Patronymic NVARCHAR(40) NULL,"
                 "Address NVARCHAR(100) NULL,"
                 "Phone NVARCHAR(20) NOT NULL,"
                 "Branch NVARCHAR(100) NOT NULL,"
@@ -109,9 +109,9 @@ void  Database::InsertTestData(){
     }
 
     str_query = "INSERT INTO Employee (IsWorked, LastName, FirstName, Patronymic, Phone, Branch, Login, Password, Role) VALUES "
-                "(1, 'Семенов', 'Николай', 'Тимофеевич', '74956772849', '125149, г. Москва, ул. Куйбышева, 12, оф. 58', 'admin', 'admin', 'Администратор'),"
-                "(1, 'Козырева', 'София', 'Назаровна', '74954657197', '630597, г. Новосибирск, ул. Южная, 37, оф. 51', 'agent1', '1', 'Агент'),"
-                "(1, 'Яковлев', 'Михаил', 'Георгиевич', '74959388993', '630597, г. Новосибирск, ул. Южная, 37, оф. 51', 'accountant1', '1', 'Бухгалтер');";
+                "(1, 'Семенов', 'Николай', 'Тимофеевич', '74956772849', '125149, г. Москва, ул. Куйбышева, 12, оф. 58', '1', '1', 'Администратор'),"
+                "(1, 'Козырева', 'София', NULL, '74954657197', '630597, г. Новосибирск, ул. Южная, 37, оф. 51', '2', '2', 'Агент'),"
+                "(1, 'Яковлев', 'Михаил', 'Георгиевич', '74959388993', '630597, г. Новосибирск, ул. Южная, 37, оф. 51', '3', '3', 'Бухгалтер');";
     queryResult = query.exec(str_query);
     if(!queryResult){
         qDebug() << "Не удаётся вставить данные";
@@ -187,7 +187,7 @@ Client Database::GetClientById(int id){
 
 User Database::GetUserById(int id){
     QSqlQuery query;
-    QString str_query = QString("SELECT *"
+    QString str_query = QString("SELECT * "
                                 "FROM Employee "
                                 "WHERE ID = %1;").arg(id);
 
@@ -202,4 +202,82 @@ User Database::GetUserById(int id){
     user << query;
 
     return user;
+}
+
+User Database::CheckLogin(const QString login, const QString password){
+    QSqlQuery query;
+    QString str_query = QString("SELECT * "
+                                "FROM Employee "
+                                "WHERE Login = '%1' AND Password = '%2';").arg(login,password);
+
+    bool queryResult = query.exec(str_query);
+
+    if(!queryResult){
+        qDebug() << query.lastError();
+        return User();
+    }
+
+    User user;
+    user << query;
+    return user;
+}
+
+void Database::RegisterUser(QString LastName, QString FirstName, QString Patronymic, QString Phone, QString Role, QString Address, QString Branch, QString Login, QString Password){
+    QSqlQuery query;
+    QString str_query = QString("SELECT * "
+                                "FROM Employee "
+                                "WHERE Login = '%1';").arg(Login);
+
+    bool queryResult = query.exec(str_query);
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось выполнить запрос.");
+    }
+
+    query.next();
+    if(!query.value(0).isNull()){
+        throw std::runtime_error("Данный логин уже используется.");
+    }
+    query.clear();
+
+    str_query = QString("INSERT INTO Employee (IsWorked, LastName, FirstName, Patronymic, Phone, Branch, Login, Password, Role, Address) VALUES "
+                        "(1, '%1', '%2', '%3', '%4', '%5', '%6', '%7', '%8','%9');").arg(LastName,FirstName,Patronymic,Phone,Branch,Login,Password,Role,Address);
+    queryResult = query.exec(str_query);
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Вставка данных не выполнена.");
+    }
+}
+
+void Database::RefreshUserById(User user){
+    QSqlQuery query;
+    query.prepare("UPDATE  Employee "
+                  "SET    IsWorked = :worked, "
+                  "       LastName = :lastName, "
+                  "       FirstName = :firstName, "
+                  "       Patronymic = :patronymic,"
+                  "       Address = :address, "
+                  "       Phone = :phone, "
+                  "       Branch = :branch, "
+                  "       Login = :login, "
+                  "       Password = :password, "
+                  "       Role = :role "
+                  "WHERE ID = :id;");
+    query.bindValue(":worked", user.GetStatus());
+    query.bindValue(":lastName", user.GetLastName());
+    query.bindValue(":firstName", user.GetFirstName());
+    query.bindValue(":patronymic", user.GetPatronymic());
+    query.bindValue(":address", user.GetAddress());
+    query.bindValue(":phone", user.GetPhone());
+    query.bindValue(":branch", user.GetBranch());
+    query.bindValue(":login", user.GetLogin());
+    query.bindValue(":password", user.GetPassword());
+    query.bindValue(":role", User::convertPost(user.GetPost()));
+    query.bindValue(":id", user.GetId());
+
+    bool queryResult = query.exec();
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось вставить данные.");
+    }
 }

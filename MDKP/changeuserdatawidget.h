@@ -23,6 +23,9 @@ private:
     User user;
 signals:
     void signalBackButtonCliked();
+    void signalRefreshUser(User& user);
+private slots:
+    void slotConfirmButtonClicked();
 };
 
 #endif // CHANGEUSERDATAWIDGET_H
