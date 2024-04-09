@@ -18,24 +18,21 @@ class ContractConfirmationWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit ContractConfirmationWindow(User us, Database* db, QWidget *parent = nullptr);
+    explicit ContractConfirmationWindow(QWidget *parent = nullptr);
     ~ContractConfirmationWindow();
     void SetContractAndClient(Contract Contract, Client Client);
+    Contract GetCurrentContract();
+    QString GetComment();
+    void ClearUserData();
 
 private:
     Ui::ContractConfirmationWindow *ui;
     Contract contract;
     Client client;
-    Database* db;
-    User user;
 signals:
     void signalBackButtonClicked();
-    void signalContractUpdateAndReject();
-    void signalContractUpdateAndConfirm();
-
-private slots:
-    void slotRejectButtonClicked();
-    void slotConfirmButtonClicked();
+    void signalConfirmButtonClicked();
+    void signalRejectButtonClicked();
 };
 
 #endif // CONTRACTCONFIRMATIONWINDOW_H

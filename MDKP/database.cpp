@@ -89,9 +89,9 @@ void  Database::CreateTables(){
 void  Database::InsertTestData(){
     QSqlQuery query;
     QString str_query = "INSERT INTO Contract (Datee, Summa, TypeInsurance, TariffRate, ID_Client, ID_Employee, Status) VALUES "
-                        "(DATETIME(), 690700,'Добровольное медицинское страхование', 0.56, 1,2,1),"
-                        "(DATETIME(), 346798,'Cтрахование домашнего имущества', 0.678, 2,2,2),"
-                        "(DATETIME(), 488000,'Cтрахование автотранспорта', 0.8, 3,2,3);";
+                        "(DATETIME('now', '+7 hours'), 690700,'Добровольное медицинское страхование', 0.56, 1,2,1),"
+                        "(DATETIME('now', '+7 hours'), 346798,'Cтрахование домашнего имущества', 0.678, 2,2,2),"
+                        "(DATETIME('now', '+7 hours'), 488000,'Cтрахование автотранспорта', 0.8, 3,2,3);";
     bool queryResult = query.exec(str_query);
     if(!queryResult){
         qDebug() << "Не удаётся вставить данные";
@@ -236,7 +236,15 @@ void Database::RegisterUser(QString LastName, QString FirstName, QString Patrony
     if(query.next() && !query.value(0).isNull()){
         throw std::runtime_error("Данный логин уже используется.");
     }
-    query.clear();
+
+    query.prepare("SELECT ID "
+                  "FROM Employee "
+                  "WHERE Phone = :phone;");
+    query.bindValue(":phone",Phone);
+    query.exec();
+    if(query.next() && !query.value(0).isNull()){
+        throw std::runtime_error("Данный номер телефона уже используется.");
+    }
 
     str_query = QString("INSERT INTO Employee (IsWorked, LastName, FirstName, Patronymic, Phone, Branch, Login, Password, Role, Address) VALUES "
                         "(1, '%1', '%2', '%3', '%4', '%5', '%6', '%7', '%8','%9');").arg(LastName,FirstName,Patronymic,Phone,Branch,Login,Password,Role,Address);
@@ -347,7 +355,7 @@ int Database::RegisterClient(Client client){
 void Database::AddContract(Contract contract){
     QSqlQuery query;
     query.prepare("INSERT INTO Contract (Datee, Summa, TypeInsurance, ID_Client, ID_Employee, Status) VALUES "
-                  "(DATETIME(), :summa, :typeContract, :idClient, :idEmployee, :status);");
+                  "(DATETIME('now', '+7 hours'), :summa, :typeContract, :idClient, :idEmployee, :status);");
     query.bindValue(":summa", contract.GetSumma());
     query.bindValue(":typeContract", contract.GetTypeInsurance());
     query.bindValue(":idClient", contract.GetIdClient());
@@ -384,7 +392,7 @@ void Database::RefreshClientById(Client client){
 void Database::RefreshContractById(Contract contract){
     QSqlQuery query;
     query.prepare("UPDATE  Contract "
-                  "SET    Datee = DATETIME(), "
+                  "SET    Datee = DATETIME('now', '+7 hours'), "
                   "       Summa = :summa, "
                   "       TariffRate = :rate, "
                   "       TypeInsurance = :typeContract, "
@@ -428,7 +436,7 @@ void Database::CheckClientNumberForId(Client client){
 void Database::AddComment(QString comment, int IdAccountant, int IdContract){
     QSqlQuery query;
     query.prepare("INSERT INTO Comment (Comment, Datee) VALUES "
-                  "(:comment , DATETIME());");
+                  "(:comment , DATETIME('now', '+7 hours'));");
     query.bindValue(":comment", comment);
 
     bool queryResult = query.exec();

@@ -75,6 +75,7 @@ void AgentWindow::slotDoubleClikedOnRenegitiationContract(const QModelIndex inde
     int idContract = sqlModelRenegotiate->index(indexRowClicked, 0).data().toInt();
     Contract contract = db->GetContractById(idContract);
     Client client = db->GetClientById(contract.GetIdClient());
+    renegotiationContractWidget->ClearUserData();
     renegotiationContractWidget->SetContractAndClient(contract, client);
     renegotiationContractWidget->UpdateAccountantComments();
     ShowRenegotiateContractWidget();

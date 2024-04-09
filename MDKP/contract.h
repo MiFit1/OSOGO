@@ -22,6 +22,7 @@ public:
     void SetStatus(int Status);
     void SetTypeInsurance(QString TypeContract);
     void SetIdEmployee(int IdEmployee);
+    void SetTariffRate(double Rate);
 private:
     int id;
     QDateTime date;

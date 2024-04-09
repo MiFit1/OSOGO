@@ -10,8 +10,9 @@ AccountantWindow::AccountantWindow(const User& us, Database* database, QWidget *
     ConfiguringInterface();
     connect(viewContracts, SIGNAL(doubleClicked(QModelIndex)), SLOT(slotDoubleClikedOnContract(QModelIndex)));
     connect(confirmationWindow, SIGNAL(signalBackButtonClicked()),SLOT(slotConfirmWidgetBackButtonClicked()));
-    connect(confirmationWindow,SIGNAL(signalContractUpdateAndReject()),SLOT(slotContractUpdateAndReject()));
-    connect(confirmationWindow,SIGNAL(signalContractUpdateAndConfirm()),SLOT(slotContractUpdateAndConfirm()));
+    connect(confirmationWindow,SIGNAL(signalConfirmButtonClicked()),SLOT(slotConfirmContractButtonClicked()));
+    connect(confirmationWindow,SIGNAL(signalRejectButtonClicked()),SLOT(slotRejectContractButtonClicked()));
+    connect(tariffRateWidget, SIGNAL(signalOkButtonClicked()), tariffRateButton, SIGNAL(clicked()));
 }
 
 AccountantWindow::~AccountantWindow()
@@ -20,14 +21,39 @@ AccountantWindow::~AccountantWindow()
 }
 
 void AccountantWindow::ConfiguringInterface(){
-    //Кнопка профиля
-    ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
+    //Кнопка профиля и кнопка настройки ставки
+    tabCornerWidget = new QWidget(this);
+    tariffRateButton = new QPushButton(this);
+    tariffRateButton->setIcon(QIcon(":/images/resources/tariff.png"));
+    tariffRateButton->setIconSize(QSize(40, 40));
+    tariffRateButton->setMinimumHeight(50);
+
+    tabCornerWidgetLayout = new QHBoxLayout(tabCornerWidget);
+    tabCornerWidgetLayout->addWidget(profileButton);
+    tabCornerWidgetLayout->addWidget(tariffRateButton);
+    tabCornerWidgetLayout->setSpacing(0);
+    tabCornerWidgetLayout->setContentsMargins(0,0,0,0);
+    tabCornerWidget->setLayout(tabCornerWidgetLayout);
+
+    ui->tabWidget->setCornerWidget(tabCornerWidget, Qt::TopLeftCorner);
     profilePanel->raise();
+
+    tariffRatePanel = new PanelLeftSide(this);
+    tariffRatePanel->setOpenEasingCurve(QEasingCurve::Type::OutExpo);
+    tariffRatePanel->setCloseEasingCurve(QEasingCurve::Type::InExpo);
+    tariffRatePanel->init(tariffRateButton);
+
+    tariffRateWidget = new TariffRateWidget(this);
+    tariffRatePanel->setPanelSize(tariffRateWidget->size().width()+160);
+    tariffRatePanel->setWidgetResizable(true);
+    tariffRatePanel->setWidget(tariffRateWidget);
+    tariffRateWidget->raise();
+
 
     //layout вкладки подтверждения договоров
     stackedWidgetConfirmContract = ui->stackedWidgetConfirmContract;
     viewContracts = new QTableView(stackedWidgetConfirmContract);
-    confirmationWindow = new ContractConfirmationWindow(user, db,stackedWidgetConfirmContract);
+    confirmationWindow = new ContractConfirmationWindow(stackedWidgetConfirmContract);
     stackedWidgetConfirmContract->addWidget(viewContracts);
     stackedWidgetConfirmContract->addWidget(confirmationWindow );
     ShowViewContracts();
@@ -70,6 +96,7 @@ void AccountantWindow::slotDoubleClikedOnContract(const QModelIndex index){
     int idContract = sqlModelContract->index(indexRowClicked, 0).data().toInt();
     Contract contract = db->GetContractById(idContract);
     Client client = db->GetClientById(contract.GetIdClient());
+    confirmationWindow->ClearUserData();
     confirmationWindow->SetContractAndClient(contract, client);
     ShowConfirmationWindow();
 }
@@ -78,16 +105,56 @@ void AccountantWindow::slotConfirmWidgetBackButtonClicked(){
     ShowViewContracts();
 }
 
-void AccountantWindow::slotContractUpdateAndReject(){
-    UpdateViewContracts();
-    ShowViewContracts();
-}
+void AccountantWindow::slotConfirmContractButtonClicked(){
+    Contract changedContract = confirmationWindow->GetCurrentContract();
+    double changedRate = 0;
 
-void AccountantWindow::slotContractUpdateAndConfirm(){
+    if(changedContract.GetTypeInsurance() == "Cтрахование автотранспорта"){
+        changedRate = tariffRateWidget->GetVehicleInsuranceRate();
+    }
+    else if(changedContract.GetTypeInsurance() == "Cтрахование домашнего имущества"){
+        changedRate = tariffRateWidget->GetHomePropertyInsuranceRate();
+    }
+    else if(changedContract.GetTypeInsurance() == "Добровольное медицинское страхование"){
+        changedRate = tariffRateWidget->GetHealthInsuranceRate();
+    }
+    else{
+        QMessageBox::critical(this,"Ошибка","Неизвестный тип договора.");
+        return;
+    }
+
+    if(changedRate <= 0){
+        QMessageBox::information(this,"Ошибка","Для данного типа договоров не установлена ставка. Пожалуйста, зайдите в окно настройки ставок.");
+        return;
+    }
+
+    changedContract.SetTariffRate(changedRate);
+    changedContract.SetStatus(3);
+    try {
+        db->RefreshContractById(changedContract);
+    } catch (std::runtime_error& err) {
+        QMessageBox::critical(this,"Ошибка",err.what());
+        return;
+    }
     UpdateViewContracts();
     sqlModelStatistics->UpdateView();
     ShowViewContracts();
 }
+
+void AccountantWindow::slotRejectContractButtonClicked(){
+    Contract changedContract = confirmationWindow->GetCurrentContract();
+    changedContract.SetStatus(2);
+    try {
+        db->RefreshContractById(changedContract);
+        db->AddComment(confirmationWindow->GetComment(),user.GetId(),changedContract.GetId());
+    } catch (std::runtime_error& err) {
+        QMessageBox::critical(this,"Ошибка",err.what());
+        return;
+    }
+    UpdateViewContracts();
+    ShowViewContracts();
+}
+
 void AccountantWindow::UpdateViewContracts(){
     sqlModelContract->setQuery("SELECT  Contract.ID,"
                                "        TypeInsurance as [Тип договора],"
@@ -100,3 +167,5 @@ void AccountantWindow::UpdateViewContracts(){
                                "    JOIN Employee ON Contract.ID_Employee = Employee.ID "
                                "WHERE Contract.Status = 1;");
 }
+
+

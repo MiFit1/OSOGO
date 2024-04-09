@@ -89,3 +89,13 @@ void RenegotiateContractWindow::UpdateAccountantComments(){
     ui->AccountantComments->setHtml(commentStr);
 }
 
+void RenegotiateContractWindow::ClearUserData(){
+    ui->TypeContract->setCurrentIndex(-1);
+    ui->AccountantComments->clear();
+    ui->FirstName->clear();
+    ui->LastName->clear();
+    ui->Patronymic->clear();
+    ui->Phone->clear();
+    ui->Summa->clear();
+}
+

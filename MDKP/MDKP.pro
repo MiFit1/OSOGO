@@ -31,6 +31,7 @@ SOURCES += \
     mainwindow.cpp \
     profilewindow.cpp \
     renegotiatecontractwindow.cpp \
+    tariffratewidget.cpp \
     user.cpp \
     windownavigator.cpp
 
@@ -52,6 +53,7 @@ HEADERS += \
     mainwindow.h \
     profilewindow.h \
     renegotiatecontractwindow.h \
+    tariffratewidget.h \
     user.h \
     windownavigator.h
 
@@ -64,7 +66,8 @@ FORMS += \
     loginwindow.ui \
     mainwindow.ui \
     profilewindow.ui \
-    renegotiatecontractwindow.ui
+    renegotiatecontractwindow.ui \
+    tariffratewidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

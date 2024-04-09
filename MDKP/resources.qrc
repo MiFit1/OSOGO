@@ -2,5 +2,7 @@
     <qresource prefix="/images">
         <file>resources/settings.png</file>
         <file>resources/CheckMark.png</file>
+        <file>resources/tariff.png</file>
+        <file>resources/tariff2.png</file>
     </qresource>
 </RCC>

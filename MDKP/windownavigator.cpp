@@ -32,14 +32,15 @@ void WindowNavigator::slotLoginSuccessful(const User& user){
         Q_ASSERT(false);
     }
 
-    windowForRole->show();
+
+    windowForRole->showMaximized();
     connect(windowForRole.get(),SIGNAL(signalLogout()),this,SLOT(slotLogout()));
 }
 
 void WindowNavigator::CreateAndShowLoginWindow(){
     loginWindow.reset(new LoginWindow(db));
     connect(loginWindow.get(), SIGNAL(signalLoginSuccessful(User)),this,SLOT(slotLoginSuccessful(User)));
-    loginWindow->show();
+    loginWindow->showMaximized();
 }
 
 void WindowNavigator::HideAndRemoveLoginWindow(){

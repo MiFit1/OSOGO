@@ -68,4 +68,8 @@ void Contract::SetIdEmployee(int IdEmployee){
     idEmployee = IdEmployee;
 }
 
+void Contract::SetTariffRate(double Rate){
+    tariffRate = Rate;
+}
+
 

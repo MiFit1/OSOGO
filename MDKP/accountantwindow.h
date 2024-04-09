@@ -3,9 +3,12 @@
 #include "contractconfirmationwindow.h"
 #include "abstractuserwindow.h"
 #include "accountantmodelstatistics.h"
+#include "QSidePanel/PanelLeftSide.hpp"
+#include "tariffratewidget.h"
 #include <QMainWindow>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QTableView>
 #include <QLayoutItem>
 #include <QSqlQueryModel>
@@ -35,6 +38,11 @@ private:
     QSqlQueryModel* sqlModelContract;
     AccountantModelStatistics* sqlModelStatistics;
     Database* db;
+    QPushButton* tariffRateButton;
+    QWidget* tabCornerWidget;
+    QHBoxLayout* tabCornerWidgetLayout;
+    PanelLeftSide* tariffRatePanel;
+    TariffRateWidget* tariffRateWidget;
 
     void ConfiguringInterface();
     void ShowViewContracts();
@@ -43,8 +51,8 @@ private:
 private slots:
     void slotDoubleClikedOnContract(const QModelIndex index);
     void slotConfirmWidgetBackButtonClicked();
-    void slotContractUpdateAndReject();
-    void slotContractUpdateAndConfirm();
+    void slotConfirmContractButtonClicked();
+    void slotRejectContractButtonClicked();
 };
 
 #endif // ACCOUNTANTWINDOW_H

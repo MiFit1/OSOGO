@@ -24,6 +24,7 @@ public:
     ~RenegotiateContractWindow();
     void SetContractAndClient(Contract Contract, Client Client);
     void UpdateAccountantComments();
+    void ClearUserData();
 
 private:
     Ui::RenegotiateContractWindow *ui;
