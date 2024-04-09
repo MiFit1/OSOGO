@@ -27,7 +27,7 @@ void AccountantWindow::ConfiguringInterface(){
     //layout вкладки подтверждения договоров
     stackedWidgetConfirmContract = ui->stackedWidgetConfirmContract;
     viewContracts = new QTableView(stackedWidgetConfirmContract);
-    confirmationWindow = new ContractConfirmationWindow(db,stackedWidgetConfirmContract);
+    confirmationWindow = new ContractConfirmationWindow(user, db,stackedWidgetConfirmContract);
     stackedWidgetConfirmContract->addWidget(viewContracts);
     stackedWidgetConfirmContract->addWidget(confirmationWindow );
     ShowViewContracts();

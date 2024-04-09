@@ -1,12 +1,13 @@
 #include "contractconfirmationwindow.h"
 #include "ui_contractconfirmationwindow.h"
 
-ContractConfirmationWindow::ContractConfirmationWindow(Database* db, QWidget *parent)
+ContractConfirmationWindow::ContractConfirmationWindow(User us, Database* db, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::ContractConfirmationWindow)
 {
     ui->setupUi(this);
     this->db  = db;
+    user = us;
     AddShadowToChildren(this);
     connect(ui->backButton, SIGNAL(clicked()),SIGNAL(signalBackButtonClicked()));
     connect(ui->RejectButton,SIGNAL(clicked()),SLOT(slotRejectButtonClicked()));
@@ -35,6 +36,7 @@ void ContractConfirmationWindow::slotRejectButtonClicked(){
     changedContract.SetStatus(2);
     try {
         db->RefreshContractById(changedContract);
+        db->AddComment(ui->Comment->toPlainText(),user.GetId(),changedContract.GetId());
     } catch (std::runtime_error& err) {
         QMessageBox::critical(this,"Ошибка",err.what());
         return;

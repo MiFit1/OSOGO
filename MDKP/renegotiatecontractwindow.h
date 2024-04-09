@@ -4,6 +4,7 @@
 #include "client.h"
 #include "database.h"
 #include "Global.h"
+#include "comment.h"
 #include <QWidget>
 #include <QGraphicsDropShadowEffect>
 #include <QListView>
@@ -22,6 +23,7 @@ public:
     explicit RenegotiateContractWindow(User user,Database* db, QWidget *parent = nullptr);
     ~RenegotiateContractWindow();
     void SetContractAndClient(Contract Contract, Client Client);
+    void UpdateAccountantComments();
 
 private:
     Ui::RenegotiateContractWindow *ui;
@@ -29,6 +31,7 @@ private:
     Client client;
     User user;
     Database* db;
+
 signals:
     void signalBackButtonClicked();
     //void signalRefreshContractAndClient(Contract& contract, Client& client);

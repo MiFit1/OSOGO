@@ -76,6 +76,7 @@ void AgentWindow::slotDoubleClikedOnRenegitiationContract(const QModelIndex inde
     Contract contract = db->GetContractById(idContract);
     Client client = db->GetClientById(contract.GetIdClient());
     renegotiationContractWidget->SetContractAndClient(contract, client);
+    renegotiationContractWidget->UpdateAccountantComments();
     ShowRenegotiateContractWidget();
 }
 

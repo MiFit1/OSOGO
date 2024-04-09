@@ -60,3 +60,32 @@ void RenegotiateContractWindow::slotConfirmButtonClicked(){
     emit signalRenegotiateContractDataChanged();
 }
 
+void RenegotiateContractWindow::UpdateAccountantComments(){
+    QList<Comment> comments;
+    try {
+        comments = db->GetCommentsByIdContract(contract.GetId());
+    } catch (std::runtime_error& err) {
+        QMessageBox::critical(this,"Ошибка",err.what());
+        return;
+    }
+
+    if(comments.empty()){
+        return;
+    }
+
+    QString commentStr = ""; //Отображающаяся строка
+    for(auto comm : comments){
+        commentStr += "<p style='font-size:12px; margin-bottom:0px;'>";
+        commentStr += comm.GetAccountantPesonalData();
+        commentStr += " ";
+        commentStr += comm.GetDate();
+        commentStr += ":</p>";
+        commentStr += "<p style='font-size:11px; margin-top:0;'>";
+        QString commentTxt = comm.GetComment();
+        commentTxt.replace("\n", "<br>");
+        commentStr += commentTxt;
+        commentStr += "</p>";
+    }
+    ui->AccountantComments->setHtml(commentStr);
+}
+

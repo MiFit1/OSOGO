@@ -425,3 +425,63 @@ void Database::CheckClientNumberForId(Client client){
         throw std::runtime_error("Клиент с таким номером телефона уже есть.");
     }
 }
+void Database::AddComment(QString comment, int IdAccountant, int IdContract){
+    QSqlQuery query;
+    query.prepare("INSERT INTO Comment (Comment, Datee) VALUES "
+                  "(:comment , DATETIME());");
+    query.bindValue(":comment", comment);
+
+    bool queryResult = query.exec();
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось вставить комментарий в БД.");
+    }
+
+    int idComment = query.lastInsertId().toInt();
+    query.prepare("INSERT INTO CommentsOn (ID_Employee, ID_Contract, ID_Comment) VALUES "
+                  "(:idEmployee, :idContract, :idComment);");
+    query.bindValue(":idEmployee", IdAccountant);
+    query.bindValue(":idContract", IdContract);
+    query.bindValue(":idComment", idComment);
+
+    queryResult = query.exec();
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось вставить данные в CommentsOn.");
+    }
+}
+
+QList<Comment> Database::GetCommentsByIdContract(int idContract){
+    QList<Comment> comments;
+    QSqlQuery query;
+    query.prepare("SELECT   Employee.LastName || ' ' || Employee.FirstName || ' ' || COALESCE(Employee.Patronymic,''), "
+                  "         strftime('%H:%M', Comment.Datee), "
+                  "         Comment.Comment "
+                  "FROM CommentsOn "
+                  " JOIN Employee ON Employee.ID = CommentsOn.ID_Employee "
+                  " JOIN Contract ON Contract.ID = CommentsOn.ID_Contract "
+                  " JOIN Comment ON Comment.ID = CommentsOn.ID_Comment "
+                  "WHERE Contract.ID = :idContract;");
+    query.bindValue(":idContract", idContract);
+
+    bool queryResult = query.exec();
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось осуществить поиск в БД.");
+    }
+
+    if(!query.next() && query.value(0).isNull()){
+        return comments;
+    }
+
+    do{
+        Comment comm;
+        comm.SetAccountantData(query.value(0).toString());
+        comm.SetDate(query.value(1).toString());
+        comm.SetComment(query.value(2).toString());
+        comments.push_back(comm);
+    }
+    while(query.next());
+
+    return comments;
+}

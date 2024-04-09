@@ -18,7 +18,7 @@ class ContractConfirmationWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit ContractConfirmationWindow(Database* db, QWidget *parent = nullptr);
+    explicit ContractConfirmationWindow(User us, Database* db, QWidget *parent = nullptr);
     ~ContractConfirmationWindow();
     void SetContractAndClient(Contract Contract, Client Client);
 
@@ -27,6 +27,7 @@ private:
     Contract contract;
     Client client;
     Database* db;
+    User user;
 signals:
     void signalBackButtonClicked();
     void signalContractUpdateAndReject();

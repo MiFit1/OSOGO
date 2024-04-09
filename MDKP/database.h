@@ -3,9 +3,11 @@
 
 #include <QObject>
 #include <QtSql>
+#include <QList>
 #include "contract.h"
 #include "client.h"
 #include "user.h"
+#include "comment.h"
 #include <stdexcept>
 
 class Database : public QObject
@@ -27,6 +29,8 @@ public:
     void RefreshClientById(Client client);
     void RefreshContractById(Contract contract);
     void CheckClientNumberForId(Client client);//Есть ли другие клиенты с таким же телефоном, но другим id
+    void AddComment(QString comment, int IdAccountant, int IdContract);
+    QList<Comment> GetCommentsByIdContract(int idContract);
 private:
     QSqlDatabase* sqlDatabase;
 

@@ -22,6 +22,7 @@ SOURCES += \
     agentwindow.cpp \
     changeuserdatawidget.cpp \
     client.cpp \
+    comment.cpp \
     contract.cpp \
     contractconfirmationwindow.cpp \
     database.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     agentwindow.h \
     changeuserdatawidget.h \
     client.h \
+    comment.h \
     contract.h \
     contractconfirmationwindow.h \
     database.h \
