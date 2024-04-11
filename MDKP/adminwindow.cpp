@@ -9,6 +9,7 @@ AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
     ui->setupUi(this);
     db = database;
     configuringInterface();
+    ClearDataRegistrationUserWidget();
     AddShadowToChildren(changeUserDataWidget);
     AddShadowToChildren(ui->AddUserTab);
     connect(viewUsers,SIGNAL(doubleClicked(QModelIndex)),SLOT(slotDoubleClikedOnUser(QModelIndex)));
@@ -24,6 +25,7 @@ AdminWindow::~AdminWindow()
 }
 
 void AdminWindow::configuringInterface(){
+
     //Кнопка профиля
     ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
     profilePanel->raise();
@@ -74,6 +76,14 @@ void AdminWindow::slotBackButtonChangeUserWidgetCliked(){
 }
 
 void AdminWindow::slotRegistrationButtonClicked(){
+
+    try {
+        CheckingFieldsEmpty();
+    } catch (std::runtime_error& err) {
+        QMessageBox::information(this,"Предупреждение",err.what());
+        return;
+    }
+
     QString LastName = ui->LastName->text();
     QString FirstName = ui->FirstName->text();
     QString Patronymic = ui->Patronymic->text();
@@ -115,4 +125,25 @@ void AdminWindow::ClearDataRegistrationUserWidget(){
     ui->LoginLine->clear();
     ui->PasswordLine->clear();
     ui->Post->setCurrentIndex(-1);
+}
+
+void AdminWindow::CheckingFieldsEmpty(){
+    if(ui->LastName->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле фамилии не может быть пустым.");
+    }
+    if(ui->FirstName->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле имени не может быть пустым.");
+    }
+    if(ui->Phone->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле телефона не может быть пустым.");
+    }
+    if(ui->LoginLine->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле логина не может быть пустым.");
+    }
+    if(ui->PasswordLine->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле пароля не может быть пустым.");
+    }
+    if(ui->Post->currentIndex() == -1){
+        throw std::runtime_error("Не указана должность пользователя.");
+    }
 }

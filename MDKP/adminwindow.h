@@ -45,6 +45,7 @@ private:
     void ShowChangeUserDataWidget();
     void RefreshDataView();
     void ClearDataRegistrationUserWidget();
+    void CheckingFieldsEmpty();
 public slots:
     void slotBackButtonChangeUserWidgetCliked();
 private slots:

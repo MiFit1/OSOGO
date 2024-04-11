@@ -50,7 +50,7 @@ void  Database::CreateTables(){
                 "Patronymic NVARCHAR(40) NULL,"
                 "Address NVARCHAR(100) NULL,"
                 "Phone NVARCHAR(20) NOT NULL,"
-                "Branch NVARCHAR(100) NOT NULL,"
+                "Branch NVARCHAR(100) NULL,"
                 "Login NVARCHAR(40) NOT NULL,"
                 "Password NVARCHAR(40) NOT NULL,"
                 "Role NVARCHAR(20) NOT NULL);";
@@ -246,9 +246,19 @@ void Database::RegisterUser(QString LastName, QString FirstName, QString Patrony
         throw std::runtime_error("Данный номер телефона уже используется.");
     }
 
-    str_query = QString("INSERT INTO Employee (IsWorked, LastName, FirstName, Patronymic, Phone, Branch, Login, Password, Role, Address) VALUES "
-                        "(1, '%1', '%2', '%3', '%4', '%5', '%6', '%7', '%8','%9');").arg(LastName,FirstName,Patronymic,Phone,Branch,Login,Password,Role,Address);
-    queryResult = query.exec(str_query);
+    query.prepare("INSERT INTO Employee (IsWorked, LastName, FirstName, Patronymic, Phone, Branch, Login, Password, Role, Address) VALUES "
+                  "(1, :lastName, :firstName, :patronymic, :phone, :branch, :login, :password, :role,:address);");
+    query.bindValue(":lastName",LastName);
+    query.bindValue(":firstName",FirstName);
+    query.bindValue(":patronymic",Patronymic);
+    query.bindValue(":phone",Phone);
+    query.bindValue(":branch",Branch);
+    query.bindValue(":login",Login);
+    query.bindValue(":password",Password);
+    query.bindValue(":role",Role);
+    query.bindValue(":address",Address);
+    queryResult = query.exec();
+
     if(!queryResult){
         qDebug() << query.lastError();
         throw std::runtime_error("Вставка данных не выполнена.");
