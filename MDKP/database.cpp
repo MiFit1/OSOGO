@@ -20,7 +20,7 @@ void  Database::CreateTables(){
                         "TypeInsurance NVARCHAR(100) NOT NULL,"
                         "TariffRate FLOAT NULL,"
                         "ID_Client INTEGER NOT NULL,"
-                        "ID_Employee INTEGER NOT NULL,"
+                        "ID_Employee INTEGER NULL,"
                         "Status INTEGER NOT NULL,"
                         "FOREIGN KEY (ID_Client) REFERENCES Client(ID),"
                         "FOREIGN KEY (ID_Employee) REFERENCES Employee(ID));";
@@ -502,4 +502,23 @@ QList<Comment> Database::GetCommentsByIdContract(int idContract){
     while(query.next());
 
     return comments;
+}
+
+void Database::InsertAdmin(){
+    QSqlQuery query;
+    query.prepare("SELECT ID "
+                  "FROM Employee "
+                  "WHERE Login = 'admin' AND Password = 'admin';");
+    if(!query.exec()){
+        qDebug()<<"Не удалось вставить админа";
+    }
+
+    if(query.next() && !query.value(0).isNull()){
+        return;
+    }
+    else{
+        query.prepare("INSERT INTO Employee (IsWorked, LastName, FirstName, Patronymic, Phone, Branch, Login, Password, Role) VALUES "
+                      "(1, 'Super', 'User', NULL , '89243341176', '125149, г. Москва, ул. Куйбышева, 12, оф. 58', 'admin', 'admin', 'Администратор')");
+        query.exec();
+    }
 }

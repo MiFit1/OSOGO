@@ -42,13 +42,14 @@ private:
     void ShowRenegotiateContractWidget();
     void ClearContractDataUi();
     void viewRenegotiateContractRefresh();
+    void CheckingContractDataFieldsEmpty();
 
 private slots:
     void slotDoubleClikedOnRenegitiationContract(const QModelIndex index);
     void slotRenegotiateWidgetBackButtonClicked();
     void slotConcludeContractButtonClicked();
     void slotRenegotiateContractDataChanged();
-
+    void slotHeaderInStatisticWidgetClicked(int index);
 };
 
 #endif // AGENTWINDOW_H

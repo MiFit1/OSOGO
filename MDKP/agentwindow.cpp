@@ -10,10 +10,13 @@ AgentWindow::AgentWindow(const User& us,Database* database, QWidget *parent)
     ui->setupUi(this);
     db = database;
     ConfiguringInterface();
+    ClearContractDataUi();
+    QHeaderView* headerStatistics = viewStatistic->horizontalHeader();
     connect(viewRenegotiateContract, SIGNAL(doubleClicked(QModelIndex)), SLOT(slotDoubleClikedOnRenegitiationContract(QModelIndex)));
     connect(renegotiationContractWidget, SIGNAL(signalBackButtonClicked()), SLOT(slotRenegotiateWidgetBackButtonClicked()));
     connect(ui->ConcludeContractButton,SIGNAL(clicked()),SLOT(slotConcludeContractButtonClicked()));
     connect(renegotiationContractWidget, SIGNAL(signalRenegotiateContractDataChanged()),SLOT(slotRenegotiateContractDataChanged()));
+    connect(headerStatistics,SIGNAL(sectionClicked(int)),SLOT(slotHeaderInStatisticWidgetClicked(int)));
 }
 
 AgentWindow::~AgentWindow()
@@ -36,13 +39,13 @@ void AgentWindow::ConfiguringInterface(){
     stackedWidgetRenegotiateContract->addWidget(renegotiationContractWidget);
 
     sqlModelRenegotiate = new QSqlQueryModel(this);
-    sqlModelRenegotiate->setQuery("SELECT   Contract.ID,"
-                                  "         TypeInsurance as [Тип договора],"
-                                  "         Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
-                                  "         Contract.Datee "
-                                  "FROM Contract "
-                                  "     JOIN Client ON Contract.ID_Client = Client.ID "
-                                  "WHERE Contract.Status = 2;");
+    sqlModelRenegotiate->setQuery(QString("SELECT   Contract.ID,"
+                                          "         TypeInsurance as [Тип договора],"
+                                          "         Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
+                                          "         Contract.Datee "
+                                          "FROM Contract "
+                                          "     JOIN Client ON Contract.ID_Client = Client.ID "
+                                          "WHERE Contract.Status = 2 AND (Contract.ID_Employee = %1 OR Contract.ID_Employee = NULL);").arg(user.GetId()));
     viewRenegotiateContract->setModel(sqlModelRenegotiate);
     viewRenegotiateContract->setSelectionBehavior(QAbstractItemView::SelectRows);
     viewRenegotiateContract->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -51,6 +54,7 @@ void AgentWindow::ConfiguringInterface(){
     viewRenegotiateContract->setColumnHidden(0,true);
 
     sqlStatisticModel = new AgentStatisticModel(user,this);
+    sqlStatisticModel->UpdateView();
     viewStatistic->setModel(sqlStatisticModel);
     viewStatistic->setSelectionBehavior(QAbstractItemView::SelectRows);
     viewStatistic->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -86,6 +90,13 @@ void AgentWindow::slotRenegotiateWidgetBackButtonClicked(){
 }
 
 void AgentWindow::slotConcludeContractButtonClicked(){
+    try {
+        CheckingContractDataFieldsEmpty();
+    } catch (std::runtime_error& err) {
+        QMessageBox::information(this,"Предупреждение",err.what());
+        return;
+    }
+
     QString lastName = ui->LastName->text();
     QString firstName = ui->FirstName->text();
     QString patronymic = ui->Patronymic->text();
@@ -128,4 +139,26 @@ void AgentWindow::viewRenegotiateContractRefresh(){
 void AgentWindow::slotRenegotiateContractDataChanged(){
     viewRenegotiateContractRefresh();
     ShowViewRenegotiateContract();
+}
+
+void AgentWindow::slotHeaderInStatisticWidgetClicked(int index){
+    sqlStatisticModel->UpdateView(index);
+}
+
+void AgentWindow::CheckingContractDataFieldsEmpty(){
+    if(ui->LastName->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле фамилии не может быть пустым.");
+    }
+    if(ui->FirstName->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле имени не может быть пустым.");
+    }
+    if(ui->Phone->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле телефона не может быть пустым.");
+    }
+    if(ui->TypeContract->currentIndex() == -1){
+        throw std::runtime_error("Не выбран тип договора.");
+    }
+    if(ui->Summa->text().trimmed().isEmpty()){
+        throw std::runtime_error("Не указана сумма договора.");
+    }
 }

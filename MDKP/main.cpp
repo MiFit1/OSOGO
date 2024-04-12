@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
     Database* db = new Database();
     db->SetSqlDatabase(sdb);
     db->CreateTables();
-    db->InsertTestData();
+    db->InsertAdmin();
+    //db->InsertTestData();
 
     WindowNavigator navigator(db);
     return a.exec();

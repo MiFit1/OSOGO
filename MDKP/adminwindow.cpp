@@ -10,6 +10,7 @@ AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
     db = database;
     configuringInterface();
     ClearDataRegistrationUserWidget();
+    SetValidationOnCreateUsers();
     AddShadowToChildren(changeUserDataWidget);
     AddShadowToChildren(ui->AddUserTab);
     connect(viewUsers,SIGNAL(doubleClicked(QModelIndex)),SLOT(slotDoubleClikedOnUser(QModelIndex)));
@@ -146,4 +147,18 @@ void AdminWindow::CheckingFieldsEmpty(){
     if(ui->Post->currentIndex() == -1){
         throw std::runtime_error("Не указана должность пользователя.");
     }
+}
+
+void AdminWindow::SetValidationOnCreateUsers(){
+    QRegularExpression regExpOnFIO("[A-Za-zA-яа-я\\s-]*");
+    ui->LastName->setValidator(new QRegularExpressionValidator(regExpOnFIO,this));
+    ui->FirstName->setValidator(new QRegularExpressionValidator(regExpOnFIO,this));
+    ui->Patronymic->setValidator(new QRegularExpressionValidator(regExpOnFIO,this));
+
+    QRegularExpression regExpOnBranchAndAddress("[A-Za-zA-яа-я0-9\\s\\-,.]*");
+    ui->Branch->setValidator(new QRegularExpressionValidator(regExpOnBranchAndAddress,this));
+    ui->Address->setValidator(new QRegularExpressionValidator(regExpOnBranchAndAddress,this));
+
+    QRegularExpression regExpOnLogin("[A-Za-zA-яа-я0-9\\s\\-_.]*");
+    ui->LoginLine->setValidator(new QRegularExpressionValidator(regExpOnLogin,this));
 }

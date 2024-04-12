@@ -53,6 +53,7 @@ private slots:
     void slotConfirmWidgetBackButtonClicked();
     void slotConfirmContractButtonClicked();
     void slotRejectContractButtonClicked();
+    void slotHeaderInStatisticWidgetClicked(int index);
 };
 
 #endif // ACCOUNTANTWINDOW_H

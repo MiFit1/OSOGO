@@ -17,6 +17,8 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSize>
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
 #include <stdexcept>
 
 
@@ -46,6 +48,7 @@ private:
     void RefreshDataView();
     void ClearDataRegistrationUserWidget();
     void CheckingFieldsEmpty();
+    void SetValidationOnCreateUsers();
 public slots:
     void slotBackButtonChangeUserWidgetCliked();
 private slots:

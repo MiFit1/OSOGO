@@ -8,11 +8,13 @@ AccountantWindow::AccountantWindow(const User& us, Database* database, QWidget *
     ui->setupUi(this);
     db = database;
     ConfiguringInterface();
+    QHeaderView* headerStatistics = viewStatistics->horizontalHeader();
     connect(viewContracts, SIGNAL(doubleClicked(QModelIndex)), SLOT(slotDoubleClikedOnContract(QModelIndex)));
     connect(confirmationWindow, SIGNAL(signalBackButtonClicked()),SLOT(slotConfirmWidgetBackButtonClicked()));
-    connect(confirmationWindow,SIGNAL(signalConfirmButtonClicked()),SLOT(slotConfirmContractButtonClicked()));
-    connect(confirmationWindow,SIGNAL(signalRejectButtonClicked()),SLOT(slotRejectContractButtonClicked()));
+    connect(confirmationWindow, SIGNAL(signalConfirmButtonClicked()),SLOT(slotConfirmContractButtonClicked()));
+    connect(confirmationWindow, SIGNAL(signalRejectButtonClicked()),SLOT(slotRejectContractButtonClicked()));
     connect(tariffRateWidget, SIGNAL(signalOkButtonClicked()), tariffRateButton, SIGNAL(clicked()));
+    connect(headerStatistics, SIGNAL(sectionClicked(int)),SLOT(slotHeaderInStatisticWidgetClicked(int)));
 }
 
 AccountantWindow::~AccountantWindow()
@@ -146,13 +148,19 @@ void AccountantWindow::slotRejectContractButtonClicked(){
     changedContract.SetStatus(2);
     try {
         db->RefreshContractById(changedContract);
-        db->AddComment(confirmationWindow->GetComment(),user.GetId(),changedContract.GetId());
+        if(!confirmationWindow->GetComment().trimmed().isEmpty()){
+            db->AddComment(confirmationWindow->GetComment(),user.GetId(),changedContract.GetId());
+        }
     } catch (std::runtime_error& err) {
         QMessageBox::critical(this,"Ошибка",err.what());
         return;
     }
     UpdateViewContracts();
     ShowViewContracts();
+}
+
+void AccountantWindow::slotHeaderInStatisticWidgetClicked(int index){
+    sqlModelStatistics->UpdateView(index);
 }
 
 void AccountantWindow::UpdateViewContracts(){

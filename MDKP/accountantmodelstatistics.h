@@ -8,7 +8,12 @@ class AccountantModelStatistics : public QSqlQueryModel
     Q_OBJECT
 public:
     explicit AccountantModelStatistics(QObject *parent = nullptr);
-    void UpdateView();
+    void UpdateView(int numberColumnToSort = 7);
+    QString convertNumberColumnToName(int numberColumn);
+
+private:
+    bool currentSortingTypeToColumn[7];
+    void ResetCurrentSortingTypeToColumn();
 
 signals:
 };

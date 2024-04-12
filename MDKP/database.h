@@ -18,6 +18,7 @@ public:
     void SetSqlDatabase(QSqlDatabase &sdb);
     void CreateTables();
     void InsertTestData();
+    void InsertAdmin();
     Contract GetContractById(int id);
     Client GetClientById(int id);
     User GetUserById(int id);

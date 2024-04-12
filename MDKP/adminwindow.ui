@@ -89,6 +89,9 @@ QLineEdit:focus {
 }
 </string>
               </property>
+              <property name="maxLength">
+               <number>40</number>
+              </property>
               <property name="placeholderText">
                <string>Логин</string>
               </property>
@@ -206,6 +209,9 @@ QLineEdit:focus {
 }
 </string>
               </property>
+              <property name="maxLength">
+               <number>100</number>
+              </property>
               <property name="placeholderText">
                <string>Филиал</string>
               </property>
@@ -271,6 +277,9 @@ QLineEdit:focus {
 }
 </string>
               </property>
+              <property name="maxLength">
+               <number>40</number>
+              </property>
               <property name="placeholderText">
                <string>Фамилия</string>
               </property>
@@ -297,6 +306,9 @@ QLineEdit:focus {
     border-color: #5fbaeb;
 }
 </string>
+              </property>
+              <property name="maxLength">
+               <number>40</number>
               </property>
               <property name="placeholderText">
                <string>Пароль</string>
@@ -330,6 +342,9 @@ QLineEdit:focus {
     border-color: #5fbaeb;
 }
 </string>
+              </property>
+              <property name="maxLength">
+               <number>20</number>
               </property>
               <property name="placeholderText">
                <string>Телефон</string>
@@ -379,6 +394,9 @@ QLineEdit:focus {
     border-color: #5fbaeb;
 }
 </string>
+              </property>
+              <property name="maxLength">
+               <number>100</number>
               </property>
               <property name="placeholderText">
                <string>Адрес</string>
@@ -438,6 +456,9 @@ QLineEdit:focus {
 }
 </string>
               </property>
+              <property name="maxLength">
+               <number>40</number>
+              </property>
               <property name="placeholderText">
                <string>Отчество</string>
               </property>
@@ -470,6 +491,9 @@ QLineEdit:focus {
     border-color: #5fbaeb;
 }
 </string>
+              </property>
+              <property name="maxLength">
+               <number>40</number>
               </property>
               <property name="placeholderText">
                <string>Имя</string>
