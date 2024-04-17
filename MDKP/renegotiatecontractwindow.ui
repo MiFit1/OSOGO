@@ -532,7 +532,7 @@ height: 40px;
        </item>
        <item>
         <property name="text">
-         <string>Cтрахование автотранспорта</string>
+         <string>Страхование автотранспорта</string>
         </property>
        </item>
       </widget>
@@ -541,6 +541,17 @@ height: 40px;
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>LastName</tabstop>
+  <tabstop>FirstName</tabstop>
+  <tabstop>Patronymic</tabstop>
+  <tabstop>Phone</tabstop>
+  <tabstop>TypeContract</tabstop>
+  <tabstop>Summa</tabstop>
+  <tabstop>BackButton</tabstop>
+  <tabstop>SendButton</tabstop>
+  <tabstop>AccountantComments</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

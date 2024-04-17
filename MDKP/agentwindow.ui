@@ -520,6 +520,17 @@ QScrollBar::sub-page:vertical
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>LastName</tabstop>
+  <tabstop>FirstName</tabstop>
+  <tabstop>Patronymic</tabstop>
+  <tabstop>Phone</tabstop>
+  <tabstop>TypeContract</tabstop>
+  <tabstop>Summa</tabstop>
+  <tabstop>ConcludeContractButton</tabstop>
+  <tabstop>statisticView</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

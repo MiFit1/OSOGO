@@ -111,10 +111,10 @@ void AccountantWindow::slotConfirmContractButtonClicked(){
     Contract changedContract = confirmationWindow->GetCurrentContract();
     double changedRate = 0;
 
-    if(changedContract.GetTypeInsurance() == "Cтрахование автотранспорта"){
+    if(changedContract.GetTypeInsurance() == "Страхование автотранспорта"){
         changedRate = tariffRateWidget->GetVehicleInsuranceRate();
     }
-    else if(changedContract.GetTypeInsurance() == "Cтрахование домашнего имущества"){
+    else if(changedContract.GetTypeInsurance() == "Страхование домашнего имущества"){
         changedRate = tariffRateWidget->GetHomePropertyInsuranceRate();
     }
     else if(changedContract.GetTypeInsurance() == "Добровольное медицинское страхование"){

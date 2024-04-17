@@ -11,6 +11,7 @@ AgentWindow::AgentWindow(const User& us,Database* database, QWidget *parent)
     db = database;
     ConfiguringInterface();
     ClearContractDataUi();
+    SetValidationOnConfirmContract();
     QHeaderView* headerStatistics = viewStatistic->horizontalHeader();
     connect(viewRenegotiateContract, SIGNAL(doubleClicked(QModelIndex)), SLOT(slotDoubleClikedOnRenegitiationContract(QModelIndex)));
     connect(renegotiationContractWidget, SIGNAL(signalBackButtonClicked()), SLOT(slotRenegotiateWidgetBackButtonClicked()));
@@ -161,4 +162,12 @@ void AgentWindow::CheckingContractDataFieldsEmpty(){
     if(ui->Summa->text().trimmed().isEmpty()){
         throw std::runtime_error("Не указана сумма договора.");
     }
+}
+
+void AgentWindow::SetValidationOnConfirmContract(){
+    ui->LastName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
+    ui->FirstName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
+    ui->Patronymic->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
+
+    ui->Summa->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_NUMBER_LINE,this));
 }

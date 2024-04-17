@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QGraphicsDropShadowEffect>
 #include <QWidget>
+#include <QRegularExpression>
 
 enum {
     Unknown = -1,
@@ -16,6 +17,13 @@ enum {
     Fired = 0,
     Works = 1
 };
+
+namespace ValidationConstant {
+    const QRegularExpression EXP_ON_FIO("[A-Za-zA-яа-я\\s-]*");
+    const QRegularExpression EXP_ON_BRANCH_AND_ADDRESS("[A-Za-zA-яа-я0-9\\s\\-,\\.]*");
+    const QRegularExpression EXP_ON_LOGIN("[A-Za-zA-яа-я0-9\\s\\-_\\.]*");
+    const QRegularExpression EXP_ON_NUMBER_LINE("[0-9]+\\.?[0-9]*");
+}
 
 void AddShadowToChildren(QObject* obj);
 #endif // GLOBAL_H

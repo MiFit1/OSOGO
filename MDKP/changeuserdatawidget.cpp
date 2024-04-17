@@ -11,6 +11,7 @@ ChangeUserDataWidget::ChangeUserDataWidget(QWidget *parent)
     //ui->Post->
     connect(ui->BackButton,SIGNAL(clicked()),SIGNAL(signalBackButtonCliked()));
     connect(ui->ConfirmButton,SIGNAL(clicked()),SLOT(slotConfirmButtonClicked()));
+    SetValidation();
 }
 
 ChangeUserDataWidget::~ChangeUserDataWidget()
@@ -35,6 +36,13 @@ void ChangeUserDataWidget::setUserToChangeWidget(User user){
 }
 
 void ChangeUserDataWidget::slotConfirmButtonClicked(){
+    try {
+        CheckingFieldsEmpty();
+    } catch (std::runtime_error& err) {
+        QMessageBox::information(this,"Предупреждение",err.what());
+        return;
+    }
+
     User changeUser = user;
     changeUser.SetLastName(ui->LastName->text());
     changeUser.SetFirstName(ui->FirstName->text());
@@ -49,4 +57,33 @@ void ChangeUserDataWidget::slotConfirmButtonClicked(){
     changeUser.SetLogin(ui->LoginLine->text());
     changeUser.SetPassword(ui->PasswordLine->text());
     emit signalRefreshUser(changeUser);
+}
+
+void ChangeUserDataWidget::CheckingFieldsEmpty(){
+    if(ui->LastName->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле фамилии не может быть пустым.");
+    }
+    if(ui->FirstName->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле имени не может быть пустым.");
+    }
+    if(ui->Phone->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле телефона не может быть пустым.");
+    }
+    if(ui->LoginLine->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле логина не может быть пустым.");
+    }
+    if(ui->PasswordLine->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле пароля не может быть пустым.");
+    }
+}
+
+void ChangeUserDataWidget::SetValidation(){
+    ui->LastName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
+    ui->FirstName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
+    ui->Patronymic->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
+
+    ui->Branch->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_BRANCH_AND_ADDRESS,this));
+    ui->Address->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_BRANCH_AND_ADDRESS,this));
+
+    ui->LoginLine->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_LOGIN,this));
 }

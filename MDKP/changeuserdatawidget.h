@@ -2,6 +2,7 @@
 #define CHANGEUSERDATAWIDGET_H
 
 #include <QWidget>
+#include <QMessageBox>
 #include "user.h"
 
 namespace Ui {
@@ -17,10 +18,13 @@ public:
     ~ChangeUserDataWidget();
 
     void setUserToChangeWidget(User user);
+    void CheckingFieldsEmpty();
 
 private:
     Ui::ChangeUserDataWidget *ui;
     User user;
+    void SetValidation();
+
 signals:
     void signalBackButtonCliked();
     void signalRefreshUser(User& user);

@@ -271,6 +271,13 @@ QPushButton:pressed {
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>LastNameLine</tabstop>
+  <tabstop>FirstNameLine</tabstop>
+  <tabstop>PatronymicLine</tabstop>
+  <tabstop>LogoutButton</tabstop>
+  <tabstop>CancelButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

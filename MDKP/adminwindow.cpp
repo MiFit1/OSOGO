@@ -150,15 +150,12 @@ void AdminWindow::CheckingFieldsEmpty(){
 }
 
 void AdminWindow::SetValidationOnCreateUsers(){
-    QRegularExpression regExpOnFIO("[A-Za-zA-яа-я\\s-]*");
-    ui->LastName->setValidator(new QRegularExpressionValidator(regExpOnFIO,this));
-    ui->FirstName->setValidator(new QRegularExpressionValidator(regExpOnFIO,this));
-    ui->Patronymic->setValidator(new QRegularExpressionValidator(regExpOnFIO,this));
+    ui->LastName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
+    ui->FirstName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
+    ui->Patronymic->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
 
-    QRegularExpression regExpOnBranchAndAddress("[A-Za-zA-яа-я0-9\\s\\-,.]*");
-    ui->Branch->setValidator(new QRegularExpressionValidator(regExpOnBranchAndAddress,this));
-    ui->Address->setValidator(new QRegularExpressionValidator(regExpOnBranchAndAddress,this));
+    ui->Branch->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_BRANCH_AND_ADDRESS,this));
+    ui->Address->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_BRANCH_AND_ADDRESS,this));
 
-    QRegularExpression regExpOnLogin("[A-Za-zA-яа-я0-9\\s\\-_.]*");
-    ui->LoginLine->setValidator(new QRegularExpressionValidator(regExpOnLogin,this));
+    ui->LoginLine->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_LOGIN,this));
 }

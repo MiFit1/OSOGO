@@ -621,6 +621,20 @@ height: 40px;
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>LastName</tabstop>
+  <tabstop>FirstName</tabstop>
+  <tabstop>Patronymic</tabstop>
+  <tabstop>Phone</tabstop>
+  <tabstop>Address</tabstop>
+  <tabstop>Post</tabstop>
+  <tabstop>Status</tabstop>
+  <tabstop>Branch</tabstop>
+  <tabstop>LoginLine</tabstop>
+  <tabstop>PasswordLine</tabstop>
+  <tabstop>BackButton</tabstop>
+  <tabstop>ConfirmButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

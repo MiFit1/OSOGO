@@ -564,6 +564,18 @@ QLineEdit:focus {
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>LastName</tabstop>
+  <tabstop>FirstName</tabstop>
+  <tabstop>Patronymic</tabstop>
+  <tabstop>Phone</tabstop>
+  <tabstop>TypeContract</tabstop>
+  <tabstop>Summa</tabstop>
+  <tabstop>backButton</tabstop>
+  <tabstop>RejectButton</tabstop>
+  <tabstop>ConfirmButton</tabstop>
+  <tabstop>Comment</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

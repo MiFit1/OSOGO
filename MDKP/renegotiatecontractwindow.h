@@ -32,6 +32,8 @@ private:
     Client client;
     User user;
     Database* db;
+    void CheckingFieldsEmpty();
+    void SetValidation();
 
 signals:
     void signalBackButtonClicked();

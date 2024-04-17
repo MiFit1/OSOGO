@@ -43,7 +43,7 @@ private:
     void ClearContractDataUi();
     void viewRenegotiateContractRefresh();
     void CheckingContractDataFieldsEmpty();
-
+    void SetValidationOnConfirmContract();
 private slots:
     void slotDoubleClikedOnRenegitiationContract(const QModelIndex index);
     void slotRenegotiateWidgetBackButtonClicked();

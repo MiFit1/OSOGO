@@ -633,6 +633,19 @@ QPushButton:pressed {
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>LastName</tabstop>
+  <tabstop>FirstName</tabstop>
+  <tabstop>Patronymic</tabstop>
+  <tabstop>Phone</tabstop>
+  <tabstop>Post</tabstop>
+  <tabstop>Address</tabstop>
+  <tabstop>Branch</tabstop>
+  <tabstop>LoginLine</tabstop>
+  <tabstop>PasswordLine</tabstop>
+  <tabstop>registrationButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

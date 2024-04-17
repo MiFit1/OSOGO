@@ -3,6 +3,7 @@
 #include "abstractuserwindow.h"
 #include "changeuserdatawidget.h"
 #include "database.h"
+#include "Global.h"
 
 #include <QMainWindow>
 #include <QPushButton>

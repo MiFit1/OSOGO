@@ -273,6 +273,12 @@ QPushButton:pressed {
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tarrifRate1</tabstop>
+  <tabstop>tarrifRate2</tabstop>
+  <tabstop>tarrifRate3</tabstop>
+  <tabstop>okButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

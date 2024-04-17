@@ -10,6 +10,7 @@ RenegotiateContractWindow::RenegotiateContractWindow(User user, Database* db, QW
     this->user = user;
     //Тени на дочерние объекты
     AddShadowToChildren(this);
+    SetValidation();
     connect(ui->BackButton, SIGNAL(clicked()),SIGNAL(signalBackButtonClicked()));
     connect(ui->SendButton,SIGNAL(clicked()),SLOT(slotConfirmButtonClicked()));
 }
@@ -32,6 +33,13 @@ void RenegotiateContractWindow::SetContractAndClient(Contract Contract, Client C
 }
 
 void RenegotiateContractWindow::slotConfirmButtonClicked(){
+    try {
+        CheckingFieldsEmpty();
+    } catch (std::runtime_error& err) {
+        QMessageBox::information(this,"Предупреждение",err.what());
+        return;
+    }
+
     Client changedClient = client;
     changedClient.SetFirstName(ui->FirstName->text());
     changedClient.SetLastName(ui->LastName->text());
@@ -97,5 +105,28 @@ void RenegotiateContractWindow::ClearUserData(){
     ui->Patronymic->clear();
     ui->Phone->clear();
     ui->Summa->clear();
+}
+
+void RenegotiateContractWindow::CheckingFieldsEmpty(){
+    if(ui->LastName->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле фамилии не может быть пустым.");
+    }
+    if(ui->FirstName->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле имени не может быть пустым.");
+    }
+    if(ui->Phone->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле телефона не может быть пустым.");
+    }
+    if(ui->Summa->text().trimmed().isEmpty()){
+        throw std::runtime_error("Поле суммы не может быть пустым.");
+    }
+}
+
+void RenegotiateContractWindow::SetValidation(){
+    ui->LastName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
+    ui->FirstName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
+    ui->Patronymic->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
+
+    ui->Summa->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_NUMBER_LINE,this));
 }
 
