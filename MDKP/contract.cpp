@@ -3,7 +3,7 @@
 Contract::Contract(){
     valid = false;
 }
-Contract::Contract(QString ID, QString Date, QString Summa, QString TypeInsurance, QString TariffRate, QString IdClient, QString IdEmployee, QString Status) {
+Contract::Contract(QString ID, QString Date, QString Summa, QString TypeInsurance, QString TariffRate, QString IdClient, QString IdEmployee, QString Status, QString IdConfirmedAccountant) {
     id = ID.toInt();
     date =  QDateTime::fromString(Date,"yyyy-MM-dd hh:mm:ss");
     summa = Summa.toDouble();
@@ -12,7 +12,16 @@ Contract::Contract(QString ID, QString Date, QString Summa, QString TypeInsuranc
     idClient = IdClient.toInt();
     idEmployee = IdEmployee.toInt();
     status = Status.toInt();
+    idConfirmedAccountant = IdConfirmedAccountant.toInt();
     valid = true;
+}
+
+void Contract::SetIdConfirmedAccountant(int IdAccountant){
+    idConfirmedAccountant = IdAccountant;
+}
+
+int Contract::GetIdAccountant(){
+    return idConfirmedAccountant;
 }
 
 int Contract::GetId(){

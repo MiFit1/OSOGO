@@ -158,4 +158,9 @@ void AdminWindow::SetValidationOnCreateUsers(){
     ui->Address->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_BRANCH_AND_ADDRESS,this));
 
     ui->LoginLine->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_LOGIN,this));
+
+    //QRegularExpression regExp("^\\+7 \\([0-9]{3}\\) [0-9]{3} [0-9]{2} [0-9]{2}$");
+    //ui->Phone->setValidator(new QRegularExpressionValidator(regExp, this));
+    ui->Phone->setStyleSheet("");
+
 }

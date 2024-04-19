@@ -316,7 +316,7 @@ QLineEdit:focus {
              </widget>
             </item>
             <item row="5" column="1">
-             <widget class="QLineEdit" name="Phone">
+             <widget class="PhoneEdit" name="Phone">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                 <horstretch>0</horstretch>
@@ -344,7 +344,7 @@ QLineEdit:focus {
 </string>
               </property>
               <property name="maxLength">
-               <number>20</number>
+               <number>18</number>
               </property>
               <property name="placeholderText">
                <string>Телефон</string>
@@ -633,6 +633,13 @@ QPushButton:pressed {
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PhoneEdit</class>
+   <extends>QLineEdit</extends>
+   <header>phoneedit.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>tabWidget</tabstop>
   <tabstop>LastName</tabstop>

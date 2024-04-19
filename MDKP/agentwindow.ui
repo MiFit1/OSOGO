@@ -59,7 +59,7 @@ QTabBar::tab:selected {
            </spacer>
           </item>
           <item row="5" column="1">
-           <widget class="QLineEdit" name="Phone">
+           <widget class="PhoneEdit" name="Phone">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -79,6 +79,9 @@ QLineEdit:focus {
     border-color: #5fbaeb;
 }
 </string>
+            </property>
+            <property name="maxLength">
+             <number>18</number>
             </property>
             <property name="placeholderText">
              <string>Телефон</string>
@@ -520,6 +523,13 @@ QScrollBar::sub-page:vertical
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PhoneEdit</class>
+   <extends>QLineEdit</extends>
+   <header>phoneedit.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>tabWidget</tabstop>
   <tabstop>LastName</tabstop>

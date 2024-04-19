@@ -14,16 +14,18 @@ void Database::SetSqlDatabase(QSqlDatabase &sdb){
 void  Database::CreateTables(){
     QSqlQuery query;
     QString str_query = "CREATE TABLE if not exists Contract ("
-                        "ID INTEGER PRIMARY KEY NOT NULL,"
-                        "Datee DATE NOT NULL,"
-                        "Summa FLOAT NOT NULL,"
-                        "TypeInsurance NVARCHAR(100) NOT NULL,"
-                        "TariffRate FLOAT NULL,"
-                        "ID_Client INTEGER NOT NULL,"
-                        "ID_Employee INTEGER NULL,"
-                        "Status INTEGER NOT NULL,"
-                        "FOREIGN KEY (ID_Client) REFERENCES Client(ID),"
-                        "FOREIGN KEY (ID_Employee) REFERENCES Employee(ID));";
+                        "ID INTEGER PRIMARY KEY NOT NULL, "
+                        "Datee DATE NOT NULL, "
+                        "Summa FLOAT NOT NULL, "
+                        "TypeInsurance NVARCHAR(100) NOT NULL, "
+                        "TariffRate FLOAT NULL, "
+                        "ID_Client INTEGER NOT NULL, "
+                        "ID_Employee INTEGER NULL, "
+                        "Status INTEGER NOT NULL, "
+                        "ID_ConfirmedAccountant INTEGER NULL, "
+                        "FOREIGN KEY (ID_Client) REFERENCES Client(ID), "
+                        "FOREIGN KEY (ID_Employee) REFERENCES Employee(ID), "
+                        "FOREIGN KEY (ID_ConfirmedAccountant) REFERENCES Employee(ID)); ";
     bool queryResult = query.exec(str_query);
     if(!queryResult){
         qDebug() << "Не удаётся создать таблицу Contract";
@@ -56,7 +58,7 @@ void  Database::CreateTables(){
                 "Role NVARCHAR(20) NOT NULL);";
     queryResult = query.exec(str_query);
     if(!queryResult){
-        qDebug() << "Не удаётся создать таблицу Client";
+        qDebug() << "Не удаётся создать таблицу Employee";
         qDebug() << query.lastError();
     }
 
@@ -408,7 +410,8 @@ void Database::RefreshContractById(Contract contract){
                   "       TypeInsurance = :typeContract, "
                   "       ID_Client = :idClient,"
                   "       ID_Employee = :idEmployee, "
-                  "       Status = :status "
+                  "       Status = :status, "
+                  "       ID_ConfirmedAccountant = :idAccountant "
                   "WHERE ID = :id;");
     query.bindValue(":summa", contract.GetSumma());
     query.bindValue(":rate", contract.GetTariffRate());
@@ -417,6 +420,14 @@ void Database::RefreshContractById(Contract contract){
     query.bindValue(":idEmployee", contract.GetIdEmployee());
     query.bindValue(":status", contract.GetStatus());
     query.bindValue(":id", contract.GetId());
+
+    if(contract.GetIdAccountant() == -1){
+        query.bindValue(":idAccountant", QVariant());
+    }
+    else{
+        query.bindValue(":idAccountant", contract.GetIdAccountant());
+    }
+
     bool queryResult = query.exec();
     if(!queryResult){
         qDebug() << query.lastError();

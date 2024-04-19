@@ -44,7 +44,7 @@ private:
     PanelLeftSide* tariffRatePanel;
     TariffRateWidget* tariffRateWidget;
 
-    void ConfiguringInterface();
+    void ConfiguringInterface(User user);
     void ShowViewContracts();
     void ShowConfirmationWindow();
     void UpdateViewContracts();

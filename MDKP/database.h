@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QtSql>
 #include <QList>
+#include <QVariant>
 #include "contract.h"
 #include "client.h"
 #include "user.h"

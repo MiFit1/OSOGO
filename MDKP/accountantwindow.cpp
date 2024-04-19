@@ -7,7 +7,7 @@ AccountantWindow::AccountantWindow(const User& us, Database* database, QWidget *
 {
     ui->setupUi(this);
     db = database;
-    ConfiguringInterface();
+    ConfiguringInterface(us);
     QHeaderView* headerStatistics = viewStatistics->horizontalHeader();
     connect(viewContracts, SIGNAL(doubleClicked(QModelIndex)), SLOT(slotDoubleClikedOnContract(QModelIndex)));
     connect(confirmationWindow, SIGNAL(signalBackButtonClicked()),SLOT(slotConfirmWidgetBackButtonClicked()));
@@ -22,7 +22,7 @@ AccountantWindow::~AccountantWindow()
     delete ui;
 }
 
-void AccountantWindow::ConfiguringInterface(){
+void AccountantWindow::ConfiguringInterface(User user){
     //Кнопка профиля и кнопка настройки ставки
     tabCornerWidget = new QWidget(this);
     tariffRateButton = new QPushButton(this);
@@ -76,7 +76,7 @@ void AccountantWindow::ConfiguringInterface(){
     viewContracts->horizontalHeader()->setHighlightSections(false);
     viewContracts->setColumnHidden(0,true);
 
-    sqlModelStatistics = new AccountantModelStatistics(this);
+    sqlModelStatistics = new AccountantModelStatistics(user,this);
     viewStatistics->setModel(sqlModelStatistics);
     viewStatistics->setSelectionBehavior(QAbstractItemView::SelectRows);
     viewStatistics->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -132,6 +132,7 @@ void AccountantWindow::slotConfirmContractButtonClicked(){
 
     changedContract.SetTariffRate(changedRate);
     changedContract.SetStatus(3);
+    changedContract.SetIdConfirmedAccountant(user.GetId());
     try {
         db->RefreshContractById(changedContract);
     } catch (std::runtime_error& err) {

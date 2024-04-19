@@ -29,6 +29,7 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
+    phoneedit.cpp \
     profilewindow.cpp \
     renegotiatecontractwindow.cpp \
     tariffratewidget.cpp \
@@ -51,6 +52,7 @@ HEADERS += \
     database.h \
     loginwindow.h \
     mainwindow.h \
+    phoneedit.h \
     profilewindow.h \
     renegotiatecontractwindow.h \
     tariffratewidget.h \

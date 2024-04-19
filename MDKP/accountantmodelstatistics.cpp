@@ -1,9 +1,10 @@
 #include "accountantmodelstatistics.h"
 
 
-AccountantModelStatistics::AccountantModelStatistics(QObject *parent)
+AccountantModelStatistics::AccountantModelStatistics(User user, QObject *parent)
     : QSqlQueryModel(parent)
 {
+    this->user = user;
     ResetCurrentSortingTypeToColumn();
     UpdateView();
 }
@@ -59,6 +60,6 @@ void AccountantModelStatistics::UpdateView(int numberColumnToSort){
                     "FROM Contract "
                     "     JOIN Client ON Contract.ID_Client = Client.ID "
                     "     JOIN Employee ON Contract.ID_Employee = Employee.ID "
-                    "WHERE Contract.Status = 3 "
-                    "ORDER BY %1 %2;").arg(fieldToSort,typeSort));
+                    "WHERE Contract.Status = 3 AND ID_ConfirmedAccountant = %1 "
+                     "ORDER BY %2 %3;").arg(QString::number(user.GetId()),fieldToSort,typeSort));
 }

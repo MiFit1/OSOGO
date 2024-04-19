@@ -82,7 +82,7 @@ QLineEdit:focus {
       </widget>
      </item>
      <item row="8" column="1">
-      <widget class="QLineEdit" name="Phone">
+      <widget class="PhoneEdit" name="Phone">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -108,6 +108,9 @@ QLineEdit:focus {
     border-color: #5fbaeb;
 }
 </string>
+       </property>
+       <property name="maxLength">
+        <number>18</number>
        </property>
        <property name="readOnly">
         <bool>true</bool>
@@ -564,6 +567,13 @@ QLineEdit:focus {
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PhoneEdit</class>
+   <extends>QLineEdit</extends>
+   <header>phoneedit.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>LastName</tabstop>
   <tabstop>FirstName</tabstop>
