@@ -17,6 +17,20 @@ AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
     connect(changeUserDataWidget, SIGNAL(signalBackButtonCliked()),SLOT(slotBackButtonChangeUserWidgetCliked()));
     connect(ui->registrationButton, SIGNAL(clicked()),SLOT(slotRegistrationButtonClicked()));
     connect(changeUserDataWidget, SIGNAL(signalRefreshUser(User&)),SLOT(slotRefreshUserInDatabase(User&)));
+
+
+    //Тесты
+//    notify = new QFrame(this);
+//    notify->setProperty("notifyArea", true);
+//    notify->setFrameShape(QFrame::NoFrame);
+//    connectionMessage = new NotifyMessage("Привет ад.", notify);
+//    subscriptionMessage = new NotifyMessage("Я честно сам делал эти всплывающие виджеты.", notify);
+//    QVBoxLayout* notifyLayout = new QVBoxLayout(notify);
+//    notifyLayout->setContentsMargins(QMargins());
+//    notifyLayout->setSpacing(1);
+//    notifyLayout->addWidget(connectionMessage);
+//    notifyLayout->addWidget(subscriptionMessage);
+//    notify->hide();
 }
 
 AdminWindow::~AdminWindow()
@@ -77,13 +91,18 @@ void AdminWindow::slotBackButtonChangeUserWidgetCliked(){
 }
 
 void AdminWindow::slotRegistrationButtonClicked(){
+    //kkkkkk
+//    notify->show();
+//    WAF::Animation::sideSlideIn(notify, WAF::BottomSide, false);
+//    connectionMessage->showMessage();
+//    subscriptionMessage->showMessage();
 
-    try {
-        CheckingFieldsEmpty();
-    } catch (std::runtime_error& err) {
-        QMessageBox::information(this,"Предупреждение",err.what());
-        return;
-    }
+//    try {
+//        CheckingFieldsEmpty();
+//    } catch (std::runtime_error& err) {
+//        QMessageBox::information(this,"Предупреждение",err.what());
+//        return;
+//    }
 
     QString LastName = ui->LastName->text();
     QString FirstName = ui->FirstName->text();
@@ -158,9 +177,4 @@ void AdminWindow::SetValidationOnCreateUsers(){
     ui->Address->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_BRANCH_AND_ADDRESS,this));
 
     ui->LoginLine->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_LOGIN,this));
-
-    //QRegularExpression regExp("^\\+7 \\([0-9]{3}\\) [0-9]{3} [0-9]{2} [0-9]{2}$");
-    //ui->Phone->setValidator(new QRegularExpressionValidator(regExp, this));
-    ui->Phone->setStyleSheet("");
-
 }

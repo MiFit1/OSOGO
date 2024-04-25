@@ -7,10 +7,10 @@ CONFIG += c++17
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-TARGET = q_side_panel_proj
 TEMPLATE = app
 
 include($${PWD}/QSidePanel/q_side_panel.pri)
+include($${PWD}/WidgetAnimationFramework/waf.pri)
 
 SOURCES += \
     Global.cpp \
@@ -29,6 +29,7 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
+    notifymessage.cpp \
     phoneedit.cpp \
     profilewindow.cpp \
     renegotiatecontractwindow.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
     database.h \
     loginwindow.h \
     mainwindow.h \
+    notifymessage.h \
     phoneedit.h \
     profilewindow.h \
     renegotiatecontractwindow.h \
@@ -78,6 +80,3 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
-
-DISTFILES += \
-    QSidePanel/q_side_panel.pri

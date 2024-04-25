@@ -25,7 +25,7 @@ void  Database::CreateTables(){
                         "ID_ConfirmedAccountant INTEGER NULL, "
                         "FOREIGN KEY (ID_Client) REFERENCES Client(ID), "
                         "FOREIGN KEY (ID_Employee) REFERENCES Employee(ID), "
-                        "FOREIGN KEY (ID_ConfirmedAccountant) REFERENCES Employee(ID)); ";
+                        "FOREIGN KEY (ID_ConfirmedAccountant) REFERENCES Employee(ID));";
     bool queryResult = query.exec(str_query);
     if(!queryResult){
         qDebug() << "Не удаётся создать таблицу Contract";

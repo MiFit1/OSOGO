@@ -19,9 +19,9 @@ enum {
 };
 
 namespace ValidationConstant {
-    const QRegularExpression EXP_ON_FIO("[A-Za-zA-яа-я\\s-]*");
-    const QRegularExpression EXP_ON_BRANCH_AND_ADDRESS("[A-Za-zA-яа-я0-9\\s\\-,\\.]*");
-    const QRegularExpression EXP_ON_LOGIN("[A-Za-zA-яа-я0-9\\s\\-_\\.]*");
+    const QRegularExpression EXP_ON_FIO("[A-zA-яЁё\\s\\-]*");
+    const QRegularExpression EXP_ON_BRANCH_AND_ADDRESS("[A-zA-яЁё0-9\\s\\-\\,\\.]*");
+    const QRegularExpression EXP_ON_LOGIN("[A-zA-я0-9\\s\\-\\_\\.]*");
     const QRegularExpression EXP_ON_NUMBER_LINE("[0-9]+\\.?[0-9]*");
 }
 

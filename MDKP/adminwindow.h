@@ -4,11 +4,15 @@
 #include "changeuserdatawidget.h"
 #include "database.h"
 #include "Global.h"
+#include "notifymessage.h"
 
 #include <QMainWindow>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QFrame>
+#include <QTimer>
+#include <QToolButton>
 #include <QTableView>
 #include <QLayoutItem>
 #include <QHeaderView>
@@ -43,6 +47,9 @@ private:
     ChangeUserDataWidget* changeUserDataWidget;
     QStackedWidget* stackedWidgetUserManagement;
     Database* db;
+//    QFrame* notify;
+//    NotifyMessage* connectionMessage;
+//    NotifyMessage* subscriptionMessage;
 
     void ShowViewUsers();
     void ShowChangeUserDataWidget();
