@@ -19,18 +19,27 @@ AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
     connect(changeUserDataWidget, SIGNAL(signalRefreshUser(User&)),SLOT(slotRefreshUserInDatabase(User&)));
 
 
+    // QWidget* central = new QWidget(this);
+    // QLabel* lbl = new QLabel("TEST",this);
+    // stackedLayout = new QStackedLayout(central);
+    // stackedLayout->addWidget(lbl);
+    // stackedLayout->addWidget(centralWidget());
+    // stackedLayout->setStackingMode(QStackedLayout::StackAll);
+    // central->setLayout(stackedLayout);
+    // setCentralWidget(central);
+
     //Тесты
-//    notify = new QFrame(this);
-//    notify->setProperty("notifyArea", true);
-//    notify->setFrameShape(QFrame::NoFrame);
-//    connectionMessage = new NotifyMessage("Привет ад.", notify);
-//    subscriptionMessage = new NotifyMessage("Я честно сам делал эти всплывающие виджеты.", notify);
-//    QVBoxLayout* notifyLayout = new QVBoxLayout(notify);
-//    notifyLayout->setContentsMargins(QMargins());
-//    notifyLayout->setSpacing(1);
-//    notifyLayout->addWidget(connectionMessage);
-//    notifyLayout->addWidget(subscriptionMessage);
-//    notify->hide();
+   // notify = new QFrame(this);
+   // notify->setProperty("notifyArea", true);
+   // notify->setFrameShape(QFrame::NoFrame);
+   // connectionMessage = new NotifyMessage("Привет ад.", notify);
+   // subscriptionMessage = new NotifyMessage("Я честно сам делал эти всплывающие виджеты.", notify);
+   // QVBoxLayout* notifyLayout = new QVBoxLayout(notify);
+   // notifyLayout->setContentsMargins(QMargins());
+   // notifyLayout->setSpacing(1);
+   // notifyLayout->addWidget(connectionMessage);
+   // notifyLayout->addWidget(subscriptionMessage);
+   // notify->hide();
 }
 
 AdminWindow::~AdminWindow()
@@ -92,17 +101,18 @@ void AdminWindow::slotBackButtonChangeUserWidgetCliked(){
 
 void AdminWindow::slotRegistrationButtonClicked(){
     //kkkkkk
-//    notify->show();
-//    WAF::Animation::sideSlideIn(notify, WAF::BottomSide, false);
-//    connectionMessage->showMessage();
-//    subscriptionMessage->showMessage();
+     // notify->show();
+     // WAF::Animation::sideSlideIn(notify, WAF::BottomSide, false);
+     // connectionMessage->showMessage();
+     // subscriptionMessage->showMessage();
 
-//    try {
-//        CheckingFieldsEmpty();
-//    } catch (std::runtime_error& err) {
-//        QMessageBox::information(this,"Предупреждение",err.what());
-//        return;
-//    }
+/*
+    try {
+        CheckingFieldsEmpty();
+    } catch (std::runtime_error& err) {
+        QMessageBox::information(this,"Предупреждение",err.what());
+       return;
+    }
 
     QString LastName = ui->LastName->text();
     QString FirstName = ui->FirstName->text();
@@ -122,7 +132,7 @@ void AdminWindow::slotRegistrationButtonClicked(){
     }
 
     ClearDataRegistrationUserWidget();
-    RefreshDataView();
+    RefreshDataView();*/
 }
 
 void AdminWindow::RefreshDataView(){

@@ -45,6 +45,9 @@ private:
 
     int _panel_size = 100; // px
 
+    bool UseParentWidget = true;
+    QRect rectBackground;
+
 protected:
 
     bool eventFilter(QObject* watched, QEvent* event) override;
@@ -101,11 +104,18 @@ public:
 
     QSize getHandlerSize() const;
 
+    void SetRect(QRect rect);
+    void SetUseRect();
+    void SetUseParent();
+
 signals:
     void stateChanged(SidePanelState state);
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
+
+public slots:
+    void slotStartAnimation();
 };
 
 #endif // Q_SIDE_PANEL__SIDE_PANEL_HPP

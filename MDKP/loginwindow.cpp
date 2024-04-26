@@ -8,7 +8,10 @@ LoginWindow::LoginWindow(Database* database, QWidget *parent) :
     ui->setupUi(this);
     db = database;
     AddShadowToChildren(this);
+
+    //QStackedLayout
 }
+
 
 LoginWindow::~LoginWindow()
 {

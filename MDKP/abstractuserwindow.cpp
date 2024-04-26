@@ -14,6 +14,8 @@ AbstractUserWindow::AbstractUserWindow(const User& us, QWidget *parent)
     profilePanel = new PanelLeftSide(this);
     profilePanel->setOpenEasingCurve(QEasingCurve::Type::OutExpo);
     profilePanel->setCloseEasingCurve(QEasingCurve::Type::InExpo);
+//    profilePanel->SetRect(QRect(10,150,1000,500));
+//    profilePanel->SetUseRect();
     profilePanel->init(profileButton);
 
     profileWindow = new ProfileWindow(this);

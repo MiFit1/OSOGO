@@ -6,6 +6,9 @@
 #include "Global.h"
 #include "database.h"
 
+#include <QStackedLayout>
+#include <QWidget>
+
 namespace Ui {
 class LoginWindow;
 }

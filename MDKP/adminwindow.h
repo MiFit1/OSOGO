@@ -26,6 +26,7 @@
 #include <QRegularExpressionValidator>
 #include <stdexcept>
 
+#include <QStackedLayout>
 
 namespace Ui {
 class AdminWindow;
@@ -50,6 +51,7 @@ private:
 //    QFrame* notify;
 //    NotifyMessage* connectionMessage;
 //    NotifyMessage* subscriptionMessage;
+    QStackedLayout* stackedLayout;
 
     void ShowViewUsers();
     void ShowChangeUserDataWidget();

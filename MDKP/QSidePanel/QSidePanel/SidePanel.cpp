@@ -27,8 +27,30 @@ bool SidePanel::eventFilter(QObject *watched, QEvent *event)
     if(event->type() == QEvent::Resize)
     {
         switch (_state) {
-        case SidePanelState::Opened: { const auto geom = getOpenedRect(this->parentWidget()->rect()); this->setGeometry( geom ); this->updateHandlerRect(_anim_progress, geom); } break;
-        case SidePanelState::Closed: { const auto geom = getClosedRect(this->parentWidget()->rect()); this->setGeometry( geom ); this->updateHandlerRect(_anim_progress, geom); } break;
+        case SidePanelState::Opened: {
+            QRect rect;
+            if(UseParentWidget){
+                rect = this->parentWidget()->rect();
+            }
+            else{
+                rect = rectBackground;
+            }
+            const auto geom = getOpenedRect(rect);
+            this->setGeometry( geom );
+            this->updateHandlerRect(_anim_progress, geom);
+        } break;
+        case SidePanelState::Closed: {
+            QRect rect;
+            if(UseParentWidget){
+                rect = this->parentWidget()->rect();
+            }
+            else{
+                rect = rectBackground;
+            }
+            const auto geom = getClosedRect(rect);
+            this->setGeometry( geom );
+            this->updateHandlerRect(_anim_progress, geom);
+        } break;
         }
 
         // return true;
@@ -36,8 +58,30 @@ bool SidePanel::eventFilter(QObject *watched, QEvent *event)
     else if(event->type() == QEvent::Move)
     {
         switch (_state) {
-        case SidePanelState::Opened: { const auto geom = getOpenedRect(this->parentWidget()->rect()); this->setGeometry( geom ); this->updateHandlerRect(_anim_progress, geom); } break;
-        case SidePanelState::Closed: { const auto geom = getClosedRect(this->parentWidget()->rect()); this->setGeometry( geom ); this->updateHandlerRect(_anim_progress, geom); } break;
+        case SidePanelState::Opened: {
+            QRect rect;
+            if(UseParentWidget){
+                rect = this->parentWidget()->rect();
+            }
+            else{
+                rect = rectBackground;
+            }
+            const auto geom = getOpenedRect(rect);
+            this->setGeometry( geom );
+            this->updateHandlerRect(_anim_progress, geom);
+        } break;
+        case SidePanelState::Closed: {
+            QRect rect;
+            if(UseParentWidget){
+                rect = this->parentWidget()->rect();
+            }
+            else{
+                rect = rectBackground;
+            }
+            const auto geom = getClosedRect(rect);
+            this->setGeometry( geom );
+            this->updateHandlerRect(_anim_progress, geom);
+        } break;
         }
 
         // return true;
@@ -67,10 +111,19 @@ SidePanel::SidePanel(QWidget *parent)
 
     const auto anim_func = [this](qreal t) -> void
     {
-        const QRect parent_rect = this->parentWidget()->rect();
+//        const QRect parent_rect = this->parentWidget()->rect();
 
-        const QRectF geom_start = getClosedRect(parent_rect);
-        const QRectF geom_end   = getOpenedRect(parent_rect);
+//        const QRectF geom_start = getClosedRect(parent_rect);
+//        const QRectF geom_end   = getOpenedRect(parent_rect);
+        QRect rect;
+        if(UseParentWidget){
+            rect = this->parentWidget()->rect();
+        }
+        else{
+            rect = rectBackground;
+        }
+        const QRectF geom_start = getClosedRect(rect);
+        const QRectF geom_end   = getOpenedRect(rect);
 
         const QRect new_geom = q_sp::lerp(t, geom_start, geom_end).toRect();
         this->setGeometry( new_geom );
@@ -82,7 +135,7 @@ SidePanel::SidePanel(QWidget *parent)
 
 
     _timer = new QTimer(this);
-    _timer->setInterval(10);
+    _timer->setInterval(5);
 
     connect(_timer, &QTimer::timeout, this, [this, anim_func]
     {
@@ -93,8 +146,32 @@ SidePanel::SidePanel(QWidget *parent)
 
             // This setGeometry() for cases when duration=200ms, interval_time=100ms;
             switch (_state) {
-            case SidePanelState::Opening: { const auto geom = getOpenedRect(this->parentWidget()->rect()); this->setGeometry( geom ); _anim_progress = 1.0; updateHandlerRect(_anim_progress, geom); } break;
-            case SidePanelState::Closing: { const auto geom = getClosedRect(this->parentWidget()->rect()); this->setGeometry( geom ); _anim_progress = 0.0; updateHandlerRect(_anim_progress, geom); } break;
+            case SidePanelState::Opening: {
+                QRect rect;
+                if(UseParentWidget){
+                    rect = this->parentWidget()->rect();
+                }
+                else{
+                    rect = rectBackground;
+                }
+                const auto geom = getOpenedRect(rect);
+//                const auto geom = getOpenedRect(QRect(0,0,500,500));
+                this->setGeometry( geom ); _anim_progress = 1.0;
+                updateHandlerRect(_anim_progress, geom);
+            } break;
+            case SidePanelState::Closing: {
+                QRect rect;
+                if(UseParentWidget){
+                    rect = this->parentWidget()->rect();
+                }
+                else{
+                    rect = rectBackground;
+                }
+                const auto geom = getClosedRect(rect);
+                this->setGeometry( geom );
+                _anim_progress = 0.0;
+                updateHandlerRect(_anim_progress, geom);
+            } break;
             default: break;
             }
 
@@ -209,30 +286,31 @@ void SidePanel::init(QPushButton* btn)
     });
 
 
-    connect(_handler, &QAbstractButton::clicked, this, [this]
-    {
-        if(_timer->isActive())
-        {
-            qDebug() << "CLICK DURING ANIMATION";
+    // connect(_handler, &QAbstractButton::clicked, this, [this]
+    // {
+    //     if(_timer->isActive())
+    //     {
+    //         qDebug() << "CLICK DURING ANIMATION";
 
-            switch (_state) {
-            case SidePanelState::Opening: { _setState(SidePanelState::Closing); } break;
-            case SidePanelState::Closing: { _setState(SidePanelState::Opening); } break;
-            default: break;
-            }
+    //         switch (_state) {
+    //         case SidePanelState::Opening: { _setState(SidePanelState::Closing); } break;
+    //         case SidePanelState::Closing: { _setState(SidePanelState::Opening); } break;
+    //         default: break;
+    //         }
 
-        } else
-        {
-            switch (_state) {
-            case SidePanelState::Closed: { this->show(); _setState(SidePanelState::Opening); } break;
-            case SidePanelState::Opened: { this->show(); _setState(SidePanelState::Closing); } break;
-            default: break;
-            }
+    //     } else
+    //     {
+    //         switch (_state) {
+    //         case SidePanelState::Closed: { this->show(); _setState(SidePanelState::Opening); } break;
+    //         case SidePanelState::Opened: { this->show(); _setState(SidePanelState::Closing); } break;
+    //         default: break;
+    //         }
 
-            _time_start = std::chrono::system_clock::now();
-            _timer->start();
-        }
-    });
+    //         _time_start = std::chrono::system_clock::now();
+    //         _timer->start();
+    //     }
+    // });
+    connect(btn,SIGNAL(clicked()),SLOT(slotStartAnimation()));
 
     connect(this, &SidePanel::stateChanged, _handler, [this](SidePanelState state)
     {
@@ -244,7 +322,17 @@ void SidePanel::init(QPushButton* btn)
 
 //    this->hide();
     QTimer::singleShot(0, [this] {
-        const auto geom = getClosedRect(this->parentWidget()->rect()); this->setGeometry( geom ); _anim_progress = 0.0; updateHandlerRect(_anim_progress, geom);
+        QRect rect;
+        if(UseParentWidget){
+            rect = this->parentWidget()->rect();
+        }
+        else{
+            rect = rectBackground;
+        }
+        const auto geom = getClosedRect(rect);
+        this->setGeometry( geom );
+        _anim_progress = 0.0;
+        updateHandlerRect(_anim_progress, geom);
     });
 }
 
@@ -256,7 +344,14 @@ void SidePanel::openPanel()
 
     this->show();
 
-    const QRect new_geom = getOpenedRect(this->parentWidget()->rect());
+    QRect rect;
+    if(UseParentWidget){
+        rect = this->parentWidget()->rect();
+    }
+    else{
+        rect = rectBackground;
+    }
+    const QRect new_geom = getOpenedRect(rect);
     this->setGeometry( new_geom );
 
     _anim_progress = 1.0;
@@ -271,7 +366,14 @@ void SidePanel::closePanel()
 
     this->hide();
 
-    const QRect new_geom = getClosedRect(this->parentWidget()->rect());
+    QRect rect;
+    if(UseParentWidget){
+        rect = this->parentWidget()->rect();
+    }
+    else{
+        rect = rectBackground;
+    }
+    const QRect new_geom = getClosedRect(rect);
     this->setGeometry( new_geom );
 
     _anim_progress = 0.0;
@@ -336,4 +438,39 @@ void SidePanel::resizeEvent(QResizeEvent *event)
     base_t::resizeEvent(event);
 
     updateHandlerRect(_anim_progress, this->geometry());
+}
+
+void SidePanel::SetRect(QRect rect){
+    rectBackground = rect;
+}
+
+void SidePanel::SetUseRect(){
+    UseParentWidget = false;
+}
+void SidePanel::SetUseParent(){
+    UseParentWidget = true;
+}
+
+void SidePanel::slotStartAnimation(){
+    if(_timer->isActive())
+    {
+        qDebug() << "CLICK DURING ANIMATION";
+
+        switch (_state) {
+        case SidePanelState::Opening: { _setState(SidePanelState::Closing); } break;
+        case SidePanelState::Closing: { _setState(SidePanelState::Opening); } break;
+        default: break;
+        }
+
+    } else
+    {
+        switch (_state) {
+        case SidePanelState::Closed: { this->show(); _setState(SidePanelState::Opening); } break;
+        case SidePanelState::Opened: { this->show(); _setState(SidePanelState::Closing); } break;
+        default: break;
+        }
+
+        _time_start = std::chrono::system_clock::now();
+        _timer->start();
+    }
 }
