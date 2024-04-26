@@ -16,26 +16,26 @@ PanelTopSide::PanelTopSide(QWidget *parent)
         return q_sp::rect_closed_top(this->getPanelSize(), parent_rect);
     };
 
-    this->alignedHandlerRect = [](const QRect& panel_geom, const QSize& handler_size, qreal) -> QRect
-    {
-        return q_sp::rect_aligned_bottom_center(panel_geom, handler_size);
-    };
+    // this->alignedHandlerRect = [](const QRect& panel_geom, const QSize& handler_size, qreal) -> QRect
+    // {
+    //     return q_sp::rect_aligned_bottom_center(panel_geom, handler_size);
+    // };
 
-    this->initialHandlerSize = []() -> QSize
-    {
-        return {120, 60};
-    };
+    // this->initialHandlerSize = []() -> QSize
+    // {
+    //     return {120, 60};
+    // };
 
-    this->updateHandler = [](const SidePanelState state, HandlerWidgetT* handler)
-    {
-        switch (state) {
-        case SidePanelState::Opening: { handler->setText("^^^"); } break;
-        case SidePanelState::Opened:  { handler->setText("^^^"); } break;
-        case SidePanelState::Closing: { handler->setText("vvv"); } break;
-        case SidePanelState::Closed:  { handler->setText("vvv"); } break;
-        default: break;
-        }
-    };
+    // this->updateHandler = [](const SidePanelState state, HandlerWidgetT* handler)
+    // {
+    //     switch (state) {
+    //     case SidePanelState::Opening: { handler->setText("^^^"); } break;
+    //     case SidePanelState::Opened:  { handler->setText("^^^"); } break;
+    //     case SidePanelState::Closing: { handler->setText("vvv"); } break;
+    //     case SidePanelState::Closed:  { handler->setText("vvv"); } break;
+    //     default: break;
+    //     }
+    // };
 
 }
 

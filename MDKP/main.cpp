@@ -112,9 +112,6 @@ void SetStyleSheets(){
                          "{                                     "
                          "height: 0px;                          "
                          "background-color: transparent;        "
-                         "}                                     "
-                         "QFrame[notifyArea=true] { background-color: white; }"
-                         "QFrame[notifyMessage=true] { background-color: #232323; color: white; }"
-                         "QLabel[notifyMessage=true] { background-color: #232323; color: white;";
+                         "}                                     ";
     qApp->setStyleSheet(styleSheet);
 }

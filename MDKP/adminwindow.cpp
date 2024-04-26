@@ -18,7 +18,6 @@ AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
     connect(ui->registrationButton, SIGNAL(clicked()),SLOT(slotRegistrationButtonClicked()));
     connect(changeUserDataWidget, SIGNAL(signalRefreshUser(User&)),SLOT(slotRefreshUserInDatabase(User&)));
 
-
     // QWidget* central = new QWidget(this);
     // QLabel* lbl = new QLabel("TEST",this);
     // stackedLayout = new QStackedLayout(central);
@@ -53,6 +52,7 @@ void AdminWindow::configuringInterface(){
     //Кнопка профиля
     ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
     profilePanel->raise();
+    messagePanel->raise();
 
     stackedWidgetUserManagement = ui->stackedWidgetUserManagement;
     viewUsers = new QTableView(stackedWidgetUserManagement);
@@ -100,17 +100,19 @@ void AdminWindow::slotBackButtonChangeUserWidgetCliked(){
 }
 
 void AdminWindow::slotRegistrationButtonClicked(){
+    //ShowMessage("Тестовое сообщение, всё гуд kjsdfhgks\n jdhgkj hfkjdjkg djdf",true);
     //kkkkkk
      // notify->show();
      // WAF::Animation::sideSlideIn(notify, WAF::BottomSide, false);
      // connectionMessage->showMessage();
      // subscriptionMessage->showMessage();
 
-/*
+
     try {
         CheckingFieldsEmpty();
     } catch (std::runtime_error& err) {
-        QMessageBox::information(this,"Предупреждение",err.what());
+        //QMessageBox::information(this,"Предупреждение",err.what());
+        ShowMessage(err.what(),false);
        return;
     }
 
@@ -127,12 +129,13 @@ void AdminWindow::slotRegistrationButtonClicked(){
     try {
         db->RegisterUser(LastName,FirstName,Patronymic,Phone,Role,Address,Branch,Login,Password);
     } catch (const std::runtime_error& err) {
-        QMessageBox::critical(this,"Ошибка",err.what());
+        //QMessageBox::critical(this,"Ошибка",err.what());
+        ShowMessage(err.what(),false);
         return;
     }
 
     ClearDataRegistrationUserWidget();
-    RefreshDataView();*/
+    RefreshDataView();
 }
 
 void AdminWindow::RefreshDataView(){

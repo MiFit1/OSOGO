@@ -43,7 +43,9 @@ void AccountantWindow::ConfiguringInterface(User user){
     tariffRatePanel = new PanelLeftSide(this);
     tariffRatePanel->setOpenEasingCurve(QEasingCurve::Type::OutExpo);
     tariffRatePanel->setCloseEasingCurve(QEasingCurve::Type::InExpo);
-    tariffRatePanel->init(tariffRateButton);
+    tariffRatePanel->init();
+
+    connect(tariffRateButton,SIGNAL(clicked()),tariffRatePanel,SLOT(slotStartAnimation()));
 
     tariffRateWidget = new TariffRateWidget(this);
     tariffRatePanel->setPanelSize(tariffRateWidget->size().width()+160);
@@ -83,6 +85,7 @@ void AccountantWindow::ConfiguringInterface(User user){
     viewStatistics->setSelectionMode(QAbstractItemView::SingleSelection);
     viewStatistics->horizontalHeader()->setHighlightSections(false);
     viewStatistics->setColumnHidden(0,true);
+
 }
 
 void AccountantWindow::ShowViewContracts(){

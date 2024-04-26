@@ -37,7 +37,7 @@ bool SidePanel::eventFilter(QObject *watched, QEvent *event)
             }
             const auto geom = getOpenedRect(rect);
             this->setGeometry( geom );
-            this->updateHandlerRect(_anim_progress, geom);
+//            this->updateHandlerRect(_anim_progress, geom);
         } break;
         case SidePanelState::Closed: {
             QRect rect;
@@ -49,7 +49,7 @@ bool SidePanel::eventFilter(QObject *watched, QEvent *event)
             }
             const auto geom = getClosedRect(rect);
             this->setGeometry( geom );
-            this->updateHandlerRect(_anim_progress, geom);
+ //           this->updateHandlerRect(_anim_progress, geom);
         } break;
         }
 
@@ -68,7 +68,7 @@ bool SidePanel::eventFilter(QObject *watched, QEvent *event)
             }
             const auto geom = getOpenedRect(rect);
             this->setGeometry( geom );
-            this->updateHandlerRect(_anim_progress, geom);
+ //           this->updateHandlerRect(_anim_progress, geom);
         } break;
         case SidePanelState::Closed: {
             QRect rect;
@@ -80,7 +80,7 @@ bool SidePanel::eventFilter(QObject *watched, QEvent *event)
             }
             const auto geom = getClosedRect(rect);
             this->setGeometry( geom );
-            this->updateHandlerRect(_anim_progress, geom);
+//            this->updateHandlerRect(_anim_progress, geom);
         } break;
         }
 
@@ -92,11 +92,11 @@ bool SidePanel::eventFilter(QObject *watched, QEvent *event)
 
 // -----------------------------------------------------------------------------
 
-void SidePanel::updateHandlerRect(const qreal progress, const QRect& geom)
-{
-    const QRect handle_geom = alignedHandlerRect( geom, _handler->size() , progress);
-    _handler->setGeometry( handle_geom );
-}
+// void SidePanel::updateHandlerRect(const qreal progress, const QRect& geom)
+// {
+//     const QRect handle_geom = alignedHandlerRect( geom, _handler->size() , progress);
+//     _handler->setGeometry( handle_geom );
+// }
 
 SidePanel::SidePanel(QWidget *parent)
     : base_t(parent)
@@ -128,9 +128,9 @@ SidePanel::SidePanel(QWidget *parent)
         const QRect new_geom = q_sp::lerp(t, geom_start, geom_end).toRect();
         this->setGeometry( new_geom );
 
-        updateHandlerRect(_anim_progress, new_geom);
+//        updateHandlerRect(_anim_progress, new_geom);
 
-        qDebug() << new_geom << t;
+        //qDebug() << new_geom << t;
     };
 
 
@@ -157,7 +157,9 @@ SidePanel::SidePanel(QWidget *parent)
                 const auto geom = getOpenedRect(rect);
 //                const auto geom = getOpenedRect(QRect(0,0,500,500));
                 this->setGeometry( geom ); _anim_progress = 1.0;
-                updateHandlerRect(_anim_progress, geom);
+                qDebug()<<"Открытие закончилось";
+
+//                updateHandlerRect(_anim_progress, geom);
             } break;
             case SidePanelState::Closing: {
                 QRect rect;
@@ -170,14 +172,24 @@ SidePanel::SidePanel(QWidget *parent)
                 const auto geom = getClosedRect(rect);
                 this->setGeometry( geom );
                 _anim_progress = 0.0;
-                updateHandlerRect(_anim_progress, geom);
+                qDebug()<<"Закрытие закончилось";
+
+//                updateHandlerRect(_anim_progress, geom);
             } break;
             default: break;
             }
 
             switch (_state) {
-            case SidePanelState::Opening: { this->show(); _setState(SidePanelState::Opened); } break;
-            case SidePanelState::Closing: { this->hide(); _setState(SidePanelState::Closed); } break;
+            case SidePanelState::Opening: {
+                this->show();
+                _setState(SidePanelState::Opened);
+                emit signalOpeningEnd();
+            } break;
+            case SidePanelState::Closing: {
+                this->hide();
+                _setState(SidePanelState::Closed);
+                emit signalClosingEnd();
+            } break;
             default: break;
             }
 
@@ -213,8 +225,8 @@ SidePanel::SidePanel(QWidget *parent)
     });
 
     //_handler = new HandlerWidgetT(parent);
-    _handler = new HandlerWidgetT(this);
-    _handler->setObjectName("SidePanel_handler");
+    //_handler = new HandlerWidgetT(this);
+    //_handler->setObjectName("SidePanel_handler");
 
 
     // =========================================================================
@@ -232,25 +244,25 @@ SidePanel::SidePanel(QWidget *parent)
 
     // -------------------------------------------------------------------------
 
-    this->alignedHandlerRect = [](const QRect& panel_geom, const QSize& handler_size, qreal) -> QRect
-    {
-        return q_sp::rect_aligned_right_center(panel_geom, handler_size);
-    };
+    // this->alignedHandlerRect = [](const QRect& panel_geom, const QSize& handler_size, qreal) -> QRect
+    // {
+    //     return q_sp::rect_aligned_right_center(panel_geom, handler_size);
+    // };
 
     // -------------------------------------------------------------------------
 
-    this->initialHandlerSize = [this]() -> QSize
-    {
-        return this->_handler->size();
-    };
+    // this->initialHandlerSize = [this]() -> QSize
+    // {
+    //     return this->_handler->size();
+    // };
 
     // -------------------------------------------------------------------------
 
-    this->updateHandler = [](const SidePanelState state, HandlerWidgetT* handler)
-    {
-        Q_UNUSED(state);
-        Q_UNUSED(handler);
-    };
+    // this->updateHandler = [](const SidePanelState state, HandlerWidgetT* handler)
+    // {
+    //     Q_UNUSED(state);
+    //     Q_UNUSED(handler);
+    // };
 
 }
 
@@ -264,26 +276,26 @@ SidePanel::~SidePanel()
         _timer = nullptr;
     }
 
-    if(_handler != nullptr) {
-        delete _handler;
-        _handler = nullptr;
-    }
+    // if(_handler != nullptr) {
+    //     delete _handler;
+    //     _handler = nullptr;
+    // }
 
     if(parentWidget()) {
         removeEventFilter(this);
     }
 }
 
-void SidePanel::init(QPushButton* btn)
+void SidePanel::init()
 {
     //Топовые вставки)
-    connect(btn,SIGNAL(clicked()),_handler,SIGNAL(clicked()));
-    _handler->hide();
-    //====================================================================================================================================
-    QTimer::singleShot(0, [this] {
-        _handler->resize( initialHandlerSize() );
-        updateHandler(_state, _handler);
-    });
+    // connect(btn,SIGNAL(clicked()),_handler,SIGNAL(clicked()));
+    // _handler->hide();
+    // //====================================================================================================================================
+    // QTimer::singleShot(0, [this] {
+    //     _handler->resize( initialHandlerSize() );
+    //     updateHandler(_state, _handler);
+    // });
 
 
     // connect(_handler, &QAbstractButton::clicked, this, [this]
@@ -310,12 +322,11 @@ void SidePanel::init(QPushButton* btn)
     //         _timer->start();
     //     }
     // });
-    connect(btn,SIGNAL(clicked()),SLOT(slotStartAnimation()));
 
-    connect(this, &SidePanel::stateChanged, _handler, [this](SidePanelState state)
-    {
-        updateHandler(state, _handler);
-    });
+    // connect(this, &SidePanel::stateChanged, _handler, [this](SidePanelState state)
+    // {
+    //     updateHandler(state, _handler);
+    // });
 
 
     this->parentWidget()->installEventFilter(this);
@@ -332,7 +343,7 @@ void SidePanel::init(QPushButton* btn)
         const auto geom = getClosedRect(rect);
         this->setGeometry( geom );
         _anim_progress = 0.0;
-        updateHandlerRect(_anim_progress, geom);
+//        updateHandlerRect(_anim_progress, geom);
     });
 }
 
@@ -355,7 +366,7 @@ void SidePanel::openPanel()
     this->setGeometry( new_geom );
 
     _anim_progress = 1.0;
-    updateHandlerRect(_anim_progress, new_geom);
+//    updateHandlerRect(_anim_progress, new_geom);
 
     _setState(SidePanelState::Opened);
 }
@@ -377,7 +388,7 @@ void SidePanel::closePanel()
     this->setGeometry( new_geom );
 
     _anim_progress = 0.0;
-    updateHandlerRect(_anim_progress, new_geom);
+//    updateHandlerRect(_anim_progress, new_geom);
 
     _setState(SidePanelState::Closed);
 }
@@ -424,10 +435,10 @@ void SidePanel::setCloseEasingCurve(const QEasingCurve &curve)
 
 // -----------------------------------------------------------------------------
 
-QSize SidePanel::getHandlerSize() const
-{
-    return _handler->size();
-}
+// QSize SidePanel::getHandlerSize() const
+// {
+//     return _handler->size();
+// }
 
 // -----------------------------------------------------------------------------
 
@@ -437,7 +448,7 @@ void SidePanel::resizeEvent(QResizeEvent *event)
 {
     base_t::resizeEvent(event);
 
-    updateHandlerRect(_anim_progress, this->geometry());
+//    updateHandlerRect(_anim_progress, this->geometry());
 }
 
 void SidePanel::SetRect(QRect rect){

@@ -4,5 +4,6 @@
         <file>resources/CheckMark.png</file>
         <file>resources/tariff.png</file>
         <file>resources/tariff2.png</file>
+        <file>resources/close.png</file>
     </qresource>
 </RCC>

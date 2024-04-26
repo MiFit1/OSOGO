@@ -22,7 +22,7 @@ class SidePanel : public QScrollArea
 public:
 
     using HandlerWidgetT = QPushButton;
-    HandlerWidgetT* _handler = nullptr;
+//    HandlerWidgetT* _handler = nullptr;
 
 private:
 
@@ -41,7 +41,7 @@ private:
 
     qreal _anim_progress = 0.0;
 
-    void updateHandlerRect(const qreal progress, const QRect& geom);
+//    void updateHandlerRect(const qreal progress, const QRect& geom);
 
     int _panel_size = 100; // px
 
@@ -65,21 +65,21 @@ public:
 
     // -------------------------------------------------------------------------
 
-    using handler_align_func_t = std::function<QRect(const QRect& /*panel_geom*/, const QSize& /*handler_size*/, qreal /*progress*/)>;
+    // using handler_align_func_t = std::function<QRect(const QRect& /*panel_geom*/, const QSize& /*handler_size*/, qreal /*progress*/)>;
 
-    handler_align_func_t alignedHandlerRect;
-
-    // -------------------------------------------------------------------------
-
-    using handler_size_func_t = std::function<QSize()>;
-
-    handler_size_func_t initialHandlerSize;
+    // handler_align_func_t alignedHandlerRect;
 
     // -------------------------------------------------------------------------
 
-    using handler_update_func_t = std::function<void(const SidePanelState, HandlerWidgetT*)>;
+    // using handler_size_func_t = std::function<QSize()>;
 
-    handler_update_func_t updateHandler;
+    // handler_size_func_t initialHandlerSize;
+
+    // -------------------------------------------------------------------------
+
+    // using handler_update_func_t = std::function<void(const SidePanelState, HandlerWidgetT*)>;
+
+    // handler_update_func_t updateHandler;
 
     // =========================================================================
 
@@ -87,7 +87,7 @@ public:
     explicit SidePanel(QWidget *parent = nullptr);
     virtual ~SidePanel() override;
 
-    void init(QPushButton* btn);
+    void init();
 
     // Immediately open/close panel without animation
     void openPanel();
@@ -102,7 +102,7 @@ public:
     void setOpenEasingCurve (const QEasingCurve& curve);
     void setCloseEasingCurve(const QEasingCurve& curve);
 
-    QSize getHandlerSize() const;
+//    QSize getHandlerSize() const;
 
     void SetRect(QRect rect);
     void SetUseRect();
@@ -110,6 +110,8 @@ public:
 
 signals:
     void stateChanged(SidePanelState state);
+    void signalOpeningEnd();
+    void signalClosingEnd();
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
