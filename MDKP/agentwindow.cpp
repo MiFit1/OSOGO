@@ -94,7 +94,8 @@ void AgentWindow::slotConcludeContractButtonClicked(){
     try {
         CheckingContractDataFieldsEmpty();
     } catch (std::runtime_error& err) {
-        QMessageBox::information(this,"Предупреждение",err.what());
+        //QMessageBox::information(this,"Предупреждение",err.what());
+        ShowMessage(err.what(),false);
         return;
     }
 
@@ -108,7 +109,8 @@ void AgentWindow::slotConcludeContractButtonClicked(){
     try {
         idClient = db->RegisterClient(client);
     } catch (std::runtime_error& err) {
-        QMessageBox::critical(this,"Ошибка",err.what());
+        //QMessageBox::critical(this,"Ошибка",err.what());
+        ShowMessage(err.what(),false);
         return;
     }
 
@@ -117,10 +119,12 @@ void AgentWindow::slotConcludeContractButtonClicked(){
     try {
         db->AddContract(contract);
     } catch (std::runtime_error& err) {
-        QMessageBox::critical(this,"Ошибка",err.what());
+        ShowMessage(err.what(),false);
+        //QMessageBox::critical(this,"Ошибка",err.what());
         return;
     }
 
+    ShowMessage("Договор успешно добавлен.",this);
     ClearContractDataUi();
 }
 

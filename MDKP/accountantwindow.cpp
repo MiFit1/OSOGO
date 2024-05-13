@@ -124,12 +124,14 @@ void AccountantWindow::slotConfirmContractButtonClicked(){
         changedRate = tariffRateWidget->GetHealthInsuranceRate();
     }
     else{
-        QMessageBox::critical(this,"Ошибка","Неизвестный тип договора.");
+        //QMessageBox::critical(this,"Ошибка","Неизвестный тип договора.");
+        ShowMessage("Ошибка: неизвестный тип договора.",false);
         return;
     }
 
     if(changedRate <= 0){
-        QMessageBox::information(this,"Ошибка","Для данного типа договоров не установлена ставка. Пожалуйста, зайдите в окно настройки ставок.");
+        //QMessageBox::information(this,"Ошибка","Для данного типа договоров не установлена ставка. Пожалуйста, зайдите в окно настройки ставок.");
+        ShowMessage("Ошибка: для данного типа договоров не установлена ставка. Пожалуйста, зайдите в окно настройки ставок.",false);
         return;
     }
 
@@ -139,7 +141,8 @@ void AccountantWindow::slotConfirmContractButtonClicked(){
     try {
         db->RefreshContractById(changedContract);
     } catch (std::runtime_error& err) {
-        QMessageBox::critical(this,"Ошибка",err.what());
+        //QMessageBox::critical(this,"Ошибка",err.what());
+        ShowMessage(err.what(),false);
         return;
     }
     UpdateViewContracts();
@@ -156,7 +159,8 @@ void AccountantWindow::slotRejectContractButtonClicked(){
             db->AddComment(confirmationWindow->GetComment(),user.GetId(),changedContract.GetId());
         }
     } catch (std::runtime_error& err) {
-        QMessageBox::critical(this,"Ошибка",err.what());
+        //QMessageBox::critical(this,"Ошибка",err.what());
+        ShowMessage(err.what(),false);
         return;
     }
     UpdateViewContracts();

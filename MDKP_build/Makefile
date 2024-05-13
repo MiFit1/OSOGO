@@ -206,13 +206,11 @@ Makefile: ../MDKP/MDKP.pro C:/Qt/6.6.0/mingw_64/mkspecs/win32-g++/qmake.conf C:/
 		C:/Qt/6.6.0/mingw_64/mkspecs/features/qt_config.prf \
 		C:/Qt/6.6.0/mingw_64/mkspecs/win32-g++/qmake.conf \
 		C:/Qt/6.6.0/mingw_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		C:/Qt/6.6.0/mingw_64/mkspecs/features/exclusive_builds.prf \
 		C:/Qt/6.6.0/mingw_64/mkspecs/features/toolchain.prf \
 		C:/Qt/6.6.0/mingw_64/mkspecs/features/default_pre.prf \
 		C:/Qt/6.6.0/mingw_64/mkspecs/features/win32/default_pre.prf \
 		../MDKP/QSidePanel/q_side_panel.pri \
-		../MDKP/WidgetAnimationFramework/waf.pri \
 		C:/Qt/6.6.0/mingw_64/mkspecs/features/resolve_config.prf \
 		C:/Qt/6.6.0/mingw_64/mkspecs/features/exclusive_builds_post.prf \
 		C:/Qt/6.6.0/mingw_64/mkspecs/features/default_post.prf \
@@ -240,6 +238,7 @@ Makefile: ../MDKP/MDKP.pro C:/Qt/6.6.0/mingw_64/mkspecs/win32-g++/qmake.conf C:/
 		C:/Qt/6.6.0/mingw_64/lib/Qt6Sql.prl \
 		C:/Qt/6.6.0/mingw_64/lib/Qt6Core.prl \
 		C:/Qt/6.6.0/mingw_64/lib/Qt6EntryPoint.prl \
+		.qmake.stash \
 		C:/Qt/6.6.0/mingw_64/mkspecs/features/build_pass.prf \
 		../MDKP/resources.qrc
 	$(QMAKE) -o Makefile ..\MDKP\MDKP.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -379,13 +378,11 @@ C:/Qt/6.6.0/mingw_64/mkspecs/features/qt_functions.prf:
 C:/Qt/6.6.0/mingw_64/mkspecs/features/qt_config.prf:
 C:/Qt/6.6.0/mingw_64/mkspecs/win32-g++/qmake.conf:
 C:/Qt/6.6.0/mingw_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 C:/Qt/6.6.0/mingw_64/mkspecs/features/exclusive_builds.prf:
 C:/Qt/6.6.0/mingw_64/mkspecs/features/toolchain.prf:
 C:/Qt/6.6.0/mingw_64/mkspecs/features/default_pre.prf:
 C:/Qt/6.6.0/mingw_64/mkspecs/features/win32/default_pre.prf:
 ../MDKP/QSidePanel/q_side_panel.pri:
-../MDKP/WidgetAnimationFramework/waf.pri:
 C:/Qt/6.6.0/mingw_64/mkspecs/features/resolve_config.prf:
 C:/Qt/6.6.0/mingw_64/mkspecs/features/exclusive_builds_post.prf:
 C:/Qt/6.6.0/mingw_64/mkspecs/features/default_post.prf:
@@ -413,6 +410,7 @@ C:/Qt/6.6.0/mingw_64/lib/Qt6Gui.prl:
 C:/Qt/6.6.0/mingw_64/lib/Qt6Sql.prl:
 C:/Qt/6.6.0/mingw_64/lib/Qt6Core.prl:
 C:/Qt/6.6.0/mingw_64/lib/Qt6EntryPoint.prl:
+.qmake.stash:
 C:/Qt/6.6.0/mingw_64/mkspecs/features/build_pass.prf:
 ../MDKP/resources.qrc:
 qmake: FORCE

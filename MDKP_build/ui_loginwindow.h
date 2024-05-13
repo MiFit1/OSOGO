@@ -43,7 +43,7 @@ public:
     {
         if (LoginWindow->objectName().isEmpty())
             LoginWindow->setObjectName("LoginWindow");
-        LoginWindow->resize(612, 633);
+        LoginWindow->resize(1920, 1080);
         centralwidget = new QWidget(LoginWindow);
         centralwidget->setObjectName("centralwidget");
         horizontalLayout = new QHBoxLayout(centralwidget);
@@ -139,7 +139,7 @@ public:
         LoginWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(LoginWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 612, 17));
+        menubar->setGeometry(QRect(0, 0, 1920, 17));
         LoginWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(LoginWindow);
         statusbar->setObjectName("statusbar");

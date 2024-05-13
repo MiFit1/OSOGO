@@ -19,6 +19,7 @@ public:
 
     void setUserToChangeWidget(User user);
     void CheckingFieldsEmpty();
+    User GetSelectUser();
 
 private:
     Ui::ChangeUserDataWidget *ui;
@@ -27,9 +28,7 @@ private:
 
 signals:
     void signalBackButtonCliked();
-    void signalRefreshUser(User& user);
-private slots:
-    void slotConfirmButtonClicked();
+    void signalConfirmButtonClicked();
 };
 
 #endif // CHANGEUSERDATAWIDGET_H

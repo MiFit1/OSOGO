@@ -10,7 +10,7 @@ CONFIG += c++17
 TEMPLATE = app
 
 include($${PWD}/QSidePanel/q_side_panel.pri)
-include($${PWD}/WidgetAnimationFramework/waf.pri)
+#include($${PWD}/WidgetAnimationFramework/waf.pri)
 
 SOURCES += \
     Global.cpp \
@@ -29,7 +29,6 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
-    notifymessage.cpp \
     phoneedit.cpp \
     profilewindow.cpp \
     renegotiatecontractwindow.cpp \
@@ -53,7 +52,6 @@ HEADERS += \
     database.h \
     loginwindow.h \
     mainwindow.h \
-    notifymessage.h \
     phoneedit.h \
     profilewindow.h \
     renegotiatecontractwindow.h \

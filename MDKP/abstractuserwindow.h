@@ -15,6 +15,7 @@
 #include <QPropertyAnimation>
 #include <QStackedLayout>
 #include <QGraphicsOpacityEffect>
+#include <QIcon>
 
 class Message
 {
@@ -37,6 +38,8 @@ public:
 signals:
     void signalLogout();
     void signalToShowMessage();
+    void signalMessageAnimationStart();
+    void signalMessageAnimationEnd();
 
 public:
     QPushButton* profileButton;
@@ -49,18 +52,25 @@ public:
     QList<Message> messages;
     QToolButton* acceptMessageButton = new QToolButton(this);
 
-    void ShowMessage(QString message, bool typeMessage);
+    void ShowMessage(QString message, bool typeMessage, QPushButton* button = nullptr);
 private slots:
-    void slotCheckMessageToShow();
     void slotMessageAnimationEnd();
 
 private:
+    void CheckMessageToShow(QPushButton* button = nullptr);
     bool MessageIsOpening = false;
     QPropertyAnimation* messageFadeEffect;
     QGraphicsOpacityEffect* opacityEffect;
     QStackedLayout* stackedLayout;
+    QIcon iconSuccessMessage;
+    QIcon iconUnsuccessMessage;
     void MessageFadeIn();
     void MessageFadeOut();
+    void DisableButton(QPushButton* button);
+    void EnableButton(QPushButton* button);
+
+    QString disableButtonStyleSheet;
+    QString enableButtonStyleSheet;
 
 protected:
     User user;

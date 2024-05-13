@@ -5,7 +5,11 @@ AbstractUserWindow::AbstractUserWindow(const User& us, QWidget *parent)
 {
     user = us;
 
-    acceptMessageButton->setIcon(QIcon(":/images/resources/close.png"));
+    iconSuccessMessage = QIcon(":/images/resources/CheckMarkGreen.png");
+    iconUnsuccessMessage = QIcon(":/images/resources/close.png");
+
+
+    acceptMessageButton->setIcon(QIcon(iconUnsuccessMessage));
 
     profileButton = new QPushButton;
     profileButton->setIcon(QIcon(":/images/resources/settings.png"));
@@ -52,6 +56,28 @@ AbstractUserWindow::AbstractUserWindow(const User& us, QWidget *parent)
     messageFadeEffect = new QPropertyAnimation(opacityEffect,"opacity");
     messageFadeEffect->setDuration(500);
 
+    disableButtonStyleSheet = "font: 500 14pt \"Montserrat Medium\";"
+                              "background-color: #c8c8c8;"
+                              "color: white;"
+                              "border: none;"
+                              "font-size: 14px;"
+                              "border-radius: 5px;";
+
+    enableButtonStyleSheet ="QPushButton {"
+                            "font: 500 14pt \"Montserrat Medium\";"
+                            "background-color: #4CAF50;"
+                            "color: white;"
+                            "border: none;"
+                            "font-size: 14px;"
+                            "border-radius: 5px;"
+                            "}"
+                            "QPushButton:hover {"
+                            "    background-color: #45a049;"
+                            "}"
+                            "QPushButton:pressed {"
+                            "    background-color: #357a38;"
+                            "}";
+
     connect(profileWindow, SIGNAL(signalLogoutButtonClicked()),SIGNAL(signalLogout()));
     connect(profileWindow,SIGNAL(singalCancelButtonClicked()),profileButton, SIGNAL(clicked()));
     connect(profileButton,SIGNAL(clicked()),profilePanel,SLOT(slotStartAnimation()));
@@ -73,24 +99,39 @@ User AbstractUserWindow::getUser(){
     return user;
 }
 
-void AbstractUserWindow::ShowMessage(QString message, bool typeMessage){
+void AbstractUserWindow::ShowMessage(QString message, bool typeMessage, QPushButton* button){
     Message msg(message,typeMessage);
     messages.append(msg);
-    slotCheckMessageToShow();
+    CheckMessageToShow(button);
 }
 
 void AbstractUserWindow::slotMessageAnimationEnd(){
     MessageIsOpening = false;
-    slotCheckMessageToShow();
+    CheckMessageToShow();
+    emit signalMessageAnimationEnd();
 }
 
-void AbstractUserWindow::slotCheckMessageToShow(){
+void AbstractUserWindow::DisableButton(QPushButton* button){
+    button->setEnabled(false);
+    button->setStyleSheet(disableButtonStyleSheet);
+}
+
+void AbstractUserWindow::EnableButton(QPushButton* button){
+    button->setEnabled(true);
+    button->setStyleSheet(enableButtonStyleSheet);
+}
+
+void AbstractUserWindow::CheckMessageToShow(QPushButton* button){
     if(!messages.empty()){
         if(MessageIsOpening){
-            qDebug()<<"Return";
             return;
         }
-        qDebug()<<"Зашёл";
+
+        if(button != nullptr){
+            DisableButton(button);
+        }
+
+        emit signalMessageAnimationStart();
         MessageIsOpening = true;
         Message msg = messages.front();
         messages.pop_front();
@@ -98,12 +139,26 @@ void AbstractUserWindow::slotCheckMessageToShow(){
 
         messagePanel->setPanelSize(MessageWidget->size().width()+5);
         messagePanel->SetRect(QRect(0,0,this->rect().width(),60));
+
+        if(msg.typeMessage){
+            acceptMessageButton->setIcon(iconSuccessMessage);
+        }
+        else{
+            acceptMessageButton->setIcon(iconUnsuccessMessage);
+        }
+
         messagePanel->slotStartAnimation();
         MessageFadeIn();
+
         //Закрытие сообщения через время
-        QTimer::singleShot(2500,[this]{
+        QTimer::singleShot(2500,[this, button]{
             messagePanel->slotStartAnimation();
             MessageFadeOut();
+            if(button != nullptr){
+                QTimer::singleShot(1000, [this,button]{
+                    EnableButton(button);
+                });
+            }
         });
     }
 }
@@ -124,3 +179,4 @@ void AbstractUserWindow::MessageFadeOut(){
     messageFadeEffect->setEndValue(0);
     messageFadeEffect->start();
 }
+

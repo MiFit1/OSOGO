@@ -10,7 +10,7 @@ ChangeUserDataWidget::ChangeUserDataWidget(QWidget *parent)
 
     //ui->Post->
     connect(ui->BackButton,SIGNAL(clicked()),SIGNAL(signalBackButtonCliked()));
-    connect(ui->ConfirmButton,SIGNAL(clicked()),SLOT(slotConfirmButtonClicked()));
+    connect(ui->ConfirmButton,SIGNAL(clicked()),SIGNAL(signalConfirmButtonClicked()));
     SetValidation();
 }
 
@@ -33,30 +33,6 @@ void ChangeUserDataWidget::setUserToChangeWidget(User user){
     ui->Post->setCurrentText(postStr);
     QString statusStr = User::convertStatusToString(user.GetStatus());
     ui->Status->setCurrentText(statusStr);
-}
-
-void ChangeUserDataWidget::slotConfirmButtonClicked(){
-    try {
-        CheckingFieldsEmpty();
-    } catch (std::runtime_error& err) {
-        QMessageBox::information(this,"Предупреждение",err.what());
-        return;
-    }
-
-    User changeUser = user;
-    changeUser.SetLastName(ui->LastName->text());
-    changeUser.SetFirstName(ui->FirstName->text());
-    changeUser.SetPatronymic(ui->Patronymic->text());
-    changeUser.SetPhone(ui->Phone->text());
-    changeUser.SetAddress(ui->Address->text());
-    int post = User::convertPostToInt(ui->Post->currentText());
-    changeUser.SetPost(post);
-    int status = User::convertStatusToInt(ui->Status->currentText());
-    changeUser.SetStatus(status);
-    changeUser.SetBranch(ui->Branch->text());
-    changeUser.SetLogin(ui->LoginLine->text());
-    changeUser.SetPassword(ui->PasswordLine->text());
-    emit signalRefreshUser(changeUser);
 }
 
 void ChangeUserDataWidget::CheckingFieldsEmpty(){
@@ -86,4 +62,21 @@ void ChangeUserDataWidget::SetValidation(){
     ui->Address->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_BRANCH_AND_ADDRESS,this));
 
     ui->LoginLine->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_LOGIN,this));
+}
+
+User ChangeUserDataWidget::GetSelectUser(){
+    User changeUser = user;
+    changeUser.SetLastName(ui->LastName->text());
+    changeUser.SetFirstName(ui->FirstName->text());
+    changeUser.SetPatronymic(ui->Patronymic->text());
+    changeUser.SetPhone(ui->Phone->text());
+    changeUser.SetAddress(ui->Address->text());
+    int post = User::convertPostToInt(ui->Post->currentText());
+    changeUser.SetPost(post);
+    int status = User::convertStatusToInt(ui->Status->currentText());
+    changeUser.SetStatus(status);
+    changeUser.SetBranch(ui->Branch->text());
+    changeUser.SetLogin(ui->LoginLine->text());
+    changeUser.SetPassword(ui->PasswordLine->text());
+    return changeUser;
 }

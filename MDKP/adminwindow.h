@@ -4,7 +4,6 @@
 #include "changeuserdatawidget.h"
 #include "database.h"
 #include "Global.h"
-#include "notifymessage.h"
 
 #include <QMainWindow>
 #include <QPushButton>
@@ -48,10 +47,7 @@ private:
     ChangeUserDataWidget* changeUserDataWidget;
     QStackedWidget* stackedWidgetUserManagement;
     Database* db;
-//    QFrame* notify;
-//    NotifyMessage* connectionMessage;
-//    NotifyMessage* subscriptionMessage;
-    QStackedLayout* stackedLayout;
+    QString defaulStyleSheetRegButton;
 
     void ShowViewUsers();
     void ShowChangeUserDataWidget();
@@ -64,7 +60,9 @@ public slots:
 private slots:
     void slotDoubleClikedOnUser(const QModelIndex index);
     void slotRegistrationButtonClicked();
-    void slotRefreshUserInDatabase(User& user);
+    //void slotRegistrationButtonDisable();
+    //void slotRegistrationButtonEnable();
+    void slotChangeUserConfirmButtonClicked();
 };
 
 #endif // ADMINWINDOW_H

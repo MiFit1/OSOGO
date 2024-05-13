@@ -8,6 +8,7 @@ AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
     qDebug() << "call constructor";
     ui->setupUi(this);
     db = database;
+    defaulStyleSheetRegButton = ui->registrationButton->styleSheet();
     configuringInterface();
     ClearDataRegistrationUserWidget();
     SetValidationOnCreateUsers();
@@ -15,30 +16,8 @@ AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
     AddShadowToChildren(ui->AddUserTab);
     connect(viewUsers,SIGNAL(doubleClicked(QModelIndex)),SLOT(slotDoubleClikedOnUser(QModelIndex)));
     connect(changeUserDataWidget, SIGNAL(signalBackButtonCliked()),SLOT(slotBackButtonChangeUserWidgetCliked()));
+    connect(changeUserDataWidget,SIGNAL(signalConfirmButtonClicked()),SLOT(slotChangeUserConfirmButtonClicked()));
     connect(ui->registrationButton, SIGNAL(clicked()),SLOT(slotRegistrationButtonClicked()));
-    connect(changeUserDataWidget, SIGNAL(signalRefreshUser(User&)),SLOT(slotRefreshUserInDatabase(User&)));
-
-    // QWidget* central = new QWidget(this);
-    // QLabel* lbl = new QLabel("TEST",this);
-    // stackedLayout = new QStackedLayout(central);
-    // stackedLayout->addWidget(lbl);
-    // stackedLayout->addWidget(centralWidget());
-    // stackedLayout->setStackingMode(QStackedLayout::StackAll);
-    // central->setLayout(stackedLayout);
-    // setCentralWidget(central);
-
-    //Тесты
-   // notify = new QFrame(this);
-   // notify->setProperty("notifyArea", true);
-   // notify->setFrameShape(QFrame::NoFrame);
-   // connectionMessage = new NotifyMessage("Привет ад.", notify);
-   // subscriptionMessage = new NotifyMessage("Я честно сам делал эти всплывающие виджеты.", notify);
-   // QVBoxLayout* notifyLayout = new QVBoxLayout(notify);
-   // notifyLayout->setContentsMargins(QMargins());
-   // notifyLayout->setSpacing(1);
-   // notifyLayout->addWidget(connectionMessage);
-   // notifyLayout->addWidget(subscriptionMessage);
-   // notify->hide();
 }
 
 AdminWindow::~AdminWindow()
@@ -100,19 +79,10 @@ void AdminWindow::slotBackButtonChangeUserWidgetCliked(){
 }
 
 void AdminWindow::slotRegistrationButtonClicked(){
-    //ShowMessage("Тестовое сообщение, всё гуд kjsdfhgks\n jdhgkj hfkjdjkg djdf",true);
-    //kkkkkk
-     // notify->show();
-     // WAF::Animation::sideSlideIn(notify, WAF::BottomSide, false);
-     // connectionMessage->showMessage();
-     // subscriptionMessage->showMessage();
-
-
     try {
         CheckingFieldsEmpty();
     } catch (std::runtime_error& err) {
-        //QMessageBox::information(this,"Предупреждение",err.what());
-        ShowMessage(err.what(),false);
+        ShowMessage(err.what(),false, ui->registrationButton);
        return;
     }
 
@@ -129,23 +99,17 @@ void AdminWindow::slotRegistrationButtonClicked(){
     try {
         db->RegisterUser(LastName,FirstName,Patronymic,Phone,Role,Address,Branch,Login,Password);
     } catch (const std::runtime_error& err) {
-        //QMessageBox::critical(this,"Ошибка",err.what());
         ShowMessage(err.what(),false);
         return;
     }
 
+    ShowMessage("Пользователь добавлен",true);
     ClearDataRegistrationUserWidget();
     RefreshDataView();
 }
 
 void AdminWindow::RefreshDataView(){
     usersModel->setQuery(usersModel->query().lastQuery());
-}
-
-void AdminWindow::slotRefreshUserInDatabase(User& user){
-    db->RefreshUserById(user);
-    RefreshDataView();
-    ShowViewUsers();
 }
 
 void AdminWindow::ClearDataRegistrationUserWidget(){
@@ -170,6 +134,9 @@ void AdminWindow::CheckingFieldsEmpty(){
     if(ui->Phone->text().trimmed().isEmpty()){
         throw std::runtime_error("Поле телефона не может быть пустым.");
     }
+    if(ui->Phone->text().length() < 18){
+        throw std::runtime_error("Телефон не указан полностью.");
+    }
     if(ui->LoginLine->text().trimmed().isEmpty()){
         throw std::runtime_error("Поле логина не может быть пустым.");
     }
@@ -190,4 +157,18 @@ void AdminWindow::SetValidationOnCreateUsers(){
     ui->Address->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_BRANCH_AND_ADDRESS,this));
 
     ui->LoginLine->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_LOGIN,this));
+}
+
+void AdminWindow::slotChangeUserConfirmButtonClicked(){
+    try {
+        changeUserDataWidget->CheckingFieldsEmpty();
+    } catch (std::runtime_error& err) {
+        ShowMessage(err.what(),false);
+        return;
+    }
+
+    User changeUser = changeUserDataWidget->GetSelectUser();
+    db->RefreshUserById(changeUser);
+    RefreshDataView();
+    ShowViewUsers();
 }

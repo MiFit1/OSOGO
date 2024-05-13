@@ -135,7 +135,7 @@ SidePanel::SidePanel(QWidget *parent)
 
 
     _timer = new QTimer(this);
-    _timer->setInterval(5);
+    _timer->setInterval(10);
 
     connect(_timer, &QTimer::timeout, this, [this, anim_func]
     {
