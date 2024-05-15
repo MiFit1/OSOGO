@@ -6,7 +6,7 @@ Contract::Contract(){
 Contract::Contract(QString ID, QString Date, QString Summa, QString TypeInsurance, QString TariffRate, QString IdClient, QString IdEmployee, QString Status, QString IdConfirmedAccountant) {
     id = ID.toInt();
     date =  QDateTime::fromString(Date,"yyyy-MM-dd hh:mm:ss");
-    summa = Summa.toDouble();
+    summa = Summa;
     typeInsurance = TypeInsurance;
     tariffRate = TariffRate.toDouble();
     idClient = IdClient.toInt();
@@ -32,12 +32,8 @@ QDateTime Contract::GetDate(){
     return date;
 }
 
-double Contract::GetSumma(){
+QString Contract::GetSumma(){
     return summa;
-}
-
-QString Contract::GetSummaString(){
-    return QString::number(summa);
 }
 
 QString Contract::GetTypeInsurance(){
@@ -64,7 +60,7 @@ bool Contract::isValid(){
     return valid;
 }
 
-void Contract::SetSumma(double Summa){
+void Contract::SetSumma(QString Summa){
     summa = Summa;
 }
 void Contract::SetStatus(int Status){

@@ -26,7 +26,7 @@ void ContractConfirmationWindow::SetContractAndClient(Contract Contract, Client 
     ui->Phone->setText(client.GetPhone());
 
     ui->TypeContract->setText(Contract.GetTypeInsurance());
-    ui->Summa->setText(Contract.GetSummaString());
+    ui->Summa->setText(Contract.GetSumma());
 }
 
 Contract ContractConfirmationWindow::GetCurrentContract(){

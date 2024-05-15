@@ -10,8 +10,7 @@ public:
     Contract(QString ID, QString Date, QString Summa, QString TypeInsurance, QString TariffRate, QString IdClient, QString IdEmployee, QString Status, QString IdConfirmedAccountant = "-1");
     int GetId();
     QDateTime GetDate();
-    double GetSumma();
-    QString GetSummaString();
+    QString GetSumma();
     QString GetTypeInsurance();
     double GetTariffRate();
     int GetIdAccountant();
@@ -19,7 +18,7 @@ public:
     int GetIdEmployee();
     int GetStatus();
     bool isValid();
-    void SetSumma(double Summa);
+    void SetSumma(QString Summa);
     void SetStatus(int Status);
     void SetTypeInsurance(QString TypeContract);
     void SetIdEmployee(int IdEmployee);
@@ -28,7 +27,7 @@ public:
 private:
     int id;
     QDateTime date;
-    double summa;
+    QString summa;
     QString typeInsurance;
     double tariffRate;
     int idClient;

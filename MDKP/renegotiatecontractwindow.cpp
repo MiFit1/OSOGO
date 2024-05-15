@@ -27,7 +27,7 @@ void RenegotiateContractWindow::SetContractAndClient(Contract Contract, Client C
     ui->FirstName->setText(Client.GetFirstName());
     ui->Patronymic->setText(Client.GetPatronymic());
     ui->Phone->setText(Client.GetPhone());
-    ui->Summa->setText(QString::number(Contract.GetSumma()));
+    ui->Summa->setText(Contract.GetSumma());
     qDebug()<<Contract.GetTypeInsurance();
     ui->TypeContract->setCurrentText(Contract.GetTypeInsurance());
 }
@@ -43,7 +43,7 @@ Client RenegotiateContractWindow::GetChangedClient(){
 
 Contract RenegotiateContractWindow::GetChangedContract(){
     Contract changedContract = contract;
-    changedContract.SetSumma(ui->Summa->text().toDouble());
+    changedContract.SetSumma(ui->Summa->text());
     changedContract.SetTypeInsurance(ui->TypeContract->currentText());
     changedContract.SetIdEmployee(user.GetId());
     changedContract.SetStatus(1);
