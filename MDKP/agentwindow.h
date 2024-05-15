@@ -48,7 +48,7 @@ private slots:
     void slotDoubleClikedOnRenegitiationContract(const QModelIndex index);
     void slotRenegotiateWidgetBackButtonClicked();
     void slotConcludeContractButtonClicked();
-    void slotRenegotiateContractDataChanged();
+    void slotRenegotiateWidgetSendButtonClicked();
     void slotHeaderInStatisticWidgetClicked(int index);
 };
 

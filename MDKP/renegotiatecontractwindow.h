@@ -25,22 +25,21 @@ public:
     void SetContractAndClient(Contract Contract, Client Client);
     void UpdateAccountantComments();
     void ClearUserData();
-
+    void CheckingFieldsEmpty();
+    Client GetChangedClient();
+    Contract GetChangedContract();
+    QPushButton* GetSendButton();
 private:
     Ui::RenegotiateContractWindow *ui;
     Contract contract;
     Client client;
     User user;
     Database* db;
-    void CheckingFieldsEmpty();
     void SetValidation();
 
 signals:
     void signalBackButtonClicked();
-    //void signalRefreshContractAndClient(Contract& contract, Client& client);
-    void signalRenegotiateContractDataChanged();
-private slots:
-    void slotConfirmButtonClicked();
+    void signalSendButtonClicked();
 };
 
 #endif // RENEGOTIATECONTRACTWINDOW_H

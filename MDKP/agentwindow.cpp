@@ -16,8 +16,8 @@ AgentWindow::AgentWindow(const User& us,Database* database, QWidget *parent)
     connect(viewRenegotiateContract, SIGNAL(doubleClicked(QModelIndex)), SLOT(slotDoubleClikedOnRenegitiationContract(QModelIndex)));
     connect(renegotiationContractWidget, SIGNAL(signalBackButtonClicked()), SLOT(slotRenegotiateWidgetBackButtonClicked()));
     connect(ui->ConcludeContractButton,SIGNAL(clicked()),SLOT(slotConcludeContractButtonClicked()));
-    connect(renegotiationContractWidget, SIGNAL(signalRenegotiateContractDataChanged()),SLOT(slotRenegotiateContractDataChanged()));
     connect(headerStatistics,SIGNAL(sectionClicked(int)),SLOT(slotHeaderInStatisticWidgetClicked(int)));
+    connect(renegotiationContractWidget,SIGNAL(signalSendButtonClicked()),SLOT(slotRenegotiateWidgetSendButtonClicked()));
 }
 
 AgentWindow::~AgentWindow()
@@ -26,7 +26,7 @@ AgentWindow::~AgentWindow()
 }
 
 void AgentWindow::ConfiguringInterface(){
-
+    messagePanel->raise();
     //Кнопка профиля
     ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
     profilePanel->raise();
@@ -94,8 +94,7 @@ void AgentWindow::slotConcludeContractButtonClicked(){
     try {
         CheckingContractDataFieldsEmpty();
     } catch (std::runtime_error& err) {
-        //QMessageBox::information(this,"Предупреждение",err.what());
-        ShowMessage(err.what(),false);
+        ShowMessage(err.what(),false,ui->ConcludeContractButton);
         return;
     }
 
@@ -109,8 +108,7 @@ void AgentWindow::slotConcludeContractButtonClicked(){
     try {
         idClient = db->RegisterClient(client);
     } catch (std::runtime_error& err) {
-        //QMessageBox::critical(this,"Ошибка",err.what());
-        ShowMessage(err.what(),false);
+        ShowMessage(err.what(),false,ui->ConcludeContractButton);
         return;
     }
 
@@ -119,12 +117,11 @@ void AgentWindow::slotConcludeContractButtonClicked(){
     try {
         db->AddContract(contract);
     } catch (std::runtime_error& err) {
-        ShowMessage(err.what(),false);
-        //QMessageBox::critical(this,"Ошибка",err.what());
+        ShowMessage(err.what(),false,ui->ConcludeContractButton);
         return;
     }
 
-    ShowMessage("Договор успешно добавлен.",this);
+    ShowMessage("Договор успешно добавлен.",true);
     ClearContractDataUi();
 }
 
@@ -141,7 +138,34 @@ void AgentWindow::viewRenegotiateContractRefresh(){
     sqlModelRenegotiate->setQuery(sqlModelRenegotiate->query().lastQuery());
 }
 
-void AgentWindow::slotRenegotiateContractDataChanged(){
+void AgentWindow::slotRenegotiateWidgetSendButtonClicked(){
+    try {
+        renegotiationContractWidget->CheckingFieldsEmpty();
+    } catch (std::runtime_error& err) {
+        QPushButton* sendButton = renegotiationContractWidget->GetSendButton();
+        ShowMessage(err.what(),false,sendButton);
+        return;
+    }
+
+    Client changedClient = renegotiationContractWidget->GetChangedClient();
+    try {
+        db->CheckClientNumberForId(changedClient);
+        db->RefreshClientById(changedClient);
+    } catch (std::runtime_error& err) {
+        QPushButton* sendButton = renegotiationContractWidget->GetSendButton();
+        ShowMessage(err.what(),false,sendButton);
+        return;
+    }
+
+    Contract changedContract = renegotiationContractWidget->GetChangedContract();
+    try {
+        db->RefreshContractById(changedContract);
+    } catch (std::runtime_error& err) {
+        QPushButton* sendButton = renegotiationContractWidget->GetSendButton();
+        ShowMessage(err.what(),false,sendButton);
+        return;
+    }
+
     viewRenegotiateContractRefresh();
     ShowViewRenegotiateContract();
 }

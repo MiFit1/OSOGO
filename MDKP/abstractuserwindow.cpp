@@ -8,7 +8,6 @@ AbstractUserWindow::AbstractUserWindow(const User& us, QWidget *parent)
     iconSuccessMessage = QIcon(":/images/resources/CheckMarkGreen.png");
     iconUnsuccessMessage = QIcon(":/images/resources/close.png");
 
-
     acceptMessageButton->setIcon(QIcon(iconUnsuccessMessage));
 
     profileButton = new QPushButton;
@@ -19,8 +18,6 @@ AbstractUserWindow::AbstractUserWindow(const User& us, QWidget *parent)
     profilePanel = new PanelLeftSide(this);
     profilePanel->setOpenEasingCurve(QEasingCurve::Type::OutExpo);
     profilePanel->setCloseEasingCurve(QEasingCurve::Type::InExpo);
-//    profilePanel->SetRect(QRect(10,150,1000,500));
-//    profilePanel->SetUseRect();
     profilePanel->init();
 
     profileWindow = new ProfileWindow(this);
@@ -56,6 +53,11 @@ AbstractUserWindow::AbstractUserWindow(const User& us, QWidget *parent)
     messageFadeEffect = new QPropertyAnimation(opacityEffect,"opacity");
     messageFadeEffect->setDuration(500);
 
+    timerClosingMessage = new QTimer(this);
+    timerEnableButton = new QTimer(this);
+    timerClosingMessage->setSingleShot(true);
+    timerEnableButton->setSingleShot(true);
+
     disableButtonStyleSheet = "font: 500 14pt \"Montserrat Medium\";"
                               "background-color: #c8c8c8;"
                               "color: white;"
@@ -82,18 +84,18 @@ AbstractUserWindow::AbstractUserWindow(const User& us, QWidget *parent)
     connect(profileWindow,SIGNAL(singalCancelButtonClicked()),profileButton, SIGNAL(clicked()));
     connect(profileButton,SIGNAL(clicked()),profilePanel,SLOT(slotStartAnimation()));
     connect(messagePanel,SIGNAL(signalClosingEnd()),SLOT(slotMessageAnimationEnd()));
+    connect(timerClosingMessage, &QTimer::timeout, [this]{
+        if(messagePanel != nullptr){
+            messagePanel->slotStartAnimation();
+            MessageFadeOut();
+        }
+    });
 }
 
 AbstractUserWindow::~AbstractUserWindow(){
     qDebug() << "call abstract destructor";
     delete profileButton;
 }
-
-// void AbstractUserWindow::setUser(const User& us){
-//     qDebug()<<us.GetId()<<" setUser metod";
-//     user = us;
-//     profileWindow->fillProfile(us);
-// }
 
 User AbstractUserWindow::getUser(){
     return user;
@@ -131,7 +133,7 @@ void AbstractUserWindow::CheckMessageToShow(QPushButton* button){
             DisableButton(button);
         }
 
-        emit signalMessageAnimationStart();
+        //emit signalMessageAnimationStart();
         MessageIsOpening = true;
         Message msg = messages.front();
         messages.pop_front();
@@ -150,16 +152,15 @@ void AbstractUserWindow::CheckMessageToShow(QPushButton* button){
         messagePanel->slotStartAnimation();
         MessageFadeIn();
 
-        //Закрытие сообщения через время
-        QTimer::singleShot(2500,[this, button]{
-            messagePanel->slotStartAnimation();
-            MessageFadeOut();
-            if(button != nullptr){
-                QTimer::singleShot(1000, [this,button]{
-                    EnableButton(button);
-                });
+        timerClosingMessage->start(2500);
+        QMetaObject::Connection connection;
+        connection = connect(timerEnableButton, &QTimer::timeout, [this,button,connection]{
+            if((messagePanel != nullptr)&&(button != nullptr)){
+                EnableButton(button);
             }
+            disconnect(connection);
         });
+        timerEnableButton->start(3500);
     }
 }
 

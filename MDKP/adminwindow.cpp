@@ -152,10 +152,8 @@ void AdminWindow::SetValidationOnCreateUsers(){
     ui->LastName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
     ui->FirstName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
     ui->Patronymic->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
-
     ui->Branch->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_BRANCH_AND_ADDRESS,this));
     ui->Address->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_BRANCH_AND_ADDRESS,this));
-
     ui->LoginLine->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_LOGIN,this));
 }
 
@@ -163,7 +161,8 @@ void AdminWindow::slotChangeUserConfirmButtonClicked(){
     try {
         changeUserDataWidget->CheckingFieldsEmpty();
     } catch (std::runtime_error& err) {
-        ShowMessage(err.what(),false);
+        QPushButton* confirmButton = changeUserDataWidget->GetConfirmBurron();
+        ShowMessage(err.what(),false,confirmButton);
         return;
     }
 

@@ -8,7 +8,6 @@ ContractConfirmationWindow::ContractConfirmationWindow(QWidget *parent)
     ui->setupUi(this);
     AddShadowToChildren(this);
     connect(ui->backButton, SIGNAL(clicked()),SIGNAL(signalBackButtonClicked()));
-    connect(ui->RejectButton,SIGNAL(clicked()),SLOT(slotRejectButtonClicked()));
     connect(ui->ConfirmButton,SIGNAL(clicked()),SIGNAL(signalConfirmButtonClicked()));
     connect(ui->RejectButton,SIGNAL(clicked()),SIGNAL(signalRejectButtonClicked()));
 }
@@ -36,6 +35,14 @@ Contract ContractConfirmationWindow::GetCurrentContract(){
 
 QString ContractConfirmationWindow::GetComment(){
     return ui->Comment->toPlainText();
+}
+
+QPushButton* ContractConfirmationWindow::GetConfirmButton(){
+    return ui->ConfirmButton;
+}
+
+QPushButton* ContractConfirmationWindow::GetRejcetButton(){
+    return ui->RejectButton;
 }
 
 void ContractConfirmationWindow::ClearUserData(){

@@ -12,7 +12,7 @@ RenegotiateContractWindow::RenegotiateContractWindow(User user, Database* db, QW
     AddShadowToChildren(this);
     SetValidation();
     connect(ui->BackButton, SIGNAL(clicked()),SIGNAL(signalBackButtonClicked()));
-    connect(ui->SendButton,SIGNAL(clicked()),SLOT(slotConfirmButtonClicked()));
+    connect(ui->SendButton,SIGNAL(clicked()),SIGNAL(signalSendButtonClicked()));
 }
 
 RenegotiateContractWindow::~RenegotiateContractWindow()
@@ -32,40 +32,22 @@ void RenegotiateContractWindow::SetContractAndClient(Contract Contract, Client C
     ui->TypeContract->setCurrentText(Contract.GetTypeInsurance());
 }
 
-void RenegotiateContractWindow::slotConfirmButtonClicked(){
-    try {
-        CheckingFieldsEmpty();
-    } catch (std::runtime_error& err) {
-        QMessageBox::information(this,"Предупреждение",err.what());
-        return;
-    }
-
+Client RenegotiateContractWindow::GetChangedClient(){
     Client changedClient = client;
     changedClient.SetFirstName(ui->FirstName->text());
     changedClient.SetLastName(ui->LastName->text());
     changedClient.SetPatronymic(ui->Patronymic->text());
     changedClient.SetPhone(ui->Phone->text());
+    return changedClient;
+}
 
-    try {
-        db->CheckClientNumberForId(changedClient);
-        db->RefreshClientById(changedClient);
-    } catch (std::runtime_error& err) {
-        QMessageBox::critical(this,"Ошибка",err.what());
-        return;
-    }
-
+Contract RenegotiateContractWindow::GetChangedContract(){
     Contract changedContract = contract;
     changedContract.SetSumma(ui->Summa->text().toDouble());
     changedContract.SetTypeInsurance(ui->TypeContract->currentText());
     changedContract.SetIdEmployee(user.GetId());
     changedContract.SetStatus(1);
-    try {
-        db->RefreshContractById(changedContract);
-    } catch (std::runtime_error& err) {
-        QMessageBox::critical(this,"Ошибка",err.what());
-        return;
-    }
-    emit signalRenegotiateContractDataChanged();
+    return changedContract;
 }
 
 void RenegotiateContractWindow::UpdateAccountantComments(){
@@ -81,7 +63,7 @@ void RenegotiateContractWindow::UpdateAccountantComments(){
         return;
     }
 
-    QString commentStr = ""; //Отображающаяся строка
+    QString commentStr = "";
     for(auto comm : comments){
         commentStr += "<p style='font-size:12px; margin-bottom:0px;'>";
         commentStr += comm.GetAccountantPesonalData();
@@ -130,3 +112,6 @@ void RenegotiateContractWindow::SetValidation(){
     ui->Summa->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_NUMBER_LINE,this));
 }
 
+QPushButton* RenegotiateContractWindow::GetSendButton(){
+    return ui->SendButton;
+}

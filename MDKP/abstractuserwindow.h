@@ -72,6 +72,9 @@ private:
     QString disableButtonStyleSheet;
     QString enableButtonStyleSheet;
 
+    QTimer* timerClosingMessage;
+    QTimer* timerEnableButton;
+
 protected:
     User user;
     void resizeEvent(QResizeEvent* event) override;

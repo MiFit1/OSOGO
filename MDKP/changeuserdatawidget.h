@@ -20,7 +20,7 @@ public:
     void setUserToChangeWidget(User user);
     void CheckingFieldsEmpty();
     User GetSelectUser();
-
+    QPushButton* GetConfirmBurron();
 private:
     Ui::ChangeUserDataWidget *ui;
     User user;

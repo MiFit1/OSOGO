@@ -24,6 +24,8 @@ public:
     Contract GetCurrentContract();
     QString GetComment();
     void ClearUserData();
+    QPushButton* GetConfirmButton();
+    QPushButton* GetRejcetButton();
 
 private:
     Ui::ContractConfirmationWindow *ui;

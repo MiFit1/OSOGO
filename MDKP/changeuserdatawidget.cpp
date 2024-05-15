@@ -80,3 +80,7 @@ User ChangeUserDataWidget::GetSelectUser(){
     changeUser.SetPassword(ui->PasswordLine->text());
     return changeUser;
 }
+
+QPushButton* ChangeUserDataWidget::GetConfirmBurron(){
+    return ui->ConfirmButton;
+}

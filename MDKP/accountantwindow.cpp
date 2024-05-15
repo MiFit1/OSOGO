@@ -23,6 +23,7 @@ AccountantWindow::~AccountantWindow()
 }
 
 void AccountantWindow::ConfiguringInterface(User user){
+    messagePanel->raise();
     //Кнопка профиля и кнопка настройки ставки
     tabCornerWidget = new QWidget(this);
     tariffRateButton = new QPushButton(this);
@@ -85,7 +86,6 @@ void AccountantWindow::ConfiguringInterface(User user){
     viewStatistics->setSelectionMode(QAbstractItemView::SingleSelection);
     viewStatistics->horizontalHeader()->setHighlightSections(false);
     viewStatistics->setColumnHidden(0,true);
-
 }
 
 void AccountantWindow::ShowViewContracts(){
@@ -124,14 +124,14 @@ void AccountantWindow::slotConfirmContractButtonClicked(){
         changedRate = tariffRateWidget->GetHealthInsuranceRate();
     }
     else{
-        //QMessageBox::critical(this,"Ошибка","Неизвестный тип договора.");
-        ShowMessage("Ошибка: неизвестный тип договора.",false);
+        QPushButton* confirmButton = confirmationWindow->GetConfirmButton();
+        ShowMessage("Ошибка: неизвестный тип договора.",false,confirmButton);
         return;
     }
 
     if(changedRate <= 0){
-        //QMessageBox::information(this,"Ошибка","Для данного типа договоров не установлена ставка. Пожалуйста, зайдите в окно настройки ставок.");
-        ShowMessage("Ошибка: для данного типа договоров не установлена ставка. Пожалуйста, зайдите в окно настройки ставок.",false);
+        QPushButton* confirmButton = confirmationWindow->GetConfirmButton();
+        ShowMessage("Ошибка: для данного типа договоров не установлена ставка. Пожалуйста, зайдите в окно настройки ставок.",false,confirmButton);
         return;
     }
 
@@ -141,8 +141,8 @@ void AccountantWindow::slotConfirmContractButtonClicked(){
     try {
         db->RefreshContractById(changedContract);
     } catch (std::runtime_error& err) {
-        //QMessageBox::critical(this,"Ошибка",err.what());
-        ShowMessage(err.what(),false);
+        QPushButton* confirmButton = confirmationWindow->GetConfirmButton();
+        ShowMessage(err.what(),false,confirmButton);
         return;
     }
     UpdateViewContracts();
@@ -159,8 +159,8 @@ void AccountantWindow::slotRejectContractButtonClicked(){
             db->AddComment(confirmationWindow->GetComment(),user.GetId(),changedContract.GetId());
         }
     } catch (std::runtime_error& err) {
-        //QMessageBox::critical(this,"Ошибка",err.what());
-        ShowMessage(err.what(),false);
+        QPushButton* rejectButton = confirmationWindow->GetConfirmButton();
+        ShowMessage(err.what(),false,rejectButton);
         return;
     }
     UpdateViewContracts();
