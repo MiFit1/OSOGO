@@ -16,10 +16,42 @@
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="6" column="4">
-      <spacer name="horizontalSpacer_2">
+     <item row="7" column="1">
+      <widget class="QPushButton" name="LogoutButton">
+       <property name="minimumSize">
+        <size>
+         <width>120</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+font: 500 14pt &quot;Montserrat Medium&quot;;
+    background-color: #4CAF50; 
+    color: white; 
+    border: none;
+    font-size: 14px;
+    border-radius: 5px; 
+}
+QPushButton:hover {
+    background-color: #45a049;
+}
+QPushButton:pressed {
+    background-color: #357a38; 
+}</string>
+       </property>
+       <property name="text">
+        <string>Выйти</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="2">
+      <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -29,7 +61,125 @@
        </property>
       </spacer>
      </item>
-     <item row="6" column="3">
+     <item row="1" column="1" colspan="2">
+      <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	font: 500 11pt &quot;Montserrat Medium&quot;;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Профиль</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="2">
+      <widget class="QLineEdit" name="LastNameLine">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>Фамилия</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1" colspan="2">
+      <widget class="QLineEdit" name="PatronymicLine">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QLineEdit:focus {
+    border-color: #5fbaeb;
+}
+</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>Отчество</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="2">
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="1">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>60</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="1">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="7" column="3">
       <widget class="QPushButton" name="CancelButton">
        <property name="minimumSize">
         <size>
@@ -57,6 +207,19 @@ QPushButton:pressed {
         <string>Отмена</string>
        </property>
       </widget>
+     </item>
+     <item row="7" column="4">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item row="3" column="1" colspan="2">
       <widget class="QLineEdit" name="FirstNameLine">
@@ -91,94 +254,6 @@ QLineEdit:focus {
        </property>
       </widget>
      </item>
-     <item row="4" column="1" colspan="2">
-      <widget class="QLineEdit" name="PatronymicLine">
-       <property name="minimumSize">
-        <size>
-         <width>200</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QLineEdit {
-	font: 500 9pt &quot;Montserrat Medium&quot;;
-   background: #e9e9e9;
-	border-radius: 5px;
-	padding: 8px;
-	border: 1px solid gray;
-}
-
-QLineEdit:focus {
-    border-color: #5fbaeb;
-}
-</string>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-       <property name="placeholderText">
-        <string>Отчество</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>60</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="1" column="1" colspan="2">
-      <widget class="QLabel" name="label">
-       <property name="styleSheet">
-        <string notr="true">QLabel {
-	font: 500 11pt &quot;Montserrat Medium&quot;;
-}
-</string>
-       </property>
-       <property name="text">
-        <string>Профиль</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="6" column="2">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Minimum</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
      <item row="3" column="0">
       <spacer name="horizontalSpacer_3">
        <property name="orientation">
@@ -192,80 +267,24 @@ QLineEdit:focus {
        </property>
       </spacer>
      </item>
-     <item row="2" column="1" colspan="2">
-      <widget class="QLineEdit" name="LastNameLine">
+     <item row="5" column="1">
+      <widget class="QCheckBox" name="shadowCheckBox">
        <property name="minimumSize">
-        <size>
-         <width>200</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QLineEdit {
-	font: 500 9pt &quot;Montserrat Medium&quot;;
-   background: #e9e9e9;
-	border-radius: 5px;
-	padding: 8px;
-	border: 1px solid gray;
-}
-
-QLineEdit:focus {
-    border-color: #5fbaeb;
-}
-</string>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-       <property name="placeholderText">
-        <string>Фамилия</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QPushButton" name="LogoutButton">
-       <property name="minimumSize">
-        <size>
-         <width>120</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-font: 500 14pt &quot;Montserrat Medium&quot;;
-    background-color: #4CAF50; 
-    color: white; 
-    border: none;
-    font-size: 14px;
-    border-radius: 5px; 
-}
-QPushButton:hover {
-    background-color: #45a049;
-}
-QPushButton:pressed {
-    background-color: #357a38; 
-}</string>
-       </property>
-       <property name="text">
-        <string>Выйти</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="2">
-      <spacer name="verticalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::MinimumExpanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
          <height>20</height>
         </size>
        </property>
-      </spacer>
+       <property name="text">
+        <string>Вкл. / выкл. тени</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+       <property name="tristate">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

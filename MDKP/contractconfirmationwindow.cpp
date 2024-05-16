@@ -6,7 +6,6 @@ ContractConfirmationWindow::ContractConfirmationWindow(QWidget *parent)
     , ui(new Ui::ContractConfirmationWindow)
 {
     ui->setupUi(this);
-    AddShadowToChildren(this);
     connect(ui->backButton, SIGNAL(clicked()),SIGNAL(signalBackButtonClicked()));
     connect(ui->ConfirmButton,SIGNAL(clicked()),SIGNAL(signalConfirmButtonClicked()));
     connect(ui->RejectButton,SIGNAL(clicked()),SIGNAL(signalRejectButtonClicked()));

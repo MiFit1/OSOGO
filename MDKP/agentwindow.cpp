@@ -12,6 +12,9 @@ AgentWindow::AgentWindow(const User& us,Database* database, QWidget *parent)
     ConfiguringInterface();
     ClearContractDataUi();
     SetValidationOnConfirmContract();
+    AddShadow(ui->ConcludeTab);
+    AddShadow(renegotiationContractWidget);
+    ReadAndSetShadowSettings();
     QHeaderView* headerStatistics = viewStatistic->horizontalHeader();
     connect(viewRenegotiateContract, SIGNAL(doubleClicked(QModelIndex)), SLOT(slotDoubleClikedOnRenegitiationContract(QModelIndex)));
     connect(renegotiationContractWidget, SIGNAL(signalBackButtonClicked()), SLOT(slotRenegotiateWidgetBackButtonClicked()));
@@ -63,7 +66,6 @@ void AgentWindow::ConfiguringInterface(){
     viewStatistic->setColumnHidden(0,true);
     viewStatistic->horizontalHeader()->setHighlightSections(false);
 
-    AddShadowToChildren(ui->ConcludeTab);
     ShowViewRenegotiateContract();
 }
 

@@ -5,7 +5,7 @@ void AddShadowToChildren(QObject* obj){
             // Пропускаем QLabel
             continue;
         }
-        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
+        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(child);
         shadowEffect->setBlurRadius(20);
         shadowEffect->setColor(QColor(140,140,140,255));
         shadowEffect->setOffset(3,3);

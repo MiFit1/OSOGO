@@ -25,6 +25,13 @@ AbstractUserWindow::AbstractUserWindow(const User& us, QWidget *parent)
     profilePanel->setWidgetResizable(true);
     profilePanel->setWidget(profileWindow);
     profileWindow->fillProfile(us);
+    int shadowSettings = GetShadowSettings();
+    if((shadowSettings == 1)||(shadowSettings == -1)){
+        profileWindow->SetShadowCheckBox(true);
+    }
+    else{
+        profileWindow->SetShadowCheckBox(false);
+    }
 
     acceptMessageButton->setStyleSheet("border: none; min-width: 30px; min-height: 30px; icon-size: 24px;");
     MessageWidget = new QFrame(this);
@@ -80,8 +87,11 @@ AbstractUserWindow::AbstractUserWindow(const User& us, QWidget *parent)
                             "    background-color: #357a38;"
                             "}";
 
+    AddShadow(profileWindow);
+
     connect(profileWindow, SIGNAL(signalLogoutButtonClicked()),SIGNAL(signalLogout()));
     connect(profileWindow,SIGNAL(singalCancelButtonClicked()),profileButton, SIGNAL(clicked()));
+    connect(profileWindow, SIGNAL(signalShadowCheckBoxStateChanged(int)),SLOT(slotShadowCheckBoxStateChanged(int)));
     connect(profileButton,SIGNAL(clicked()),profilePanel,SLOT(slotStartAnimation()));
     connect(messagePanel,SIGNAL(signalClosingEnd()),SLOT(slotMessageAnimationEnd()));
     connect(timerClosingMessage, &QTimer::timeout, [this]{
@@ -181,3 +191,63 @@ void AbstractUserWindow::MessageFadeOut(){
     messageFadeEffect->start();
 }
 
+void AbstractUserWindow::AddShadow(QObject* obj){
+    for (auto child : obj->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly)) {
+        if (child->metaObject()->className() == QStringLiteral("QLabel")) {
+            // Пропускаем QLabel
+            continue;
+        }
+        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(child);
+        shadowEffect->setBlurRadius(20);
+        shadowEffect->setColor(QColor(140,140,140,255));
+        shadowEffect->setOffset(3,3);
+        child->setGraphicsEffect(shadowEffect);
+        shadowEffects.push_back(shadowEffect);
+    }
+}
+
+void AbstractUserWindow::SetEnabledGraphicsEffect(bool status){
+    for(int i = 0; i < shadowEffects.size(); ++i){
+        shadowEffects.at(i)->setEnabled(status);
+    }
+}
+
+void AbstractUserWindow::SetShadowSettings(int status){
+    QSettings settings("MifitSoft","OSOGO");
+    settings.setValue("ShadowEffect",status);
+    //emit signalShadowSettingsStateChanged(status);
+}
+
+int AbstractUserWindow::GetShadowSettings(){
+    QSettings settings("MifitSoft", "OSOGO");
+    if(settings.contains("ShadowEffect")) {
+        int result = settings.value("ShadowEffect").toInt();
+        return result;
+    }
+    return -1;
+}
+
+void AbstractUserWindow::ReadAndSetShadowSettings(){
+    int ShadowValue = GetShadowSettings();
+    if(ShadowValue == -1){
+        SetShadowSettings(0);
+    }
+
+    if(ShadowValue == 1){
+        SetEnabledGraphicsEffect(true);
+    }
+    else{
+        SetEnabledGraphicsEffect(false);
+    }
+}
+
+void AbstractUserWindow::slotShadowCheckBoxStateChanged(int state){
+    if(state == 2){
+        SetShadowSettings(1);
+        SetEnabledGraphicsEffect(true);
+    }
+    else{
+        SetShadowSettings(0);
+        SetEnabledGraphicsEffect(false);
+    }
+}

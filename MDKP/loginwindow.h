@@ -20,11 +20,15 @@ class LoginWindow : public QMainWindow
 public:
     explicit LoginWindow(Database* database, QWidget *parent = nullptr);
     ~LoginWindow();
-
+    void SetEnabledGraphicsEffect(bool status);
 private:
     Ui::LoginWindow *ui;
     Database* db;
+    QList<QGraphicsDropShadowEffect*> shadowEffects;
 
+    void AddShadow(QObject* obj);
+    void ReadAndSetShadowSettings();
+    int GetShadowSettings();
 signals:
     void signalLoginSuccessful(const User& user);
 

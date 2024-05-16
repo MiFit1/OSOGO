@@ -9,7 +9,6 @@ RenegotiateContractWindow::RenegotiateContractWindow(User user, Database* db, QW
     this->db = db;
     this->user = user;
     //Тени на дочерние объекты
-    AddShadowToChildren(this);
     SetValidation();
     connect(ui->BackButton, SIGNAL(clicked()),SIGNAL(signalBackButtonClicked()));
     connect(ui->SendButton,SIGNAL(clicked()),SIGNAL(signalSendButtonClicked()));

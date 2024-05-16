@@ -35,6 +35,7 @@ void WindowNavigator::slotLoginSuccessful(const User& user){
 
     windowForRole->showMaximized();
     connect(windowForRole.get(),SIGNAL(signalLogout()),this,SLOT(slotLogout()));
+    //connect(windowForRole.get(),SIGNAL(signalShadowSettingsStateChanged(int)),loginWindow.get(),SLOT(slotShadowSettingStateChanged(int)));
 }
 
 void WindowNavigator::CreateAndShowLoginWindow(){

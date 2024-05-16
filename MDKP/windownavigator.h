@@ -10,6 +10,7 @@
 #include "adminwindow.h"
 #include "abstractuserwindow.h"
 #include "user.h"
+#include <QMessageBox>
 
 class WindowNavigator : public QObject
 {

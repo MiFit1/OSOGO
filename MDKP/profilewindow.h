@@ -18,11 +18,13 @@ public:
     explicit ProfileWindow(QWidget *parent = nullptr);
     ~ProfileWindow();
     void fillProfile(const User& user);
+    void SetShadowCheckBox(bool status);
 private:
     Ui::ProfileWindow *ui;
 signals:
     void signalLogoutButtonClicked();
     void singalCancelButtonClicked();
+    void signalShadowCheckBoxStateChanged(int state);
 };
 
 #endif // PROFILEWINDOW_H

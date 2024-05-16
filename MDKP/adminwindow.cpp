@@ -12,8 +12,9 @@ AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
     configuringInterface();
     ClearDataRegistrationUserWidget();
     SetValidationOnCreateUsers();
-    AddShadowToChildren(changeUserDataWidget);
-    AddShadowToChildren(ui->AddUserTab);
+    AddShadow(changeUserDataWidget);
+    AddShadow(ui->AddUserTab);
+    ReadAndSetShadowSettings();
     connect(viewUsers,SIGNAL(doubleClicked(QModelIndex)),SLOT(slotDoubleClikedOnUser(QModelIndex)));
     connect(changeUserDataWidget, SIGNAL(signalBackButtonCliked()),SLOT(slotBackButtonChangeUserWidgetCliked()));
     connect(changeUserDataWidget,SIGNAL(signalConfirmButtonClicked()),SLOT(slotChangeUserConfirmButtonClicked()));
@@ -171,3 +172,4 @@ void AdminWindow::slotChangeUserConfirmButtonClicked(){
     RefreshDataView();
     ShowViewUsers();
 }
+

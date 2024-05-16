@@ -6,10 +6,9 @@ ProfileWindow::ProfileWindow(QWidget *parent)
     , ui(new Ui::ProfileWindow)
 {
     ui->setupUi(this);
-
-    AddShadowToChildren(this);
     connect(ui->LogoutButton, SIGNAL(clicked()),SIGNAL(signalLogoutButtonClicked()));
     connect(ui->CancelButton,SIGNAL(clicked()),SIGNAL(singalCancelButtonClicked()));
+    connect(ui->shadowCheckBox, SIGNAL(stateChanged(int)), SIGNAL(signalShadowCheckBoxStateChanged(int)));
 }
 
 ProfileWindow::~ProfileWindow()
@@ -23,4 +22,8 @@ void ProfileWindow::fillProfile(const User& user){
         ui->FirstNameLine->setText(user.GetFirstName());
         ui->PatronymicLine->setText(user.GetPatronymic());
     }
+}
+
+void ProfileWindow::SetShadowCheckBox(bool status){
+    ui->shadowCheckBox->setChecked(status);
 }

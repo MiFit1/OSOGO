@@ -16,6 +16,8 @@
 #include <QStackedLayout>
 #include <QGraphicsOpacityEffect>
 #include <QIcon>
+#include <QList>
+#include <QSettings>
 
 class Message
 {
@@ -40,6 +42,7 @@ signals:
     void signalToShowMessage();
     void signalMessageAnimationStart();
     void signalMessageAnimationEnd();
+    //void signalShadowSettingsStateChanged(int state);
 
 public:
     QPushButton* profileButton;
@@ -53,11 +56,14 @@ public:
     QToolButton* acceptMessageButton = new QToolButton(this);
 
     void ShowMessage(QString message, bool typeMessage, QPushButton* button = nullptr);
+    void AddShadow(QObject* obj);
+    void SetEnabledGraphicsEffect(bool status);
+    void ReadAndSetShadowSettings();
 private slots:
     void slotMessageAnimationEnd();
+    void slotShadowCheckBoxStateChanged(int state);
 
 private:
-    void CheckMessageToShow(QPushButton* button = nullptr);
     bool MessageIsOpening = false;
     QPropertyAnimation* messageFadeEffect;
     QGraphicsOpacityEffect* opacityEffect;
@@ -75,6 +81,11 @@ private:
     QTimer* timerClosingMessage;
     QTimer* timerEnableButton;
 
+    QList<QGraphicsDropShadowEffect*> shadowEffects;
+
+    void CheckMessageToShow(QPushButton* button = nullptr);
+    void SetShadowSettings(int status);
+    int GetShadowSettings();
 protected:
     User user;
     void resizeEvent(QResizeEvent* event) override;

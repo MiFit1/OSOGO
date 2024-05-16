@@ -8,6 +8,8 @@ AccountantWindow::AccountantWindow(const User& us, Database* database, QWidget *
     ui->setupUi(this);
     db = database;
     ConfiguringInterface(us);
+    AddShadow(confirmationWindow);
+    ReadAndSetShadowSettings();
     QHeaderView* headerStatistics = viewStatistics->horizontalHeader();
     connect(viewContracts, SIGNAL(doubleClicked(QModelIndex)), SLOT(slotDoubleClikedOnContract(QModelIndex)));
     connect(confirmationWindow, SIGNAL(signalBackButtonClicked()),SLOT(slotConfirmWidgetBackButtonClicked()));
