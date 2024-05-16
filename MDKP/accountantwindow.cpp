@@ -75,19 +75,11 @@ void AccountantWindow::ConfiguringInterface(User user){
     UpdateViewContracts();
 
     viewContracts->setModel(sqlModelContract);
-    viewContracts->setSelectionBehavior(QAbstractItemView::SelectRows);
-    viewContracts->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    viewContracts->setSelectionMode(QAbstractItemView::SingleSelection);
-    viewContracts->horizontalHeader()->setHighlightSections(false);
-    viewContracts->setColumnHidden(0,true);
+    DefaultSettingView(viewContracts);
 
     sqlModelStatistics = new AccountantModelStatistics(user,this);
     viewStatistics->setModel(sqlModelStatistics);
-    viewStatistics->setSelectionBehavior(QAbstractItemView::SelectRows);
-    viewStatistics->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    viewStatistics->setSelectionMode(QAbstractItemView::SingleSelection);
-    viewStatistics->horizontalHeader()->setHighlightSections(false);
-    viewStatistics->setColumnHidden(0,true);
+    DefaultSettingView(viewStatistics);
 }
 
 void AccountantWindow::ShowViewContracts(){
@@ -174,16 +166,7 @@ void AccountantWindow::slotHeaderInStatisticWidgetClicked(int index){
 }
 
 void AccountantWindow::UpdateViewContracts(){
-    sqlModelContract->setQuery("SELECT  Contract.ID,"
-                               "        TypeInsurance as [Тип договора],"
-                               "        Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
-                               "        Employee.LastName || ' ' || Employee.FirstName || ' ' || COALESCE(Employee.Patronymic,'') as [ФИО агента],"
-                               "        Contract.Summa as [Сумма договора],"
-                               "        Contract.Datee as [Дата заключения]"
-                               "FROM Contract"
-                               "    JOIN Client ON Contract.ID_Client = Client.ID "
-                               "    JOIN Employee ON Contract.ID_Employee = Employee.ID "
-                               "WHERE Contract.Status = 1;");
+    sqlModelContract->setQuery(Database::GetQueryToSelectContractsToConfirm());
 }
 
 

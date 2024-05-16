@@ -1,5 +1,6 @@
 #include "abstractuserwindow.h"
-
+#include <QTableView>
+#include <QHeaderView>
 AbstractUserWindow::AbstractUserWindow(const User& us, QWidget *parent)
     : QMainWindow{parent}
 {
@@ -250,4 +251,12 @@ void AbstractUserWindow::slotShadowCheckBoxStateChanged(int state){
         SetShadowSettings(0);
         SetEnabledGraphicsEffect(false);
     }
+}
+
+void AbstractUserWindow::DefaultSettingView(QTableView* view){
+    view->setSelectionBehavior(QAbstractItemView::SelectRows);
+    view->setSelectionMode(QAbstractItemView::SingleSelection);
+    view->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    view->horizontalHeader()->setHighlightSections(false);
+    view->setColumnHidden(0,true);
 }

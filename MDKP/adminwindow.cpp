@@ -43,19 +43,9 @@ void AdminWindow::configuringInterface(){
 
    //ФИО телефон должность филиал
     usersModel = new QSqlQueryModel(this);
-    usersModel->setQuery("SELECT Employee.ID, "
-                         "      LastName ||' '|| FirstName ||' '||COALESCE(Patronymic,'') as [ФИО],"
-                         "      Phone as [Телефон], "
-                         "      Role as [Должность], "
-                         "      Branch as [Филиал]"
-                         " FROM Employee");
+    usersModel->setQuery(Database::GetQueryToSelectEmployee());
     viewUsers->setModel(usersModel);
-    viewUsers->setSelectionBehavior(QAbstractItemView::SelectRows);
-    viewUsers->horizontalHeader()->setStretchLastSection(true);
-    viewUsers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    viewUsers->setSelectionMode(QAbstractItemView::SingleSelection);
-    viewUsers->horizontalHeader()->setHighlightSections(false);
-    viewUsers->setColumnHidden(0,true);
+    DefaultSettingView(viewUsers);
 }
 
 void AdminWindow::ShowViewUsers(){

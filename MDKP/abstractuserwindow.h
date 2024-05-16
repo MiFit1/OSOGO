@@ -18,6 +18,7 @@
 #include <QIcon>
 #include <QList>
 #include <QSettings>
+#include <QTableView>
 
 class Message
 {
@@ -59,6 +60,7 @@ public:
     void AddShadow(QObject* obj);
     void SetEnabledGraphicsEffect(bool status);
     void ReadAndSetShadowSettings();
+    void DefaultSettingView(QTableView* view);
 private slots:
     void slotMessageAnimationEnd();
     void slotShadowCheckBoxStateChanged(int state);

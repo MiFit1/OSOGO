@@ -1,4 +1,5 @@
 #include "agentstatisticmodel.h"
+#include "database.h"
 
 AgentStatisticModel::AgentStatisticModel(const User user, QObject *parent)
     : QSqlQueryModel(parent)
@@ -47,18 +48,7 @@ void AgentStatisticModel::UpdateView(int numberColumnToSort){
     }
     currentSortingTypeToColumn[indexCurrentColumn] = !currentSortingTypeToColumn[indexCurrentColumn];
 
-    QString str = (QString("SELECT    Contract.ID, "
-                          "          TypeInsurance as [Тип договора], "
-                          "          Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента], "
-                          "          Contract.Datee as [Дата заключения], "
-                          "          Contract.TariffRate as [Ставка], "
-                          "          Contract.Summa as [Сумма договора], "
-                          "          Contract.TariffRate * Contract.Summa as [Плата] "
-                          "FROM Contract "
-                          "     JOIN Client ON Contract.ID_Client = Client.ID "
-                          "     JOIN Employee ON Contract.ID_Employee = Employee.ID "
-                          "WHERE Contract.Status = 3 AND Contract.ID_Employee = %1 "
-                           "ORDER BY %2 %3;").arg(QString::number(user.GetId()),fieldToSort,typeSort));
+    QString str = (Database::GetQueryToSelectStatisticsAgent().arg(QString::number(user.GetId()),fieldToSort,typeSort));
     setQuery(str);
 
     if(this->lastError().isValid()){

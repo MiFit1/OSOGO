@@ -43,28 +43,14 @@ void AgentWindow::ConfiguringInterface(){
     stackedWidgetRenegotiateContract->addWidget(renegotiationContractWidget);
 
     sqlModelRenegotiate = new QSqlQueryModel(this);
-    sqlModelRenegotiate->setQuery(QString("SELECT   Contract.ID,"
-                                          "         TypeInsurance as [Тип договора],"
-                                          "         Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
-                                          "         Contract.Datee "
-                                          "FROM Contract "
-                                          "     JOIN Client ON Contract.ID_Client = Client.ID "
-                                          "WHERE Contract.Status = 2 AND (Contract.ID_Employee = %1 OR Contract.ID_Employee = NULL);").arg(user.GetId()));
+    sqlModelRenegotiate->setQuery(Database::GetQueryToSelectRenegotiateContract().arg(user.GetId()));
     viewRenegotiateContract->setModel(sqlModelRenegotiate);
-    viewRenegotiateContract->setSelectionBehavior(QAbstractItemView::SelectRows);
-    viewRenegotiateContract->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    viewRenegotiateContract->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    viewRenegotiateContract->horizontalHeader()->setHighlightSections(false);
-    viewRenegotiateContract->setColumnHidden(0,true);
+    DefaultSettingView(viewRenegotiateContract);
 
     sqlStatisticModel = new AgentStatisticModel(user,this);
     sqlStatisticModel->UpdateView();
     viewStatistic->setModel(sqlStatisticModel);
-    viewStatistic->setSelectionBehavior(QAbstractItemView::SelectRows);
-    viewStatistic->setSelectionMode(QAbstractItemView::SingleSelection);
-    viewStatistic->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    viewStatistic->setColumnHidden(0,true);
-    viewStatistic->horizontalHeader()->setHighlightSections(false);
+    DefaultSettingView(viewStatistic);
 
     ShowViewRenegotiateContract();
 }

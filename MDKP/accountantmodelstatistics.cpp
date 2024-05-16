@@ -1,4 +1,5 @@
 #include "accountantmodelstatistics.h"
+#include "database.h"
 
 
 AccountantModelStatistics::AccountantModelStatistics(User user, QObject *parent)
@@ -49,17 +50,5 @@ void AccountantModelStatistics::UpdateView(int numberColumnToSort){
     }
     currentSortingTypeToColumn[indexCurrentColumn] = !currentSortingTypeToColumn[indexCurrentColumn];
 
-    setQuery(QString("SELECT    Contract.ID,"
-                    "          TypeInsurance as [Тип договора],"
-                    "          Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
-                    "          Employee.LastName || ' ' || Employee.FirstName || ' ' || COALESCE(Employee.Patronymic,'') as [ФИО агента],"
-                    "          Contract.Summa as [Сумма договора],"
-                    "          Contract.TariffRate as [Ставка],"
-                    "          Contract.TariffRate * Contract.Summa as [Плата],"
-                    "          Contract.Datee as [Дата заключения]"
-                    "FROM Contract "
-                    "     JOIN Client ON Contract.ID_Client = Client.ID "
-                    "     JOIN Employee ON Contract.ID_Employee = Employee.ID "
-                    "WHERE Contract.Status = 3 AND ID_ConfirmedAccountant = %1 "
-                     "ORDER BY %2 %3;").arg(QString::number(user.GetId()),fieldToSort,typeSort));
+    setQuery(Database::GetQueryToSelectStatisticsAccountant().arg(QString::number(user.GetId()),fieldToSort,typeSort));
 }

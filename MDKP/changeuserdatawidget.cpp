@@ -8,7 +8,6 @@ ChangeUserDataWidget::ChangeUserDataWidget(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //ui->Post->
     connect(ui->BackButton,SIGNAL(clicked()),SIGNAL(signalBackButtonCliked()));
     connect(ui->ConfirmButton,SIGNAL(clicked()),SIGNAL(signalConfirmButtonClicked()));
     SetValidation();

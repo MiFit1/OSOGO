@@ -533,3 +533,66 @@ void Database::InsertAdmin(){
         query.exec();
     }
 }
+
+QString Database::GetQueryToSelectEmployee(){
+return QString( "SELECT Employee.ID, "
+                "      LastName ||' '|| FirstName ||' '||COALESCE(Patronymic,'') as [ФИО],"
+                "      Phone as [Телефон], "
+                "      Role as [Должность], "
+                "      Branch as [Филиал]"
+                " FROM Employee");
+}
+
+QString Database::GetQueryToSelectStatisticsAccountant(){
+return QString("SELECT    Contract.ID,"
+        "          TypeInsurance as [Тип договора],"
+        "          Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
+        "          Employee.LastName || ' ' || Employee.FirstName || ' ' || COALESCE(Employee.Patronymic,'') as [ФИО агента],"
+        "          Contract.Summa as [Сумма договора],"
+        "          Contract.TariffRate as [Ставка],"
+        "          Contract.TariffRate * Contract.Summa as [Плата],"
+        "          Contract.Datee as [Дата заключения]"
+        "FROM Contract "
+        "     JOIN Client ON Contract.ID_Client = Client.ID "
+        "     JOIN Employee ON Contract.ID_Employee = Employee.ID "
+        "WHERE Contract.Status = 3 AND ID_ConfirmedAccountant = %1 "
+        "ORDER BY %2 %3;");
+}
+
+QString Database::GetQueryToSelectContractsToConfirm(){
+return QString("SELECT  Contract.ID,"
+     "        TypeInsurance as [Тип договора],"
+     "        Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
+     "        Employee.LastName || ' ' || Employee.FirstName || ' ' || COALESCE(Employee.Patronymic,'') as [ФИО агента],"
+     "        Contract.Summa as [Сумма договора],"
+     "        Contract.Datee as [Дата заключения]"
+     "FROM Contract"
+     "    JOIN Client ON Contract.ID_Client = Client.ID "
+     "    JOIN Employee ON Contract.ID_Employee = Employee.ID "
+     "WHERE Contract.Status = 1;");
+}
+
+QString Database::GetQueryToSelectStatisticsAgent(){
+return QString("SELECT    Contract.ID, "
+                   "          TypeInsurance as [Тип договора], "
+                   "          Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента], "
+                   "          Contract.Datee as [Дата заключения], "
+                   "          Contract.TariffRate as [Ставка], "
+                   "          Contract.Summa as [Сумма договора], "
+                   "          Contract.TariffRate * Contract.Summa as [Плата] "
+                   "FROM Contract "
+                   "     JOIN Client ON Contract.ID_Client = Client.ID "
+                   "     JOIN Employee ON Contract.ID_Employee = Employee.ID "
+                   "WHERE Contract.Status = 3 AND Contract.ID_Employee = %1 "
+                   "ORDER BY %2 %3;");
+}
+
+QString Database::GetQueryToSelectRenegotiateContract(){
+return QString("SELECT   Contract.ID,"
+                   "         TypeInsurance as [Тип договора],"
+                   "         Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
+                   "         Contract.Datee "
+                   "FROM Contract "
+                   "     JOIN Client ON Contract.ID_Client = Client.ID "
+                   "WHERE Contract.Status = 2 AND (Contract.ID_Employee = %1 OR Contract.ID_Employee = NULL);");
+}

@@ -33,6 +33,12 @@ public:
     void CheckClientNumberForId(Client client);//Есть ли другие клиенты с таким же телефоном, но другим id
     void AddComment(QString comment, int IdAccountant, int IdContract);
     QList<Comment> GetCommentsByIdContract(int idContract);
+
+    static QString GetQueryToSelectEmployee();
+    static QString GetQueryToSelectStatisticsAccountant();
+    static QString GetQueryToSelectContractsToConfirm();
+    static QString GetQueryToSelectStatisticsAgent();
+    static QString GetQueryToSelectRenegotiateContract();
 private:
     QSqlDatabase* sqlDatabase;
 
