@@ -1,4 +1,7 @@
 #include "Global.h"
+#include <QGraphicsDropShadowEffect>
+#include <QWidget>
+#include <QObject>
 void AddShadowToChildren(QObject* obj){
     for (auto child : obj->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly)) {
         if (child->metaObject()->className() == QStringLiteral("QLabel")) {

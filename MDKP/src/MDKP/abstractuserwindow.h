@@ -4,8 +4,8 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include "profilewindow.h"
-#include "QSidePanel/PanelLeftSide.hpp"
-#include "QSidePanel/PanelRightSide.hpp"
+#include "QSidePanel/QSidePanel/PanelLeftSide.hpp"
+#include "QSidePanel/QSidePanel/PanelRightSide.hpp"
 #include "user.h"
 #include <QLabel>
 #include <QHBoxLayout>

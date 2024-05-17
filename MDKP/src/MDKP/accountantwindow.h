@@ -3,7 +3,7 @@
 #include "contractconfirmationwindow.h"
 #include "abstractuserwindow.h"
 #include "accountantmodelstatistics.h"
-#include "QSidePanel/PanelLeftSide.hpp"
+#include "QSidePanel/QSidePanel/PanelLeftSide.hpp"
 #include "tariffratewidget.h"
 #include <QMainWindow>
 #include <QPushButton>

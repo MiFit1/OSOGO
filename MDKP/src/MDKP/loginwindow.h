@@ -8,6 +8,7 @@
 
 #include <QStackedLayout>
 #include <QWidget>
+#include <QGraphicsDropShadowEffect>
 
 namespace Ui {
 class LoginWindow;
