@@ -231,7 +231,8 @@ int AbstractUserWindow::GetShadowSettings(){
 void AbstractUserWindow::ReadAndSetShadowSettings(){
     int ShadowValue = GetShadowSettings();
     if(ShadowValue == -1){
-        SetShadowSettings(0);
+        SetShadowSettings(1);
+        ShadowValue = 1;
     }
 
     if(ShadowValue == 1){
