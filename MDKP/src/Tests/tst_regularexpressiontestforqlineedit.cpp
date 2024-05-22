@@ -18,6 +18,8 @@ private slots:
     //void cleanupTestCase();
     void FIO_EXPRESSION_TEST_data();
     void FIO_EXPRESSION_TEST();
+    void ADDRESS_EXPRESSION_TEST_data();
+    void ADDRESS_EXPRESSION_TEST();
 };
 
 RegularExpressionTestForQLineEdit::RegularExpressionTestForQLineEdit() {}
@@ -48,6 +50,27 @@ void RegularExpressionTestForQLineEdit::FIO_EXPRESSION_TEST(){
     bool expressionResult = match.hasMatch();
     QVERIFY2(expressionResult == result, qPrintable(ErrorStr));
 }
+
+void RegularExpressionTestForQLineEdit::ADDRESS_EXPRESSION_TEST_data(){
+    QTest::addColumn<QString>("testString");
+    QTest::addColumn<bool>("result");
+    QTest::addColumn<QString>("ErrorString");
+
+    QTest::newRow("null address")<<""<<false<<"Адрес не может быть пустым";
+    //QTest::newRow("")
+}
+
+void RegularExpressionTestForQLineEdit::ADDRESS_EXPRESSION_TEST(){
+    QFETCH(QString, testString);
+    QFETCH(bool, result);
+    QFETCH(QString, ErrorString);
+
+    QRegularExpression addressExp = ValidationConstant::EXP_ON_BRANCH_AND_ADDRESS;
+    QRegularExpressionMatch match = addressExp.match(testString);
+    bool expressionResult = match.hasMatch();
+    QVERIFY2(expressionResult == result, qPrintable(ErrorString));
+}
+
 
 QTEST_APPLESS_MAIN(RegularExpressionTestForQLineEdit)
 
