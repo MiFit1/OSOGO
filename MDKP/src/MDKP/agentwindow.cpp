@@ -43,7 +43,7 @@ void AgentWindow::ConfiguringInterface(){
     stackedWidgetRenegotiateContract->addWidget(renegotiationContractWidget);
 
     sqlModelRenegotiate = new QSqlQueryModel(this);
-    sqlModelRenegotiate->setQuery(Database::GetQueryToSelectRenegotiateContract().arg(user.GetId()));
+    sqlModelRenegotiate->setQuery(Database::GetQueryToSelectRenegotiateContract(user.GetId()));
     viewRenegotiateContract->setModel(sqlModelRenegotiate);
     DefaultSettingView(viewRenegotiateContract);
 

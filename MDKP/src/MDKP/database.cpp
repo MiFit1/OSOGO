@@ -269,6 +269,22 @@ void Database::RegisterUser(QString LastName, QString FirstName, QString Patrony
 
 void Database::RefreshUserById(User user){
     QSqlQuery query;
+    query.prepare("SELECT ID "
+                  "FROM Employee "
+                  "WHERE ID <> :id AND Phone = :phone;");
+    query.bindValue(":id", user.GetId());
+    query.bindValue(":phone", user.GetPhone());
+    bool queryResult = query.exec();
+
+    if(!queryResult){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось проверить использование данного номера.");
+    }
+
+    if(query.first() && !query.isNull(0)){
+        throw std::runtime_error("Данный номер телефона уже используется.");
+    }
+
     query.prepare("UPDATE  Employee "
                   "SET    IsWorked = :worked, "
                   "       LastName = :lastName, "
@@ -293,7 +309,7 @@ void Database::RefreshUserById(User user){
     query.bindValue(":role", User::convertPost(user.GetPost()));
     query.bindValue(":id", user.GetId());
 
-    bool queryResult = query.exec();
+    queryResult = query.exec();
     if(!queryResult){
         qDebug() << query.lastError();
         throw std::runtime_error("Не удалось обновить данные.");
@@ -543,7 +559,7 @@ return QString( "SELECT Employee.ID, "
                 " FROM Employee");
 }
 
-QString Database::GetQueryToSelectStatisticsAccountant(){
+QString Database::GetQueryToSelectStatisticsAccountant(int idUser, QString fieldToSort, QString typeSort){
 return QString("SELECT    Contract.ID,"
         "          TypeInsurance as [Тип договора],"
         "          Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
@@ -556,7 +572,7 @@ return QString("SELECT    Contract.ID,"
         "     JOIN Client ON Contract.ID_Client = Client.ID "
         "     JOIN Employee ON Contract.ID_Employee = Employee.ID "
         "WHERE Contract.Status = 3 AND ID_ConfirmedAccountant = %1 "
-        "ORDER BY %2 %3;");
+        "ORDER BY %2 %3;").arg(QString::number(idUser),fieldToSort,typeSort);
 }
 
 QString Database::GetQueryToSelectContractsToConfirm(){
@@ -572,7 +588,7 @@ return QString("SELECT  Contract.ID,"
      "WHERE Contract.Status = 1;");
 }
 
-QString Database::GetQueryToSelectStatisticsAgent(){
+QString Database::GetQueryToSelectStatisticsAgent(int idUser, QString fieldToSort, QString typeSort){
 return QString("SELECT    Contract.ID, "
                    "          TypeInsurance as [Тип договора], "
                    "          Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента], "
@@ -584,15 +600,15 @@ return QString("SELECT    Contract.ID, "
                    "     JOIN Client ON Contract.ID_Client = Client.ID "
                    "     JOIN Employee ON Contract.ID_Employee = Employee.ID "
                    "WHERE Contract.Status = 3 AND Contract.ID_Employee = %1 "
-                   "ORDER BY %2 %3;");
+                   "ORDER BY %2 %3;").arg(QString::number(idUser),fieldToSort,typeSort);
 }
 
-QString Database::GetQueryToSelectRenegotiateContract(){
+QString Database::GetQueryToSelectRenegotiateContract(int idUser){
 return QString("SELECT   Contract.ID,"
                    "         TypeInsurance as [Тип договора],"
                    "         Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
                    "         Contract.Datee "
                    "FROM Contract "
                    "     JOIN Client ON Contract.ID_Client = Client.ID "
-                   "WHERE Contract.Status = 2 AND (Contract.ID_Employee = %1 OR Contract.ID_Employee = NULL);");
+                   "WHERE Contract.Status = 2 AND (Contract.ID_Employee = %1 OR Contract.ID_Employee = NULL);").arg(idUser);
 }

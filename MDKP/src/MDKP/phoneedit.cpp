@@ -7,6 +7,9 @@ PhoneEdit::PhoneEdit(QWidget *parent)
 }
 
 void PhoneEdit::slotTextChanged(QString text){
+    int oldPosition = this->cursorPosition();
+    static QString oldText;
+
     QString resultPhone = text;
     resultPhone.remove(QRegularExpression("[^\\d]"));
 
@@ -32,5 +35,11 @@ void PhoneEdit::slotTextChanged(QString text){
 
     this->blockSignals(true);
     this->setText(resultPhone);
+
+    if (oldText.length() >= text.length()) {
+        this->setCursorPosition(oldPosition);
+    }
+
     this->blockSignals(false);
+    oldText = text;
 }

@@ -44,6 +44,9 @@ void ChangeUserDataWidget::CheckingFieldsEmpty(){
     if(ui->Phone->text().trimmed().isEmpty()){
         throw std::runtime_error("Поле телефона не может быть пустым.");
     }
+    if(ui->Phone->text().length() < 18){
+        throw std::runtime_error("Телефон указан не полностью.");
+    }
     if(ui->LoginLine->text().trimmed().isEmpty()){
         throw std::runtime_error("Поле логина не может быть пустым.");
     }

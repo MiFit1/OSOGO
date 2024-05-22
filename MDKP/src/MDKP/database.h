@@ -9,7 +9,6 @@
 #include "client.h"
 #include "user.h"
 #include "comment.h"
-#include <stdexcept>
 
 class Database : public QObject
 {
@@ -35,10 +34,10 @@ public:
     QList<Comment> GetCommentsByIdContract(int idContract);
 
     static QString GetQueryToSelectEmployee();
-    static QString GetQueryToSelectStatisticsAccountant();
+    static QString GetQueryToSelectStatisticsAccountant(int idUser, QString fieldToSort, QString typeSort);
     static QString GetQueryToSelectContractsToConfirm();
-    static QString GetQueryToSelectStatisticsAgent();
-    static QString GetQueryToSelectRenegotiateContract();
+    static QString GetQueryToSelectStatisticsAgent(int idUser, QString fieldToSort, QString typeSort);
+    static QString GetQueryToSelectRenegotiateContract(int idUser);
 private:
     QSqlDatabase* sqlDatabase;
 

@@ -126,7 +126,7 @@ void AdminWindow::CheckingFieldsEmpty(){
         throw std::runtime_error("Поле телефона не может быть пустым.");
     }
     if(ui->Phone->text().length() < 18){
-        throw std::runtime_error("Телефон не указан полностью.");
+        throw std::runtime_error("Телефон указан не полностью.");
     }
     if(ui->LoginLine->text().trimmed().isEmpty()){
         throw std::runtime_error("Поле логина не может быть пустым.");
@@ -158,7 +158,14 @@ void AdminWindow::slotChangeUserConfirmButtonClicked(){
     }
 
     User changeUser = changeUserDataWidget->GetSelectUser();
-    db->RefreshUserById(changeUser);
+    try {
+        db->RefreshUserById(changeUser);
+    } catch (std::runtime_error& err) {
+        QPushButton* confirmButton = changeUserDataWidget->GetConfirmBurron();
+        ShowMessage(err.what(),false,confirmButton);
+        return;
+    }
+
     RefreshDataView();
     ShowViewUsers();
 }

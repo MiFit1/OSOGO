@@ -50,5 +50,5 @@ void AccountantModelStatistics::UpdateView(int numberColumnToSort){
     }
     currentSortingTypeToColumn[indexCurrentColumn] = !currentSortingTypeToColumn[indexCurrentColumn];
 
-    setQuery(Database::GetQueryToSelectStatisticsAccountant().arg(QString::number(user.GetId()),fieldToSort,typeSort));
+    setQuery(Database::GetQueryToSelectStatisticsAccountant(user.GetId(), fieldToSort, typeSort));
 }

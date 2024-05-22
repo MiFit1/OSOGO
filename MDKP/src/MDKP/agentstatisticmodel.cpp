@@ -48,7 +48,7 @@ void AgentStatisticModel::UpdateView(int numberColumnToSort){
     }
     currentSortingTypeToColumn[indexCurrentColumn] = !currentSortingTypeToColumn[indexCurrentColumn];
 
-    QString str = (Database::GetQueryToSelectStatisticsAgent().arg(QString::number(user.GetId()),fieldToSort,typeSort));
+    QString str = (Database::GetQueryToSelectStatisticsAgent(user.GetId(),fieldToSort,typeSort));
     setQuery(str);
 
     if(this->lastError().isValid()){
