@@ -25,6 +25,10 @@ void LoginWindow::on_LoginButton_clicked()
         QMessageBox::information(this,"Ошибка","Неверно указан логин или пароль");
         return;
     }
+    else if(user.GetStatus() == 0){
+        QMessageBox::information(this,"Ошибка","К сожалению, вы больше не работаете в нашей компании. Удачи вам на новой работе :D");
+        return;
+    }
     else{
         emit signalLoginSuccessful(user);
     }

@@ -267,6 +267,19 @@ void Database::RegisterUser(QString LastName, QString FirstName, QString Patrony
     }
 }
 
+void Database::ReleaseContract(int IdUser){
+    QSqlQuery query;
+    query.prepare("UPDATE Contract "
+                  "SET ID_Employee = NULL,"
+                  "     Status = 2 "
+                  "WHERE ID_Employee = :IdUser;");
+    query.bindValue(":IdUser",IdUser);
+    if(!query.exec()){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось освободить договоры данного пользователя.");
+    }
+}
+
 void Database::RefreshUserById(User user){
     QSqlQuery query;
     query.prepare("SELECT ID "
@@ -610,5 +623,5 @@ return QString("SELECT   Contract.ID,"
                    "         Contract.Datee "
                    "FROM Contract "
                    "     JOIN Client ON Contract.ID_Client = Client.ID "
-                   "WHERE Contract.Status = 2 AND (Contract.ID_Employee = %1 OR Contract.ID_Employee = NULL);").arg(idUser);
+                   "WHERE Contract.Status = 2 AND (Contract.ID_Employee = %1 OR Contract.ID_Employee IS NULL);").arg(idUser);
 }

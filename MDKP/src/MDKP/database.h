@@ -31,6 +31,7 @@ public:
     void RefreshContractById(Contract contract);
     void CheckClientNumberForId(Client client);//Есть ли другие клиенты с таким же телефоном, но другим id
     void AddComment(QString comment, int IdAccountant, int IdContract);
+    void ReleaseContract(int IdUser);
     QList<Comment> GetCommentsByIdContract(int idContract);
 
     static QString GetQueryToSelectEmployee();

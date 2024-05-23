@@ -6,19 +6,28 @@ PhoneEdit::PhoneEdit(QWidget *parent)
     connect(this,SIGNAL(textChanged(QString)),SLOT(slotTextChanged(QString)));
 }
 
+void PhoneEdit::mousePressEvent(QMouseEvent *event){
+    QLineEdit::mousePressEvent(event);
+    if (cursorPosition() < 4)
+    {
+        setCursorPosition(4);
+    }
+}
+//+7 (924) 667 33
 void PhoneEdit::slotTextChanged(QString text){
     int oldPosition = this->cursorPosition();
     static QString oldText;
-
     QString resultPhone = text;
+    resultPhone.remove(QRegularExpression("^\\+7"));
     resultPhone.remove(QRegularExpression("[^\\d]"));
 
     if(resultPhone.length() > 0){
-        resultPhone.prepend('+');
+        resultPhone.insert(0,"+7 (");
     }
-
-    if(resultPhone.length() > 2){
-        resultPhone.insert(2," (");
+    else{
+        oldText = "";
+        this->setText("");
+        return;
     }
 
     if(resultPhone.length() > 7){
@@ -37,7 +46,12 @@ void PhoneEdit::slotTextChanged(QString text){
     this->setText(resultPhone);
 
     if (oldText.length() >= text.length()) {
-        this->setCursorPosition(oldPosition);
+        if(oldPosition < 4){
+            this->setCursorPosition(4);
+        }
+        else{
+            this->setCursorPosition(oldPosition);
+        }
     }
 
     this->blockSignals(false);

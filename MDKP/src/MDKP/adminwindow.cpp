@@ -160,6 +160,9 @@ void AdminWindow::slotChangeUserConfirmButtonClicked(){
     User changeUser = changeUserDataWidget->GetSelectUser();
     try {
         db->RefreshUserById(changeUser);
+        if(changeUser.GetStatus() == 0){
+            db->ReleaseContract(changeUser.GetId());
+        }
     } catch (std::runtime_error& err) {
         QPushButton* confirmButton = changeUserDataWidget->GetConfirmBurron();
         ShowMessage(err.what(),false,confirmButton);

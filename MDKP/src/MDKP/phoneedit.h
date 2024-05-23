@@ -11,8 +11,8 @@ class PhoneEdit : public QLineEdit
     Q_OBJECT
 public:
     explicit PhoneEdit(QWidget *parent = nullptr);
-
-signals:
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
 
 private slots:
     void slotTextChanged(QString text);
