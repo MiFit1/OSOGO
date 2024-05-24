@@ -189,7 +189,7 @@ QLineEdit:focus {
       </spacer>
      </item>
      <item row="6" column="3">
-      <widget class="QLineEdit" name="Summa">
+      <widget class="NumberEdit" name="Summa">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -572,6 +572,11 @@ QLineEdit:focus {
    <class>PhoneEdit</class>
    <extends>QLineEdit</extends>
    <header>phoneedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>NumberEdit</class>
+   <extends>QLineEdit</extends>
+   <header>numberedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

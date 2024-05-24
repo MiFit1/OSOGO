@@ -1,5 +1,4 @@
 #include "agentwindow.h"
-#include "qmessagebox.h"
 #include "ui_agentwindow.h"
 
 
@@ -184,6 +183,5 @@ void AgentWindow::SetValidationOnConfirmContract(){
     ui->LastName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
     ui->FirstName->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
     ui->Patronymic->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_FIO,this));
-
     ui->Summa->setValidator(new QRegularExpressionValidator(ValidationConstant::EXP_ON_NUMBER_LINE,this));
 }

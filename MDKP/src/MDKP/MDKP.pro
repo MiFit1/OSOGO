@@ -36,7 +36,8 @@ SOURCES += \
     ./QSidePanel/QSidePanel/SidePanel.cpp \
     ./QSidePanel/QSidePanel/SidePanelState.cpp \
     ./QSidePanel/QSidePanel/math.cpp \
-    ./QSidePanel/QSidePanel/side_panel_helpers.cpp
+    ./QSidePanel/QSidePanel/side_panel_helpers.cpp \
+    numberedit.cpp
 
 HEADERS += \
     ./QSidePanel/QSidePanel/PanelBottomSide.hpp \
@@ -46,7 +47,8 @@ HEADERS += \
     ./QSidePanel/QSidePanel/SidePanel.hpp \
     ./QSidePanel/QSidePanel/SidePanelState.hpp \
     ./QSidePanel/QSidePanel/math.hpp \
-    ./QSidePanel/QSidePanel/side_panel_helpers.hpp
+    ./QSidePanel/QSidePanel/side_panel_helpers.hpp \
+    numberedit.h
 
 SOURCES += \
     Global.cpp \
