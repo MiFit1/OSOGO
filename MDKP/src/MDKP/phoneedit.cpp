@@ -18,8 +18,11 @@ void PhoneEdit::slotTextChanged(QString text){
     int oldPosition = this->cursorPosition();
     static QString oldText;
     QString resultPhone = text;
-    resultPhone.remove(QRegularExpression("^\\+7"));
-    resultPhone.remove(QRegularExpression("[^\\d]"));
+
+    static QRegularExpression reg("^\\+7");
+    static QRegularExpression regNoDigit("[^\\d]");
+    resultPhone.remove(reg);
+    resultPhone.remove(regNoDigit);
 
     if(resultPhone.length() > 0){
         resultPhone.insert(0,"+7 (");
