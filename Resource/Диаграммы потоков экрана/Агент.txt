@@ -16,7 +16,7 @@ renewContractWindow : Пользователь может:
 renewContractWindow : -Выбрать нужный договор
 
 loginWindow : Пользователь может:
-loginWindow : -ввести ФИО
+loginWindow : -ввести логин и пароль
 loginWindow : -войти
 
 homeWindow : Пользователь может:

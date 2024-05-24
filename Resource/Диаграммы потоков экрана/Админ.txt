@@ -2,16 +2,16 @@
 state "Окно входа в программу" as loginWindow
 state "Домашнее окно" as homeWindow
 state "Окно добавления пользователей" as addWindow
-state "Окно удаления пользователей" as delWindow
+state "Окно редактирования пользователей" as delWindow
 state "Окно профиля пользователя" as profileWindow
 
 loginWindow : Пользователь может:
-loginWindow : -ввести ФИО
+loginWindow : -ввести логин и пароль
 loginWindow : -войти
 
 homeWindow : Пользователь может:
 homeWindow : -Открыть окно добавления пользователей
-homeWindow : -Открыть окно удаления пользователей
+homeWindow : -Открыть окно редактирования пользователей
 homeWindow : -Открыть профиль пользователя
 homeWindow : -Закрыть программу
 
@@ -20,7 +20,8 @@ addWindow : -Заполнить необходимые данные
 addWindow : -Зарегистрировать пользователя
 
 delWindow : Пользователь может:
-delWindow : -Выбрать нужных пользователей\n и удалить их
+delWindow : Редактировать информацию пользователей
+delWindow : Удалять пользователей
 
 profileWindow : Пользователь может:
 profileWindow : -Просмотреть свои ФИО

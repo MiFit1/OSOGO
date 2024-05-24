@@ -13,17 +13,17 @@ contractWindow : -Отклонить договор
 contractWindow : -Написать комментарий
 
 loginWindow : Пользователь может:
-loginWindow : -ввести ФИО
+loginWindow : -ввести логи и пароль
 loginWindow : -войти
 
 homeWindow : Пользователь может:
-homeWindow : -Открыть окно рассчёта\n заработной платы
+homeWindow : -Открыть окно подтверждения договоров
 homeWindow : -Открыть окно просмотра статистики
 homeWindow : -Открыть профиль пользователя
 homeWindow : -Закрыть программу
 
 verifyWindow : Пользователь может:
-verifyWindow : -Открыть настройки\n тарифной ставки
+verifyWindow : -Открыть настройки тарифной ставки
 verifyWindow : -Выбрать договор
 
 statisticWindow : Пользователь может:
