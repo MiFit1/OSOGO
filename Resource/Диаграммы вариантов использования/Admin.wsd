@@ -1,0 +1,17 @@
+@startuml
+
+left to right direction
+
+actor "Администратор" as fc
+
+usecase "Войти в систему" as UC1
+usecase "Добавить пользователя" as UC2
+usecase "Редактировать пользователя" as UC3
+usecase "Выйти из системы" as UC4
+
+fc --> UC1
+fc --> UC4
+fc --> UC2
+fc --> UC3
+
+@enduml

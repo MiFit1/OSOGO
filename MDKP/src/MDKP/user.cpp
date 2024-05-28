@@ -24,6 +24,7 @@ User::User(QString ID,QString IsWorked, QString LastName, QString FirstName, QSt
     phone = Phone;
     branch = Branch;
     login = Login;
+    password = Password;
     post = User::convertPostToInt(Role);
 }
 

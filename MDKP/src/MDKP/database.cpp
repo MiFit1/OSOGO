@@ -558,7 +558,7 @@ void Database::InsertAdmin(){
     }
     else{
         query.prepare("INSERT INTO Employee (IsWorked, LastName, FirstName, Patronymic, Phone, Branch, Login, Password, Role) VALUES "
-                      "(1, 'Super', 'User', NULL , '89243341176', '125149, г. Москва, ул. Куйбышева, 12, оф. 58', 'admin', 'admin', 'Администратор')");
+                      "(1, 'Super', 'User', NULL , '+7 (924) 334 11 76', '125149, г. Москва, ул. Куйбышева, 12, оф. 58', 'admin', 'admin', 'Администратор')");
         query.exec();
     }
 }
@@ -620,7 +620,7 @@ QString Database::GetQueryToSelectRenegotiateContract(int idUser){
 return QString("SELECT   Contract.ID,"
                    "         TypeInsurance as [Тип договора],"
                    "         Client.LastName || ' ' || Client.FirstName || ' ' || COALESCE(Client.Patronymic,'') as [ФИО клиента],"
-                   "         Contract.Datee "
+                   "         Contract.Datee as [Дата]"
                    "FROM Contract "
                    "     JOIN Client ON Contract.ID_Client = Client.ID "
                    "WHERE Contract.Status = 2 AND (Contract.ID_Employee = %1 OR Contract.ID_Employee IS NULL);").arg(idUser);

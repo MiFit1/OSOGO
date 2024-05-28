@@ -8,7 +8,7 @@ RenegotiateContractWindow::RenegotiateContractWindow(User user, Database* db, QW
     ui->setupUi(this);
     this->db = db;
     this->user = user;
-    //Тени на дочерние объекты
+
     SetValidation();
     connect(ui->BackButton, SIGNAL(clicked()),SIGNAL(signalBackButtonClicked()));
     connect(ui->SendButton,SIGNAL(clicked()),SIGNAL(signalSendButtonClicked()));
