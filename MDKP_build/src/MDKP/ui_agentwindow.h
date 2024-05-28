@@ -27,6 +27,7 @@
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "numberedit.h"
 #include "phoneedit.h"
 
 QT_BEGIN_NAMESPACE
@@ -51,7 +52,7 @@ public:
     QSpacerItem *horizontalSpacer_7;
     QSpacerItem *verticalSpacer_4;
     QLabel *label;
-    QLineEdit *Summa;
+    NumberEdit *Summa;
     QHBoxLayout *horizontalLayout_5;
     QSpacerItem *horizontalSpacer_11;
     QPushButton *ConcludeContractButton;
@@ -214,7 +215,7 @@ public:
 
         gridLayout->addWidget(label, 1, 1, 1, 1);
 
-        Summa = new QLineEdit(ConcludeTab);
+        Summa = new NumberEdit(ConcludeTab);
         Summa->setObjectName("Summa");
         Summa->setMinimumSize(QSize(0, 40));
         Summa->setStyleSheet(QString::fromUtf8("QLineEdit {\n"

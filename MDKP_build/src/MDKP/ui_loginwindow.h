@@ -100,6 +100,7 @@ public:
 "    border-color: #5fbaeb;\n"
 "}\n"
 ""));
+        PasswordLine->setEchoMode(QLineEdit::Password);
 
         verticalLayout->addWidget(PasswordLine);
 

@@ -11,6 +11,7 @@ AccountantWindow::AccountantWindow(const User& us, Database* database, QWidget *
     AddShadow(confirmationWindow);
     ReadAndSetShadowSettings();
     QHeaderView* headerStatistics = viewStatistics->horizontalHeader();
+    setWindowTitle("OSOGO");
     connect(viewContracts, SIGNAL(doubleClicked(QModelIndex)), SLOT(slotDoubleClikedOnContract(QModelIndex)));
     connect(confirmationWindow, SIGNAL(signalBackButtonClicked()),SLOT(slotConfirmWidgetBackButtonClicked()));
     connect(confirmationWindow, SIGNAL(signalConfirmButtonClicked()),SLOT(slotConfirmContractButtonClicked()));

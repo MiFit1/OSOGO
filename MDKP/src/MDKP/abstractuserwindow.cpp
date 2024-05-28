@@ -144,7 +144,6 @@ void AbstractUserWindow::CheckMessageToShow(QPushButton* button){
             DisableButton(button);
         }
 
-        //emit signalMessageAnimationStart();
         MessageIsOpening = true;
         Message msg = messages.front();
         messages.pop_front();

@@ -10,6 +10,7 @@ LoginWindow::LoginWindow(Database* database, QWidget *parent) :
     db = database;
     AddShadow(this);
     ReadAndSetShadowSettings();
+    setWindowTitle("OSOGO");
 }
 
 

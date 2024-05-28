@@ -15,6 +15,7 @@ AgentWindow::AgentWindow(const User& us,Database* database, QWidget *parent)
     AddShadow(renegotiationContractWidget);
     ReadAndSetShadowSettings();
     QHeaderView* headerStatistics = viewStatistic->horizontalHeader();
+    setWindowTitle("OSOGO");
     connect(viewRenegotiateContract, SIGNAL(doubleClicked(QModelIndex)), SLOT(slotDoubleClikedOnRenegitiationContract(QModelIndex)));
     connect(renegotiationContractWidget, SIGNAL(signalBackButtonClicked()), SLOT(slotRenegotiateWidgetBackButtonClicked()));
     connect(ui->ConcludeContractButton,SIGNAL(clicked()),SLOT(slotConcludeContractButtonClicked()));

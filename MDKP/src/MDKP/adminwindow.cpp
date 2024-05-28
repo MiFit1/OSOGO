@@ -15,6 +15,7 @@ AdminWindow::AdminWindow(const User& us, Database* database, QWidget *parent) :
     AddShadow(changeUserDataWidget);
     AddShadow(ui->AddUserTab);
     ReadAndSetShadowSettings();
+    setWindowTitle("OSOGO");
     connect(viewUsers,SIGNAL(doubleClicked(QModelIndex)),SLOT(slotDoubleClikedOnUser(QModelIndex)));
     connect(changeUserDataWidget, SIGNAL(signalBackButtonCliked()),SLOT(slotBackButtonChangeUserWidgetCliked()));
     connect(changeUserDataWidget,SIGNAL(signalConfirmButtonClicked()),SLOT(slotChangeUserConfirmButtonClicked()));

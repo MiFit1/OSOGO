@@ -20,6 +20,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
+#include "numberedit.h"
 #include "phoneedit.h"
 
 QT_BEGIN_NAMESPACE
@@ -50,7 +51,7 @@ public:
     QLabel *label_3;
     QTextEdit *AccountantComments;
     QSpacerItem *verticalSpacer_2;
-    QLineEdit *Summa;
+    NumberEdit *Summa;
     QComboBox *TypeContract;
 
     void setupUi(QWidget *RenegotiateContractWindow)
@@ -292,7 +293,7 @@ public:
 
         gridLayout->addItem(verticalSpacer_2, 0, 3, 1, 1);
 
-        Summa = new QLineEdit(RenegotiateContractWindow);
+        Summa = new NumberEdit(RenegotiateContractWindow);
         Summa->setObjectName("Summa");
         sizePolicy.setHeightForWidth(Summa->sizePolicy().hasHeightForWidth());
         Summa->setSizePolicy(sizePolicy);
