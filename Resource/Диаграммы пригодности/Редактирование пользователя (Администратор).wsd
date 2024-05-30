@@ -1,0 +1,25 @@
+@startuml
+skinparam Shadowing true
+actor "Администратор" as admin
+boundary "  Вкладка редактирования\n          пользователей" as mainMenuAd
+boundary "Окно редактирования\n      пользователей" as removeUserWindow 
+
+control "Открытие окна редактирования\n               пользователей" as removeUserWindowControl
+control "Обновление базы\n         данных" as writeToDatabase
+entity "Файловая система" as fs
+
+control "Проверка корректности\n              данных" as checkControl
+boundary "Окно ошибки" as errorWindow #Red
+
+admin -u-> mainMenuAd
+mainMenuAd --> removeUserWindowControl : Выбрал пользователя
+removeUserWindowControl --> removeUserWindow 
+removeUserWindow --> checkControl 
+checkControl --> writeToDatabase
+checkControl --> errorWindow
+errorWindow -- admin
+
+writeToDatabase --> fs
+admin -- removeUserWindow 
+
+@enduml

@@ -1,15 +1,17 @@
 @startuml
 skinparam Shadowing true
 actor "Агент" as agent
-boundary "Главное меню\n  агента" as mainMenuAg
+boundary "Главное меню\n агента" as mainMenuAg
 boundary "Окно выбора\n   договора" as contractWindow
 boundary "Окно перезаключения\n  договора" as reContractWindow
 boundary "Окно ошибки" as errorWindow #Red
 
 entity "Файловая система" as fs
 
-agent -> mainMenuAg : Нажал перезаключить\n\tдоговор
+agent -> mainMenuAg : Нажал перезаключить\n\t  договор
 mainMenuAg -> contractWindow : Отобразить
+contractWindow --> agent
+agent -> contractWindow:Выбрал договор
 contractWindow -> reContractWindow : Отобразить
 reContractWindow --> agent
 agent -> reContractWindow : Вводит данные

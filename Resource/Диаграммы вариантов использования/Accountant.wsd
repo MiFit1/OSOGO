@@ -8,10 +8,8 @@ usecase "Войти в систему" as UC1
 usecase "Подтвердить договор" as UC2
 usecase "Просмотреть\n заключённые договоры" as UC3
 usecase "Установить\n тарифную ставку" as UC4
-usecase "Выйти из системы" as UC5
 
 fc --> UC1
-fc --> UC5
 fc --> UC2
 fc --> UC3
 fc --> UC4

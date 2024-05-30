@@ -1,0 +1,18 @@
+@startuml
+skinparam Shadowing true
+actor "Агент" as agent
+boundary "Главное меню\n      агента" as mainMenuAc
+boundary "Окно просмотра статистики" as statisticWindow
+
+control "Открытие окна\n     статистки" as statisticWindowControl
+control "Чтение данных" as readData
+
+entity "Файловая система" as fs
+
+agent -l- mainMenuAc
+mainMenuAc -l-> statisticWindowControl
+statisticWindowControl --> statisticWindow
+statisticWindow -- agent
+statisticWindow --> readData
+readData --> fs
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+skinparam Shadowing true
+actor "Администратор" as admin
+boundary "Вкладка управления\nпользователями" as changeUserTab
+boundary "Окно редактирования\nпользователя" as changeUserWindow
+boundary "Окно ошибки" as errorWindow #Red 
+
+entity "Файловая система" as fs
+
+admin -> changeUserTab:Нажал управление\n пользователями
+changeUserTab --> admin
+changeUserTab -> changeUserWindow :Отобразить
+changeUserWindow --> admin
+admin -> changeUserWindow:Вводит данные
+changeUserWindow -> changeUserWindow:Проверка\n данных
+alt Данные корректны
+    changeUserWindow -> fs:Обновление БД
+    fs --> changeUserWindow
+    changeUserWindow --> admin
+else Данные не корректны
+    changeUserWindow -> errorWindow : Создать
+    errorWindow --> admin
+end
+
+@enduml

@@ -14,7 +14,7 @@ control "Проверка корректности\n             данных" a
 
 entity "Файловая система" as fs
 
-agent -u-> mainMenuAc
+agent -u- mainMenuAc
 mainMenuAc -l-> contractWindowControl
 contractWindowControl -l-> contractWindow
 contractWindow --> reContractWindowControl

@@ -1,0 +1,59 @@
+@startuml
+entity "Contract" as Contract {
+    *ID : integer
+    --
+    Datee : datetime
+    Sum : float
+    TypeInsurance : nvarchar
+    TariffRate : float
+    ID_Client : integer
+    ID_Employee : integer
+    ID_ConfirmedAccountant : integer
+    Status : integer
+}
+
+entity "Client" as Client {
+    *ID : integer
+    --
+    LastName : nvarchar
+    FirstName : nvarchar
+    Patronymic : nvarchar
+    Phone : nvarchar
+}
+
+entity "Employee" as Employee {
+    *ID : integer
+    --
+    IsWorked : integer
+    LastName : nvarchar
+    FirstName : nvarchar
+    Patronymic : nvarchar
+    Address : nvarchar
+    Phone : nvarchar
+    Branch : nvarchar
+    Login : nvarchar
+    Password : nvarchar
+    Role : nvarchar
+}
+
+entity "CommentsOn" as CommentsOn {
+    *ID : integer
+    --
+    ID_Employee : integer
+    ID_Contract: integer
+    ID_Comment : integer
+}
+
+entity "Comment" as Comment {
+    *ID : integer
+    --
+    Comment : nvarchar
+    Datee: datetime
+}
+
+Contract ||-l-|| Client
+Contract ||--|| Employee
+CommentsOn }|-l-|| Contract
+CommentsOn ||-r-|| Comment
+CommentsOn ||--|| Employee
+@enduml

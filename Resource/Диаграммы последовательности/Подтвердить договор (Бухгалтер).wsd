@@ -10,6 +10,11 @@ entity "Файловая система" as fs
 
 accountant -> mainMenuAc :Нажал перезаключить\n\tдоговор
 mainMenuAc -> contractWindow :Отобразить
+contractWindow -> fs:Чтение данных
+fs --> contractWindow
+contractWindow -> contractWindow:Обработка\nзапроса
+contractWindow --> accountant
+accountant -> contractWindow:Выбрал договор
 contractWindow -> accessContractWindow :Отобразить
 accessContractWindow --> accountant
 accountant -> accessContractWindow : Вводит данные

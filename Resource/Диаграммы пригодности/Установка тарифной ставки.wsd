@@ -1,0 +1,15 @@
+@startuml
+skinparam Shadowing true
+actor "Бухгалтер" as accountant
+boundary "Главное меню\n   бухгалтера" as mainMenuAc
+boundary " Окно установки\nтарифной ставки" as rateWindow
+control "Открытие окна установки\n       тарифной ставки" as rateWindowControl
+control "Установка тарифной\n            ставки" as rateControl
+
+mainMenuAc -l- accountant
+mainMenuAc -r-> rateWindowControl
+rateWindowControl --> rateWindow
+rateWindow -- accountant
+rateWindow -- rateControl
+
+@enduml
