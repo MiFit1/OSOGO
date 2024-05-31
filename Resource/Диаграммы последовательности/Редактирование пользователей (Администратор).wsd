@@ -1,14 +1,19 @@
 @startuml
 skinparam Shadowing true
 actor "Администратор" as admin
-boundary "Вкладка управления\nпользователями" as changeUserTab
+boundary "Главное меню\nадминистратора" as mainMenuAd
+boundary "Окно управления\nпользователями" as changeUserTab
 boundary "Окно редактирования\nпользователя" as changeUserWindow
 boundary "Окно ошибки" as errorWindow #Red 
 
 entity "Файловая система" as fs
 
-admin -> changeUserTab:Нажал управление\n пользователями
+admin -> mainMenuAd:Нажал управление\n пользователями
+mainMenuAd -> changeUserTab:Отобразить
+changeUserTab -> fs:Чтение данных
+fs --> changeUserTab
 changeUserTab --> admin
+admin -> changeUserTab:Выбрал пользователя
 changeUserTab -> changeUserWindow :Отобразить
 changeUserWindow --> admin
 admin -> changeUserWindow:Вводит данные

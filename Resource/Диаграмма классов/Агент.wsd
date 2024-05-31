@@ -37,22 +37,6 @@ class  LoginWindow{
    void checkUser()
 }
 
-class TariffRateWindow{
-   double rateOne
-   double rateTwo
-   double rateThree
-   void SetRate()
-   void GetRate()
-}
-
-class ContractConfirmationWindow{
-   AccountantModel model
-   TableView view
-   Contract contractToConfirm
-   void ConfirmContract()
-   void NotConfirmContract()
-}
-
 class ContractConclusionWindow{
    Contract contractData
    void ConcludeContract()
@@ -65,28 +49,10 @@ class ContractRenegotiateWindow{
    void sendContract()
 }
 
-class AccountantStatisticsWindow{
-   TableView view
-   AccountantModel model
-   void sort()
-}
-
 class AgentStatisticsWindow{
    TableView view
    AgentModel model
    void sort()
-}
-
-class AddUserWindow{
-   User userData
-   void AddUser()
-}
-
-class ChangeUserWindow{
-   TableView view
-   AdminModel model
-   User userData
-   void ChangeUser()
 }
 
 class AbstractWindowForRole{
@@ -114,14 +80,6 @@ class Database {
    +bool RenegotiateContract()
 }
 
-class AdminWindow{
-   Database database
-   ChangeUserWindow changeWindow
-   AddUserWindow addWindow
-   void ShowChangeUserWindow()
-   void ShowAddUserWindow()
-}
-
 class AgentWindow{
    Database database
    ContractConclusionWindow conclusionWindow
@@ -132,67 +90,28 @@ class AgentWindow{
    void ShowStatisticsWindow()
 }
 
-class AccountantWindow{
-   Database database
-   StatisticsWindow statisticsWindow
-   TariffRateWindow tariffRate
-   ContractConfirmationWindow confirmWindow
-   void ShowStatisticsWindow()
-   void ShowContractConfirmationWindow()
-   void ShowTariffRateWindow()
-}
-
-class AdminModel{
-   QVector<User> users
-   void AddUser()
-   User GetUser(int index)
-}
-
-class AccountantModel{
-   Vector<Contract> contracts
-   void AddContract()
-   Contract GetContract(int index)
-}
-
 class AgentModel{
    Vector<Contract> contracts
    void AddContract()
    Contract GetContract(int index)
 }
 
-AbstractWindowForRole <|-- AdminWindow
 AbstractWindowForRole <|-- AgentWindow
-AbstractWindowForRole <|-- AccountantWindow
 AgentWindow o-- Database
-AdminWindow o-- Database
-AccountantWindow o-- Database
 WindowNavigator --> AbstractWindowForRole
 WindowNavigator --> LoginWindow
-AdminWindow --> AddUserWindow
-AdminWindow --> ChangeUserWindow
 AgentWindow --> ContractConclusionWindow
 AgentWindow --> ContractRenegotiateWindow
 AgentWindow --> AgentStatisticsWindow
 AgentStatisticsWindow --> AgentModel
-AccountantWindow --> ContractConfirmationWindow
-AccountantWindow --> TariffRateWindow
-AccountantWindow --> AccountantStatisticsWindow
-AccountantStatisticsWindow --> AccountantModel
 AbstractWindowForRole --> ProfileWindow
 AgentModel --> Contract
-AccountantModel --> Contract
-AdminModel --> User
 ProfileWindow --> User
 
-AddUserWindow --> User
-ChangeUserWindow --> User
-ChangeUserWindow --> AdminModel
 
 ContractConclusionWindow --> Contract
 ContractRenegotiateWindow --> Contract
 ContractRenegotiateWindow --> AgentModel
-ContractConfirmationWindow --> Contract
-ContractConfirmationWindow --> AccountantModel
 
 LoginWindow o-- Database
 

@@ -1,19 +1,24 @@
 @startuml
 skinparam Shadowing true
 actor "Агент" as agent
-boundary "Вкладка заключения\n         договора" as contractWindow 
+boundary "Главное меню\n      агента" as mainMenuAg
+boundary "Окно заключения\n         договора" as contractWindow 
 boundary "Окно ошибки" as errorWindow #Red
 
+control "     Открытие окна\nзаключения договора" as contractWindowControl
 control "Обновление базы\n         данных" as updateDatabase
 control "Проверка корректности\n             данных" as checkCorrectData
 control "Открытие окна\n       ошибки" as errorWindowControl
 entity "Файловая система" as fs
 
-contractWindow -l-> checkCorrectData
-checkCorrectData --> errorWindowControl
-errorWindowControl --> errorWindow
-checkCorrectData --> updateDatabase 
-updateDatabase <--> fs
+agent -l- mainMenuAg
+mainMenuAg -l-> contractWindowControl
+contractWindowControl --> contractWindow
+contractWindow --> checkCorrectData
+checkCorrectData -r-> errorWindowControl
+errorWindowControl -r-> errorWindow
+checkCorrectData -l-> updateDatabase 
+updateDatabase <-u-> fs
 
 agent -- contractWindow
 agent -- errorWindow

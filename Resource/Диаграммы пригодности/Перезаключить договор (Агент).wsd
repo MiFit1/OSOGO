@@ -11,6 +11,7 @@ control "         Открытие окна\nперезаключения дог
 control "Обновление базы\n         данных" as updateDatabase
 control "Открытие окна\n ошибки" as errorWindowControl
 control "Проверка корректности\n             данных" as checkCorrectData
+control "Чтение данных" as readData
 
 entity "Файловая система" as fs
 
@@ -18,6 +19,8 @@ agent -u- mainMenuAc
 mainMenuAc -l-> contractWindowControl
 contractWindowControl -l-> contractWindow
 contractWindow --> reContractWindowControl
+contractWindow -l-> readData
+readData --> fs
 reContractWindowControl --> reContractWindow
 reContractWindow --> checkCorrectData
 checkCorrectData --> updateDatabase

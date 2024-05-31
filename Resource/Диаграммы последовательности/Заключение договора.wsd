@@ -1,11 +1,15 @@
 @startuml
 skinparam Shadowing true
 actor "Агент" as agent
-boundary "Вкладка заключения\n  договора" as contractWindow 
+boundary "Главное меню\nагента" as mainMenuAg
+boundary "Окно заключения\n  договора" as contractWindow 
 boundary "Окно ошибки" as errorWindow #Red
 
 entity "Файловая система" as fs
 
+agent -> mainMenuAg:Нажал заключить\n договор
+mainMenuAg -> contractWindow:Отобразить
+contractWindow --> agent
 agent -> contractWindow : Вводит данные
 contractWindow -> contractWindow : Проверка\n данных
 

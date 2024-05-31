@@ -1,0 +1,96 @@
+@startuml
+class User{
+   -int id
+   -bool isWork
+   -QString lastName
+   -QString firstName
+   -QString patronymic
+   -QString address
+   -QString phone
+   -QString branch
+   -QString login
+   -QString password
+   -int role
+}
+
+class ProfileWindow{
+   User user
+   void Logout()
+}
+
+class  LoginWindow{
+   QString login
+   QString password
+   Database db
+   void checkUser()
+}
+
+class AddUserWindow{
+   User userData
+   void AddUser()
+}
+
+class ChangeUserWindow{
+   TableView view
+   AdminModel model
+   User userData
+   void ChangeUser()
+}
+
+class AbstractWindowForRole{
+   ProfileWindow profile
+   SidePanel notify
+   void SetUser()
+   void ShowProfileWindow()
+}
+
+class WindowNavigator{
+   -AbstractWindowForRole WindowForRole
+   -LoginWindow login
+}
+
+class Database {
+   +void CreateTables()
+   +Contract GetContractById()
+   +User GetUserById()
+   +bool ChangeContract()
+   +bool UserVerify()
+   +bool AddUser()
+   +bool AddContract()
+   +bool ChangeUser()
+   +bool ConfirmationContract()
+   +bool RenegotiateContract()
+}
+
+class AdminWindow{
+   Database database
+   ChangeUserWindow changeWindow
+   AddUserWindow addWindow
+   void ShowChangeUserWindow()
+   void ShowAddUserWindow()
+}
+
+class AdminModel{
+   QVector<User> users
+   void AddUser()
+   User GetUser(int index)
+}
+
+AbstractWindowForRole <|-- AdminWindow
+AdminWindow o-- Database
+WindowNavigator --> AbstractWindowForRole
+WindowNavigator --> LoginWindow
+AdminWindow --> AddUserWindow
+AdminWindow --> ChangeUserWindow
+
+AbstractWindowForRole --> ProfileWindow
+AdminModel --> User
+ProfileWindow --> User
+
+AddUserWindow --> User
+ChangeUserWindow --> User
+ChangeUserWindow --> AdminModel
+
+LoginWindow o-- Database
+
+@enduml
