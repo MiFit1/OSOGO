@@ -6,11 +6,13 @@ actor "Бухгалтер" as fc
 
 usecase "Войти в систему" as UC1
 usecase "Подтвердить договор" as UC2
+usecase "Отклонить договор" as UC5
 usecase "Просмотреть\n заключённые договоры" as UC3
 usecase "Установить\n тарифную ставку" as UC4
 
 fc --> UC1
 fc --> UC2
+fc --> UC5
 fc --> UC3
 fc --> UC4
 

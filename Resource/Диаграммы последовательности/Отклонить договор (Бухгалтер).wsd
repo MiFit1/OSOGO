@@ -17,7 +17,8 @@ contractWindow --> accountant
 accountant -> contractWindow:Выбрал договор
 contractWindow -> accessContractWindow :Отобразить
 accessContractWindow --> accountant
-accountant -> accessContractWindow : Нажимает подтвердить
+accountant -> accessContractWindow :Вводит комментарий
+accountant -> accessContractWindow :Нажимает отклонить 
 accessContractWindow -> fs
 fs --> accessContractWindow
 accessContractWindow -> accessContractWindow :Обработка\n результата
@@ -29,5 +30,4 @@ else Не удалось обновить БД
     accessContractWindow -> errorWindow:Создать
     errorWindow --> accountant
 end
-
 @enduml
