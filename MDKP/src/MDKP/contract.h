@@ -24,6 +24,7 @@ public:
     void SetIdEmployee(int IdEmployee);
     void SetTariffRate(double Rate);
     void SetIdConfirmedAccountant(int IdAccountant);
+    static int ConvertTypeContractToNumber(QString TypeContract);
 private:
     int id;
     QDateTime date;

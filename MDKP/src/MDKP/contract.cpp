@@ -77,4 +77,18 @@ void Contract::SetTariffRate(double Rate){
     tariffRate = Rate;
 }
 
+int Contract::ConvertTypeContractToNumber(QString TypeContract){
+    if(TypeContract == "Добровольное медицинское страхование"){
+        return 0;
+    }
+    else if(TypeContract == "Страхование домашнего имущества"){
+        return 1;
+    }
+    else if(TypeContract == "Страхование автотранспорта"){
+        return 2;
+    }
+
+    throw std::runtime_error("Не удалось преобразовать тип договора");
+    return -1;
+}
 

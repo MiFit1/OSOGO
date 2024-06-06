@@ -2,7 +2,6 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include "../MDKP/Global.h"
-
 // add necessary includes here
 
 class RegularExpressionTestForQLineEdit : public QObject
@@ -39,9 +38,10 @@ void RegularExpressionTestForQLineEdit::FIO_EXPRESSION_TEST_data(){
     QTest::addColumn<bool>("result");
     QTest::addColumn<QString>("ErrorStr");
 
-    QTest::newRow("number in fio") << "Vasa1" << false << "Проверка на цифры в ФИО провалена.";
-    QTest::newRow("big fio") << "sssssssssssssssssssssssssssssssssssssssss" << false << "Проверка на длину ФИО провалена.";
+
     QTest::newRow("null fio") << "" << false << "Проверка на пустое ФИО провалена.";
+    QTest::newRow("big fio") << "sssssssssssssssssssssssssssssssssssssssss" << false << "Проверка на длину ФИО провалена.";
+    QTest::newRow("incorrect fio") << "_Vasa_" << false << "Проверка некорректного ФИО провалена.";
     QTest::newRow("correct fio") << "Olgerd Фон Everek-third" << true << "Проверка корректного ФИО провалена.";
 }
 

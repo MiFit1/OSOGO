@@ -29,6 +29,10 @@ AgentWindow::~AgentWindow()
 }
 
 void AgentWindow::ConfiguringInterface(){
+    ui->TypeContract->addItem("Добровольное медицинское страхование");
+    ui->TypeContract->addItem("Страхование домашнего имущества");
+    ui->TypeContract->addItem("Страхование автотранспорта");
+
     messagePanel->raise();
     //Кнопка профиля
     ui->tabWidget->setCornerWidget(profileButton, Qt::TopLeftCorner);
@@ -171,6 +175,9 @@ void AgentWindow::CheckingContractDataFieldsEmpty(){
     }
     if(ui->Phone->text().trimmed().isEmpty()){
         throw std::runtime_error("Поле телефона не может быть пустым.");
+    }
+    if(ui->Phone->text().length() < 18){
+        throw std::runtime_error("Телефон указан не полностью.");
     }
     if(ui->TypeContract->currentIndex() == -1){
         throw std::runtime_error("Не выбран тип договора.");

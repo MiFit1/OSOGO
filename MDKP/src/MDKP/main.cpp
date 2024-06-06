@@ -8,6 +8,7 @@ void SetStyleSheets();
 
 int main(int argc, char *argv[])
 {
+    QLocale::setDefault(QLocale(QLocale::Russian, QLocale::Russia));
     QApplication a(argc, argv);
 
     SetStyleSheets();

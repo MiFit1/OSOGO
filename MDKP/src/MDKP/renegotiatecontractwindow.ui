@@ -523,21 +523,6 @@ height: 40px;
        <property name="placeholderText">
         <string>Выберите тип договора</string>
        </property>
-       <item>
-        <property name="text">
-         <string>Добровольное медицинское страхование</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Cтрахование домашнего имущества</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Страхование автотранспорта</string>
-        </property>
-       </item>
       </widget>
      </item>
     </layout>

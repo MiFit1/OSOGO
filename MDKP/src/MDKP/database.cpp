@@ -287,9 +287,8 @@ void Database::RefreshUserById(User user){
                   "WHERE ID <> :id AND Phone = :phone;");
     query.bindValue(":id", user.GetId());
     query.bindValue(":phone", user.GetPhone());
-    bool queryResult = query.exec();
 
-    if(!queryResult){
+    if(!query.exec()){
         qDebug() << query.lastError();
         throw std::runtime_error("Не удалось проверить использование данного номера.");
     }
@@ -297,6 +296,22 @@ void Database::RefreshUserById(User user){
     if(query.first() && !query.isNull(0)){
         throw std::runtime_error("Данный номер телефона уже используется.");
     }
+
+    query.prepare("SELECT ID "
+                  "FROM Employee "
+                  "WHERE ID <> :id AND Login = :login;");
+    query.bindValue(":id", user.GetId());
+    query.bindValue(":login",user.GetLogin());
+
+    if(!query.exec()){
+        qDebug() << query.lastError();
+        throw std::runtime_error("Не удалось проверить использование данного логина.");
+    }
+
+    if(query.first() && !query.isNull(0)){
+        throw std::runtime_error("Данный логин уже используется.");
+    }
+
 
     query.prepare("UPDATE  Employee "
                   "SET    IsWorked = :worked, "
@@ -322,8 +337,7 @@ void Database::RefreshUserById(User user){
     query.bindValue(":role", User::convertPost(user.GetPost()));
     query.bindValue(":id", user.GetId());
 
-    queryResult = query.exec();
-    if(!queryResult){
+    if(!query.exec()){
         qDebug() << query.lastError();
         throw std::runtime_error("Не удалось обновить данные.");
     }

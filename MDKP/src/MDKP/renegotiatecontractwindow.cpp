@@ -1,5 +1,6 @@
 #include "renegotiatecontractwindow.h"
 #include "ui_renegotiatecontractwindow.h"
+#include "ui_renegotiatecontractwindow.h"
 
 RenegotiateContractWindow::RenegotiateContractWindow(User user, Database* db, QWidget *parent)
     : QWidget(parent)
@@ -8,7 +9,9 @@ RenegotiateContractWindow::RenegotiateContractWindow(User user, Database* db, QW
     ui->setupUi(this);
     this->db = db;
     this->user = user;
-
+    ui->TypeContract->addItem("Добровольное медицинское страхование");
+    ui->TypeContract->addItem("Страхование домашнего имущества");
+    ui->TypeContract->addItem("Страхование автотранспорта");
     SetValidation();
     connect(ui->BackButton, SIGNAL(clicked()),SIGNAL(signalBackButtonClicked()));
     connect(ui->SendButton,SIGNAL(clicked()),SIGNAL(signalSendButtonClicked()));
@@ -28,7 +31,9 @@ void RenegotiateContractWindow::SetContractAndClient(Contract Contract, Client C
     ui->Phone->setText(Client.GetPhone());
     ui->Summa->setText(Contract.GetSumma());
     qDebug()<<Contract.GetTypeInsurance();
-    ui->TypeContract->setCurrentText(Contract.GetTypeInsurance());
+    QString typeContract = Contract.GetTypeInsurance();
+    int index = Contract::ConvertTypeContractToNumber(typeContract);
+    ui->TypeContract->setCurrentIndex(index);
 }
 
 Client RenegotiateContractWindow::GetChangedClient(){
