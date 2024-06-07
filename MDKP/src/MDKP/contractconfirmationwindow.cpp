@@ -57,4 +57,5 @@ void ContractConfirmationWindow::ClearUserData(){
     ui->Summa->clear();
     ui->Patronymic->clear();
     ui->Phone->clear();
+    ui->Description->clear();
 }

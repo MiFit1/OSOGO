@@ -457,7 +457,8 @@ void Database::RefreshContractById(Contract contract){
                   "       ID_Client = :idClient,"
                   "       ID_Employee = :idEmployee, "
                   "       Status = :status, "
-                  "       ID_ConfirmedAccountant = :idAccountant "
+                  "       ID_ConfirmedAccountant = :idAccountant,"
+                  "       Description = :description "
                   "WHERE ID = :id;");
     query.bindValue(":summa", contract.GetSumma());
     query.bindValue(":rate", contract.GetTariffRate());
@@ -466,6 +467,7 @@ void Database::RefreshContractById(Contract contract){
     query.bindValue(":idEmployee", contract.GetIdEmployee());
     query.bindValue(":status", contract.GetStatus());
     query.bindValue(":id", contract.GetId());
+    query.bindValue(":description",contract.GetDescription());
 
     if(contract.GetIdAccountant() == -1){
         query.bindValue(":idAccountant", QVariant());

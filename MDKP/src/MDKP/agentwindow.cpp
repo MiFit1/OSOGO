@@ -125,6 +125,7 @@ void AgentWindow::ClearContractDataUi(){
     ui->Phone->clear();
     ui->Summa->clear();
     ui->TypeContract->setCurrentIndex(-1);
+    ui->Description->clear();
 }
 
 void AgentWindow::viewRenegotiateContractRefresh(){

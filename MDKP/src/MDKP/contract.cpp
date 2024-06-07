@@ -19,6 +19,10 @@ Contract::Contract(QString ID, QString Date, QString Summa, QString TypeInsuranc
     valid = true;
 }
 
+void Contract::SetDescription(QString description){
+    this->description = description;
+}
+
 void Contract::SetIdConfirmedAccountant(int IdAccountant){
     idConfirmedAccountant = IdAccountant;
 }

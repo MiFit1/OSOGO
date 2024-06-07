@@ -27,6 +27,7 @@ public:
     void SetIdEmployee(int IdEmployee);
     void SetTariffRate(double Rate);
     void SetIdConfirmedAccountant(int IdAccountant);
+    void SetDescription(QString description);
     static int ConvertTypeContractToNumber(QString TypeContract);
 private:
     int id;
