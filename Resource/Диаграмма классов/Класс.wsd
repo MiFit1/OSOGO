@@ -26,79 +26,74 @@ class Contract{
 }
 
 class ProfileWindow{
-   User user
-   void Logout()
+   +void LogoutButtonClicked()
+   +void CancelButtonClicked()
 }
 
 class  LoginWindow{
-   QString login
-   QString password
-   Database db
-   void checkUser()
+   -Database db
+   -void LoginButtonClicked()
+   +void LoginSuccessful()
 }
 
 class TariffRateWindow{
-   double rateOne
-   double rateTwo
-   double rateThree
-   void SetRate()
-   void GetRate()
+   +void GetRateOne()
+   +void GetRateTwo()
+   +void GetRateThree()
+   +void OkButtonClicked()
 }
 
 class ContractConfirmationWindow{
-   AccountantModel model
-   TableView view
-   Contract contractToConfirm
-   void ConfirmContract()
-   void NotConfirmContract()
-}
-
-class ContractConclusionWindow{
-   Contract contractData
-   void ConcludeContract()
+   -Contract currentContract
+   +Contract GetCurrentContract()
+   +QString GetComment()
+   +void BackButtonClicked()
+   +void ConfirmButtonClicked()
+   +void RejectButtonClicked()
 }
 
 class ContractRenegotiateWindow{
-   AgentModel model
-   TableView view
-   Contract contractData
-   void sendContract()
+   -Contract currentContract
+   -Database db
+   +void UpdataComments()
+   +void ClearUi()
+   +void BackButtonClicked()
+   +void SendButtonClicked()
 }
 
-class AccountantStatisticsWindow{
-   TableView view
-   AccountantModel model
-   void sort()
+class AccountantStatisticsModel{
+   +void UpdateModel()
+   -void ResetSorting()
 }
 
-class AgentStatisticsWindow{
-   TableView view
-   AgentModel model
-   void sort()
-}
-
-class AddUserWindow{
-   User userData
-   void AddUser()
+class AgentStatisticsModel{
+   +void UpdateModel()
+   -void ResetSorting()
 }
 
 class ChangeUserWindow{
-   TableView view
-   AdminModel model
-   User userData
-   void ChangeUser()
+   -User currentUser
+   +User GetCurrentUser()
+   +void BackButtonClicked()
+   +void ConfirmButtonClicked()
 }
 
 class AbstractWindowForRole{
-   ProfileWindow profile
-   SidePanel notify
-   void SetUser()
-   void ShowProfileWindow()
+   +ProfileWindow profile
+   +SidePanel messagePanel
+   +void ShowMessage()
+   +void Logout()
 }
 
 class WindowNavigator{
    -AbstractWindowForRole WindowForRole
-   -LoginWindow login
+   -LoginWindow loginWindow
+   -Database db
+   -void CreateAndShowLoginWindow()
+   -void HideAndRemoveLoginWindow()
+   -void HideAndRemoveRoleWindow()
+   +void LoginSuccessful()
+   +void Logout()
 }
 
 class Database {
@@ -115,49 +110,49 @@ class Database {
 }
 
 class AdminWindow{
-   Database database
-   ChangeUserWindow changeWindow
-   AddUserWindow addWindow
-   void ShowChangeUserWindow()
-   void ShowAddUserWindow()
+   -Database db
+   -ChangeUserWindow changeWindow
+   -TableView viewUsers
+   -void ShowViewUsers()
+   -void ShowChangeUsers()
+   -void UpdateViewUsers()
+   -void ChangeUserBackButtonClicked()
+   -void ChangeUserConfirmButtonClicked()
+   -void DoubleClickedOnUser()
+   -void RegistrationButtonClicked()
 }
 
 class AgentWindow{
-   Database database
-   ContractConclusionWindow conclusionWindow
-   ContractRenegotiateWindow renegotiateWindow
-   StatisticsWindow statisticsWindow
-   void ShowContractConclusionWindow()
-   void ShowContractRenegotiateWindow()
-   void ShowStatisticsWindow()
+   -Database db
+   -ContractRenegotiateWindow renegotiateWindow
+   -AgentStatisticModel statisticModel
+   -TableView viewStatistic
+   -TableView viewRenegotiateContract
+   -ContractRenegotiateWindow renegotiateWidget
+   +void ShowViewRenegotiate()
+   +void ShowRenegotiateWidget()
+   +void UpdateViewRenegotiate()
+   -void DoubleClikedOnViewrenegotiate()
+   -void RenegotiateWidgetBackButtonClicked()
+   -void RenegotiateWidgetSendButtonClicked()
+   -void ConcludeContractButtonClicked()
+   -void HeaderInStatisticWidgetClicked()
 }
 
 class AccountantWindow{
-   Database database
-   StatisticsWindow statisticsWindow
-   TariffRateWindow tariffRate
-   ContractConfirmationWindow confirmWindow
-   void ShowStatisticsWindow()
-   void ShowContractConfirmationWindow()
-   void ShowTariffRateWindow()
-}
-
-class AdminModel{
-   QVector<User> users
-   void AddUser()
-   User GetUser(int index)
-}
-
-class AccountantModel{
-   Vector<Contract> contracts
-   void AddContract()
-   Contract GetContract(int index)
-}
-
-class AgentModel{
-   Vector<Contract> contracts
-   void AddContract()
-   Contract GetContract(int index)
+   -Database db
+   -TariffRateWindow tariffRate
+   -ContractConfirmationWindow confirmWindow
+   -TableView viewStatistics
+   -TableView viewContracts
+   -AccountantStatisticsModel statisticModel
+   -void ShowViewContracts()
+   -void ShowConfirmWindow()
+   -void UpdateViewContracts()
+   -void DoubleClikedOnContract()
+   -void ConfirmWindowBackButtonClicked()
+   -void ConfirmWindowConfirmButtonClicked()
+   -void ConfirmWindowRejectButtonClicked()
 }
 
 AbstractWindowForRole <|-- AdminWindow
@@ -166,33 +161,22 @@ AbstractWindowForRole <|-- AccountantWindow
 AgentWindow o-- Database
 AdminWindow o-- Database
 AccountantWindow o-- Database
+WindowNavigator o-- Database
 WindowNavigator --> AbstractWindowForRole
 WindowNavigator --> LoginWindow
-AdminWindow --> AddUserWindow
 AdminWindow --> ChangeUserWindow
-AgentWindow --> ContractConclusionWindow
 AgentWindow --> ContractRenegotiateWindow
-AgentWindow --> AgentStatisticsWindow
-AgentStatisticsWindow --> AgentModel
+AgentWindow --> AgentStatisticsModel
 AccountantWindow --> ContractConfirmationWindow
 AccountantWindow --> TariffRateWindow
-AccountantWindow --> AccountantStatisticsWindow
-AccountantStatisticsWindow --> AccountantModel
+AccountantWindow --> AccountantStatisticsModel
 AbstractWindowForRole --> ProfileWindow
-AgentModel --> Contract
-AccountantModel --> Contract
-AdminModel --> User
-ProfileWindow --> User
 
-AddUserWindow --> User
 ChangeUserWindow --> User
-ChangeUserWindow --> AdminModel
 
-ContractConclusionWindow --> Contract
 ContractRenegotiateWindow --> Contract
-ContractRenegotiateWindow --> AgentModel
+ContractRenegotiateWindow o-- Database
 ContractConfirmationWindow --> Contract
-ContractConfirmationWindow --> AccountantModel
 
 LoginWindow o-- Database
 

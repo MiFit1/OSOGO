@@ -4,7 +4,7 @@ actor "Бухгалтер" as accountant
 boundary "Главное меню\nбухгалтера" as mainMenuAc
 boundary "Окно просмотра\nстатистики" as statisticWindow 
 
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 accountant -> mainMenuAc:Нажал просмотреть\nстатистику
 mainMenuAc -> statisticWindow:Отобразить

@@ -9,7 +9,7 @@ control "     Открытие окна\nзаключения договора" 
 control "Обновление базы\n         данных" as updateDatabase
 control "Проверка корректности\n             данных" as checkCorrectData
 control "Открытие окна\n       ошибки" as errorWindowControl
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 agent -l- mainMenuAg
 mainMenuAg -l-> contractWindowControl
@@ -18,7 +18,7 @@ contractWindow --> checkCorrectData
 checkCorrectData -r-> errorWindowControl
 errorWindowControl -r-> errorWindow
 checkCorrectData -l-> updateDatabase 
-updateDatabase <-u-> fs
+updateDatabase -u-> fs
 
 agent -- contractWindow
 agent -- errorWindow

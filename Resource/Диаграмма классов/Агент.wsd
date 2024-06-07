@@ -1,17 +1,4 @@
 @startuml
-class User{
-   -int id
-   -bool isWork
-   -QString lastName
-   -QString firstName
-   -QString patronymic
-   -QString address
-   -QString phone
-   -QString branch
-   -QString login
-   -QString password
-   -int role
-}
 
 class Contract{
    -int id
@@ -26,45 +13,46 @@ class Contract{
 }
 
 class ProfileWindow{
-   User user
-   void Logout()
+   +void LogoutButtonClicked()
+   +void CancelButtonClicked()
 }
 
 class  LoginWindow{
-   QString login
-   QString password
-   Database db
-   void checkUser()
-}
-
-class ContractConclusionWindow{
-   Contract contractData
-   void ConcludeContract()
+   -Database db
+   -void LoginButtonClicked()
+   +void LoginSuccessful()
 }
 
 class ContractRenegotiateWindow{
-   AgentModel model
-   TableView view
-   Contract contractData
-   void sendContract()
+   -Contract currentContract
+   -Database db
+   +void UpdataComments()
+   +void ClearUi()
+   +void BackButtonClicked()
+   +void SendButtonClicked()
 }
 
-class AgentStatisticsWindow{
-   TableView view
-   AgentModel model
-   void sort()
+class AgentStatisticsModel{
+   +void UpdateModel()
+   -void ResetSorting()
 }
 
 class AbstractWindowForRole{
-   ProfileWindow profile
-   SidePanel notify
-   void SetUser()
-   void ShowProfileWindow()
+   +ProfileWindow profile
+   +SidePanel messagePanel
+   +void ShowMessage()
+   +void Logout()
 }
 
 class WindowNavigator{
    -AbstractWindowForRole WindowForRole
-   -LoginWindow login
+   -LoginWindow loginWindow
+   -Database db
+   -void CreateAndShowLoginWindow()
+   -void HideAndRemoveLoginWindow()
+   -void HideAndRemoveRoleWindow()
+   +void LoginSuccessful()
+   +void Logout()
 }
 
 class Database {
@@ -80,39 +68,36 @@ class Database {
    +bool RenegotiateContract()
 }
 
+
 class AgentWindow{
-   Database database
-   ContractConclusionWindow conclusionWindow
-   ContractRenegotiateWindow renegotiateWindow
-   StatisticsWindow statisticsWindow
-   void ShowContractConclusionWindow()
-   void ShowContractRenegotiateWindow()
-   void ShowStatisticsWindow()
+   -Database db
+   -ContractRenegotiateWindow renegotiateWindow
+   -AgentStatisticModel statisticModel
+   -TableView viewStatistic
+   -TableView viewRenegotiateContract
+   -ContractRenegotiateWindow renegotiateWidget
+   +void ShowViewRenegotiate()
+   +void ShowRenegotiateWidget()
+   +void UpdateViewRenegotiate()
+   -void DoubleClikedOnViewrenegotiate()
+   -void RenegotiateWidgetBackButtonClicked()
+   -void RenegotiateWidgetSendButtonClicked()
+   -void ConcludeContractButtonClicked()
+   -void HeaderInStatisticWidgetClicked()
 }
 
-class AgentModel{
-   Vector<Contract> contracts
-   void AddContract()
-   Contract GetContract(int index)
-}
 
 AbstractWindowForRole <|-- AgentWindow
-AgentWindow o-- Database
-WindowNavigator --> AbstractWindowForRole
-WindowNavigator --> LoginWindow
-AgentWindow --> ContractConclusionWindow
+AgentWindow o-l- Database
+WindowNavigator o-- Database
+WindowNavigator -r-> AbstractWindowForRole
+WindowNavigator -l-> LoginWindow
 AgentWindow --> ContractRenegotiateWindow
-AgentWindow --> AgentStatisticsWindow
-AgentStatisticsWindow --> AgentModel
-AbstractWindowForRole --> ProfileWindow
-AgentModel --> Contract
-ProfileWindow --> User
+AgentWindow --> AgentStatisticsModel
+AbstractWindowForRole -r-> ProfileWindow
 
-
-ContractConclusionWindow --> Contract
 ContractRenegotiateWindow --> Contract
-ContractRenegotiateWindow --> AgentModel
+ContractRenegotiateWindow o-- Database
 
 LoginWindow o-- Database
-
 @enduml

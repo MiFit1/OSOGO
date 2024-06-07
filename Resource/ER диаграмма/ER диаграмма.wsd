@@ -10,6 +10,7 @@ entity "Contract" as Contract {
     ID_Employee : integer
     ID_ConfirmedAccountant : integer
     Status : integer
+    Description : nvarchar
 }
 
 entity "Client" as Client {

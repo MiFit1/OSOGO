@@ -6,7 +6,7 @@ boundary "Главное меню\n   пользователя" as mainMenu
 boundary "Окно ошибки" as errorWindow #Red
 
 control "Проверка учётной\n     записи" as checkDatabase
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 person -> loginWindow : Вводит данные
 person -> loginWindow : Нажата кнопка войти

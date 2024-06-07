@@ -10,13 +10,13 @@ boundary "Окно ошибки" as errorWindow #Red
 control "Проверка учётной\n         записи" as checkDatabase
 control "Открытие главного\nменю пользователя" as openMainMenu
 control "Открытие окна ошибки" as openErrorWindow
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 
 person -r-> loginWindow
 
 loginWindow -u-> checkDatabase : Введены данные\nНажата кнопка \nвойти
-checkDatabase <-u-> fs
+checkDatabase -u-> fs
 
 checkDatabase -u-> openMainMenu 
 openMainMenu -d-> mainMenuB

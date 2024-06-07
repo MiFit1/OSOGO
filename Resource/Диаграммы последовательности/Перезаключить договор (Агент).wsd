@@ -6,7 +6,7 @@ boundary "Окно выбора\n   договора" as contractWindow
 boundary "Окно перезаключения\nдоговора" as reContractWindow
 boundary "Окно ошибки" as errorWindow #Red
 
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 agent -> mainMenuAg : Нажал перезаключить\n\t  договор
 mainMenuAg -> contractWindow : Отобразить

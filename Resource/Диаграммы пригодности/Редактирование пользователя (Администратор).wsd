@@ -8,7 +8,7 @@ boundary "Окно редактирования\n      пользователя"
 control "             Открытие окна\nредактирования пользователей" as changeUserTabControl
 control "Открытие окна редактирования\n               пользователя" as changeUserWindowControl
 control "Обновление базы\n         данных" as writeToDatabase
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 control "Проверка корректности\n              данных" as checkControl
 control "Чтение данных" as readData

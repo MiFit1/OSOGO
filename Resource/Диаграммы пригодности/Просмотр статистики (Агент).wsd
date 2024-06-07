@@ -7,7 +7,7 @@ boundary "Окно просмотра статистики" as statisticWindow
 control "Открытие окна\n     статистки" as statisticWindowControl
 control "Чтение данных" as readData
 
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 agent -l- mainMenuAc
 mainMenuAc -l-> statisticWindowControl

@@ -6,7 +6,7 @@ boundary "Окно управления\nпользователями" as change
 boundary "Окно редактирования\nпользователя" as changeUserWindow
 boundary "Окно ошибки" as errorWindow #Red 
 
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 admin -> mainMenuAd:Нажал управление\n пользователями
 mainMenuAd -> changeUserTab:Отобразить

@@ -13,7 +13,7 @@ control "Открытие окна\n ошибки" as errorWindowControl
 control "Проверка корректности\n             данных" as checkCorrectData
 control "Чтение данных" as readData
 
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 agent -u- mainMenuAc
 mainMenuAc -l-> contractWindowControl
@@ -25,7 +25,7 @@ reContractWindowControl --> reContractWindow
 reContractWindow --> checkCorrectData
 checkCorrectData --> updateDatabase
 checkCorrectData -r-> errorWindowControl
-updateDatabase <--> fs
+updateDatabase --> fs
 errorWindowControl -r-> errorWindow
 
 agent -- contractWindow

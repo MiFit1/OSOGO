@@ -14,39 +14,39 @@ class User{
 }
 
 class ProfileWindow{
-   User user
-   void Logout()
+   +void LogoutButtonClicked()
+   +void CancelButtonClicked()
 }
 
 class  LoginWindow{
-   QString login
-   QString password
-   Database db
-   void checkUser()
-}
-
-class AddUserWindow{
-   User userData
-   void AddUser()
+   -Database db
+   -void LoginButtonClicked()
+   +void LoginSuccessful()
 }
 
 class ChangeUserWindow{
-   TableView view
-   AdminModel model
-   User userData
-   void ChangeUser()
+   -User currentUser
+   +User GetCurrentUser()
+   +void BackButtonClicked()
+   +void ConfirmButtonClicked()
 }
 
 class AbstractWindowForRole{
-   ProfileWindow profile
-   SidePanel notify
-   void SetUser()
-   void ShowProfileWindow()
+   +ProfileWindow profile
+   +SidePanel messagePanel
+   +void ShowMessage()
+   +void Logout()
 }
 
 class WindowNavigator{
    -AbstractWindowForRole WindowForRole
-   -LoginWindow login
+   -LoginWindow loginWindow
+   -Database db
+   -void CreateAndShowLoginWindow()
+   -void HideAndRemoveLoginWindow()
+   -void HideAndRemoveRoleWindow()
+   +void LoginSuccessful()
+   +void Logout()
 }
 
 class Database {
@@ -63,33 +63,26 @@ class Database {
 }
 
 class AdminWindow{
-   Database database
-   ChangeUserWindow changeWindow
-   AddUserWindow addWindow
-   void ShowChangeUserWindow()
-   void ShowAddUserWindow()
-}
-
-class AdminModel{
-   QVector<User> users
-   void AddUser()
-   User GetUser(int index)
+   -Database db
+   -ChangeUserWindow changeWindow
+   -TableView viewUsers
+   -void ShowViewUsers()
+   -void ShowChangeUsers()
+   -void UpdateViewUsers()
+   -void ChangeUserBackButtonClicked()
+   -void ChangeUserConfirmButtonClicked()
+   -void DoubleClickedOnUser()
+   -void RegistrationButtonClicked()
 }
 
 AbstractWindowForRole <|-- AdminWindow
 AdminWindow o-- Database
-WindowNavigator --> AbstractWindowForRole
+WindowNavigator o-- Database
+WindowNavigator -r-> AbstractWindowForRole
 WindowNavigator --> LoginWindow
-AdminWindow --> AddUserWindow
 AdminWindow --> ChangeUserWindow
-
-AbstractWindowForRole --> ProfileWindow
-AdminModel --> User
-ProfileWindow --> User
-
-AddUserWindow --> User
+AbstractWindowForRole -r-> ProfileWindow
 ChangeUserWindow --> User
-ChangeUserWindow --> AdminModel
 
 LoginWindow o-- Database
 

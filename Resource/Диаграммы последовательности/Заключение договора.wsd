@@ -5,7 +5,7 @@ boundary "Главное меню\nагента" as mainMenuAg
 boundary "Окно заключения\n  договора" as contractWindow 
 boundary "Окно ошибки" as errorWindow #Red
 
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 agent -> mainMenuAg:Нажал заключить\n договор
 mainMenuAg -> contractWindow:Отобразить

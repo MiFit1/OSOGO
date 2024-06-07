@@ -4,7 +4,7 @@ actor "Агент" as agent
 boundary "Главное меню\nагента" as mainMenuAg
 boundary "Окно просмотра\nстатистики" as statisticWindow 
 
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 agent -> mainMenuAg:Нажал просмотреть\nстатистику
 mainMenuAg -> statisticWindow:Отобразить

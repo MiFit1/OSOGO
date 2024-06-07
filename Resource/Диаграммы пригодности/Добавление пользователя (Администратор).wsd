@@ -10,7 +10,7 @@ control "Открытие окна добавления\n          пользо�
 control "Запись в базу\n      данных" as writeToDatabase
 control "Проверка корректности\n             данных" as checkCorrectData
 control "Открытие окна\n       ошибки" as openErrorWindow
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 
 admin -u-> mainMenuAd
