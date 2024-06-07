@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>917</width>
-    <height>465</height>
+    <width>1008</width>
+    <height>548</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -411,6 +411,26 @@ QLineEdit:focus {
             </property>
            </widget>
           </item>
+          <item row="4" column="3" rowspan="2">
+           <widget class="QTextEdit" name="Description">
+            <property name="styleSheet">
+             <string notr="true">QTextEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QTextEdit:focus {
+    border-color: #5fbaeb;
+}</string>
+            </property>
+            <property name="placeholderText">
+             <string>Описание объекта договора</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -422,6 +442,9 @@ QLineEdit:focus {
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QStackedWidget" name="stackedWidgetRenegotiateContract">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
           <widget class="QWidget" name="page"/>
           <widget class="QWidget" name="page_2"/>
          </widget>
@@ -501,8 +524,8 @@ QScrollBar::sub-page:vertical
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>917</width>
-     <height>17</height>
+     <width>1008</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>

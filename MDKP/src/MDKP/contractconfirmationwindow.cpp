@@ -26,6 +26,11 @@ void ContractConfirmationWindow::SetContractAndClient(Contract Contract, Client 
 
     ui->TypeContract->setText(Contract.GetTypeInsurance());
     ui->Summa->setText(Contract.GetSumma());
+
+    QString description = Contract.GetDescription();
+    if(!description.trimmed().isNull()){
+        ui->Description->setText(description);
+    }
 }
 
 Contract ContractConfirmationWindow::GetCurrentContract(){

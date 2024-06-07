@@ -7,7 +7,9 @@ class Contract
 {
 public:
     Contract();
-    Contract(QString ID, QString Date, QString Summa, QString TypeInsurance, QString TariffRate, QString IdClient, QString IdEmployee, QString Status, QString IdConfirmedAccountant = "-1");
+    Contract(QString ID, QString Date, QString Summa, QString TypeInsurance,
+             QString TariffRate, QString IdClient, QString IdEmployee, QString Status,
+             QString IdConfirmedAccountant = "-1", QString Description = "");
     int GetId();
     QDateTime GetDate();
     QString GetSumma();
@@ -17,6 +19,7 @@ public:
     int GetIdClient();
     int GetIdEmployee();
     int GetStatus();
+    QString GetDescription();
     bool isValid();
     void SetSumma(QString Summa);
     void SetStatus(int Status);
@@ -34,6 +37,7 @@ private:
     int idClient;
     int idEmployee;
     int status;
+    QString description;
     bool valid;
     int idConfirmedAccountant;
 };

@@ -23,6 +23,7 @@ void  Database::CreateTables(){
                         "ID_Employee INTEGER NULL, "
                         "Status INTEGER NOT NULL, "
                         "ID_ConfirmedAccountant INTEGER NULL, "
+                        "Description NVARCHAR(200) NULL, "
                         "FOREIGN KEY (ID_Client) REFERENCES Client(ID), "
                         "FOREIGN KEY (ID_Employee) REFERENCES Employee(ID), "
                         "FOREIGN KEY (ID_ConfirmedAccountant) REFERENCES Employee(ID));";
@@ -156,8 +157,9 @@ Contract Database::GetContractById(int id){
     QString ID_Client = query.value("ID_Client").toString();
     QString ID_Employee = query.value("ID_Employee").toString();
     QString Status = query.value("Status").toString();
+    QString Description = query.value("Description").toString();
 
-    return Contract(ID,Datee,Summa,TypeInsurance,TariffRate,ID_Client,ID_Employee,Status);
+    return Contract(ID,Datee,Summa,TypeInsurance,TariffRate,ID_Client,ID_Employee,Status,"",Description);
 }
 
 Client Database::GetClientById(int id){
@@ -409,13 +411,14 @@ int Database::RegisterClient(Client client){
 
 void Database::AddContract(Contract contract){
     QSqlQuery query;
-    query.prepare("INSERT INTO Contract (Datee, Summa, TypeInsurance, ID_Client, ID_Employee, Status) VALUES "
-                  "(DATETIME('now', '+7 hours'), :summa, :typeContract, :idClient, :idEmployee, :status);");
+    query.prepare("INSERT INTO Contract (Datee, Summa, TypeInsurance, ID_Client, ID_Employee, Status, Description) VALUES "
+                  "(DATETIME('now', '+7 hours'), :summa, :typeContract, :idClient, :idEmployee, :status, :description);");
     query.bindValue(":summa", contract.GetSumma());
     query.bindValue(":typeContract", contract.GetTypeInsurance());
     query.bindValue(":idClient", contract.GetIdClient());
     query.bindValue(":idEmployee", contract.GetIdEmployee());
     query.bindValue(":status", contract.GetStatus());
+    query.bindValue(":description", contract.GetDescription());
 
     bool queryResult = query.exec();
     if(!queryResult){

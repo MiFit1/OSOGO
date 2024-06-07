@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>837</width>
-    <height>498</height>
+    <width>1107</width>
+    <height>605</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -84,7 +84,7 @@ QLineEdit:focus {
      <item row="8" column="1">
       <widget class="PhoneEdit" name="Phone">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -126,7 +126,7 @@ QLineEdit:focus {
         <enum>Qt::Vertical</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Minimum</enum>
+        <enum>QSizePolicy::Expanding</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -514,7 +514,7 @@ QPushButton:pressed {
      <item row="7" column="1">
       <widget class="QLineEdit" name="Patronymic">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -562,6 +562,38 @@ QLineEdit:focus {
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="7" column="3" rowspan="2">
+      <widget class="QTextEdit" name="Description">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>80</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTextEdit {
+	font: 500 9pt &quot;Montserrat Medium&quot;;
+   background: #e9e9e9;
+	border-radius: 5px;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+QTextEdit:focus {
+    border-color: #5fbaeb;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Описание объекта договора</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

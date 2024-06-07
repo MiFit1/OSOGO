@@ -11,17 +11,17 @@ control " Открытие окна\nвыбора договора" as contractW
 control "     Открытие окна\nотклонения договора" as accessContractWindowControl
 control "Обновление базы\n         данных" as updateDatabase
 control "Чтение данных" as readData
-entity "Файловая система" as fs
+entity "База данных" as fs
 
 accountant -u- mainMenuAc
 mainMenuAc -l-> contractWindowControl
 contractWindowControl -l-> contractWindow
 contractWindow -l-> accessContractWindowControl
 contractWindow --> readData
-readData <--> fs
+readData --> fs
 accessContractWindowControl -l-> accessContractWindow
 accessContractWindow --> updateDatabase
-updateDatabase <--> fs
+updateDatabase --> fs
 updateDatabase -u-> errorWindowControl
 errorWindowControl --> errorWindow
 

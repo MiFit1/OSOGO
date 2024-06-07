@@ -104,7 +104,8 @@ void AgentWindow::slotConcludeContractButtonClicked(){
         return;
     }
 
-    Contract contract("-1", "", ui->Summa->text(), ui->TypeContract->currentText(), "", QString::number(idClient), QString::number(user.GetId()), "1");
+    Contract contract("-1", "", ui->Summa->text(), ui->TypeContract->currentText(), "",
+                      QString::number(idClient), QString::number(user.GetId()), "1", "",ui->Description->toPlainText());
 
     try {
         db->AddContract(contract);
